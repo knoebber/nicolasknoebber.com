@@ -30,23 +30,59 @@ variables = {'d':5,'l':50,'a':45,'b':2}
 selected = None
 number_dict = {}
 colored = False
+
+"""
+double linked tree structure with variable children
+"""
+class Node(object) :
+  def __init__(self,x,y,angle,parent) :
+    self.x = x
+    self.y = y
+    self.parent = parent #not used as of now
+    self.children = []
+    self.angle = angle
+"""
+creates a surface for pygame to render
+"""
+class Text(object) :
+
+  def __init__(self,text,pos) :
+    self.text = text
+    if colored :
+      self.color = WHITE
+    else :
+      self.color = BLACK
+    self.selected = False
+    self.pos=pos
+    self.line = None
+  def render(self,num) :
+    self.line=font.render(self.text+str(num),False,self.color)
+    if colored:
+      self.color=WHITE
+    else :
+      self.color =BLACK
+
+
 for i in range(0,10) :
   number_dict[i+48] = i #map 0-10 to their equalivant keycodes
 
-#Calculate and draw a polar line
+"""
+calculate and draw a polar line
+"""
 def pol_line(x0,y0,length,angle,color):
   theta = (math.pi / 180.0) * angle
   x1= length*(math.cos(theta))+x0
   y1 = length*(math.sin(theta))+y0
   if draw :
-    print ("drawing with "+str(color))
     pygame.draw.line(tree_surf,color,(x0,y0),(x1,y1))
     screen  .blit(GUI_surf,(0,0))
     screen.blit(tree_surf,(0,0))
     pygame.display.update()
   return x1,y1
 
-#Make a binary tree out of Nodes
+"""
+make a binary tree out of Nodes
+"""
 def grow_tree(parent,depth,branches,length,theta,color) :
   if depth == 0 :#or parent.angle > 60 and parent.angle < 120:
     return
@@ -82,36 +118,7 @@ def grow_tree(parent,depth,branches,length,theta,color) :
 
       new_color = tuple(new_color)
       parent.children.append(Node(x1,y1,new_angle,parent))
-      print("c" +str(color))
-      print("new_color "+str(new_color))
       grow_tree(parent.children[-1],depth-1,branches,length,theta,new_color)
-
-#Double linked tree structure with variable children
-class Node(object) :
-  def __init__(self,x,y,angle,parent) :
-    self.x = x
-    self.y = y
-    self.parent = parent #not used as of now
-    self.children = []
-    self.angle = angle
-
-class Text(object) :
-
-  def __init__(self,text,pos) :
-    self.text = text
-    if colored :
-      self.color = WHITE
-    else :
-      self.color = BLACK
-    self.selected = False
-    self.pos=pos
-    self.line = None
-  def render(self,num) :
-    self.line=font.render(self.text+str(num),False,self.color)
-    if colored:
-      self.color=WHITE
-    else :
-      self.color =BLACK
 
 
 count = 0
