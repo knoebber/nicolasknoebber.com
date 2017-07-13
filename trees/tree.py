@@ -4,11 +4,17 @@ import math
 import random
 import time
 import sys
+import argparse
+
+#create command line parser
+parser = argparse.ArgumentParser(description='Create a tree')
+parser.add_argument('depth',type=int)
+parser.add_argument('length',type=int)
+parser.add_argument('angle',type=int)
+parser.add_argument('branches',type=int)
+#setup pygame
 pygame.init()
 screen_size = (1920,1080)
-screen = pygame.display.set_mode(screen_size,0,32)
-GUI_surf = pygame.Surface((400,200)).convert_alpha()
-tree_surf = pygame.Surface(screen_size).convert_alpha()
 make_tree = False
 show_GUI = True
 rand_build = False
@@ -119,111 +125,115 @@ def grow_tree(parent,depth,branches,length,theta,color) :
       new_color = tuple(new_color)
       parent.children.append(Node(x1,y1,new_angle,parent))
       grow_tree(parent.children[-1],depth-1,branches,length,theta,new_color)
+"""
+runs a gui for creating trees
+"""
+def run_gui():
+  screen = pygame.display.set_mode(screen_size,0,32)
+  GUI_surf = pygame.Surface((400,200)).convert_alpha()
+  tree_surf = pygame.Surface(screen_size).convert_alpha()
 
+  if colored :
+    BACKGROUND =  BLACK
+  else :
+    BACKGROUND = WHITE
 
-count = 0
+  screen.fill(BACKGROUND)
 
-if colored :
-  BACKGROUND =  BLACK
-else :
-  BACKGROUND = WHITE
+  texts = {}
+  texts['d']=Text("(d)epth: ",(0,10))
+  texts['b']=Text("(b)ranches: ",(0,35))
+  texts['l']=Text("(l)ength: ",(200,10))
+  texts['a']=Text("(a)ngle: ",(200,35))
+  texts['r']=Text("(r)andom: ",(0,60))
+  texts['g']=Text("(G)UI: ",(200,60))
+  value = ""
 
-screen.fill(BACKGROUND)
+  while True:
+    mouse_x,mouse_y = pygame.mouse.get_pos()
+    if show_GUI: #values: (rendered font, coordinate to be blitted)
+      if selected != None :
+        texts[selected].color = YELLOW
+      texts['d'].render(variables['d'])
+      texts['b'].render(variables['b'])
+      texts['l'].render(variables['l'])
+      texts['a'].render(variables['a'])
+      texts['r'].render(str(rand_build))
+      texts['g'].render(str(show_GUI))
+      GUI_surf.fill(BACKGROUND)
 
+      for val in texts.values() :
+        GUI_surf.blit(val.line,val.pos)
+      screen.blit(GUI_surf,(0,0))
+      screen.blit(tree_surf,(0,0))
+      pygame.display.update()
 
+    if make_tree :
+      grow_tree(genesis,variables['d'],variables['b'],variables['l'],variables['a'],color)
+      make_tree = False
 
-texts = {}
-texts['d']=Text("(d)epth: ",(0,10))
-texts['b']=Text("(b)ranches: ",(0,35))
-texts['l']=Text("(l)ength: ",(200,10))
-texts['a']=Text("(a)ngle: ",(200,35))
-texts['r']=Text("(r)andom: ",(0,60))
-texts['g']=Text("(G)UI: ",(200,60))
-value = ""
-while True:
-  mouse_x,mouse_y = pygame.mouse.get_pos()
-  if show_GUI: #values: (rendered font, coordinate to be blitted)
-    if selected != None :
-      texts[selected].color = YELLOW
-    texts['d'].render(variables['d'])
-    texts['b'].render(variables['b'])
-    texts['l'].render(variables['l'])
-    texts['a'].render(variables['a'])
-    texts['r'].render(str(rand_build))
-    texts['g'].render(str(show_GUI))
-    GUI_surf.fill(BACKGROUND)
-
-    for val in texts.values() :
-      GUI_surf.blit(val.line,val.pos)
-    screen.blit(GUI_surf,(0,0))
-    screen.blit(tree_surf,(0,0))
-    pygame.display.update()
-
-  if make_tree :
-    grow_tree(genesis,variables['d'],variables['b'],variables['l'],variables['a'],color)
-    make_tree = False
-
-  for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-      pygame.quit()
-      sys.exit()
-      break
-    if event.type==KEYDOWN :
-      if event.key==K_ESCAPE :
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
         pygame.quit()
         sys.exit()
         break
-      if event.key == K_RETURN :
-               # if value != "" :
-                    #variables[selected]= int(value)
-        value = ""
+      if event.type==KEYDOWN :
+        if event.key==K_ESCAPE :
+          pygame.quit()
+          sys.exit()
+          break
+        if event.key == K_RETURN :
+          if value != "" :
+            variables[selected]= int(value)
+            value = ""
 
-      if event.key in number_dict.keys() :
-        value += str(number_dict[event.key])
+        if event.key in number_dict.keys() :
+          value += str(number_dict[event.key])
 
-      if event.key == 100 :
-        selected = 'd'
-      if event.key == 98 :
-        selected = 'b'
-      if event.key == 108 :
-        selected = 'l'
-      if event.key == 97 :
-        selected = 'a'
+        if event.key == 100 :
+          selected = 'd'
+        if event.key == 98 :
+          selected = 'b'
+        if event.key == 108 :
+          selected = 'l'
+        if event.key == 97 :
+          selected = 'a'
 
-      if event.key == 115 :#s : save image to .png
-        print("saving image...")
-        pygame.image.save(
-          tree_surf,
-          "tree_d-"+str(variables['d'])+"_b-"+str(variables['b'])
-          +"_l-"+str(variables['l'])+"_a-"+str(variables['a'])+".png")
+        if event.key == 115 :#s : save image to .png
+          print("saving image...")
+          pygame.image.save(
+            tree_surf,
+            "tree_d-"+str(variables['d'])+"_b-"+str(variables['b'])
+            +"_l-"+str(variables['l'])+"_a-"+str(variables['a'])+".png")
 
-      if event.key == 114 :#r : toggle random build
-        rand_build = not rand_build
-      if event.key == K_SPACE :
-        tree_surf.fill(BACKGROUND)
-        screen.blit(tree_surf,(0,0))
-        tree_surf.fill(ALPHA)
-        pygame.display.update()
-      if event.key == 103 :#g : toggle GUI
-        show_GUI = not show_GUI
-        if not show_GUI:
-          GUI_surf.fill(BACKGROUND)
-        screen.blit(GUIsurf,(0,0))
-        screen.blit(tree_surf,(0,0))
-        pygame.display.update()
-    if event.type==6 : #click
-      make_tree = True
-      genesis = Node(mouse_x,mouse_y,270,None)
-      if colored :
-        color = random.choice(colors)
-      else :
-        color = BLACK
+        if event.key == 114 :#r : toggle random build
+          rand_build = not rand_build
+        if event.key == K_SPACE :
+          tree_surf.fill(BACKGROUND)
+          screen.blit(tree_surf,(0,0))
+          tree_surf.fill(ALPHA)
+          pygame.display.update()
+        if event.key == 103 :#g : toggle GUI
+          show_GUI = not show_GUI
+          if not show_GUI:
+            GUI_surf.fill(BACKGROUND)
+          screen.blit(GUIsurf,(0,0))
+          screen.blit(tree_surf,(0,0))
+          pygame.display.update()
+      if event.type==6 : #click
+        make_tree = True
+        genesis = Node(mouse_x,mouse_y,270,None)
+        if colored :
+          color = random.choice(colors)
+        else :
+          color = BLACK
 
-      if rand_build :
-        variables['d'] = random.randint(2,6) #depth
-        variables['b'] = random.randint(2,5) #branches
-        variables['l'] = random.randint(50,150) #length
-        variables['a'] = random.randint(10,40) #angle
+        if rand_build :
+          variables['d'] = random.randint(2,6) #depth
+          variables['b'] = random.randint(2,5) #branches
+          variables['l'] = random.randint(50,150) #length
+          variables['a'] = random.randint(10,40) #angle
 
 
-
+arguments = parser.parse_args()
+print(arguments)
