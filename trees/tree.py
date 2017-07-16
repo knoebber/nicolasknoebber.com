@@ -3,22 +3,10 @@ from pygame.locals import *
 import math
 import random
 import time
-import sys
+import os,sys
 import argparse
 
-#create command line parser
-parser = argparse.ArgumentParser(description='Create a tree')
-parser.add_argument('depth',type=int)
-parser.add_argument('length',type=int)
-parser.add_argument('angle',type=int)
-parser.add_argument('branches',type=int)
-#setup pygame
-pygame.init()
-screen_size = (1920,1080)
-make_tree = False
-show_GUI = True
-rand_build = False
-draw = True
+#colors
 ALPHA = (0,0,0,0)
 RED = (255,0,0)
 BLUE = (0,0,255)
@@ -26,16 +14,34 @@ GREEN = (0,255,0)
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 YELLOW = (0,255,255)
+#create command line parser
+parser = argparse.ArgumentParser(description='Create a tree')
+parser.add_argument('depth',type=int)
+parser.add_argument('length',type=int)
+parser.add_argument('angle',type=int)
+parser.add_argument('branches',type=int)
+parser.add_argument('initialX',type=int)
+parser.add_argument('initialY',type=int)
+#setup pygame
+os.environ["SDL_VIDEODRIVER"]="dummy" #used so it can run on headless server
+pygame.init()
+pygame.display.init()
+screen = pygame.display.set_mode((1,1))
+screen_size = (1920,1080)
+make_tree = False
+tree_surf = pygame.Surface(screen_size).convert_alpha()
 tree_surf.fill(ALPHA)
-colors = [RED,GREEN,BLUE]
+#variables
+rand_build = False
+draw = True
 font = pygame.font.SysFont('ariel',30)
+colors = [RED,GREEN,BLUE]
 print_lines={}
-
 variables = {'d':5,'l':50,'a':45,'b':2}
-
 selected = None
 number_dict = {}
 colored = False
+
 
 """
 double linked tree structure with variable children
@@ -81,7 +87,7 @@ def pol_line(x0,y0,length,angle,color):
   y1 = length*(math.sin(theta))+y0
   if draw :
     pygame.draw.line(tree_surf,color,(x0,y0),(x1,y1))
-    screen  .blit(GUI_surf,(0,0))
+    #screen  .blit(GUI_surf,(0,0))
     screen.blit(tree_surf,(0,0))
     pygame.display.update()
   return x1,y1
@@ -126,12 +132,12 @@ def grow_tree(parent,depth,branches,length,theta,color) :
       parent.children.append(Node(x1,y1,new_angle,parent))
       grow_tree(parent.children[-1],depth-1,branches,length,theta,new_color)
 """
-runs a gui for creating trees
+runs a gui for creating trees. Only useful if running the program locally
 """
 def run_gui():
+  show_GUI = True
   screen = pygame.display.set_mode(screen_size,0,32)
   GUI_surf = pygame.Surface((400,200)).convert_alpha()
-  tree_surf = pygame.Surface(screen_size).convert_alpha()
 
   if colored :
     BACKGROUND =  BLACK
@@ -233,7 +239,26 @@ def run_gui():
           variables['b'] = random.randint(2,5) #branches
           variables['l'] = random.randint(50,150) #length
           variables['a'] = random.randint(10,40) #angle
-
+"""
+depth = 3
+branches = 4
+length = 60
+angle = 50
+x = 500
+y = 600
+"""
 
 arguments = parser.parse_args()
 print(arguments)
+depth = arguments.depth
+branches = arguments.branches
+length = arguments.length
+angle = arguments.angle
+x = arguments.initialX
+y = arguments.initialY
+genesis = Node(x,y,270,None)
+grow_tree(genesis,depth,branches,length,angle,BLACK)
+pygame.image.save(tree_surf,"tree_d-"+str(depth)+"_b-"+str(branches)
+                 +"_l-"+str(length)+"_a-"+str(angle)+".png")
+
+
