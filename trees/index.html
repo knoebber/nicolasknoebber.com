@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html id="page">
 <head>
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
@@ -7,21 +7,48 @@
 </head>
 <body>
 <h1> Create A Tree </h1>
+<ul>
+<li> length <input id="length" value=0></input> </li>
+<li> branches <input id="branches" value=0></input> </li>
+<li> angle <input id="angle" value=0></input> </li>
+<li> depth <input id="depth" value=0></input> </li>
+<button data-action="tree-submit" onclick="requestTree()"> make me a tree! </button>
+</ul>
 <script>
-fetch("make_tree.php", {
-  method: "post",
-  headers: {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    length: 40,
-    angle: 30 
-  })
-})
-.then((response) => {
-  console.log(response);
-});
+function handleResponse(response){
+   console.log(response);
+   if (response.status=='success') {
+      console.log('success')
+   }
+}
+
+function requestTree() {
+  let length   = 0;
+  let angle    = 0;
+  let branches = 0;
+  let depth    = 0;
+  
+  length   = document.getElementById('length').value;
+  angle    = document.getElementById('angle').value;
+  branches = document.getElementById('branches').value;
+  depth    = document.getElementById('depth').value;
+  console.log(length);
+  console.log(angle);
+  console.log(branches);
+  console.log(depth);
+
+  if (length&&angle&&branches&&depth) {
+    fetch('make_tree.php', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: `length=${length}&angle=${angle}&branches=${branches}&depth=${depth}`
+
+      }).then((response) => handleResponse(JSON.parse(response)))
+    }
+}//requestTree
 </script>
 </body>
 </html>

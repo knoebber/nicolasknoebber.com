@@ -249,7 +249,6 @@ y = 600
 """
 
 arguments = parser.parse_args()
-print(arguments)
 depth = arguments.depth
 branches = arguments.branches
 length = arguments.length
@@ -258,7 +257,8 @@ x = arguments.initialX
 y = arguments.initialY
 genesis = Node(x,y,270,None)
 grow_tree(genesis,depth,branches,length,angle,BLACK)
-pygame.image.save(tree_surf,"tree_d-"+str(depth)+"_b-"+str(branches)
-                 +"_l-"+str(length)+"_a-"+str(angle)+".png")
+file = "tree_d-"+str(depth)+"_b-"+str(branches)+"_l-"+str(length)+"_a-"+str(angle)+".png"
+pygame.image.save(tree_surf,file)
+sys.stdout.write(file)
 
 
