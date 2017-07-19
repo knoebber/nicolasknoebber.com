@@ -15,9 +15,8 @@ if($length&&$angle&&$depth&&$branches) {//TODO make sure this doesn't let 0s or 
     $length   = round($length);
     $x = 900;
     $y = 900;
-    $command = "python /var/www/trees/tree.py $depth $length $angle $branches $x $y";
-    var_dump($command);
-    $file = shell_exec($command);//TODO fix permissions on python file
+    $command = "/var/www/trees/tree.py $depth $length $angle $branches $x $y 2>&1";
+    $file = exec($command);//TODO fix permissions on python file
     if($file != '') {
       echo json_encode(array('status'=>'success','message'=>'tree was generated','file'=>"$file"));
       }
