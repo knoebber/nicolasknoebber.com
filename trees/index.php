@@ -28,7 +28,6 @@ p {
 <head>
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
-<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <h1> Create A Tree </h1>
@@ -37,13 +36,16 @@ p {
 <li> branches <input id="branches" value=0></input> </li>
 <li> angle <input id="angle" value=0></input> </li>
 <li> depth <input id="depth" value=0></input> </li>
+<span>
 <button data-action="tree-submit" onclick="requestTree()"> make me a tree! </button>
+<button data-action="pull-random" onclick="requestRandom()"> view random </button>
+</span>
 <div id="message-container"></div>
 </ul>
 
 <script>
 let maxComplex = 30;
-let handleResponse = (response)=> {
+let handleResponse = (response) => {
   if (response.status =='success') {
     document.getElementById('page').setAttribute('style',`background-image: url("${response.file}");`);
     document.getElementById('message-container').innerHTML= `<p style="color:green;"> success: <span><a href=${response.file}>file</a></span></p>`;
@@ -53,7 +55,7 @@ let handleResponse = (response)=> {
   }
 }//handleResponse
 
-let requestTree= ()=> {
+let requestTree = () => {
   let length   = document.getElementById('length').value;
   let angle    = document.getElementById('angle').value;
   let branches = document.getElementById('branches').value;
@@ -77,6 +79,19 @@ let requestTree= ()=> {
         .then((json) => handleResponse(json));
     }//if
 }//requestTree
+
+let requestRandom = () => {
+  fetch('request_tree.php', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'getRandom=true'
+
+      }).then((response) => response.json())
+        .then((json) => handleResponse(json));
+}//requestRandom
 </script>
 </body>
 </html>
