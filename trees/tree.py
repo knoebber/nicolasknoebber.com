@@ -34,7 +34,6 @@ tree_surf = pygame.Surface(screen_size).convert_alpha()
 tree_surf.fill(ALPHA)
 #variables
 rand_build = False
-draw = True
 font = pygame.font.SysFont('ariel',30)
 colors = [RED,GREEN,BLUE]
 print_lines={}
@@ -42,7 +41,7 @@ variables = {'d':5,'l':50,'a':45,'b':2}
 selected = None
 number_dict = {}
 colored = False
-
+headless = True # if this is being ran on a server with no screen
 
 """
 double linked tree structure with variable children
@@ -55,7 +54,7 @@ class Node(object) :
     self.children = []
     self.angle = angle
 """
-creates a surface for pygame to render
+creates a surface for pygame to render text in
 """
 class Text(object) :
 
@@ -86,11 +85,12 @@ def pol_line(x0,y0,length,angle,color):
   theta = (math.pi / 180.0) * angle
   x1= length*(math.cos(theta))+x0
   y1 = length*(math.sin(theta))+y0
-  if draw :
-    pygame.draw.line(tree_surf,color,(x0,y0),(x1,y1))
-    #screen  .blit(GUI_surf,(0,0))
+  pygame.draw.line(tree_surf,color,(x0,y0),(x1,y1))
+  #screen  .blit(GUI_surf,(0,0))
+  if not headless :
     screen.blit(tree_surf,(0,0))
     pygame.display.update()
+
   return x1,y1
 
 """
@@ -124,14 +124,15 @@ def grow_tree(parent,depth,branches,length,theta,color) :
           new_angle = parent.angle + (theta*(i-mid))
       new_color = []
       for n in color :
-        new_val = 50 + n
-        if new_val>=255 :
-          new_val = 255
+        new_val = 15 + n
+        if new_val>= 175 :
+          new_val = 175
         new_color.append(new_val)
 
       new_color = tuple(new_color)
       parent.children.append(Node(x1,y1,new_angle,parent))
       grow_tree(parent.children[-1],depth-1,branches,length,theta,new_color)
+
 """
 runs a gui for creating trees. Only useful if running the program locally
 """
@@ -248,18 +249,19 @@ angle = 50
 x = 500
 y = 600
 """
+if not headless : run_gui()
 
-arguments = parser.parse_args()
-depth = arguments.depth
-branches = arguments.branches
-length = arguments.length
-angle = arguments.angle
-x = arguments.initialX
-y = arguments.initialY
-genesis = Node(x,y,270,None)
-grow_tree(genesis,depth,branches,length,angle,BLACK)
-file = "tree_d-"+str(depth)+"_b-"+str(branches)+"_l-"+str(length)+"_a-"+str(angle)+".png"
-pygame.image.save(tree_surf,file)
-sys.stdout.write(file)
-
+else :
+  arguments = parser.parse_args()
+  depth = arguments.depth
+  branches = arguments.branches
+  length = arguments.length
+  angle = arguments.angle
+  x = arguments.initialX
+  y = arguments.initialY
+  genesis = Node(x,y,270,None)
+  grow_tree(genesis,depth,branches,length,angle,BLACK)
+  file = "tree_d-"+str(depth)+"_b-"+str(branches)+"_l-"+str(length)+"_a-"+str(angle)+".png"
+  pygame.image.save(tree_surf,file)
+  sys.stdout.write(file)
 
