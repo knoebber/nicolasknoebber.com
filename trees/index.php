@@ -42,31 +42,29 @@ p {
 </ul>
 
 <script>
+let maxComplex = 30;
 let handleResponse = (response)=> {
-   if (response.status =='success') {
-      document.getElementById('page').setAttribute('style',`background-image: url("${response.file}");`);
-      document.getElementById('message-container').innerHTML= `<p style="color:green;"> ${response.message} </p>`;
-   }
-   else {
-      document.getElementById('message-container').innerHTML= `<p style="color:red;"> ${response.message} </p>`;
-   }
+  if (response.status =='success') {
+    document.getElementById('page').setAttribute('style',`background-image: url("${response.file}");`);
+    document.getElementById('message-container').innerHTML= `<p style="color:green;"> success: <span><a href=${response.file}>file</a></span></p>`;
+  }
+  else {
+    document.getElementById('message-container').innerHTML= `<p style="color:red;"> ${response.message} </p>`;
+  }
 }//handleResponse
 
 let requestTree= ()=> {
-  let length   = 0;
-  let angle    = 0;
-  let branches = 0;
-  let depth    = 0;
-  length   = document.getElementById('length').value;
-  angle    = document.getElementById('angle').value;
-  branches = document.getElementById('branches').value;
-  depth    = document.getElementById('depth').value;
-  console.log(length);
-  console.log(angle);
-  console.log(branches);
-  console.log(depth);
+  let length   = document.getElementById('length').value;
+  let angle    = document.getElementById('angle').value;
+  let branches = document.getElementById('branches').value;
+  let depth    = document.getElementById('depth').value;
+  if (depth * branches > maxComplex) {
+    document.getElementById('message-container').innerHTML= `<p style="color:red;">tree is too complex: depth * branches should be less than or equal to ${maxComplex}</p>`;
+    return;
+  }
 
   if (length&&angle&&branches&&depth) {
+    document.getElementById('message-container').innerHTML=`<p style="color:green"> pygame is making your tree...</p>`;
     fetch('request_tree.php', {
       method: 'post',
       headers: {
