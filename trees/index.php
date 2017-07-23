@@ -1,3 +1,28 @@
+<?php
+$mostRecentTree = shell_exec('ls *.png -t | head -n1');
+?>
+<style>
+html {
+  background: url(<?php echo $mostRecentTree?>) no-repeat center center fixed;
+  background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+}
+h1 {
+  font-family: "Lucida Console", Monaco, monospace
+}
+
+ol {
+  font:20px "Lucida Console",monospace;
+  padding-top:100px;
+}
+
+p {
+  font:20px "Lucida Console",monospace;
+}
+</style>
+
 <!DOCTYPE html>
 <html id="page">
 <head>
@@ -13,21 +38,21 @@
 <li> angle <input id="angle" value=0></input> </li>
 <li> depth <input id="depth" value=0></input> </li>
 <button data-action="tree-submit" onclick="requestTree()"> make me a tree! </button>
-<div id="error-container"></div>
+<div id="message-container"></div>
 </ul>
+
 <script>
-function handleResponse(response){
-   if (response.status=='success') {
-      document.getElementById('page').setAttribute('style',
-      `background-image: url("${response.file}");`);
+let handleResponse = (response)=> {
+   if (response.status =='success') {
+      document.getElementById('page').setAttribute('style',`background-image: url("${response.file}");`);
+      document.getElementById('message-container').innerHTML= `<p style="color:green;"> ${response.message} </p>`;
    }
    else {
-      document.getElementById('error-container').innerHTML= `<p style="color:red;">
-                                                             ${response.message} </p>`;
+      document.getElementById('message-container').innerHTML= `<p style="color:red;"> ${response.message} </p>`;
    }
-}
+}//handleResponse
 
-function requestTree() {
+let requestTree= ()=> {
   let length   = 0;
   let angle    = 0;
   let branches = 0;
@@ -52,7 +77,7 @@ function requestTree() {
 
       }).then((response) => response.json())
         .then((json) => handleResponse(json));
-    }
+    }//if
 }//requestTree
 </script>
 </body>
