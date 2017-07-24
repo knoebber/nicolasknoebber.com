@@ -32,26 +32,35 @@ p {
 <body>
 <h1> Create A Tree </h1>
 <ul>
-<li> length <input id="length" value=0></input> </li>
-<li> branches <input id="branches" value=0></input> </li>
-<li> angle <input id="angle" value=0></input> </li>
-<li> depth <input id="depth" value=0></input> </li>
+<li> length   <input id="length" value=100></input> </li>
+<li> branches <input id="branches" value=2></input> </li>
+<li> angle    <input id="angle" value=35></input> </li>
+<li> depth    <input id="depth" value=6></input> </li>
+<li> width    <input id="width" value=2></input> </li>
+</ul>
 <span>
 <button data-action="tree-submit" onclick="requestTree()"> make me a tree! </button>
 <button data-action="pull-random" onclick="requestRandom()"> view random </button>
 </span>
 <div id="message-container"></div>
-</ul>
 
 <script>
 let maxComplex = 30;
 let handleResponse = (response) => {
+  console.log(response);
   if (response.status =='success') {
-    document.getElementById('page').setAttribute('style',`background-image: url("${response.file}");`);
-    document.getElementById('message-container').innerHTML= `<p style="color:green;"> success: <span><a href=${response.file}>file</a></span></p>`;
+    document.getElementById('page')
+    .setAttribute('style',`background-image: url("${response.file}");`);
+    document.getElementById('message-container')
+    .innerHTML= `<p style="color:green;"> success:
+                   <span>
+                     <a href=${response.file}>file</a>
+                   </span>
+                 </p>`;
   }
   else {
-    document.getElementById('message-container').innerHTML= `<p style="color:red;"> ${response.message} </p>`;
+    document.getElementById('message-container')
+    .innerHTML= `<p style="color:red;"> ${response.message} </p>`;
   }
 }//handleResponse
 
@@ -60,20 +69,25 @@ let requestTree = () => {
   let angle    = document.getElementById('angle').value;
   let branches = document.getElementById('branches').value;
   let depth    = document.getElementById('depth').value;
+  let width    = document.getElementById('width').value;
   if (depth * branches > maxComplex) {
-    document.getElementById('message-container').innerHTML= `<p style="color:red;">tree is too complex: depth * branches should be less than or equal to ${maxComplex}</p>`;
+    document.getElementById('message-container').innerHTML= `
+    <p style="color:red;">
+      tree is too complex: depth * branches should be less than or equal to ${maxComplex}
+    </p>`;
     return;
   }
 
-  if (length&&angle&&branches&&depth) {
-    document.getElementById('message-container').innerHTML=`<p style="color:green"> pygame is making your tree...</p>`;
+  if (length&&angle&&branches&&depth&&width) {
+    document.getElementById('message-container').innerHTML=`
+    <p style="color:green"> pygame is making your tree...</p>`;
     fetch('request_tree.php', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: `length=${length}&angle=${angle}&branches=${branches}&depth=${depth}`
+      body: `length=${length}&angle=${angle}&branches=${branches}&depth=${depth}&width=${width}`
 
       }).then((response) => response.json())
         .then((json) => handleResponse(json));
