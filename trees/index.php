@@ -32,15 +32,35 @@ p {
 <body>
 <h1> Create A Tree </h1>
 <ul>
-<li> length   <input id="length" value=100></input> </li>
-<li> branches <input id="branches" value=2></input> </li>
-<li> angle    <input id="angle" value=35></input> </li>
-<li> depth    <input id="depth" value=6></input> </li>
-<li> width    <input id="width" value=2></input> </li>
+  <li> length
+    <input type="range" id="len" value="75" min="25" max="200"
+    oninput="lengthOut.value = len.value">
+    <output id="lengthOut">75</output>
+  </li>
+  <li> branches
+    <input type="range" id="branches" value="2" min="1" max="15"
+    oninput="branchesOut.value = branches.value">
+    <output id="branchesOut">2</output>
+  </li>
+  <li> angle
+    <input type="range" id="angle" value="27" min="1" max="360"
+    oninput="angleOut.value = angle.value">
+    <output id="angleOut">27</output>
+  </li>
+  <li> depth
+    <input type="range" id="depth" value="10" min="1" max="15"
+    oninput="depthOut.value = depth.value">
+    <output id="depthOut">10</output>
+  </li>
+  <li> width
+    <input type="range" id="linewidth" value="3" min="1" max="10"
+    oninput="widthOut.value = linewidth.value">
+    <output id="widthOut">3</output>
+  </li>
 </ul>
 <span>
-<button data-action="tree-submit" onclick="requestTree()"> make me a tree! </button>
-<button data-action="pull-random" onclick="requestRandom()"> view random </button>
+  <button data-action="tree-submit" onclick="requestTree()"> make me a tree! </button>
+  <button data-action="pull-random" onclick="requestRandom()"> view random </button>
 </span>
 <div id="message-container"></div>
 
@@ -65,11 +85,11 @@ let handleResponse = (response) => {
 }//handleResponse
 
 let requestTree = () => {
-  let length   = document.getElementById('length').value;
-  let angle    = document.getElementById('angle').value;
-  let branches = document.getElementById('branches').value;
-  let depth    = document.getElementById('depth').value;
-  let width    = document.getElementById('width').value;
+  let length   = document.getElementById('lengthOut').value;
+  let angle    = document.getElementById('angleOut').value;
+  let branches = document.getElementById('branchesOut').value;
+  let depth    = document.getElementById('depthOut').value;
+  let width    = document.getElementById('widthOut').value;
   if (depth * branches > maxComplex) {
     document.getElementById('message-container').innerHTML= `
     <p style="color:red;">
