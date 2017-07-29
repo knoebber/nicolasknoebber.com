@@ -1,5 +1,11 @@
 <?php
 $mostRecentTree = shell_exec('ls *.png -t | head -n1');
+$info = array_map(function($e){return substr($e,1);},explode('_',$mostRecentTree));
+$initLength   = $info[1];
+$initDepth    = $info[2];
+$initBranches = $info[3];
+$initAngle    = $info[4];
+$initWidth    = $info[5][0];
 ?>
 <style>
 html {
@@ -33,29 +39,29 @@ p {
 <h1> Create A Tree </h1>
 <ul>
   <li> length
-    <input type="range" id="len" value="75" min="25" max="200"
+    <input type="range" id="len" value="<?php echo $initLength ?>" min="25" max="200"
     oninput="lengthOut.value = len.value">
-    <output id="lengthOut">75</output>
+    <output id="lengthOut"><?php echo $initLength ?></output>
   </li>
   <li> branches
-    <input type="range" id="branches" value="2" min="1" max="15"
+    <input type="range" id="branches" value="<?php echo $initBranches?>" min="1" max="15"
     oninput="branchesOut.value = branches.value">
-    <output id="branchesOut">2</output>
+    <output id="branchesOut"><?php echo $initBranches?></output>
   </li>
   <li> angle
-    <input type="range" id="angle" value="27" min="1" max="360"
+    <input type="range" id="angle" value="<?php echo $initAngle?>" min="1" max="360"
     oninput="angleOut.value = angle.value">
-    <output id="angleOut">27</output>
+    <output id="angleOut"><?php echo $initAngle?></output>
   </li>
   <li> depth
-    <input type="range" id="depth" value="10" min="1" max="15"
+    <input type="range" id="depth" value="<?php echo $initDepth?>" min="1" max="15"
     oninput="depthOut.value = depth.value">
-    <output id="depthOut">10</output>
+    <output id="depthOut"><?php echo $initDepth?></output>
   </li>
   <li> width
-    <input type="range" id="linewidth" value="3" min="1" max="10"
+    <input type="range" id="linewidth" value="<?php echo $initWidth?>" min="1" max="10"
     oninput="widthOut.value = linewidth.value">
-    <output id="widthOut">3</output>
+    <output id="widthOut"><?php echo $initWidth?></output>
   </li>
 </ul>
 <span>
@@ -76,7 +82,30 @@ let handleResponse = (response) => {
                    <span>
                      <a href=${response.file}>file</a>
                    </span>
-                 </p>`;
+                 </p>`
+
+    /* TODO refactor all of this. (use object with keys and for loop etc */
+    info = response.file.split('_').map(s=>s.slice(1));
+    let newLength   =info[1];
+    let newDepth    =info[2];
+    let newBranches =info[3];
+    let newAngle    =info[4];
+    let newWidth    =info[5][0];
+    console.log(newLength);
+    console.log(info);
+    document.getElementById('len').value      = newLength;
+    document.getElementById('depth').value    = newDepth;
+    document.getElementById('branches').value = newBranches;
+    document.getElementById('angle').value    = newAngle;
+    document.getElementById('linewidth').value= newWidth;
+
+    document.getElementById('lengthOut').innerHTML   = newLength;
+    document.getElementById('depthOut').innerHTML    = newDepth;
+    document.getElementById('branchesOut').innerHTML = newBranches;
+    document.getElementById('angleOut').innerHTML    = newAngle;
+    document.getElementById('widthOut').innerHTML    = newWidth;
+
+
   }
   else {
     document.getElementById('message-container')
