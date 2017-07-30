@@ -39,8 +39,8 @@ p {
 <h1> Create A Tree </h1>
 <ul>
   <li> length
-    <input type="range" id="len" value="<?php echo $initLength ?>" min="25" max="200"
-    oninput="lengthOut.value = len.value">
+    <input type="range" id="length" value="<?php echo $initLength ?>" min="25" max="200"
+    oninput="lengthOut.value = length.value">
     <output id="lengthOut"><?php echo $initLength ?></output>
   </li>
   <li> branches
@@ -59,8 +59,8 @@ p {
     <output id="depthOut"><?php echo $initDepth?></output>
   </li>
   <li> width
-    <input type="range" id="linewidth" value="<?php echo $initWidth?>" min="1" max="10"
-    oninput="widthOut.value = linewidth.value">
+    <input type="range" id="width" value="<?php echo $initWidth?>" min="1" max="10"
+    oninput="widthOut.value = width.value">
     <output id="widthOut"><?php echo $initWidth?></output>
   </li>
 </ul>
@@ -82,31 +82,18 @@ let handleResponse = (response) => {
                    <span>
                      <a href=${response.file}>file</a>
                    </span>
-                 </p>`
+                 </p>`;
 
-    /* TODO refactor all of this. (use object with keys and for loop etc */
-    info = response.file.split('_').map(s=>s.slice(1));
-    let newLength   =info[1];
-    let newDepth    =info[2];
-    let newBranches =info[3];
-    let newAngle    =info[4];
-    let newWidth    =info[5][0];
-    console.log(newLength);
-    console.log(info);
-    document.getElementById('len').value      = newLength;
-    document.getElementById('depth').value    = newDepth;
-    document.getElementById('branches').value = newBranches;
-    document.getElementById('angle').value    = newAngle;
-    document.getElementById('linewidth').value= newWidth;
+    ids = ['length','depth','branches','angle','width'];
+    info = response.file.slice(5,-4)
+                        .split('_')
+                        .map(s=>s.slice(1))
+                        .map(e => ({'id':ids.shift(),'val':e}));
 
-    document.getElementById('lengthOut').innerHTML   = newLength;
-    document.getElementById('depthOut').innerHTML    = newDepth;
-    document.getElementById('branchesOut').innerHTML = newBranches;
-    document.getElementById('angleOut').innerHTML    = newAngle;
-    document.getElementById('widthOut').innerHTML    = newWidth;
+    for (i of info) document.getElementById(i.id).value=i.val;
+    for (i of info) document.getElementById(i.id+'Out').innerHTML=i.val;
+  }//if response.status=='success'
 
-
-  }
   else {
     document.getElementById('message-container')
     .innerHTML= `<p style="color:red;"> ${response.message} </p>`;
@@ -114,6 +101,7 @@ let handleResponse = (response) => {
 }//handleResponse
 
 let requestTree = () => {
+  //TODO refactor
   let length   = document.getElementById('lengthOut').value;
   let angle    = document.getElementById('angleOut').value;
   let branches = document.getElementById('branchesOut').value;
