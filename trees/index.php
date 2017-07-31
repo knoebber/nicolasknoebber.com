@@ -39,9 +39,9 @@ p {
 <h1> Create A Tree </h1>
 <ul>
   <li> length
-    <input type="range" id="length" value="<?php echo $initLength ?>" min="25" max="200"
-    oninput="lengthOut.value = length.value">
-    <output id="lengthOut"><?php echo $initLength ?></output>
+    <input type="range" id="len" value="<?php echo $initLength ?>" min="25" max="200"
+    oninput="lenOut.value = len.value">
+    <output id="lenOut"><?php echo $initLength ?></output>
   </li>
   <li> branches
     <input type="range" id="branches" value="<?php echo $initBranches?>" min="1" max="15"
@@ -59,9 +59,9 @@ p {
     <output id="depthOut"><?php echo $initDepth?></output>
   </li>
   <li> width
-    <input type="range" id="width" value="<?php echo $initWidth?>" min="1" max="10"
-    oninput="widthOut.value = width.value">
-    <output id="widthOut"><?php echo $initWidth?></output>
+    <input type="range" id="thickness" value="<?php echo $initWidth?>" min="1" max="10"
+    oninput="thicknessOut.value = thickness.value">
+    <output id="thicknessOut"><?php echo $initWidth?></output>
   </li>
 </ul>
 <span>
@@ -84,7 +84,7 @@ let handleResponse = (response) => {
                    </span>
                  </p>`;
 
-    ids = ['length','depth','branches','angle','width'];
+    ids = ['len','depth','branches','angle','thickness'];
     info = response.file.slice(5,-4)
                         .split('_')
                         .map(s=>s.slice(1))
@@ -102,11 +102,11 @@ let handleResponse = (response) => {
 
 let requestTree = () => {
   //TODO refactor
-  let length   = document.getElementById('lengthOut').value;
+  let length   = document.getElementById('lenOut').value;
   let angle    = document.getElementById('angleOut').value;
   let branches = document.getElementById('branchesOut').value;
   let depth    = document.getElementById('depthOut').value;
-  let width    = document.getElementById('widthOut').value;
+  let width    = document.getElementById('thicknessOut').value;
   if (depth * branches > maxComplex) {
     document.getElementById('message-container').innerHTML= `
     <p style="color:red;">
