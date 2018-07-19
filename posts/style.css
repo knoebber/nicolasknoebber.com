@@ -1,0 +1,17 @@
+.title {
+  margin:auto;
+  text-align:center;
+}
+.doc {
+  display:flex;
+}
+.margin {
+  width:20%;
+}
+.body {
+    border-left:  solid black;
+    border-right: solid black;
+}
+.body p{
+  padding: 10px;
+}
