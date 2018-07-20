@@ -1,17 +1,18 @@
-.title {
-  margin:auto;
-  text-align:center;
+html {
+  padding: 25px;
+  background: darkgrey;
 }
-.doc {
-  display:flex;
+body {
+  background: lightgrey;
+  padding:10px;
+  outline: solid darkslateblue 2px;
 }
-.margin {
-  width:20%;
+h2 {
+  margin: auto;
+  text-align: center;
 }
-.body {
-    border-left:  solid black;
-    border-right: solid black;
-}
-.body p{
-  padding: 10px;
+pre {
+  outline: solid black 1px;
+  background: whitesmoke;
+  padding: 5px;
 }
