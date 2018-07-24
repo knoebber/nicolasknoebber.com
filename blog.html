@@ -4,13 +4,31 @@
 <LINK REL=StyleSheet HREF="style.css" TYPE="text/css">
 </head>
 <body>
-<h1>Welcome to my blog!</h1>
-<ol start="0">
- <li><a href="posts/0.html">about me (10/23/1994)</a></li>
- <li><a href="posts/1.html">sailing to Mexico</a></li>
- <li><a href="posts/2.html">Ensenada</a></li>
- <li><a href="posts/3.html">San Jose del Cabo</a></li>
- <li><a href="posts/4.html">creating my own blogging platform - part 1</a></li>
-</ol>
-</body>
+  <div class="header">
+    <form action="index.html">
+      <input type="submit" value="home" />
+    </form>
+   <span>blog</span>
+  </div>
+  <div class="spacer"></div>
+  <table>
+    <tbody>
+    <tr><td><a href="posts/4.html">creating my own blogging platform - part 1</a></td><td>Thu 07/19/18</td></tr>
+    <tr><td><a href="posts/3.html">journey to San Jose del Cabo</a></td><td> Thu 07/12/18</td></tr>
+    <tr><td><a href="posts/2.html">Sailing to Ensenada</a></td><td>Mon 06/25/18</td></tr>
+    <tr><td><a href="posts/1.html">dirtbikes and sailing</a></td><td>Sat 06/10/18</td></tr>
+    <tr><td><a href="posts/0.html">about me</a></td><td>Sat 07/21/18</td></tr>
+    </tbody>
+  </body>
 </html>
+<style>
+table {
+  width: 30%;
+  font-size: 18px;
+  border-collapse:collapse;
+}
+
+tbody tr:nth-child(odd) {
+  background: lightgrey;
+}
+</style>
