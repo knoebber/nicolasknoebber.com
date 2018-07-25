@@ -43,7 +43,6 @@ def add_entry(post_num) :
   header = h.read()
   h.close()
   html = markdown(md.read())
-  html = '<LINK REL=StyleSheet HREF="style.css" TYPE="text/css">\n' + html
   html = header + html
   md.close()
   post = open(post_num+'.html','wt')
