@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8"/>
+</head>
+<div class="header">
+    <form action="../blog.html">
+      <input type="submit" value="blog" />
+    </form>
+</div>
+
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css">
+<h2>how to connect a Google domain to a S3 bucket for static web hosting</h2>
+<h4>Tue 07/24/18</h4>
+<p>For the last year I've had this website hosted on an Amazon EC2 instance, which has cost about $10 a month.
+That's not too expensive,  but with S3 the cost can be almost nothing, depending on how much traffic it gets.
+Very little in my case.</p>
+<p>The first step is to head over to <a href="https://aws.amazon.com/s3" title="s3">Amazon's simple storage service</a>
+and create a bucket with the name of your domain. In my case, <em>nicolasknoebber.com</em> .</p>
+<p><img alt="your new bucket" src="images/new_bucket.png" /></p>
+<p>You can leave all the settings as their defaults. Once it's created you can start to upload all
+of your files into it. For this I use the excellent AWS CLI. For this you need <code>pip</code>, and an AWS
+access key. With these installed run <code>sudo pip install awscli</code> and then <code>aws configure</code>.</p>
+<p>Once awscli is setup, navigate to your website directory, and run something like this:</p>
+<pre><code>aws s3 sync ~/code/personal-website s3://nicolasknoebber.com --exclude="*.swp" --exclude=".git/*"
+</code></pre>
+<p>I also like to create an alias for this in my <code>.bashrc</code> as this command won't need to change often.</p>
+<pre><code>alias sync-nk='aws s3 sync ~/code/personal-website s3://nicolasknoebber.com --exclude="*.swp" --exclude=".git/*"'
+</code></pre>
+<p>Now whenever you make changes, simply run this command and the bucket will be updated.</p>
+<p>Once all your files are uploaded, it's time to make the bucket into a static web host.
+Click the properties tab and then "Static website hosting". Enter the name of your
+index document, and then save it.</p>
+<p><img alt="static hosting" src="images/static_hosting.png" /></p>
+<p>At this point you can click the endpoint link and see how your new site looks!</p>
+<p>This isn't public yet though. To make it so that anyone can read it, head over to the permissions tab
+and then bucket policy. Add this to the text area (replace nicolasknoebber with your bucket name)</p>
+<pre><code>    {
+            "Version": "2012-10-17",
+            "Statement": [
+                    {
+                            "Sid": "PublicReadGetObject",
+                            "Effect": "Allow",
+                            "Principal": "*",
+                            "Action": "s3:GetObject",
+                            "Resource": "arn:aws:s3:::nicolasknoebber.com/*"
+                    }
+            ]
+    }
+</code></pre>
+<p>Along with <em>yourdomainname.com</em> , you will also need a bucket for <em>www.yourdomainname.com</em>. Create
+another bucket with the same name but prepend 'www.' to it. Go to the static web
+hosting option again, but instead of 'Use this bucket to host a website', click 'Redirect all
+requests'. Enter the name of your other bucket and click save.</p>
+<p>Next up is configuring the DNS. Open up <a href="https://aws.amazon.com/route53/">Amazon Route 53</a> and
+navigate into hosted zones. Create a new hosted zone with the same name as your bucket (nicolasknoebber.com).</p>
+<p>This generate a NS (name server) type row. Now Route53 needs to be told to point the traffic
+towards S3. Create a record set named <code>www</code>. For the alias target add something like this</p>
+<pre><code>s3-website-us-west-2.amazonaws.com
+</code></pre>
+<p>You may have to replace 'us-west' with a different region, look at your public endpoint URL from
+S3 to be sure.</p>
+<p><img alt="record set" src="images/hosted_zone.png" /></p>
+<p>Now create another record set, the same as before but leave the name field empty. This makes it
+so that you won't need to type 'www' in before the url.</p>
+<p>The final step is to configure Google domains. Open up the DNS settings on your domain and click
+'Use custom name servers'  Copy the 4 entries in the NS row from the Route53 NS row and add them here
+one by one.</p>
+<p><img alt="google domains" src="images/google_domains.png" /></p>
+<p>And that's it! Beware that it make take a bit for URL to work. In my case it took about 10 hours.</p>
