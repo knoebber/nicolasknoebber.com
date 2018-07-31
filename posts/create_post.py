@@ -39,12 +39,21 @@ def add_entry(post_num) :
   except :
     print(post_num+'.md'+' does not exist!')
     return False
-  h = open('header.html')
+
+  #read header and footer
+  h = open('partial/header.html')
   header = h.read()
   h.close()
+  f = open('partial/footer.html')
+  footer = f.read()
+  f.close()
+
+  #create post html from header, markdown, and footer
   html = markdown(md.read())
-  html = header + html
+  html = header + '\n' + html + '\n' + footer
   md.close()
+
+  #write html file
   post = open(post_num+'.html','wt')
   post.write(html)
   post.close()
