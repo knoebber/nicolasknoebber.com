@@ -7,11 +7,11 @@ adds a new <tr> element to blog.html
 new row will always be the first to keep reverse chronoligical order
 """
 def add_entry_to_list(post_num) :
-  md     = open(post_num+'.md')
+  md     = open('../'+post_num+'.md')
   header = md.readline()[3:-1] #slice omits the beginning hashes and trailing \n
   date   = md.readline()[5:-1]
   md.close()
-  html = open('../blog.html')
+  html = open('../../blog.html')
   lines = html.readlines()
   html.close()
   new_element = '<tr><td><a href="posts/'+post_num+'.html">'+header+'</a></td><td>'+date+'</td></tr>\n'
@@ -35,17 +35,26 @@ reads from the markdown file (post_num).md and writes (post_num).html
 def add_entry(post_num) :
   post_num = str(post_num)
   try :
-    md = open(post_num+'.md')
+    md = open('../'+post_num+'.md')
   except :
     print(post_num+'.md'+' does not exist!')
     return False
-  h = open('header.html')
+
+  #read header and footer
+  h = open('../partial/header.html')
   header = h.read()
   h.close()
+  f = open('../partial/footer.html')
+  footer = f.read()
+  f.close()
+
+  #create post html from header, markdown, and footer
   html = markdown(md.read())
-  html = header + html
+  html = header + '\n' + html + '\n' + footer
   md.close()
-  post = open(post_num+'.html','wt')
+
+  #write html file
+  post = open('../'+post_num+'.html','wt')
   post.write(html)
   post.close()
   print('post updated')
