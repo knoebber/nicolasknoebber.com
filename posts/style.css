@@ -32,7 +32,7 @@ pre {
   padding: 5px;
 }
 
-input {
+.header input {
   background:#5f5f5f;
   color:white;
   border: solid #5f5f5 2px;
@@ -41,7 +41,7 @@ input {
   font-size:20px;
 }
 
-input:hover {
+.header input:hover {
   background:grey;
   color:white;
   border: solid #5f5f5 2px;
@@ -63,4 +63,8 @@ input:hover {
 
 .header form {
   display: inline;
+}
+
+.footer input, textarea {
+  display: block;
 }
