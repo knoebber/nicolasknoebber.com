@@ -31,9 +31,7 @@ exports.handler = (event, context, callback) => {
     });
   };
   dynamo.putItem(dynamo_request, (err, data) => {
-    if (!err)
-      respond(200,`name:${comment_name},body:${comment_body},for post:${post_number}`);
-    else
-      respond(500,`an error occured ${err}`);
+    if (!err) respond(200,`name:${comment_name},body:${comment_body},for post:${post_number}`);
+    else      respond(500,`an error occured ${err}`);
   });
 };
