@@ -3,16 +3,15 @@ const dynamo = new AWS.DynamoDB();
 const table = "comment";
 
 exports.handler = (event, context, callback) => {
-  //const body = JSON.parse(event.body);
   const {post_number,comment_name,comment_body:comment_body} = JSON.parse(event.body);
-  const now = new Date().getTime();
+
   const dynamo_request = {
     Item: {
       "time_stamp": {
-        S: now.toString()
+        N: new Date().getTime().toString()
       },
       "post_number" : {
-        S:post_number.toString()
+        N:post_number.toString()
       },
       "comment_body": {
         S: comment_body
@@ -24,14 +23,19 @@ exports.handler = (event, context, callback) => {
     ReturnConsumedCapacity: "TOTAL",
     TableName: table
   };
+
   const respond = (code,message) => {
     callback(null, {
       statusCode: code,
-      body: JSON.stringify(message)
+      body: JSON.stringify({
+          "status"  : code,
+          "message" : message
+        })
     });
   };
+
   dynamo.putItem(dynamo_request, (err, data) => {
-    if (!err) respond(200,`name:${comment_name},body:${comment_body},for post:${post_number}`);
+    if (!err) respond(200,`added comment for post ${post_number}! name:${comment_name}, body:${comment_body}`);
     else      respond(500,`an error occured ${err}`);
   });
 };
