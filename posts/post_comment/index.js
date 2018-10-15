@@ -3,8 +3,8 @@ const dynamo = new AWS.DynamoDB();
 const table = "comment";
 
 exports.handler = (event, context, callback) => {
-  const body = JSON.parse(event.body);
-  const {post_number,comment_name,comment_body:comment_body} = body;
+  //const body = JSON.parse(event.body);
+  const {post_number,comment_name,comment_body:comment_body} = JSON.parse(event.body);
   const now = new Date().getTime();
   const dynamo_request = {
     Item: {

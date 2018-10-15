@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 KEY=$(cat api-key)
 curl $1 -H \
   "x-api-key: $KEY" \
