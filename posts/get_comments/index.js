@@ -3,10 +3,9 @@ const dynamo = new AWS.DynamoDB();
 const table = "comment";
 
 exports.handler = (event, context, callback) => {
-  const post_number = JSON.parse(event.body).post_number;
   const dynamo_request = {
     ExpressionAttributeValues: {
-      ":v1": { N: post_number.toString() }
+      ":v1": { N: JSON.parse(event.body).post_number.toString() } // query for the post number
     },
     KeyConditionExpression: "post_number = :v1",
     TableName: table
@@ -19,8 +18,8 @@ exports.handler = (event, context, callback) => {
     });
   };
 
- dynamo.query(dynamo_request, function(err, data) {
-   if (!err) respond(200,data)
-   else      respond(500, `an error occured ${err.stack}`)
- })
+  dynamo.query(dynamo_request, function(err, data) {
+    if (!err) respond(200,data)
+    else      respond(500, `an error occured: ${err.stack}`)
+  })
 };
