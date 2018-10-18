@@ -7,7 +7,7 @@ adds a new <tr> element to blog.html
 new row will always be the first to keep reverse chronoligical order
 """
 def add_entry_to_list(post_num) :
-  md     = open('../'+post_num+'.md')
+  md = open('../markdown/'+post_num+'.md')
   header = md.readline()[3:-1] #slice omits the beginning hashes and trailing \n
   date   = md.readline()[5:-1]
   md.close()
@@ -23,7 +23,7 @@ def add_entry_to_list(post_num) :
     if lines[i].strip() == '<tbody>' :
       lines.insert(i+1,' '*4+new_element) #indent new tag properly and add to file
       print('new list item created')
-      html = open('../blog.html','wt')
+      html = open('../../blog.html','wt')
       html.writelines(lines)
       html.close()
       return
@@ -35,7 +35,7 @@ reads from the markdown file (post_num).md and writes (post_num).html
 def add_entry(post_num) :
   post_num = str(post_num)
   try :
-    md = open('../'+post_num+'.md')
+    md = open('../markdown/'+post_num+'.md')
   except :
     print(post_num+'.md'+' does not exist!')
     return False
