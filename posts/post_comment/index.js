@@ -31,9 +31,9 @@ exports.handler = (event, context, callback) => {
       },
       statusCode: code,
       body: JSON.stringify({
-          "status"  : code,
-          "message" : message
-        })
+        "status"  : code,
+        "message" : message
+      })
     });
   };
 

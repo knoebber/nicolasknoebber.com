@@ -22,7 +22,7 @@
 </div>
 
 <script>
-fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment', {
+  fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment', {
     method: 'POST',
     body: JSON.stringify({
       post_number:9,
@@ -31,17 +31,17 @@ fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comme
     }),
     headers: {
       'Content-Type':'application/json'
-  }
-}).then(response => response.json())
-  .then(data     => console.log(data))
+    }
+  }).then(response => response.json())
+    .then(data     => console.log(data))
 
 
-fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/get_comments', {
+  fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/get_comments', {
     method: 'POST',
     body: JSON.stringify({post_number:9}),
     headers: {
       'Content-Type':'application/json'
-  }
-}).then(response => response.json())
-  .then(data     => console.log(data))
+    }
+  }).then(response => response.json())
+    .then(data     => console.log(data))
 </script>
