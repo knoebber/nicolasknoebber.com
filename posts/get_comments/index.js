@@ -5,7 +5,7 @@ const table = "comment";
 exports.handler = (event, context, callback) => {
   const dynamo_request = {
     ExpressionAttributeValues: {
-      ":v1": { N: JSON.parse(event.body).post_number.toString() } // query for the post number
+      ":v1": { N: JSON.parse(event.body).post_number.toString() }
     },
     KeyConditionExpression: "post_number = :v1",
     TableName: table
@@ -13,6 +13,9 @@ exports.handler = (event, context, callback) => {
 
   const respond = (code,message) => {
     callback(null, {
+      headers: {
+        "Access-Control-Allow-Origin" : "*",
+      },
       statusCode: code,
       body: JSON.stringify(message)
     });

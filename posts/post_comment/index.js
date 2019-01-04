@@ -26,6 +26,9 @@ exports.handler = (event, context, callback) => {
 
   const respond = (code,message) => {
     callback(null, {
+      headers: {
+        "Access-Control-Allow-Origin" : "*",
+      },
       statusCode: code,
       body: JSON.stringify({
           "status"  : code,
@@ -35,7 +38,7 @@ exports.handler = (event, context, callback) => {
   };
 
   dynamo.putItem(dynamo_request, (err, data) => {
-    if (!err) respond(200,`added comment for post ${post_number}! name:${comment_name}, body:${comment_body}`);
+    if (!err) respond(200, `added comment for post ${post_number}! name:${comment_name}, body:${comment_body}`);
     else      respond(500,`an error occured ${err}`);
   });
 };
