@@ -4,38 +4,44 @@
   <LINK REL=StyleSheet HREF="style.css" TYPE="text/css">
 </head>
 <div class="header">
-    <form action="../blog.html">
-      <input type="submit" value="blog" />
-    </form>
+  <form action="../blog.html">
+    <input type="submit" value="blog" />
+  </form>
 </div>
 
-<h1> the blog post! </h1>
-
+<h2>blog post title</h2>
+<h4>Tue 07/24/18</h4>
+<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere placerat felis, eget sodales sem. Fusce nunc nunc, rhoncus in eros id, rhoncus pellentesque dui. Morbi a lorem accumsan, placerat elit vitae, suscipit lacus. Ut eleifend quam vitae arcu scelerisque, nec porta ipsum tincidunt. In facilisis purus non rutrum semper. Phasellus ornare, nibh et scelerisque facilisis, lorem leo volutpat velit, nec volutpat odio augue et purus. Aenean eu risus dui. Suspendisse pretium erat erat, quis tincidunt nulla tempus eu. Vestibulum sed consequat magna. Praesent laoreet odio at posuere tristique. Ut tincidunt ut metus ut vestibulum. Suspendisse sollicitudin rhoncus diam in laoreet. Curabitur sit amet ultrices eros, in elementum risus. Cras porta vitae neque nec vulputate. Cras interdum justo non purus faucibus interdum.</p>
+<p> Suspendisse magna nisl, blandit sit amet elit ut, blandit volutpat nibh. Integer efficitur convallis lacus, fermentum porta est tincidunt id. Curabitur ullamcorper vehicula leo, quis vestibulum metus venenatis vitae. Quisque a ipsum id leo ultricies fringilla. Vestibulum orci lectus, pharetra id eleifend vitae, rutrum quis quam. In non lectus ac augue pretium ornare vitae et magna. Vestibulum iaculis risus eu mi accumsan, eu dapibus ipsum finibus. Praesent sit amet tortor magna. Nulla vel bibendum urna, id pretium dolor. Donec nisl quam, iaculis egestas malesuada quis, vehicula sit amet neque. Aenean a volutpat tortor. Suspendisse at diam sollicitudin, tempor libero ut, malesuada neque. Duis laoreet, dolor quis rhoncus cursus, risus est vulputate magna, et hendrerit massa mi ut est. Mauris vitae tristique sapien, in maximus velit.</p>
+<p>Vivamus molestie odio id turpis consectetur hendrerit. Sed tincidunt, nibh quis dapibus laoreet, nibh ligula lacinia nibh, ac lacinia eros nisi ultricies libero. Sed a suscipit nisi. Etiam auctor, purus eget sollicitudin tempor, dui nibh mollis turpis, a fermentum velit tellus id mi. Nunc bibendum, purus suscipit fringilla dictum, nibh arcu vehicula tortor, at volutpat massa lorem vel mi. Ut vitae ante nec diam ullamcorper tristique. Ut rhoncus elit sed metus euismod feugiat. Sed placerat cursus tristique. Nulla congue sapien eu luctus finibus. In non fermentum nunc. Integer interdum ut sem et pretium. Duis rutrum dictum massa nec pellentesque.</p>
+<pre>
+<p> Fusce egestas justo turpis, eu iaculis purus volutpat at. 
+Etiam malesuada diam nisi, eu efficitur libero ullamcorper vel. 
+Curabitur vehicula blandit ullamcorper. 
+Quisque vel consectetur ligula, nec ullamcorper metus. 
+Curabitur cursus erat eu imperdiet dapibus. 
+Suspendisse potenti. 
+Vivamus aliquam aliquet sodales. 
+Sed scelerisque tincidunt hendrerit. 
+Nam lacinia quis libero nec tincidunt. 
+Quisque ullamcorper dui quis porttitor ornare. 
+Morbi euismod vulputate ipsum, sed molestie velit lacinia dignissim.</p>
+</pre>
+<p>Vivamus pretium dui nec urna viverra, nec convallis justo auctor. Etiam congue, arcu nec sodales consequat, nunc augue venenatis turpis, ut ornare metus tellus eget dui. Etiam rutrum nunc quis congue rutrum. Donec risus lorem, pharetra sed ante ut, porta porta diam. Phasellus pharetra ultricies sem malesuada eleifend. Etiam eu ex maximus tortor mattis tincidunt. Aenean turpis nisi, convallis id velit eu, porta sodales nulla. Phasellus mollis rhoncus tempor. Donec consectetur id orci id vestibulum. Mauris lacus arcu, rutrum vitae enim sed, eleifend sollicitudin neque. Integer pharetra rhoncus justo in placerat. Nullam vulputate eget elit id lacinia. Integer id porttitor magna. Nam dictum aliquet turpis, ac molestie lectus ornare in. Sed enim lacus, fringilla non feugiat non, scelerisque eget augue.</p>
 <hr>
 <div class="footer">
   <h3>Comments</h3>
   <form>
-    <input placeholder="your name">
-    <textarea placeholder="your comment"></textarea>
-    <button> Submit </button>
+    <input    id="name"    placeholder="your name"    required>
+    <textarea id="comment-body" placeholder="your comment" required></textarea>
+    <button   id="save-post" type="button" onclick="saveComment()"> Submit </button>
   </form>
+  <div id="comments">
+    There's nothing here yet. Be the first!
+  </div>
 </div>
 
 <script>
-  fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment', {
-    method: 'POST',
-    body: JSON.stringify({
-      post_number:9,
-      comment_name:"script test",
-      comment_body:"comment body test create"
-    }),
-    headers: {
-      'Content-Type':'application/json'
-    }
-  }).then(response => response.json())
-    .then(data     => console.log(data))
-
-
   fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/get_comments', {
     method: 'POST',
     body: JSON.stringify({post_number:9}),
@@ -43,5 +49,48 @@
       'Content-Type':'application/json'
     }
   }).then(response => response.json())
-    .then(data     => console.log(data))
+    .then(data     => data.Items.forEach(displayComment));
+
+  function displayComment(comment){
+    console.log(comment)
+    const comments = document.getElementById('comments');
+
+    if (comments.children.length == 0 ) {
+      comments.innerHTML = ''
+    }
+
+    console.log(comment.time_stamp)
+    const date = new Date(parseInt(comment.time_stamp.N))
+    console.log(date.N)
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const dateSpan = `<span class="date">${month}/${day}/${year}</span>`
+
+    const commentName = `<div class="comment-name"><strong>${comment.comment_name.S}</strong>${dateSpan}</div>`
+    const commentBody = `<div class="comment-body">${comment.comment_body.S}</div>`
+    const commentParent = `<div class="comment">${commentName}${commentBody}</div>`
+
+    comments.innerHTML += commentParent
+  }
+
+
+  function saveComment(){
+    const name = document.getElementById('name').value;
+    const comment = document.getElementById('comment-body').value;
+    if (!(name || comment)) return;
+
+    fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment', {
+      method: 'POST',
+      body: JSON.stringify({
+        post_number:9,
+        comment_name:name,
+        comment_body:comment
+      }),
+      headers: {
+        'Content-Type':'application/json'
+      }
+    }).then(response => response.json())
+      .then(data     => console.log(data));
+  }
 </script>
