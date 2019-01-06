@@ -70,9 +70,13 @@
       'Content-Type':'application/json'
     }
   }).then(response => response.json())
-    .then(data     => data.Items.forEach(displayComment));
+    .then(data     => data.Items.forEach(displayComment))
+    .catch(err     => console.log(err));
+
 
   function displayComment(comment){
+    if (typeof comment == 'string') throw new Error(comment);
+
     const comments = document.getElementById('comments');
 
     if (comments.children.length == 0 ) {
@@ -83,13 +87,20 @@
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    const dateSpan = `<span class="date">${month}/${day}/${year}</span>`
 
-    const commentName = `<div class="comment-name"><strong>${comment.comment_name.S}</strong>${dateSpan}</div>`
-    const commentBody = `<div class="comment-body">${comment.comment_body.S}</div>`
-    const commentParent = `<div class="comment">${commentName}${commentBody}</div>`
+    let newComment = document.createElement('div');
 
-    comments.innerHTML = commentParent + comments.innerHTML;
+    newComment.classList.add("comment");
+    newComment.innerHTML = `
+      <div class="comment-name">
+         <strong>${comment.comment_name.S}</strong>
+         <span class="date">${month}/${day}/${year}</span>
+      </div>
+      <div class="comment-body">
+        ${comment.comment_body.S}
+      </div>`;
+
+    comments.prepend(newComment);
   }
 
   function saveComment(){
@@ -108,14 +119,7 @@
         'Content-Type':'application/json'
       }
     }).then(response => response.json())
-      .then(data => displayComment(data));
+      .then(data     => displayComment(data))
+      .catch(err     => console.log(err));
   }
-
-  // TODO handle errors like https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
-  function checkFetchError(response) {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
-}
 </script>
