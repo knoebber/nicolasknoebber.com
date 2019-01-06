@@ -3,14 +3,25 @@ const dynamo = new AWS.DynamoDB();
 const table = "comment";
 
 exports.handler = (event, context, callback) => {
+  const respond = (code,response) => callback(null,
+    {
+      statusCode:code,
+      body: JSON.stringify(response),
+      headers:{
+        "Access-Control-Allow-Origin" : "*"
+      }
+    }
+  )
+
   const {
     postNumber,
     commentName,
     commentBody
   } = JSON.parse(event.body);
 
-  if (!(postNumber || commentName || commentBody)){
-    return respond(callback,400,"postNumber, commentName, commentBody must be non empty");
+  if (!(postNumber && commentName && commentBody)){
+    respond(400,"postNumber, commentName, commentBody must be non empty");
+    return;
   }
 
   const newItem = {
@@ -35,21 +46,7 @@ exports.handler = (event, context, callback) => {
   };
 
   dynamo.putItem(dynamoRequest, (err, data) => {
-    if (!err) respond(callback, 200, newItem);
-    else      respond(callback, 500,`an error occured: ${err}`);
+    if (!err) respond(200, newItem);
+    else      respond(500,`an error occured: ${err}`);
   });
 };
-
-function respond(callback, code, response){
-  let result = {
-    statusCode:code,
-    body: JSON.stringify(response),
-    headers:{
-      "Access-Control-Allow-Origin" : "*"
-    }
-  };
-
-  if (code == 200) result.body = JSON.stringify(response);
-  else             result.statusMessage = response;
-  callback(null, result);
-}
