@@ -1,17 +1,13 @@
 html {
-  padding: 7%;
-  background: lightgrey;
   font-size:20px;
-  font-family:Helvetica, sans-serif;
+  font-family:Helvetica, sans serif;
 }
 
-body {
-  background: white;
-  padding:2rem 15rem 2rem 15rem;
-  outline: solid darkslateblue 2px;
+#content-wrapper {
+  padding:4rem 15rem 4rem 15rem;
 }
 
-h2 {
+#title h2 {
   margin: auto;
   text-align: center;
 }
@@ -26,10 +22,11 @@ img {
 }
 
 pre {
-  outline: solid black 1px;
-  background: whitesmoke;
-  padding: 5px;
-  font-family:monospace;
+  overflow: auto;
+  font-size: .7rem;
+  background: #1d1f21;
+  color:#c5c8c6;
+  border: 1px solid #777;
 }
 
 .header input {
@@ -69,12 +66,11 @@ pre {
   display: block;
 }
 
-#comments{
-  margin-top:1rem;
-  padding:.5rem;
+.comment-name {
+  font-size:1rem;
 }
-
 .comment {
+  font-size:.8rem;
   margin-top:1rem;
   border:2px solid darkslateblue;
   box-shadow: 3px 5px #888888;
