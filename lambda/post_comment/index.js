@@ -9,6 +9,10 @@ exports.handler = (event, context, callback) => {
     commentBody
   } = JSON.parse(event.body);
 
+  if (!(postNumber || commentName || commentBody)){
+    return respond(callback,400,"postNumber, commentName, commentBody must be non empty");
+  }
+
   const newItem = {
     "time_stamp": {
       N: new Date().getTime().toString()
@@ -36,15 +40,16 @@ exports.handler = (event, context, callback) => {
   });
 };
 
-function respond(callback, code, body){
-  const response = {
+function respond(callback, code, response){
+  let result = {
     statusCode:code,
+    body: JSON.stringify(response),
     headers:{
       "Access-Control-Allow-Origin" : "*"
     }
   };
 
-  if (code == 200) response.body = JSON.stringify(body);
-  else             response.body = JSON.stringify({'message':body});
-  callback(null, response);
+  if (code == 200) result.body = JSON.stringify(response);
+  else             result.statusMessage = response;
+  callback(null, result);
 }
