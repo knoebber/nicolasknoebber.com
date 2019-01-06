@@ -1,17 +1,20 @@
 html {
   padding: 7%;
-  background: darkgrey;
-}
-body {
   background: lightgrey;
-  padding:10px;
+  font-size:20px;
+  font-family:Helvetica, sans-serif;
+}
+
+body {
+  background: white;
+  padding:2rem 15rem 2rem 15rem;
   outline: solid darkslateblue 2px;
 }
+
 h2 {
   margin: auto;
   text-align: center;
 }
-
 
 img {
   display: block;
@@ -22,14 +25,11 @@ img {
   border-radius:8px;
 }
 
-p {
-  font-size: 18px;
-}
-
 pre {
   outline: solid black 1px;
   background: whitesmoke;
   padding: 5px;
+  font-family:monospace;
 }
 
 .header input {
@@ -67,4 +67,21 @@ pre {
 
 .footer input, textarea {
   display: block;
+}
+
+#comments{
+  margin-top:1rem;
+  padding:.5rem;
+}
+
+.comment {
+  margin-top:1rem;
+  border:2px solid darkslateblue;
+  box-shadow: 3px 5px #888888;
+  padding:.5rem 1rem .5rem 1rem;
+}
+
+.date{
+  font-style:italic;
+  float:right;
 }
