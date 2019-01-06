@@ -1,5 +1,5 @@
 {
-  "post_number"  : 3,
-  "comment_name" : "rick",
-  "comment_body" : "hi my name is rick"
+  "postNumber":7,
+  "commentName" : "cURL",
+  "commentBody" : "comment created from cURL"
 }
