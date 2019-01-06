@@ -28,16 +28,13 @@
     .then(data     = data.Items.forEach(displayComment));
 
   function displayComment(comment){
-    console.log(comment)
     const comments = document.getElementById('comments');
 
     if (comments.children.length == 0 ) {
       comments.innerHTML = ''
     }
 
-    console.log(comment.time_stamp)
     const date = new Date(parseInt(comment.time_stamp.N))
-    console.log(date.N)
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
@@ -76,16 +73,13 @@
     .then(data     => data.Items.forEach(displayComment));
 
   function displayComment(comment){
-    console.log(comment)
     const comments = document.getElementById('comments');
 
     if (comments.children.length == 0 ) {
       comments.innerHTML = ''
     }
 
-    console.log(comment.time_stamp)
     const date = new Date(parseInt(comment.time_stamp.N))
-    console.log(date.N)
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
@@ -95,9 +89,8 @@
     const commentBody = `<div class="comment-body">${comment.comment_body.S}</div>`
     const commentParent = `<div class="comment">${commentName}${commentBody}</div>`
 
-    comments.innerHTML += commentParent
+    comments.innerHTML = commentParent + comments.innerHTML;
   }
-
 
   function saveComment(){
     const name = document.getElementById('name').value;
@@ -107,14 +100,22 @@
     fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment', {
       method: 'POST',
       body: JSON.stringify({
-        post_number:9,
-        comment_name:name,
-        comment_body:comment
+        postNumber:9,
+        commentName:name,
+        commentBody:comment
       }),
       headers: {
         'Content-Type':'application/json'
       }
     }).then(response => response.json())
-      .then(data     => console.log(data));
+      .then(data => displayComment(data));
   }
+
+  // TODO handle errors like https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
+  function checkFetchError(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+}
 </script>
