@@ -7,7 +7,7 @@ exports.handler = (event, context, callback) => {
     ExpressionAttributeValues: {
       ":v1": { N: JSON.parse(event.body).post_number.toString() }
     },
-    ScanIndexForward: false,
+    ScanIndexForward: true,
     KeyConditionExpression: "post_number = :v1",
     TableName: table
   };
