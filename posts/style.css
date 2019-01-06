@@ -73,16 +73,26 @@ pre {
   display: inline;
 }
 
+.footer form {
+  margin-bottom:1rem;
+}
+
 .footer input, textarea {
   display: block;
+  padding:.3rem;
+}
+
+.footer button {
+  font-size:.7rem;
+  padding:.3rem;
 }
 
 .footer input {
-  width:25%
+  width:25%;
 }
 
 .footer textarea {
-  width: 50%
+  width: 50%;
 }
 
 @keyframes slide-in {
