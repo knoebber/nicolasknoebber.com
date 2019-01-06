@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from markdown import markdown
 from sys      import argv
 
@@ -8,7 +7,7 @@ new row will always be the first to keep reverse chronoligical order
 """
 def add_entry_to_list(post_num) :
   md = open('../markdown/'+post_num+'.md')
-  header = md.readline()[3:-1] #slice omits the beginning hashes and trailing \n
+  header = md.readline()[3:-1] # slice omits the beginning hashes and trailing \n
   date   = md.readline()[5:-1]
   md.close()
   html = open('../../blog.html')
@@ -21,7 +20,7 @@ def add_entry_to_list(post_num) :
       print('list item already exists')
       return
     if lines[i].strip() == '<tbody>' :
-      lines.insert(i+1,' '*4+new_element) #indent new tag properly and add to file
+      lines.insert(i+1,' '*4+new_element) # indent new tag properly and add to file
       print('new list item created')
       html = open('../../blog.html','wt')
       html.writelines(lines)
@@ -40,20 +39,22 @@ def add_entry(post_num) :
     print(post_num+'.md'+' does not exist!')
     return False
 
-  #read header and footer
+  # read header and footer
   h = open('../partial/header.html')
   header = h.read()
   h.close()
   f = open('../partial/footer.html')
   footer = f.read()
   f.close()
+  # add a post number variable to the footer so it knows how to save comments
+  footer = "<script> const postNum = "+post_num + ";</script>" + footer;
 
-  #create post html from header, markdown, and footer
+  # create post html from header, markdown, and footer
   html = markdown(md.read())
   html = header + '\n' + html + '\n' + footer
   md.close()
 
-  #write html file
+  # write html file
   post = open('../'+post_num+'.html','wt')
   post.write(html)
   post.close()
