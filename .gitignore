@@ -2,3 +2,4 @@
 *.png
 posts/images/*
 api-key
+posts/[0-9]*.html
