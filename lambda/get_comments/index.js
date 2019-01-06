@@ -3,10 +3,11 @@ const dynamo = new AWS.DynamoDB();
 const table = "comment";
 
 exports.handler = (event, context, callback) => {
-  const dynamo_request = {
+  const dynamoRequest = {
     ExpressionAttributeValues: {
       ":v1": { N: JSON.parse(event.body).post_number.toString() }
     },
+    ScanIndexForward: false,
     KeyConditionExpression: "post_number = :v1",
     TableName: table
   };
@@ -21,7 +22,7 @@ exports.handler = (event, context, callback) => {
     });
   };
 
-  dynamo.query(dynamo_request, function(err, data) {
+  dynamo.query(dynamoRequest, function(err, data) {
     if (!err) respond(200,data)
     else      respond(500, `an error occured: ${err.stack}`)
   })
