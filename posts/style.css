@@ -39,6 +39,7 @@ pre {
   background: #1d1f21;
   color:#c5c8c6;
   border: 1px solid #777;
+  padding:.2rem;
 }
 
 .header input {
