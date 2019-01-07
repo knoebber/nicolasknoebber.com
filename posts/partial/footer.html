@@ -53,8 +53,14 @@
   }
 
   function saveComment(){
-    const name = document.getElementById('name').value;
-    const comment = document.getElementById('comment-body').value;
+    const sanitizeString = (s) => {
+      let temp = document.createElement('div');
+      temp.textContent = s;
+      return temp.innerHTML;
+    };
+
+    const name = sanitizeString(document.getElementById('name').value);
+    const comment = sanitizeString(document.getElementById('comment-body').value);
     if (!(name || comment)) return;
 
     fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment', {
