@@ -1,12 +1,10 @@
 html {
   background: url(tree_d-4_b-5_l-200_a-25.png) no-repeat center center fixed whitesmoke;
   background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  -webkit-background-size: cover;
   height:100%;
   border-left:  solid #5f5f5f 3px;
   border-right: solid #5f5f5f 1px;
+  font-size:20px;
 }
 
 body {
@@ -24,19 +22,16 @@ p {
 input {
 	background:#5f5f5f;
 	color:white;
-	border: solid #5f5f5 2px;
   transition-duration: 0.4s;
 	border-radius: 4px;
-  font-size:20px;
+  font-size:70%;
 }
 
 input:hover {
 	background:grey;
 	color:white;
-	border: solid #5f5f5 2px;
   transition-duration: 0.4s;
 	border-radius: 4px;
-  font-size:20px;
 }
 
 .header {
@@ -47,7 +42,7 @@ input:hover {
 	background:#5f5f5f;
 	color: #CCC;
 	padding: 10px 20px 10px 20px;
-  font-size:25px;
+  font-size:1.3rem;
 }
 
 .spacer {
@@ -61,5 +56,3 @@ input:hover {
 .header span {
   padding-left: 20px
 }
-
-
