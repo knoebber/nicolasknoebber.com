@@ -7,7 +7,7 @@ html {
 }
 
 #content-wrapper {
-  padding:10vh 10vw 5vh 10vw;
+  padding:5rem 10vw 5vh 10vw;
 }
 
 img {
@@ -21,7 +21,7 @@ img {
 
 @media (min-width:600px) {
   #content-wrapper {
-    padding:20vh 20vw 5vh 20vw;
+    padding:5rem 20vw 5vh 20vw;
   }
   img {
     max-width:50%;
