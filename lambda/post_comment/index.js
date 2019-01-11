@@ -19,7 +19,7 @@ exports.handler = (event, context, callback) => {
     commentBody
   } = JSON.parse(event.body);
 
-  if (!(postNumber && commentName && commentBody)){
+  if (!( (postNumber === 0 || postNumber) && commentName && commentBody)){
     respond(400,"postNumber, commentName, commentBody must be non empty");
     return;
   }
