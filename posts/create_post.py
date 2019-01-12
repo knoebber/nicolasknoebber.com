@@ -1,10 +1,11 @@
+from os       import environ
 from markdown import markdown
 from sys      import argv
 
 """
 global variables for paths
 """
-website_dir = os.environ['HOME'] + '/projects/personal-website'
+website_dir = environ['HOME'] + '/projects/personal-website'
 posts_dir =  website_dir + '/posts'
 partial_dir = posts_dir + '/partial'
 markdown_dir = posts_dir + '/markdown'
@@ -16,13 +17,13 @@ new row will always be the first, to keep reverse chronological order
 """
 def add_entry_to_list(post_num) :
   # open the markdown file and get the date and title
-  md = open(markdown_dir+'/'post_num+'.md')
+  md = open(markdown_dir+'/'+post_num+'.md')
   header = md.readline()[3:-1] # slice omits the beginning hashes and trailing \n
   date   = md.readline()[5:-1]
   md.close()
 
   # open the blog file and puts its contents into a list of lines
-  html = open(website_dir+'/blog.html')
+  html = open(website_dir+'/blog.html','r')
   lines = html.readlines()
   html.close()
 
@@ -34,15 +35,16 @@ def add_entry_to_list(post_num) :
   while i > 0 :
     if lines[i].strip() == new_element.strip() :
       print('list item already exists')
-      return
-  if lines[i].strip() == '<tbody>' :
-    lines.insert(i+1,(' '*6)+new_element) # indent new tag properly and add to file
-    html = open(posts_dir,'wt')
-    html.writelines(lines)
-    html.close()
-    print('new list item created')
-    return
-  i -= 1
+      break
+    if lines[i].strip() == '<tbody>' :
+      # rewrite blog.html with the new table row
+      html = open(website_dir+'/blog.html','w')
+      lines.insert(i+1,(' '*6)+new_element) # indent new tag properly and add to file
+      html.writelines(lines)
+      html.close()
+      print('new list item created')
+      break
+    i -= 1
 
 """
 reads from the markdown file (post_num).md and writes (post_num).html
@@ -50,7 +52,7 @@ reads from the markdown file (post_num).md and writes (post_num).html
 def add_entry(post_num) :
   post_num = str(post_num)
   try :
-    md = open(markdown_dir+post_num+'.md')
+    md = open(markdown_dir+'/'+post_num+'.md')
   except :
     return False
 
