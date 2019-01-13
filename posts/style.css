@@ -2,10 +2,14 @@ html {
   font-size:20px;
   font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
   line-height:33px;
+  margin: 5rem 10vw 5vh 10vw;
+  background:#f0f0f0;
 }
 
 #content-wrapper {
-  padding:5rem 10vw 5vh 10vw;
+  box-shadow: 0 10px 5px 1px rgba(0,0,0,.26);
+  background:white;
+  padding: 1rem 1vh 2rem 1vh;
 }
 
 img {
@@ -18,9 +22,6 @@ img {
 }
 
 @media (min-width:600px) {
-  #content-wrapper {
-    padding:5rem 20vw 5vh 20vw;
-  }
   img {
     max-width:50%;
   }
@@ -89,22 +90,19 @@ pre code {
   margin-bottom:1rem;
 }
 
+.footer input {
+  margin-botom:.3rem;
+}
+
 .footer input, textarea {
   display: block;
   padding:.3rem;
+  margin-bottom: .3rem;
 }
 
 .footer button {
   font-size:.7rem;
   padding:.3rem;
-}
-
-.footer input {
-  width:25%;
-}
-
-.footer textarea {
-  width: 50%;
 }
 
 @keyframes slide-in {
@@ -124,7 +122,9 @@ pre code {
   border:2px solid darkslateblue;
   box-shadow: 3px 5px #888888;
   padding:.5rem 1rem .5rem 1rem;
+  border-radius:5px;
 }
+
 .comment-name {
   font-size:1rem;
 }
@@ -132,4 +132,8 @@ pre code {
 .date{
   font-style:italic;
   float:right;
+}
+
+.comment-body {
+  margin-top:1rem;
 }
