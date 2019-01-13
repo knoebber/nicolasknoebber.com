@@ -2,7 +2,7 @@ html {
   font-size:20px;
   font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
   line-height:33px;
-  margin: 5rem 10vw 5vh 10vw;
+  margin: 0;
   background:#f0f0f0;
 }
 
@@ -22,10 +22,14 @@ img {
 }
 
 @media (min-width:600px) {
+  html {
+    margin: 5rem 10vw 5vh 10vw;
+  }
+
   #content-wrapper {
     padding: 3rem;
   }
-  
+
   img {
     max-width:50%;
   }
@@ -46,6 +50,7 @@ code {
 }
 
 pre {
+  line-height:1rem;
   overflow: auto;
   font-size: .7rem;
   background: #1d1f21;
