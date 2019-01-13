@@ -33,6 +33,7 @@ input:hover {
 }
 
 table {
+  min-width:40%;
   border-collapse:collapse;
 	opacity: .85;
 }
