@@ -39,7 +39,7 @@ def add_entry_to_list(post_num) :
     if lines[i].strip() == '<tbody>' :
       # rewrite blog.html with the new table row
       html = open(website_dir+'/blog.html','w')
-      lines.insert(i+1,(' '*6)+new_element) # indent new tag properly and add to file
+      lines.insert(i+1,(' '*8)+new_element) # indent new tag properly and add to file
       html.writelines(lines)
       html.close()
       print('new list item created')
