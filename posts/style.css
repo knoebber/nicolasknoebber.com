@@ -32,6 +32,7 @@ img {
 }
 
 code {
+  padding:.2rem;
   border: 1px solid blue;
   font:.6rem Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace;
   border: 1px solid #BCBEC0;
