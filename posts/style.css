@@ -9,7 +9,7 @@ html {
 #content-wrapper {
   box-shadow: 0 10px 5px 1px rgba(0,0,0,.26);
   background:white;
-  padding: 1rem 1vh 2rem 1vh;
+  padding: .5rem;
 }
 
 img {
@@ -22,6 +22,10 @@ img {
 }
 
 @media (min-width:600px) {
+  #content-wrapper {
+    padding: 3rem;
+  }
+  
   img {
     max-width:50%;
   }
@@ -94,10 +98,14 @@ pre code {
   margin-botom:.3rem;
 }
 
-.footer input, textarea {
+.footer input, .footer textarea {
   display: block;
   padding:.3rem;
   margin-bottom: .3rem;
+}
+
+.footer textarea {
+  min-width:40%;
 }
 
 .footer button {
