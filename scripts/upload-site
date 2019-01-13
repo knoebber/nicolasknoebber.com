@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+aws s3 sync $HOME/projects/personal-website s3://nicolasknoebber.com \
+--exclude "*" \
+--include "*.html" \
+--include "*.png" \
+--include "*.jpg" \
+--include "*.css" \
+$1
