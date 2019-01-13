@@ -6,4 +6,5 @@ aws s3 sync $HOME/projects/personal-website s3://nicolasknoebber.com \
 --include "*.png" \
 --include "*.jpg" \
 --include "*.css" \
+--include "icon.ico" \
 $1
