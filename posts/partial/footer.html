@@ -4,7 +4,7 @@
     <form>
       <input id="name" placeholder="your name" maxlength=16 required>
       <textarea id="comment-body" placeholder="your comment" required></textarea>
-      <button type="button" onclick="saveComment()"> Submit </button>
+      <button id="submit-button" type="button" onclick="saveComment()"> Submit </button>
     </form>
     <div id="comments">
       There's nothing here yet. Be the first!
@@ -12,6 +12,8 @@
   </div>
 </div>
 <script>
+  const savedComments = new Set();
+
   fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/get_comments', {
     method: 'POST',
     body: JSON.stringify({post_number:postNum}),
@@ -25,6 +27,9 @@
 
   function displayComment(comment){
     if (typeof comment == 'string') throw new Error(comment);
+
+    // Strip the comment of all white space and add it to the comment set.
+    savedComments.add(comment.comment_body.S.replace(/\s/g,''));
 
     const comments = document.getElementById('comments');
 
@@ -61,7 +66,11 @@
 
     const name = sanitizeString(document.getElementById('name').value);
     const comment = sanitizeString(document.getElementById('comment-body').value);
-    if (!(name || comment)) return;
+
+    // Check that the comment name/body are not empty, and that the comment body is not a duplicate.
+    if (!(name || comment) || savedComments.has(comment.replace(/\s/g,''))) return;
+
+    document.getElementById("submit-button").disabled = true;
 
     fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment', {
       method: 'POST',
@@ -75,6 +84,7 @@
       }
     }).then(response => response.json())
       .then(data     => displayComment(data))
+      .then(()       => document.getElementById("submit-button").disabled = false)
       .catch(err     => console.log(err));
   }
 </script>
