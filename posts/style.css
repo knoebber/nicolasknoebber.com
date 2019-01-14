@@ -103,7 +103,7 @@ pre code {
   margin-botom:.3rem;
 }
 
-#footer input, .footer textarea {
+#footer input, #footer textarea {
   display: block;
   padding:.3rem;
   margin-bottom: .3rem;
