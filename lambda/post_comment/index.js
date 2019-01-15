@@ -29,7 +29,7 @@ exports.handler = (event, context, callback) => {
       N: new Date().getTime().toString()
     },
     "post_number" : {
-      N:postNumber.toString()
+      N: postNumber.toString()
     },
     "comment_body": {
       S: commentBody

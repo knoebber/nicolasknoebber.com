@@ -33,6 +33,7 @@
 
     const comments = document.getElementById('comments');
 
+    // Remove the "There's nothing here yet" text on the first comment insert.
     if (comments.children.length == 0 ) {
       comments.innerHTML = ''
     }
@@ -47,8 +48,7 @@
     newComment.classList.add("comment");
     newComment.innerHTML = `
       <div class="comment-name">
-         <strong>${comment.comment_name.S}</strong>
-         <span class="date">${month}/${day}/${year}</span>
+         <strong>${comment.comment_name.S}<span class="date">${month}/${day}/${year}</span></strong>
       </div>
       <div class="comment-body">
         ${comment.comment_body.S}
