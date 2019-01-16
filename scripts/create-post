@@ -36,7 +36,6 @@ def add_entry_to_list(post_num) :
   i = len(lines) - 1
   while i > 0 :
     if lines[i].strip() == new_element.strip() :
-      print('list item already exists')
       break
     if lines[i].strip() == '<tbody>' :
       # rewrite blog.html with the new table row
@@ -44,7 +43,7 @@ def add_entry_to_list(post_num) :
       lines.insert(i+1,(' '*8)+new_element) # indent new tag properly and add to file
       html.writelines(lines)
       html.close()
-      print('new list item created')
+      print('table row for post '+post_num+' created')
       break
     i -= 1
 
@@ -58,15 +57,21 @@ def add_entry(post_num) :
   except :
     return False
 
-  # read header and footer
+  # read header, add change log button
   h = open(partial_dir+'/header.html')
   header = h.read()
   h.close()
+  header += """
+    <a href="https://github.com/knoebber/personal-website/commits/master/posts/markdown/{}.md/">
+      <button>change log</button>
+    </a>
+  </div>
+  """.format(post_num)
+
+  # read footer, add post number variable so it knows how to save comments
   f = open(partial_dir+'/footer.html')
   footer = f.read()
   f.close()
-
-  # add a post number variable to the footer so it knows how to save comments
   footer = "<script> const postNum = "+post_num + ";</script>" + footer;
 
   # create post html from header, markdown, and footer
@@ -78,7 +83,7 @@ def add_entry(post_num) :
   post = open(posts_dir+'/'+post_num+'.html','wt')
   post.write(html)
   post.close()
-  print('post updated')
+  print('post '+post_num+' updated')
   add_entry_to_list(post_num)
   return True
 
