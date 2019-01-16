@@ -75,7 +75,7 @@ def add_entry(post_num) :
   footer = "<script> const postNum = "+post_num + ";</script>" + footer;
 
   # create post html from header, markdown, and footer
-  html = markdown(md.read())
+  html = markdown(md.read(), extensions=["codehilite"])
   html = header + '\n' + html + '\n' + footer
   md.close()
 
