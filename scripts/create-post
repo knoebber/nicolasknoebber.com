@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
+from sys      import argv
 from os       import environ
 from markdown import markdown
-from sys      import argv
+from markdown.extensions.codehilite import CodeHiliteExtension
 
 """
 global variables for paths
@@ -75,7 +76,7 @@ def add_entry(post_num) :
   footer = "<script> const postNum = "+post_num + ";</script>" + footer;
 
   # create post html from header, markdown, and footer
-  html = markdown(md.read(), extensions=["codehilite"])
+  html = markdown(md.read(), extensions=[CodeHiliteExtension(linenums=False)])
   html = header + '\n' + html + '\n' + footer
   md.close()
 
@@ -88,6 +89,8 @@ def add_entry(post_num) :
   return True
 
 if __name__ == '__main__' :
+  if len(argv) == 1 : exit()
+
   post_num = argv[1]
   if post_num == 'all' :
     n = 0
