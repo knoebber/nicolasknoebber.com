@@ -3,6 +3,8 @@
 aws s3 sync $HOME/projects/personal-website s3://nicolasknoebber.com \
 --exclude "*" \
 --include "*.html" \
+--exclude "posts/partial/header.html" \
+--exclude "posts/partial/footer.html" \
 --include "*.png" \
 --include "*.jpg" \
 --include "*.css" \
