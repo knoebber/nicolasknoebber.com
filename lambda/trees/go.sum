@@ -86,6 +86,8 @@ golang.org/x/tools v0.0.0-20181130195746-895048a75ecf/go.mod h1:n7NCudcB/nEzxVGm
 golang.org/x/tools v0.0.0-20181207195948-8634b1ecd393/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
 golang.org/x/tools v0.0.0-20190116231616-b258f6da2383 h1:CWP4O+Q3OaGBOLxV1/YRnzRSpvZYJlauwRUu3auRH5s=
 golang.org/x/tools v0.0.0-20190116231616-b258f6da2383/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
+golang.org/x/tools v0.0.0-20190125232054-d66bd3c5d5a6 h1:iZgcI2DDp6zW5v9Z/5+f0NuqoxNdmzg4hivjk2WLXpY=
+golang.org/x/tools v0.0.0-20190125232054-d66bd3c5d5a6/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
 gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c h1:vTxShRUnK60yd8DZU+f95p1zSLj814+5CuEh7NjF2/Y=
 gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c/go.mod h1:3HH7i1SgMqlzxCcBmUHW657sD4Kvv9sC3HpL3YukzwA=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
@@ -93,3 +95,5 @@ gopkg.in/yaml.v2 v2.2.2 h1:ZCJp+EgiOT7lHqUV2J862kp8Qj64Jo6az82+3Td9dZw=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 honnef.co/go/tools v0.0.0-20190109154334-5bcec433c8ea h1:Mqe+pbbXrgs4O/B8PTc7PMpbZ1YCzT0YAz8FHqE8AcM=
 honnef.co/go/tools v0.0.0-20190109154334-5bcec433c8ea/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
+honnef.co/go/tools v0.0.0-20190125135159-8e66885c52b0 h1:gvjw7ue3Hr/yCl8+Kcbww8XHDO+ZCeps3Gjr00iRDPI=
+honnef.co/go/tools v0.0.0-20190125135159-8e66885c52b0/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=

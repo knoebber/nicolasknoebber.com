@@ -33,8 +33,8 @@ require (
 	golang.org/x/image v0.0.0-20181116024801-cd38e8056d9b // indirect
 	golang.org/x/lint v0.0.0-20181217174547-8f45f776aaf1 // indirect
 	golang.org/x/sys v0.0.0-20190116161447-11f53e031339 // indirect
-	golang.org/x/tools v0.0.0-20190116231616-b258f6da2383 // indirect
+	golang.org/x/tools v0.0.0-20190125232054-d66bd3c5d5a6 // indirect
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
 	gopkg.in/yaml.v2 v2.2.2 // indirect
-	honnef.co/go/tools v0.0.0-20190109154334-5bcec433c8ea // indirect
+	honnef.co/go/tools v0.0.0-20190125135159-8e66885c52b0 // indirect
 )
