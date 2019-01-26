@@ -1,12 +1,14 @@
 package main
 
 import (
-//	"fmt"
-// "github.com/aws/aws-lambda-go/lambda"
-// "github.com/aws/aws-sdk-go/service/s3/s3manager"
+ "bytes"
+ "fmt"
+ "github.com/aws/aws-sdk-go/aws"
+ "github.com/aws/aws-lambda-go/lambda"
+ "github.com/aws/aws-sdk-go/service/s3"
+ "github.com/aws/aws-sdk-go/aws/session"
 )
 
-/*
 // Request is the structure that HandleRequest expects to receive.
 type Request struct {
 	Message string `json:"message"`
@@ -14,11 +16,33 @@ type Request struct {
 
 // HandleRequest processes a lambda request.
 func HandleRequest(r Request) (string, error) {
-	return fmt.Sprintf("It worked %s!", r.Message), nil
+  buffer, err := draw()
+  if err != nil {
+    return "", err
+  }
+
+  // Create a S3 client
+  session := session.Must(session.NewSession())
+  svc := s3.New(session)
+
+  reader := bytes.NewReader(buffer.Bytes())
+  fmt.Printf("%d bytes",reader.Len())
+
+  putInput := s3.PutObjectInput{
+    Bucket: aws.String("nicolasknoebber.com"),
+    Body:   reader,
+    Key:    aws.String("test_upload.png"),
+  }
+
+  result, err := svc.PutObject(&putInput)
+  if err != nil {
+    fmt.Println(err.Error)
+    return "", err
+  }
+
+	return fmt.Sprintf("put object result: %s", result), nil
 }
-*/
 
 func main() {
-	draw()
-	//	lambda.Start(HandleRequest)
+	lambda.Start(HandleRequest)
 }
