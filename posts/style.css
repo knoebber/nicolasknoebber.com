@@ -47,6 +47,37 @@ code {
   background: #F1F3F5;
   border-radius:5px;
 }
+.expandable-image {
+  margin-top:5px;
+  line-height:0;
+}
+
+.expandable-image input {
+  display:none;
+}
+
+.expandable-image label:hover {
+  background:#f0f0f0;
+}
+.expandable-image label{
+  min-width:20%;
+  padding:.5rem;
+  display:inline-block;
+  border: solid black 1px;
+}
+
+.expandable-image img {
+  height:0;
+}
+
+.toggle:checked + label {
+  width:100%;
+}
+
+.toggle:checked + label > img {
+  height:100%;
+  max-width:100%;
+}
 
 .codehilite {
   line-height:1rem;
@@ -61,19 +92,16 @@ code {
   margin-left:1.5rem;
 }
 
+#header input:hover, #header button:hover {
+  background:grey;
+}
+
 #header input, #header button {
   background:#5f5f5f;
   color: white;
   transition-duration: 0.4s;
   border-radius: 4px;
   font-size:100%;
-}
-
-#headerinput:hover, #header button:hover {
-  background:grey;
-  color:white;
-  transition-duration: 0.4s;
-  border-radius: 4px;
 }
 
 #header {
