@@ -43,6 +43,11 @@ func HandleRequest(r Request) (string, error) {
 	return fmt.Sprintf("put object result: %s", result), nil
 }
 
+
+var dev = true
 func main() {
-	lambda.Start(HandleRequest)
+  if !dev {
+    lambda.Start(HandleRequest)
+  }
+  draw()
 }
