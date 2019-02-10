@@ -27,13 +27,16 @@ func HandleRequest(request events.APIGatewayProxyRequest) (response events.APIGa
 		p      TreeParam
 		buffer *bytes.Buffer
 	)
+
 	if err = json.Unmarshal([]byte(request.Body), &p); err != nil {
 		fmt.Printf("request: %+v\n", request)
-		return response, err
+    response.StatusCode = 400
+		return
 	}
 	buffer, err = createTree(p)
 	if err != nil {
-		return response, err
+    response.StatusCode = 500
+		return
 	}
 
 	// Create a S3 client
@@ -51,10 +54,13 @@ func HandleRequest(request events.APIGatewayProxyRequest) (response events.APIGa
 
 	_, err = svc.PutObject(&putInput)
 	if err != nil {
-		return response, err
+    response.StatusCode = 500
+		return
 	}
 
-	return response, nil
+  response.StatusCode = 200
+  response.Body = `{"message":"tree created"}`
+	return
 }
 
 var dev = false
