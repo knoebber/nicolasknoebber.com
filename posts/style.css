@@ -88,6 +88,13 @@ code {
   border-radius:5px;
 }
 
+.row {
+  display:flex;
+}
+.column {
+  padding-right:5%
+}
+
 #header button {
   margin-left:1.5rem;
 }
