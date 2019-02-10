@@ -2,7 +2,9 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -18,10 +20,20 @@ type TreeParam struct {
 }
 
 // HandleRequest processes a lambda request.
-func HandleRequest(p TreeParam) (string, error) {
-	buffer, err := createTree(p)
+func HandleRequest(request events.APIGatewayProxyRequest) (response events.APIGatewayProxyResponse, err error) {
+	response.Headers = map[string]string{"Access-Control-Allow-Origin": "*"}
+
+	var (
+		p      TreeParam
+		buffer *bytes.Buffer
+	)
+	if err = json.Unmarshal([]byte(request.Body), &p); err != nil {
+		fmt.Printf("request: %+v\n", request)
+		return response, err
+	}
+	buffer, err = createTree(p)
 	if err != nil {
-		return "", err
+		return response, err
 	}
 
 	// Create a S3 client
@@ -34,19 +46,18 @@ func HandleRequest(p TreeParam) (string, error) {
 	putInput := s3.PutObjectInput{
 		Bucket: aws.String("nicolasknoebber.com"),
 		Body:   reader,
-		Key:    aws.String("lambda-go-tree.png"),
+		Key:    aws.String("/posts/images/lambda-go-tree.png"),
 	}
 
-	result, err := svc.PutObject(&putInput)
+	_, err = svc.PutObject(&putInput)
 	if err != nil {
-		fmt.Println(err.Error)
-		return "", err
+		return response, err
 	}
 
-	return fmt.Sprintf("put object result: %s", result), nil
+	return response, nil
 }
 
-var dev = true
+var dev = false
 
 func main() {
 	// For testing locally
