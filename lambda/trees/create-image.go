@@ -22,30 +22,38 @@ func polarLine(c *gg.Context, x0 ,y0, length, degrees float64)(x1,y1 float64) {
   return
 }
 
-func drawTree(c *gg.Context,lineWidth, x0, y0, length, degrees float64) {
+func drawTree(c *gg.Context,lineWidth, x0, y0, length, degrees float64, param treeParam) {
   if lineWidth < 1 || x0 < 1 || y0 < 1 || length < 1 {
     return
   }
-  numBranches := 2
   var x1 float64
   var y1 float64
 
-  for i:= 0; i< numBranches; i += 1 {
-    fmt.Printf("setting line width %f\n", lineWidth)
-    c.SetLineWidth(lineWidth)
-    x1, y1 = polarLine(c,x0,y0,length,degrees)
-    if i % 2 == 0 {
-      drawTree(c,lineWidth -2,x1,y1,length - 20, degrees - 20)
-    } else {
-      drawTree(c,lineWidth -2,x1,y1,length - 10, degrees + 10)
-      }
-  }
+  c.SetLineWidth(lineWidth)
+  lineWidth -= 2
+  x1, y1 = polarLine(c,x0,y0,length,degrees)
+  drawTree(c,lineWidth,x1,y1,length-param.leftLengthOffset, degrees-param.leftAngleOffset,param)
+  drawTree(c,lineWidth,x1,y1,length-param.rightLengthOffset, degrees + param.rightAngleOffset,param)
+}
+
+type treeParam struct {
+  leftLengthOffset float64
+  leftAngleOffset float64
+  rightLengthOffset float64
+  rightAngleOffset float64
 }
 
 func draw() (buffer *bytes.Buffer, err error) {
 	c := gg.NewContext(width, height)
 	c.SetRGB(0, 0, 0)
-  drawTree(c,10,200, height,100,270)
+  param := treeParam {
+    leftAngleOffset: 15,
+    leftLengthOffset:1,
+    rightLengthOffset:1,
+    rightAngleOffset:45,
+  }
+
+  drawTree(c,10,width/2, height,100,270,param)
   // If testing locally, save the image to the disk.
   if dev {
     c.SavePNG("test.png")
