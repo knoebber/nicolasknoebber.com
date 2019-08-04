@@ -30,12 +30,12 @@ func HandleRequest(request events.APIGatewayProxyRequest) (response events.APIGa
 
 	if err = json.Unmarshal([]byte(request.Body), &p); err != nil {
 		fmt.Printf("request: %+v\n", request)
-    response.StatusCode = 400
+		response.StatusCode = 400
 		return
 	}
 	buffer, err = createTree(p)
 	if err != nil {
-    response.StatusCode = 500
+		response.StatusCode = 500
 		return
 	}
 
@@ -54,12 +54,12 @@ func HandleRequest(request events.APIGatewayProxyRequest) (response events.APIGa
 
 	_, err = svc.PutObject(&putInput)
 	if err != nil {
-    response.StatusCode = 500
+		response.StatusCode = 500
 		return
 	}
 
-  response.StatusCode = 200
-  response.Body = `{"message":"tree created"}`
+	response.StatusCode = 200
+	response.Body = `{"message":"tree created"}`
 	return
 }
 
