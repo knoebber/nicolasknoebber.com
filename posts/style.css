@@ -35,10 +35,6 @@ img {
   #content-wrapper {
     padding: 1rem;
   }
-
-  img {
-    max-width:50%;
-  }
 }
 
 #title h2 {

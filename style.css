@@ -1,83 +1,58 @@
+:root {
+    --header-padding: 20px;
+    --header-font-size: 28px;
+}
+
 html {
-  background: url(tree_d-4_b-5_l-200_a-25.png) no-repeat center center fixed whitesmoke;
-  background-size: cover;
-  height:100%;
-  font-size:20px;
+    background: url(tree_d-4_b-5_l-200_a-25.png) no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    font-size: 50px;
+}
+
+#header {
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    background:#5f5f5f;
+    color: #CCC;
+    padding: var(--header-padding);
+    font-size: var(--header-font-size);
+}
+
+#header form {
+    display:inline
+}
+
+#header span {
+    padding-left: 20px
 }
 
 #content-wrapper {
-  padding:5rem 1rem 1rem 5vw;
-}
-
-ol {
-	font:1rem "Lucida Console",monospace;
+    margin-top: 150px;
+    margin-left: 50px;
 }
 
 p {
-	font:1rem "Lucida Console",monospace;
+    font-size: 1rem;
+}
+
+.post, a[href="mailto:knoebber@gmail.com"] {
+    font-size: .5rem;
 }
 
 input {
-	background:#5f5f5f;
-	color:white;
-  transition-duration: 0.4s;
-	border-radius: 4px;
-  font-size:70%;
+    background:#5f5f5f;
+    color:white;
+    transition-duration: 0.4s;
+    border-radius: 4px;
+    font-size:70%;
 }
 
 input:hover {
-	background:grey;
-	color:white;
-  transition-duration: 0.4s;
-	border-radius: 4px;
-}
-
-table {
-  min-width:40%;
-  border-collapse:collapse;
-	opacity: .85;
-}
-
-tbody tr:nth-child(odd) {
-  background: dimgray;
-}
-
-tbody tr:nth-child(even) {
-  background: lightslategray;
-}
-
-tbody tr:hover {
-  opacity:.8;
-}
-
-td {
-  padding:12px;
-}
-
-table a {
-  color:black;
-}
-
-.header {
-  position:fixed;
-	top:0px;
-	left:0px;
-	width:100%;
-	background:#5f5f5f;
-	color: #CCC;
-	padding: 10px 20px 10px 20px;
-  font-size:1.3rem;
-  z-index:1;
-}
-
-.spacer {
-	padding-top:100px;
-}
-
-.header form {
-  display:inline
-}
-
-.header span {
-  padding-left: 20px
+    background:grey;
+    color:white;
+    transition-duration: 0.4s;
+    border-radius: 4px;
 }
