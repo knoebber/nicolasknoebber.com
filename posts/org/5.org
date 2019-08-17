@@ -32,6 +32,7 @@ Instead of blacklisting, it is possible to white list by excluding everything, a
 
 #### upload-site
 
+    :::bash
     #!/usr/bin/bash
 
     aws s3 sync $HOME/projects/personal-website s3://nicolasknoebber.com \
