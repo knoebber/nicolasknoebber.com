@@ -1,7 +1,7 @@
-## Taking a Break From Work
-#### Sat 06/10/18
+* Taking a Break From Work
+**** Sat 06/10/18
 
----
+--------------------------------------------------------------------------------
 
 About a month ago I finished my contract work doing LAMP stack web development at FabPro1. Since then I've been spending some time catching
 up on other parts of my life. 
@@ -29,7 +29,7 @@ Overall I finished first place in points for C 250 4Stk, which I am definitely h
 Me leading the pack at Honey Lake:
 ![racing](images/honey_lake.jpg)
 
----
+--------------------------------------------------------------------------------
 
 With the racing season over and having no current work the idea of travelling has popped into my head. My grandparents
 are always telling me, "You're young, see the world!", so I figure I should listen to their wisdom.

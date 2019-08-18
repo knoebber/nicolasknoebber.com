@@ -1,6 +1,7 @@
 *.pdf
 *.png
 *.swp
-posts/images/*
+*.html
+posts/old/
+images/
 api-key
-posts/[0-9]*.html

@@ -1,7 +1,7 @@
-## RAGBRAI
-##### Sat 08/03/19
+* RAGBRAI
+**** Sat 08/03/19
 
----
+--------------------------------------------------------------------------------
 
 ![bikes](images/ragbrai_crowd.jpg)
 
@@ -12,16 +12,16 @@ So my long time friend and I signed up. In typical fashion for us we did little 
 
 **Supplies**
 
-* Bike
-* Spare tube
-* Wrench to take of wheels
-* Camelbak
-* Bike shorts
-* 7 pairs of socks
-* Athletic shirts
-* Light blanket
-* Pillow
-* Plenty of cash
++ Bike
++ Spare tube
++ Wrench to take of wheels
++ Camelbak
++ Bike shorts
++ 7 pairs of socks
++ Athletic shirts
++ Light blanket
++ Pillow
++ Plenty of cash
 
 We arrived in Council Bluffs on Saturday. The ride would start here the next morning.
 We got our first taste of the event while we were looking for parking. 
@@ -54,7 +54,7 @@ This allowed me to take a break while my pedals spun around like an egg batter.
 ![me and my bike](images/me_bike_ragbrai.jpg)
 
 As the week went on I became more in tune with the culture. The ride has its own language and set of customs.
-We kept seeing people with **VIRGIN** sharpied on the back of their calf.
+We kept seeing people with ++VIRGIN++ sharpied on the back of their calf.
 Eventually I realized this meant it was their first time on the ride.
 But it was bizarre in certain contexts; there was one group who all dressed as babies and marked themselves as such.
 It was confusing to say the least.
@@ -62,34 +62,32 @@ It was confusing to say the least.
 There were also the words that people were shouting while riding. 
 Certain events triggered a shout, and then the mass of bikes would echo it so riders further back could hear it as well.
 
-#### RAGBRAI expression / meaning
-    
-	:::HTML
-    "CAR UP":       A car is up the road driving opposite the flow of bikes.
+**** RAGBRAI expression / meaning
+#+BEGIN_SRC HTML
+  "CAR UP":       A car is up the road driving opposite the flow of bikes.
 
-	"CAR DOWN":     A car is behind us driving with the flow of bikes.
+  "CAR DOWN":     A car is behind us driving with the flow of bikes.
 
-	"BIKE UP":      A bike is up the road riding the opposite direction.
+  "BIKE UP":      A bike is up the road riding the opposite direction.
 
-	"RUMBLES":      A rumble strip in the road. Avoid this to save your butt and hands.
+  "RUMBLES":      A rumble strip in the road. Avoid this to save your butt and hands.
 
-	"SLOWING":      We are slowing down.
+  "SLOWING":      We are slowing down.
 
-	"STOPPING: :    We are stopping.
+  "STOPPING: :    We are stopping.
 
-	"TURNING":      We are turning (right or left).
+  "TURNING":      We are turning (right or left).
 
-	"RIDER OFF":    Someone is stopping on the shoulder of the road.
+  "RIDER OFF":    Someone is stopping on the shoulder of the road.
 
-	"RIDER ON":     Someone is getting back on their bike and needs space to merge on.
+  "RIDER ON":     Someone is getting back on their bike and needs space to merge on.
 
-	"GOOD MORNING": A local is waving from their porch as the ride leaves their city. 
-	                Let them know you enjoyed your stay.
-					
-	"FREE BEER":    A food truck is luring in riders at 8am with free Budweisers. 
-	                Often followed up by a "RIDER OFF"
-<br>
-
+  "GOOD MORNING": A local is waving from their porch as the ride leaves their city. 
+                  Let them know you enjoyed your stay.
+      
+  "FREE BEER":    A food truck is luring in riders at 8am with free Budweisers. 
+                  Often followed up by a "RIDER OFF"
+#+END_SRC
 The most difficult day was on Wednesday. It was about an 85 mile ride, which was the longest of the week.
 Disaster struck about half way in to the day. My bike got flat tire. 
 We had the tools to fix it and someone even stopped by to help us out.

@@ -1,7 +1,7 @@
-## Generating and Uploading Images to S3 with Golang
-#### Sun 02/10/19
+* Generating and Uploading Images to S3 with Golang
+**** Sun 02/10/19
 
----
+--------------------------------------------------------------------------------
 
 I love to write programs that generate interesting pictures. I will always get a warm
 tingly feeling when the output something that I wrote surprises me.
@@ -14,33 +14,35 @@ implemented a function to draw a line, a function to draw a circle, and then rec
 called them - [source](https://github.com/knoebber/Rustals/blob/master/src/main.rs).
 Here's a few of my favorites images that it generated:
 
-*click to expand or hide*
++click to expand or hide+
 <div id="image-gallery">
   <div class="expandable-image">
-    <input type="checkbox" id="circle-toggle" class="toggle" />
-    <label for="circle-toggle">circles<img src="images/rustal_circle.png"  alt="circle"></label>
+<input type="checkbox" id="circle-toggle" class="toggle" />
+<label for="circle-toggle">circles<img src="images/rustal_circle.png"  alt="circle"></label>
   </div>
   <div class="expandable-image">
-    <input type="checkbox" id="shell-toggle" class="toggle" />
-    <label for="shell-toggle">shell<img src="images/rustal_shell.png"  alt="shell"></label>
+<input type="checkbox" id="shell-toggle" class="toggle" />
+<label for="shell-toggle">shell<img src="images/rustal_shell.png"  alt="shell"></label>
   </div>
   <div class="expandable-image">
-    <input type="checkbox" id="tree-toggle" class="toggle" />
-    <label for="tree-toggle">tree<img src="images/rustal_rand_tree.png"  alt="tree"></label>
+<input type="checkbox" id="tree-toggle" class="toggle" />
+<label for="tree-toggle">tree<img src="images/rustal_rand_tree.png"  alt="tree"></label>
   </div>
   <div class="expandable-image">
-    <input type="checkbox" id="square-toggle" class="toggle" />
-    <label for="square-toggle">squares<img src="images/rustal_square.png"  alt="square"></label>
+<input type="checkbox" id="square-toggle" class="toggle" />
+<label for="square-toggle">squares<img src="images/rustal_square.png"  alt="square"></label>
   </div>
 </div>
 
 A few years later I wrote a program in python/pygame that generated trees in real time. Eventually I made a front
 end for it on my website that let the user specify a few different parameters:
 
-* depth: how many times to recursively draws more branches
-* branches: 2 for a binary tree, 3 for a ternary tree, etc
-* length: how long in pixels each branch should be
-* angle: the angle that a new branch is drawn from its parent
++ depth: how many times to recursively draws more branches
++ branches: 2 for a binary tree, 3 for a ternary tree, etc
++ length: how long in pixels each branch should be
+
+#+END_SRC
++ angle: the angle that a new branch is drawn from its parent
 
 Here's an example of a [result](../tree_d-4_b-5_l-200_a-25.png) and here's the
 [source](https://github.com/knoebber/personal-website/tree/e78e112376580580bbf8d36bf02cd71ccdcc9feb/trees).
@@ -48,17 +50,17 @@ This worked by using php to call the python program which used pygame headless -
 being built , it would just save the image. Sadly, when I moved my website over to be [statically hosted](5.html)
 , I did not reimplement it and so it died.
 
-### The Resurrection
+*# The Resurrection
 
 Armed with my new knowledge from [making an api for a static page with lambda](6.html), and writing
 in Go for my current job, I jumped into making a simple image generator. The first step was to create
 a Go program that could generate and save an image. I decided to use the
 [Go Graphics](https://github.com/fogleman/gg) library.
 
-#### Drawing and saving a simple image in go
+**** Drawing and saving a simple image in go
 
-    :::go
-    package main
+#+BEGIN_SRC go
+package main
 
     import "github.com/fogleman/gg"
 
@@ -80,13 +82,13 @@ for lambda handlers: it is a typed language vs the untyped Python and Nodejs. I 
 solution by looking at types, and be confident that if compiled it would work.
 
 I found that I would need to use the `"github.com/aws/aws-sdk-go/service/s3"` package to call
-`putObject`. This method takes a `*PutObjectInput` as its only parameter. This lets you
+`putObject`. This method takes a `+PutObjectInput` as its only parameter. This lets you
 specify all sorts of [things](https://docs.aws.amazon.com/sdk-for-go/api/service/s3/#PutObjectInput),
 but has a few required attributes:
 
-* Bucket - the name of the S3 bucket
-* Body - the data to be uploaded
-* Key - the name for the data in the bucket (the key of this page is "posts/7.html")
++ Bucket - the name of the S3 bucket
++ Body - the data to be uploaded
++ Key - the name for the data in the bucket (the key of this page is "posts/7.html")
 
 I would have to set `Body` to the image that I generated. It's type is a `io.ReadSeeker`.
 Next I looked in the `go graphics` package for some methods that might return a type that would work
@@ -100,59 +102,56 @@ writing functionality. This let me write the bytes from the image in the `gg`  c
 then have the s3 input object read them. Here's a working example of creating an image with `gg` and then
 uploading it to a S3 bucket:
 
-    :::go
-    package main
-
-    import (
-      "bytes"
-      "fmt"
-      "github.com/aws/aws-sdk-go/aws"
-      "github.com/aws/aws-sdk-go/service/s3"
-      "github.com/aws/aws-sdk-go/aws/session"
-      "github.com/fogleman/gg"
-    )
-
-    func draw() (buffer *bytes.Buffer, err error) {
-      c := gg.NewContext(1000, 1000)
-      // Create the image.
-      c.SetRGB(200,200, 0)
-      c.DrawCircle(400, 400, 400)
-      c.Fill()
-      // Write the bytes from the image in the context to a buffer.
-      buffer = new(bytes.Buffer)
-      if err = c.EncodePNG(buffer); err != nil {
-        fmt.Printf("failed to encode png %s",err.Error())
-      }
-      return
-    }
-
-    func main() {
-      buffer, err := draw()
-      if err != nil {
-        return
-      }
-
-      // Create a S3 client
-      session := session.Must(session.NewSession(&aws.Config{
-        Region: aws.String("us-west-2"),
-      }))
-      svc := s3.New(session)
-
-      // Read the bytes from the byte buffer that contains the image.
-      reader := bytes.NewReader(buffer.Bytes())
-      putInput := s3.PutObjectInput{
-        Bucket: aws.String("nicolasknoebber.com"),
-        Body:   reader,
-        Key:    aws.String("test_upload.png"),
-      }
-      _, err := svc.PutObject(&putInput)
-      if err != nil {
-        fmt.Println(err.Error())
-      }
-    }
+#+BEGIN_SRC go
+package main
+ import (
+  "bytes"
+  "fmt"
+  "github.com/aws/aws-sdk-go/aws"
+  "github.com/aws/aws-sdk-go/service/s3"
+  "github.com/aws/aws-sdk-go/aws/session"
+  "github.com/fogleman/gg"
+)
+ func draw() (buffer +bytes.Buffer, err error) {
+  c := gg.NewContext(1000, 1000)
+  // Create the image.
+  c.SetRGB(200,200, 0)
+  c.DrawCircle(400, 400, 400)
+  c.Fill()
+  // Write the bytes from the image in the context to a buffer.
+  buffer = new(bytes.Buffer)
+  if err = c.EncodePNG(buffer); err != nil {
+    fmt.Printf("failed to encode png %s",err.Error())
+  }
+  return
+}
+ func main() {
+  buffer, err := draw()
+  if err != nil {
+    return
+  }
+   // Create a S3 client
+  session := session.Must(session.NewSession(&aws.Config{
+    Region: aws.String("us-west-2"),
+  }))
+  svc := s3.New(session)
+   // Read the bytes from the byte buffer that contains the image.
+  reader := bytes.NewReader(buffer.Bytes())
+  putInput := s3.PutObjectInput{
+    Bucket: aws.String("nicolasknoebber.com"),
+    Body:   reader,
+    Key:    aws.String("test_upload.png"),
+  }
+  _, err := svc.PutObject(&putInput)
+  if err != nil {
+    fmt.Println(err.Error())
+  }
+}
 
 
 [It Worked!](../test_upload.png). You may have noticed that there is no access key specified here.
+
+#+END_SRC
 The secret is in the `session` variable - somewhere in the `aws/session` package it is getting the
 access key that I set when I ran `aws configure` in my terminal.
 
@@ -163,98 +162,102 @@ Next I set how the branches should grow from their parents - each time the lengt
 should change. If it's on the left side, the angle is subtracted, if on the right side the angle is added to.
 I decided to let the user decide on the values that make the length and angle change, which can lead to surprising results.
 
-    :::go
-    const (
-      width  = 400
-      height = 400
-    )
-    
-    func polarLine(c *gg.Context, x0, y0, length, degrees float64) (x1, y1 float64) {
-      theta := gg.Radians(degrees)
-      x1 = length*(math.Cos(theta)) + x0
-      y1 = length*(math.Sin(theta)) + y0
-      c.DrawLine(x0, y0, x1, y1)
-      c.Stroke()
-      return
-    }
-    
-    func tree(c *gg.Context, lineWidth, x0, y0, length, degrees float64, p TreeParam) {
-      if lineWidth < 1 || x0 < 1 || y0 < 1 || x0 > width || y0 > height || length < 1 {
-        return
-      }
-    
-      c.SetLineWidth(lineWidth)
-      lineWidth -= 2
-      x1, y1 := polarLine(c, x0, y0, length, degrees)
-      tree(c, lineWidth, x1, y1, length-p.LeftLength, degrees-p.LeftAngle, p)
-      tree(c, lineWidth, x1, y1, length-p.RightLength, degrees+p.RightAngle, p)
-    }
-    
-    func createTree(p TreeParam) (buffer *bytes.Buffer, err error) {
-      c := gg.NewContext(width, height)
-      c.SetRGB(0, 0, 0)
-      tree(c, 15, width/2, height, 100, 270, p)
-    
-      // Write the bytes from the image in the context to a buffer.
-      buffer = new(bytes.Buffer)
-      if err = c.EncodePNG(buffer); err != nil {
-        fmt.Printf("failed to encode png %s", err.Error())
-      }
-      return
-    }
-    
+#+BEGIN_SRC go
+const (
+  width  = 400
+  height = 400
+)
+
+func polarLine(c *gg.Context, x0, y0, length, degrees float64) (x1, y1 float64) {
+	theta := gg.Radians(degrees)
+	x1 = length*(math.Cos(theta)) + x0
+	y1 = length*(math.Sin(theta)) + y0
+	c.DrawLine(x0, y0, x1, y1)
+	c.Stroke()
+	return
+}
+
+func tree(c *gg.Context, lineWidth, x0, y0, length, degrees float64, p TreeParam) {
+	if lineWidth < 1 || x0 < 1 || y0 < 1 || x0 > width || y0 > height || length < 1 {
+		return
+	}
+
+	c.SetLineWidth(lineWidth)
+	lineWidth -= 2
+	x1, y1 := polarLine(c, x0, y0, length, degrees)
+	tree(c, lineWidth, x1, y1, length-p.LeftLength, degrees-p.LeftAngle, p)
+	tree(c, lineWidth, x1, y1, length-p.RightLength, degrees+p.RightAngle, p)
+}
+
+func createTree(p TreeParam) (buffer *bytes.Buffer, err error) {
+
+	c := gg.NewContext(width, height)
+	c.SetRGB(0, 0, 0)
+	tree(c, 15, width/2, height, 100, 270, p)
+
+	// Write the bytes from the image in the context to a buffer.
+	buffer = new(bytes.Buffer)
+	if err = c.EncodePNG(buffer); err != nil {
+		fmt.Printf("failed to encode png %s", err.Error())
+	}
+	return
+}
+#+END_SRC
 Next I created a public api endpoint to call this via Lambda / API Gateway, where the request object configures the length and angle change:
 
-    :::go
-    type TreeParam struct {
-      LeftLength  float64 `json:"leftLength"`
-      LeftAngle   float64 `json:"leftAngle"`
-      RightLength float64 `json:"rightLength"`
-      RightAngle  float64 `json:"rightAngle"`
-    }
-
+#+BEGIN_SRC go
+type TreeParam struct {
+	LeftLength  float64 `json:"leftLength"`
+	LeftAngle   float64 `json:"leftAngle"`
+	RightLength float64 `json:"rightLength"`
+	RightAngle  float64 `json:"rightAngle"`
+}
+#+END_SRC
 Finally I added a form and script to this post to send out the requests. Give it a try! A good starting point is using 20 for the angles, and
 12 for the length. A bigger value for length means that side of the tree will get smaller faster, while a bigger angle means that side of the tree will curve more.
 
+#+BEGIN_EXPORT html
 <img id="lambda-go-tree" src="images/lambda-go-tree.png">
 <div class="row">
   <div class="column">
-    <strong> Left Branch Propagation </strong>
-    <div><span> length <input id="left-length" type="number"> </span></div>
-    <div><span> angle <input id="left-angle" type="number"> </span></div>
+<strong> Left Branch Propagation </strong>
+<div><span> length <input id="left-length" type="number"> </span></div>
+<div><span> angle <input id="left-angle" type="number"> </span></div>
   </div>
   <div class="column">
-    <strong> Right Branch Propagation </strong>
-    <div><span> length <input id="right-length" type="number"> </span></div>
-    <div><span> angle <input id="right-angle" type="number"></span></div>
+<strong> Right Branch Propagation </strong>
+<div><span> length <input id="right-length" type="number"> </span></div>
+<div><span> angle <input id="right-angle" type="number"></span></div>
   </div>
 </div>
 <button id="create-tree-button" onClick="createTree()"> Submit </button>
 
 
 <script>
-  function createTree() {
+function createTree() {
     document.getElementById("create-tree-button").disabled = true;
     const rightLength = document.getElementById("right-length").value
     const rightAngle = document.getElementById("right-angle").value
     const leftLength = document.getElementById("left-length").value
     const leftAngle = document.getElementById("left-angle").value
+
     // To prevent caching from displaying same image.
     const newImage = "images/lambda-go-tree.png?" + new Date()
     fetch('https://jkdh1nfr8j.execute-api.us-west-2.amazonaws.com/default/trees', {
-          method: 'POST',
-          body: JSON.stringify({
-            rightLength: parseInt(rightLength),
-            rightAngle: parseInt(rightAngle),
-            leftLength: parseInt(leftLength),
-            leftAngle: parseInt(leftAngle)
-          }),
-          headers: {
-            'Content-Type':'application/json'
-          }
-        }).then(response => response.json())
-          .then(data     => document.getElementById("lambda-go-tree").src = newImage)
-          .then(()       => document.getElementById("create-tree-button").disabled = false)
-          .catch(err     => console.log(err));
-  }
+	method: 'POST',
+	body: JSON.stringify({
+	    rightLength: parseInt(rightLength),
+	    rightAngle: parseInt(rightAngle),
+	    leftLength: parseInt(leftLength),
+	    leftAngle: parseInt(leftAngle)
+	}),
+	headers: {
+	    'Content-Type':'application/json'
+	}
+	}).then(response => response.json())
+	.then(data => document.getElementById("lambda-go-tree").src = newImage)
+	.catch(err => console.log(err))
+	.finally(() => document.getElementById("create-tree-button").disabled = false);
+}
 </script>
+#+END_EXPORT

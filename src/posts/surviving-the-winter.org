@@ -1,7 +1,7 @@
-## Surviving the Winter
-##### Sun 02/17/19
+* Surviving the Winter
+****# Sun 02/17/19
 
----
+--------------------------------------------------------------------------------
 
 It's been cold in Iowa. Really cold. The so called 'polar vortex' has been turning the Midwest into
 a winter wasteland. The snow, ice, and wind have been relentless. I love the outdoors and I hate staying 
@@ -26,15 +26,15 @@ I have never camped in the snow before, but it sounded like a good experience. I
 be able to survive in this climate without my heated apartment. I don't have any winter camping gear, but I 
 figured if I brought all of my blankets and jackets I might be okay. I brought the following:
 
-* a 32f rated sleeping bag
-* two down comforters
-* 2 long sleeve thermal undershirts
-* 1 thermal long johns
-* fleece onesie
-* 2 down jackets
-* winter hat
-* gloves
-* wool socks
++ a 32f rated sleeping bag
++ two down comforters
++ 2 long sleeve thermal undershirts
++ 1 thermal long johns
++ fleece onesie
++ 2 down jackets
++ winter hat
++ gloves
++ wool socks
 
 When I arrived to the camping site we built a shelter out of two tarps and two ski poles. One tarp for the
 ground, one for the roof, and the poles to hold it up. 

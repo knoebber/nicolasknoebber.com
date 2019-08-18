@@ -1,7 +1,7 @@
-## Moving My Website to Amazon S3
-#### Tue 07/24/18
+* Moving My Website to Amazon S3
+**** Tue 07/24/18
 
----
+--------------------------------------------------------------------------------
 
 For the last year I've had this website hosted on an Amazon EC2 instance, which has cost about $10 a month.
 That's not too expensive,  but with S3 the cost can be almost nothing, depending on how much traffic I get.
@@ -30,28 +30,25 @@ thought was to use many `--exclude` tags to achieve this. But it was difficult t
 of files reliably, and it had no future proofing in the case that I added some other type of file to this repo.
 Instead of blacklisting, it is possible to white list by excluding everything, and then including only certain types.
 
-#### upload-site
-
-    :::bash
-    #!/usr/bin/bash
-
-    aws s3 sync $HOME/projects/personal-website s3://nicolasknoebber.com \
-    --exclude "*" \
-    --include "*.html" \
-    --include "*.png" \
-    --include "*.jpg" \
-    --include "*.css" \
-    $1
-
+**** upload-site
+#+BEGIN_SRC bash
+#!/usr/bin/bash
+ aws s3 sync $HOME/projects/personal-website s3://nicolasknoebber.com \
+--exclude "*" \
+--include "*.html" \
+--include "*.png" \
+--include "*.jpg" \
+--include "*.css" \
+$1
+#+END_SRC
 Note the `$1` at the end - this allows me to pass another optional flag to `aws s3 sync`. A useful one that I use
 often is `--dryrun`, which lets me see everything that would be uploaded without actually doing it. Finally I'll add
 the directory of this script to my path so that I can call this in any directory and have my local files uploaded to my bucket.
 
-#### ~/.bash_profile
-
-    :::bash
-    export PATH=$PATH:/$HOME/projects/personal-website/scripts
-
+**** ~/.bash_profile
+#+BEGIN_SRC bash
+export PATH=$PATH:/$HOME/projects/personal-website/scripts
+#+END_SRC
 Now for the important part: making these uploaded html files public on the web.
 This is surprisingly simple. In a web browser, navigate to the bucket in the AWS web app.
 Click the properties tab and then "Static website hosting". Enter the name of the index document, and then save it.
@@ -62,21 +59,20 @@ The bucket is now hosted on the web, and can be viewed by clicking on the link.
 
 However, this isn't public. To make it so that anyone can read it, head over to the permissions tab
 and then bucket policy. I added this to the text area, which allows anyone to view the bucket:
-
-    :::json
-		{
-				"Version": "2012-10-17",
-				"Statement": [
-						{
-								"Sid": "PublicReadGetObject",
-								"Effect": "Allow",
-								"Principal": "*",
-								"Action": "s3:GetObject",
-								"Resource": "arn:aws:s3:::nicolasknoebber.com/*"
-						}
-				]
-		}
-
+#+BEGIN_SRC json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::nicolasknoebber.com/*"
+        }
+    ]
+}
+#+END_SRC
 I'm not done yet though. I could tell all my friends to visit *http://nicolasknoebber.com.s3-website-us-west-2.amazonaws.com/* but I would rather have it just be *nicolasknoebber.com*.
 This is a job for DNS, or Domain Name System. This allows for websites to be given shorter names instead of having everyone remember long unwieldy addresses.
 Before setting up DNS, I'll have to create another bucket for *www.nicolasknoebber.com*. This bucket is identical to the first, but under the static web hosting menu I'll check 'Redirect all requests', and
