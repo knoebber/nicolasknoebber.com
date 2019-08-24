@@ -1,10 +1,10 @@
-* Nicolas Knoebber
-#+ATTR_HTML: :title blog
+#+TITLE: Nicolas Knoebber
+[[file:blog.html][blog]]
 
-#+BEGIN_SRC elisp
-[[posts/index.org][blog]]
 [[https://github.com/knoebber][github]]
-[[resume.pdf][resume]]
-[[about me][posts/0.org]]
-#+END_SRC
+
+[[./resume.pdf][resume]]
+
+[[./posts/about-me.html][about me]]
+
 [[mailto:knoebber@gmail.com][knoebber@gmail.com]]

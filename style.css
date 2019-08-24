@@ -1,24 +1,31 @@
 :root {
-    --header-padding: 20px;
+    --header-padding: 11px;
     --header-font-size: 28px;
 }
 
 html {
-    background: url(tree_d-4_b-5_l-200_a-25.png) no-repeat center center fixed;
+    background: url(images/tree-d-4-b-5-l-200-a-25.png) no-repeat center center fixed;
     background-size: cover;
-    height: 100%;
     font-size: 50px;
 }
 
-#header {
-    position:fixed;
-    top:0px;
-    left:0px;
-    width:100%;
+body {
+    margin:0;
+}
+
+#preamble {
     background:#5f5f5f;
-    color: #CCC;
-    padding: var(--header-padding);
     font-size: var(--header-font-size);
+    padding: var(--header-padding);
+}
+
+#preamble a {
+    text-decoration: none;
+    color: #CCC;
+}
+
+#preamble a:hover {
+    text-decoration: underline;
 }
 
 #header form {
@@ -29,30 +36,11 @@ html {
     padding-left: 20px
 }
 
-#content-wrapper {
-    margin-top: 150px;
-    margin-left: 50px;
+#content {
+    margin: 50px;
 }
 
-p {
-    font-size: 1rem;
-}
-
-.post, a[href="mailto:knoebber@gmail.com"] {
+.posts, a[href="mailto:knoebber@gmail.com"] {
     font-size: .5rem;
 }
 
-input {
-    background:#5f5f5f;
-    color:white;
-    transition-duration: 0.4s;
-    border-radius: 4px;
-    font-size:70%;
-}
-
-input:hover {
-    background:grey;
-    color:white;
-    transition-duration: 0.4s;
-    border-radius: 4px;
-}
