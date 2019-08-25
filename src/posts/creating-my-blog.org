@@ -1,6 +1,5 @@
-* Creating My Own Blogging Platform
-**** Thu 07/19/18
-
+#+TITLE: Creating My Own Blogging Platform
+Thu 07/19/18
 --------------------------------------------------------------------------------
 
 Today I've started working on creating a new blogging platform for my website.
@@ -48,7 +47,7 @@ html = '<LINK REL=StyleSheet HREF="style.css" TYPE="text/css">\n' + html
 And finally a fixed header so that readers can navigate back to the index page. For this I'll create
 a partial file and have the script read it and paste it into the output.
 
-**** header.html
+header.html
 #+BEGIN_SRC html
 <div class="header">
     <form action="../blog.html">
@@ -57,7 +56,7 @@ a partial file and have the script read it and paste it into the output.
 </div>
 
 
-**** create_post.py
+create_post.py
  #!/usr/bin/python3
 from markdown import markdown
 from sys      import argv
@@ -193,12 +192,14 @@ Finally the button itself needs colors, and should highlight on mouse over.
   font-size:20px;
 }
 #+END_SRC
+#+BEGIN_EXPORT html
 <button id="before-after"> Before/After </button>
 <script>
 document.getElementById('before-after').addEventListener('click',function() {
   document.styleSheets[0].disabled = !document.styleSheets[0].disabled;
 });
 </script>
+#+END_EXPORT
 
 A great part of markdown is that you can add any html tag whenever you need it. So my blog will
 be able to support whatever interactive elements I feel like making. Pretty cool!
@@ -214,5 +215,5 @@ document.getElementById('before-after').addEventListener('click',function() {
 The style looks okay for now, but I will most likely keep tinkering with it.
 
 **EDIT**: I have indeed tinkered with it a lot since then.
-<a href="old.html">Here's the result of the above style</a><br>
-<a href="https://github.com/knoebber/personal-website/tree/master/">Updated source code can be found here</a>
+[[../../posts/old/old_post.html][Here's the result of the above style]]
+[[https://github.com/knoebber/personal-website/tree/master/][Updated source code can be found here]]

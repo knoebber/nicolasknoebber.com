@@ -1,39 +1,8 @@
-:root {
-    --header-padding: 11px;
-    --header-font-size: 28px;
-}
-
 html {
     background: url(images/tree-d-4-b-5-l-200-a-25.png) no-repeat center center fixed;
     background-size: cover;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: 50px;
-}
-
-body {
-    margin:0;
-}
-
-#preamble {
-    background:#5f5f5f;
-    font-size: var(--header-font-size);
-    padding: var(--header-padding);
-}
-
-#preamble a {
-    text-decoration: none;
-    color: #CCC;
-}
-
-#preamble a:hover {
-    text-decoration: underline;
-}
-
-#header form {
-    display:inline
-}
-
-#header span {
-    padding-left: 20px
 }
 
 #content {

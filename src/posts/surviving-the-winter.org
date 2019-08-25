@@ -1,6 +1,5 @@
-* Surviving the Winter
-****# Sun 02/17/19
-
+#+TITLE: Surviving the Winter
+Sun 02/17/19
 --------------------------------------------------------------------------------
 
 It's been cold in Iowa. Really cold. The so called 'polar vortex' has been turning the Midwest into
@@ -11,7 +10,7 @@ I still try to ride my bike 6 miles to work. It's usually a fun adventure, but i
 My coldest day it was 0 Fahrenheit with gusty winds.
 Peddling my bike felt almost impossible. My beard froze solid and I couldn't feel my fingers.
 
-![frozen_me](images/frozen_me.jpg)
+[[file:../../images/frozen-me.jpg]]
 
 I like a challenge so I force my self out unless the snow is piled up too high. I made the mistake once of 
 trying to bike after it snowed 6 inches that night and they hadn't had time to plow, and I ended up walking my 
@@ -39,7 +38,7 @@ figured if I brought all of my blankets and jackets I might be okay. I brought t
 When I arrived to the camping site we built a shelter out of two tarps and two ski poles. One tarp for the
 ground, one for the roof, and the poles to hold it up. 
 
-![winter_shelter](images/winter_shelter.jpg)
+[[file:../../images/winter-shelter.jpg]]
 
 Winter camping is much different than normal camping. The best part of it is that no one else was out there,
 so we had the park to ourselves. But the activities are limited. We melted snow on the fire for hot drinks,

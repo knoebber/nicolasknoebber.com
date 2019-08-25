@@ -1,9 +1,8 @@
-* RAGBRAI
-**** Sat 08/03/19
-
+#+TITLE: RAGBRAI
+Sat 08/03/19
 --------------------------------------------------------------------------------
 
-![bikes](images/ragbrai_crowd.jpg)
+[[file:../../images/ragbrai-crowd.jpg]]
 
 On Saturday I finished The Register's Annual Great Bicycle Ride Across Iowa, or RAGBRAI. 
 
@@ -51,7 +50,7 @@ People who asked me about it were impressed and gave me this look like I was lit
 Going down the hills was the only tricky bit. Since there isn't a free wheel I had to take my feet out of my pedal straps and set them on the frame of the bike. 
 This allowed me to take a break while my pedals spun around like an egg batter.
 
-![me and my bike](images/me_bike_ragbrai.jpg)
+[[file:../../images/me-bike-ragbrai.jpg]]
 
 As the week went on I became more in tune with the culture. The ride has its own language and set of customs.
 We kept seeing people with ++VIRGIN++ sharpied on the back of their calf.
@@ -62,31 +61,31 @@ It was confusing to say the least.
 There were also the words that people were shouting while riding. 
 Certain events triggered a shout, and then the mass of bikes would echo it so riders further back could hear it as well.
 
-**** RAGBRAI expression / meaning
-#+BEGIN_SRC HTML
-  "CAR UP":       A car is up the road driving opposite the flow of bikes.
+~RAGBRAI expression / meaning~
+#+BEGIN_SRC Fundamental
+"CAR UP":       A car is up the road driving opposite the flow of bikes.
 
-  "CAR DOWN":     A car is behind us driving with the flow of bikes.
+"CAR DOWN":     A car is behind us driving with the flow of bikes.
 
-  "BIKE UP":      A bike is up the road riding the opposite direction.
+"BIKE UP":      A bike is up the road riding the opposite direction.
 
-  "RUMBLES":      A rumble strip in the road. Avoid this to save your butt and hands.
+"RUMBLES":      A rumble strip in the road. Avoid this to save your butt and hands.
 
-  "SLOWING":      We are slowing down.
+"SLOWING":      We are slowing down.
 
-  "STOPPING: :    We are stopping.
+"STOPPING":     We are stopping.
 
-  "TURNING":      We are turning (right or left).
+"TURNING":      We are turning (right or left).
 
-  "RIDER OFF":    Someone is stopping on the shoulder of the road.
+"RIDER OFF":    Someone is stopping on the shoulder of the road.
 
-  "RIDER ON":     Someone is getting back on their bike and needs space to merge on.
+"RIDER ON":     Someone is getting back on their bike and needs space to merge on.
 
-  "GOOD MORNING": A local is waving from their porch as the ride leaves their city. 
-                  Let them know you enjoyed your stay.
-      
-  "FREE BEER":    A food truck is luring in riders at 8am with free Budweisers. 
-                  Often followed up by a "RIDER OFF"
+"GOOD MORNING": A local is waving from their porch as the ride leaves their city.
+                Let them know you enjoyed your stay.
+
+"FREE BEER":    A food truck is luring in riders at 8am with free Budweisers.
+                Often followed up by a "RIDER OFF"
 #+END_SRC
 The most difficult day was on Wednesday. It was about an 85 mile ride, which was the longest of the week.
 Disaster struck about half way in to the day. My bike got flat tire. 
@@ -97,7 +96,7 @@ The guy in the shop basically told me there was nothing he could do. I thought m
 I prodded him a bit more and eventually he had an idea: he tightened the chain tensioner as much as he could with 
 pliers and then threw some zip ties around it for added safety. He said I should be able to finish the day off.
 
-![axle hack](images/bike_hack.jpg)
+[[file:../../images/bike-hack.jpg]]
 
 Pedaling became a lot harder because the chain was so tight. It made all sorts of awful noises as I cranked at it. But I was moving.
 I arrived that night and started searching for a new axle. I realized soon that the problem was that no one rode bikes
@@ -107,4 +106,4 @@ I figured I'd just keep riding it and hope for the best.
 As the week went on the chain stretched out more and pedalling got smoother. Eventually I almost forgot about it.
 I rode it like that for about 190 miles till the end in Keokuk on Saturday.
 
-![finish](images/ragbrai_finish.jpg)
+[[file:../../images/ragbrai-finish.jpg]]

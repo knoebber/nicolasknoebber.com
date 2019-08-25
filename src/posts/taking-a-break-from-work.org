@@ -1,6 +1,5 @@
-* Taking a Break From Work
-**** Sat 06/10/18
-
+#+TITLE: Taking a Break From Work
+Sat 06/10/18
 --------------------------------------------------------------------------------
 
 About a month ago I finished my contract work doing LAMP stack web development at FabPro1. Since then I've been spending some time catching
@@ -10,7 +9,7 @@ I went to back to Grinnell to see graduation. It was a bit weird being back - co
 like a different life now. I'm glad to be back in California. Iowa is nice but the weather volatility
 makes it difficult to have the lifestyle that I want. 
 
-Other than that I've been finishing up the [d36](http://ama-d36.org) spring cross country season. This is the first time that
+Other than that I've been finishing up the [[http://ama-d36.org][d36]] spring cross country season. This is the first time that
 I've entered all the races. It has been a learning experience. 
 
 Cross country motorcycle racing is crazy sport. Everyone brings their own machine to the starting line. The gun shoots and the pack takes off in a mad dash. It's free for all until you cross the line at the end. 
@@ -27,7 +26,7 @@ I finished first in class 3 times this season. The first two from the Sawmill Tw
 Overall I finished first place in points for C 250 4Stk, which I am definitely happy about!
 
 Me leading the pack at Honey Lake:
-![racing](images/honey_lake.jpg)
+[[file:../../images/honey-lake.jpg]]
 
 --------------------------------------------------------------------------------
 
@@ -41,4 +40,4 @@ Pretty good deal!
 
 The captain, Michael, and his vessal, Emma.
 
-![emma](images/michael_and_emma.jpg)
+[[file:../../images/michael-and-emma.jpg]]

@@ -1,11 +1,13 @@
-** Migrating to org-mode publishing
-**** Wed, 08/14/19
+#+TITLE: Migrating to org-mode publishing
+Wed, 08/14/19
 
 -----
 
 reading: http://emacs-fu.blogspot.com/2009/05/writing-and-blogging-with-org-mode.html
 
-**** Changing markdown into org with elisp
+--------------------------------------------------------------------------------
+
+** Changing markdown into org with elisp
 Lisp macros are like html templating engines; the code after the back tick is the template,
 and code after the comma is the value to be inserted.
 This will cause my functions to be expanded at compile time.
@@ -25,14 +27,19 @@ This will cause my functions to be expanded at compile time.
 #+BEGIN_SRC elisp
 (defun replace-simple-md ()
   (interactive)
+  ;; Change all the tabs to two spaces
   (replace-regex-current-buffer "\t" "  ")
+
+  ;; Use 80 dashes for a line instead of 3
   (replace-regex-current-buffer "^---" (s-repeat 80 "-"))
+
+  ;; Change lists
   (replace-regex-current-buffer "*" "+")
-  (replace-regex-current-buffer "^####" "****")
-  (replace-regex-current-buffer "^##" "*"))
+
+  ;; Convert image links from markdown syntax to org syntax
+  (replace-regex-current-buffer "!\\[.+(\\(.+\\))" "[[file:../../\\1]]"))
 #+END_SRC
 
-Luckily I
 My least favorite feature of markdown is the code syntax. In a markdown file, four spaces before a line 
 means that it will be compiled as a code block. This function deindents markdown code blocks by 4 spaces.
 Luckily I included language tags before code blocks for highlighting.
@@ -58,7 +65,15 @@ language tag and adds it after the BEGIN tag.
 	   (insert "#+END_SRC")
 	   (newline))))
 #+END_SRC
-
+#+BEGIN_SRC elisp
+;;; ![cors](images/api-gateway-cors.jpg) => [[file:../../images/api-gateway-cors.png]]
+(defun convert-link ()
+ (interactive)
+  (goto-min-save-match-data
+   (while (re-search-forward "!\\[.+(\\(.+\\))/" nil t) nil t
+     (replace-match "[[file:..\\/..\\/\\1]]"))))
+     
+#+END_SRC
 Finally, deindent the old markdown code blocks by 4 spaces.
 #+BEGIN_SRC elisp
 (defun de-indent-code ()

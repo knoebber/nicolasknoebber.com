@@ -1,6 +1,5 @@
-* Adding a Serverless Commenting System to My Blog
-**** Mon 01/14/19
-
+#+TITLE: Adding a Serverless Commenting System to My Blog
+Mon 01/14/19
 --------------------------------------------------------------------------------
 
 Serverless web technologies are awesome. No longer do we need to pay for servers to spin 24/hours a day to listen for a request
@@ -17,7 +16,7 @@ the users point of view, the requirements are simple:
 
 To accomplish this I wrote a footer to be included in every post:
 
-**** footer.html
+footer.html
 #+BEGIN_SRC html
 <div id="footer">
   <h3>Comments</h3>
@@ -60,7 +59,7 @@ it, and change the `onclick="saveComment()"` to have the post number as a parame
 very easy to read or maintain. A more simple method is to simply include a script tag with the post number 
 declared as a constant above the footer markup.
 
-**** new code in [create-post](https://github.com/knoebber/personal-website/blob/master/scripts/create-post)
+new code in [create-post](https://github.com/knoebber/personal-website/blob/master/scripts/create-post)
 
 #+BEGIN_SRC python
 # read header and footer
@@ -98,7 +97,7 @@ DynamoDB is a NoSQL database that can scale to any level. You can either choose 
 read/writes that you want to allow per second, or you can let it auto scale, up to a claimed 20 million
 requests per second. I went with the former, which is called provisioned capacity.
 
-![dynamo_scaling](images/dynamo_scaling.png)
+[[file:../../images/dynamo_scaling.png]]
 
 So my table is able to handle 2 requests per second for now, but it is as simple as changing the values in
 the "Provisioned Capacity" box if this proves to be too little. One of things that I struggled with when
@@ -130,7 +129,7 @@ composite primary key. A composite primary key is combination of a partition key
 multiple items may share the same partition key, but their sort keys must be unique. I dropped the `id` column,
 made a partition key for `post_number`, and a sort key for `time_stamp`.
 
-![comments_table](images/comments_table.png)
+[[file:../../images/comments_table.png]]
 
 Note that the `comment_body` and `comment_name` columns were not specified at all in the creation of this table.
 I can actually submit data with +any+ key name to this table, and it would create a new column for it. The only
@@ -145,7 +144,7 @@ code which will be ran depending on how you configure its triggers. The main ben
 for the execution time of the code rather than paying for a server to run 24/7. I set up my Lambda functions to 
 use a trigger from API Gateway, an AWS service that lets you set up RESTful API routes.
 
-![lambda-triggers](images/lambda-triggers.png)
+[[file:../../images/lambda-triggers.png]]
 
 Writing the Node.js to communicate with DynamoDB was straightforward, and before long I had two routes that I
 could call from cURL that saved and retrieved comments: <br>
@@ -155,7 +154,7 @@ could call from cURL that saved and retrieved comments: <br>
 Great, I thought. Now all I had to was add some JavaScript to the
 footer to handle the submit button, and I was done. I started with something like this:
 
-**** addition to [footer.html](https://github.com/knoebber/personal-website/blob/master/posts/partial/footer.html)
+addition to [footer.html](https://github.com/knoebber/personal-website/blob/master/posts/partial/footer.html)
 
 #+BEGIN_SRC javascript
  function saveComment(){
@@ -179,12 +178,12 @@ footer to handle the submit button, and I was done. I started with something lik
   if (comments.children.length == 0 ) {
     comments.innerHTML = ''
   }
-   const date = new Date(parseInt(comment.time_stamp.N))
+  const date = new Date(parseInt(comment.time_stamp.N))
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-   let newComment = document.createElement('div');
-   newComment.classList.add("comment");
+  let newComment = document.createElement('div');
+  newComment.classList.add("comment");
   newComment.innerHTML = `
     <div class="comment-name">
        <strong>${comment.comment_name.S}<span class="date">${month}/${day}/${year}</span></strong>
@@ -227,7 +226,7 @@ I went back to the AWS docs, and eventually found [this article](https://docs.aw
 Basically, in addition to the `Access-Control-Allow-Origin` header, I would need to create another method
 in API Gateway, a so called "Preflight" check. Luckily, API Gateway automates this process.
 
-![API-gateway-CORS](images/api-gateway-cors.png)
+[[file:../../images/api-gateway-cors.png]]
 
 So when a script in one of my blog posts makes an API call to AWS, it will first send an OPTIONS request,
 which API Gateway will respond back and say OK, this CORS request can go through. After receiving this reply,

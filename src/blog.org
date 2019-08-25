@@ -1,7 +1,7 @@
 #+TITLE: Nicolas Knoebber - Blog
 
 #+begin_posts
-[[./posts/RAGBGRAI.org][RAGBRAI]]
+[[./posts/RAGBRAI.org][RAGBRAI]]
 
 [[./posts/surviving-the-winter.org][Surviving the Winter]]
 

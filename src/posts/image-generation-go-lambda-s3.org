@@ -1,6 +1,5 @@
-* Generating and Uploading Images to S3 with Golang
-**** Sun 02/10/19
-
+#+TITLE: Generating and Uploading Images to S3 with Golang
+Sun 02/10/19
 --------------------------------------------------------------------------------
 
 I love to write programs that generate interesting pictures. I will always get a warm
@@ -11,28 +10,30 @@ graphics library for Rust. Instead there was an image library where you could cr
 which you could fill with pixel structs and then export it as a png. And no, it wasn't
 a 2D array, you had to transform (x,y) coordinates into indexes for a 1D array. Fun! So I
 implemented a function to draw a line, a function to draw a circle, and then recursively
-called them - [source](https://github.com/knoebber/Rustals/blob/master/src/main.rs).
+called them - [[https://github.com/knoebber/Rustals/blob/master/src/main.rs][src]]
 Here's a few of my favorites images that it generated:
 
-+click to expand or hide+
+*click to expand or hide*
+#+BEGIN_EXPORT html
 <div id="image-gallery">
   <div class="expandable-image">
 <input type="checkbox" id="circle-toggle" class="toggle" />
-<label for="circle-toggle">circles<img src="images/rustal_circle.png"  alt="circle"></label>
+<label for="circle-toggle">circles<img src="../images/rustal-circle.png"  alt="circle"></label>
   </div>
   <div class="expandable-image">
 <input type="checkbox" id="shell-toggle" class="toggle" />
-<label for="shell-toggle">shell<img src="images/rustal_shell.png"  alt="shell"></label>
+<label for="shell-toggle">shell<img src="../images/rustal-shell.png"  alt="shell"></label>
   </div>
   <div class="expandable-image">
 <input type="checkbox" id="tree-toggle" class="toggle" />
-<label for="tree-toggle">tree<img src="images/rustal_rand_tree.png"  alt="tree"></label>
+<label for="tree-toggle">tree<img src="../images/rustal-rand-tree.png"  alt="tree"></label>
   </div>
   <div class="expandable-image">
 <input type="checkbox" id="square-toggle" class="toggle" />
-<label for="square-toggle">squares<img src="images/rustal_square.png"  alt="square"></label>
+<label for="square-toggle">squares<img src="../images/rustal-square.png"  alt="square"></label>
   </div>
 </div>
+#+END_EXPORT
 
 A few years later I wrote a program in python/pygame that generated trees in real time. Eventually I made a front
 end for it on my website that let the user specify a few different parameters:
@@ -40,24 +41,21 @@ end for it on my website that let the user specify a few different parameters:
 + depth: how many times to recursively draws more branches
 + branches: 2 for a binary tree, 3 for a ternary tree, etc
 + length: how long in pixels each branch should be
-
-#+END_SRC
 + angle: the angle that a new branch is drawn from its parent
 
-Here's an example of a [result](../tree_d-4_b-5_l-200_a-25.png) and here's the
-[source](https://github.com/knoebber/personal-website/tree/e78e112376580580bbf8d36bf02cd71ccdcc9feb/trees).
+Here's an example of a [[../../images/tree-d-4-b-5-l-200-a-25.png][result]] and here's the [[https://github.com/knoebber/personal-website/tree/e78e112376580580bbf8d36bf02cd71ccdcc9feb/trees][source]].
 This worked by using php to call the python program which used pygame headless - instead of showing the tree
-being built , it would just save the image. Sadly, when I moved my website over to be [statically hosted](5.html)
-, I did not reimplement it and so it died.
+being built , it would just save the image. Sadly, when I moved my website over to be [[./migrating-to-S3.org][statically hosted]], 
+I did not reimplement it and so it died.
 
-*# The Resurrection
+The Resurrection
 
 Armed with my new knowledge from [making an api for a static page with lambda](6.html), and writing
 in Go for my current job, I jumped into making a simple image generator. The first step was to create
 a Go program that could generate and save an image. I decided to use the
 [Go Graphics](https://github.com/fogleman/gg) library.
 
-**** Drawing and saving a simple image in go
+Drawing and saving a simple image in go
 
 #+BEGIN_SRC go
 package main
@@ -72,6 +70,7 @@ package main
         c.Fill()
         c.SavePNG("circle.png")
     }
+#+END_SRC
 
 So I could save an image of a circle to my local file system. The immediate problem I saw
 was that I wanted to save it to a S3 bucket, not my computer. To solve this I
@@ -81,11 +80,10 @@ image from the `go graphics` library into this type. This is where Go shines ove
 for lambda handlers: it is a typed language vs the untyped Python and Nodejs. I could find a
 solution by looking at types, and be confident that if compiled it would work.
 
-I found that I would need to use the `"github.com/aws/aws-sdk-go/service/s3"` package to call
-`putObject`. This method takes a `+PutObjectInput` as its only parameter. This lets you
-specify all sorts of [things](https://docs.aws.amazon.com/sdk-for-go/api/service/s3/#PutObjectInput),
-but has a few required attributes:
+I found that I would need to use the ~"github.com/aws/aws-sdk-go/service/s3"~ package to call
+~putObject~. This method takes a ~+PutObjectInput~ as its only parameter, which has has many [[https://docs.aws.amazon.com/sdk-for-go/api/service/s3/#PutObjectInput][options]].
 
+These are the required parameters: 
 + Bucket - the name of the S3 bucket
 + Body - the data to be uploaded
 + Key - the name for the data in the bucket (the key of this page is "posts/7.html")
@@ -147,11 +145,8 @@ package main
     fmt.Println(err.Error())
   }
 }
-
-
-[It Worked!](../test_upload.png). You may have noticed that there is no access key specified here.
-
 #+END_SRC
+[[../../images/test_upload.png][It worked!]]. You may have noticed that there is no access key specified here.
 The secret is in the `session` variable - somewhere in the `aws/session` package it is getting the
 access key that I set when I ran `aws configure` in my terminal.
 
@@ -220,18 +215,17 @@ Finally I added a form and script to this post to send out the requests. Give it
 <img id="lambda-go-tree" src="images/lambda-go-tree.png">
 <div class="row">
   <div class="column">
-<strong> Left Branch Propagation </strong>
-<div><span> length <input id="left-length" type="number"> </span></div>
-<div><span> angle <input id="left-angle" type="number"> </span></div>
+    <strong> Left Branch Propagation </strong>
+    <div><span> length <input id="left-length" type="number"> </span></div>
+    <div><span> angle <input id="left-angle" type="number"> </span></div>
   </div>
   <div class="column">
-<strong> Right Branch Propagation </strong>
-<div><span> length <input id="right-length" type="number"> </span></div>
-<div><span> angle <input id="right-angle" type="number"></span></div>
+    <strong> Right Branch Propagation </strong>
+    <div><span> length <input id="right-length" type="number"> </span></div>
+    <div><span> angle <input id="right-angle" type="number"></span></div>
   </div>
 </div>
 <button id="create-tree-button" onClick="createTree()"> Submit </button>
-
 
 <script>
 function createTree() {

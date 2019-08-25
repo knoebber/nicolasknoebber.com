@@ -1,5 +1,5 @@
-* Sailing to Ensenada
-**** Mon 06/25/18
+#+TITLE: Sailing to Ensenada
+Mon 06/25/18
 
 --------------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ I didn't come in first, but I definitely should of won the award for
 'tallest racer' . There must have been almost a thousand people there.
 It was free to enter and I got a free shirt. Pretty good deal.
 
-![finishing](images/finishing.jpg)
+[[file:../../images/finishing.jpg]]
 
 I have been thinking a lot about running lately (sparked by an excellent book that I read,
 'Born to Run') and I want to get into longer distances. First I need to relearn how to run in a

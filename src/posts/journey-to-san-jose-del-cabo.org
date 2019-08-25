@@ -1,5 +1,5 @@
-* Journey to San Jose del Cabo
-****  Thu 07/12/18
+#+TITLE: Journey to San Jose del Cabo
+Thu 07/12/18
 
 --------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ In the morning I went for a quick swim. The water was much colder than I thought
 I briefly panicked after looking behind me and realizing the boat was really small and I was
 out of breath and cold. I made it back huffing and puffing. We sailed out a few hours later.
 
-![i made it](images/safe.jpg)
+[[file:../../images/safe.jpg]]
 
 The winds were almost dead so we motored for a few days until it started to make funny noises
 and eventually died on us. We drifted in the ocean for a few nights with no sail up, what
@@ -53,7 +53,7 @@ A few days later we finally limped into port. The engine fired up after draining
 I climbed the mast to tighten bolts on the spreaders, and take pictures of the rigging at the
 very top to see why our main halyard was chafing. It's lot taller than it seems up there!
 
-![height](images/its_high.jpg)
+[[file:../../images/its_high.jpg]]
 
 I stayed there for a little under a week, before deciding that it was too late in the hurricane
 season to venture further south , so I got a plane ticket back. Rayana also flew
