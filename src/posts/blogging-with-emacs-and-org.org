@@ -1,13 +1,24 @@
-#+TITLE: Migrating to org-mode publishing
+#+TITLE: Converting My Site with Emacs and Org
 Wed, 08/14/19
-
------
-
-reading: http://emacs-fu.blogspot.com/2009/05/writing-and-blogging-with-org-mode.html
 
 --------------------------------------------------------------------------------
 
+Lately Emacs has been taking over my computing experience. 
+I discovered evil-mode is a better vi emulator than vim. 
+At work I realized that Emacs could let me forget I was using OSX's terrible window manager.
+I spent hours learning elisp and configuring my major modes so that all my common tasks are an easy key bind away.
+I organized my life with org-mode. 
+
+But there remained one huge annoyance:
+
+This website was created with a hodgepodge of html, python, and markdown. 
+I couldn't resist when I realized I could replace this with org and elisp.
+
 ** Changing markdown into org with elisp
+The first step was to change my markdown files into org.
+Disclaimer: I probably would of spent less time on this if I did this manually, but it was a good excuse to
+practice elisp/regexes.
+
 Lisp macros are like html templating engines; the code after the back tick is the template,
 and code after the comma is the value to be inserted.
 This will cause my functions to be expanded at compile time.
