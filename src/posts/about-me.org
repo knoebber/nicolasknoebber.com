@@ -4,21 +4,21 @@ Sat 07/21/18
 --------------------------------------------------------------------------------
 
 Hi! I'm a computer science major who is interested in a whole lot of
-stuff. I grew up in a small town in Northern Californian coast called Mendocino, and graduated
-from [Grinnell College](https://grinnell.edu "grinnell") in 2017.
+stuff. I grew up in Mendocino, a small town on the coast of Northern California. 
+I graduated from [[https://grinnell.edu][Grinnell College]] in 2017.
 
 On the computer science side I am currently interested in the following topics:
 
 + GNU/Linux
-+ serverless web development
-+ data visualization
-+ emergent algorithms and fractals
-+ privacy
-+ decentralized networks
-+ cryptocurrency and blockchain technology
++ Web development
++ Data visualization
++ Emergent algorithms and fractals
++ Privacy
++ Decentralized networks
++ Cryptocurrency and blockchain technology
 
-Outside of computers I enjoy long distance running, racing my dirtbike, reading books,
-playing any kind of game, writing, and traveling.
+Outside of computers I enjoy long distance running, racing, writing, reading books,
+and playing games.
 
 In general I am open to most things, and try to take any idea into consideration.
 So if you want to connect with me, work with me, or share any kind of idea, please email me!
@@ -28,3 +28,8 @@ knoebber@gmail.com
 
 me:
 [[file:../../images/garden-portrait.jpg]]
+ #+BEGIN_EXPORT html
+<script type="text/javascript">
+ const postNum = 0;
+</script>
+ #+END_EXPORT

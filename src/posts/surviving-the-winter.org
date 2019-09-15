@@ -51,3 +51,8 @@ cold. Of course I was cold. I guess the other guys were better at hiding their m
 in the fetal position with all my layers on. The shelter helped to keep the light breeze off which
 made all the difference. I woke up twice in the night, but otherwise slept okay. When I woke it was -2f. 
 
+ #+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 8;
+</script>
+ #+END_EXPORT html

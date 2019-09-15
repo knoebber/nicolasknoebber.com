@@ -1,160 +1,124 @@
-#+TITLE: Adding a Serverless Commenting System to My Blog
+#+OPTIONS: ^:nil
+#+TITLE: Adding a Serverless Commenting System with AWS
 Mon 01/14/19
+
 --------------------------------------------------------------------------------
 
-Serverless web technologies are awesome. No longer do we need to pay for servers to spin 24/hours a day to listen for a request
-that may never come. Instead we can pay per request, and with a little JavaScript, make the users computer do the bulk of the work! Excellent.
+My goal for this post is explain how I implemented a serverless commenting system with AWS.
+The first step was to figure out the requirements:
 
-My goal for this post is explain how I implemented a serverless commenting system with AWS. As I was doing this, there were two sides of the
-user experience to think about: the blog readers, who will be reading and submitting comments, and myself, who will be creating the posts. From
-the users point of view, the requirements are simple:
++ An input for a name
++ A text area for the comment body
++ A button to submit
++ An area to show previously submitted comments, newest first
++ A way to give a post a unique identifier so that it could pull its own comments
++ An api to get and post
++ A database to store comments
 
-+ an input for their name
-+ a text area for the comment body
-+ a button to submit
-+ an area to show previously submitted comments, newest first
+I started with the easy part first - a form.
 
-To accomplish this I wrote a footer to be included in every post:
-
-footer.html
 #+BEGIN_SRC html
-<div id="footer">
-  <h3>Comments</h3>
-  <form>
-    <input id="name" placeholder="your name" maxlength=16 required>
-    <textarea id="comment-body" placeholder="your comment" required></textarea>
-    <button id="submit-button" type="button" onclick="saveComment()"> Submit </button>
-  </form>
-  <div id="comments">
-    There's nothing here yet. Be the first!
-  </div>
-</div>
+<h2>Comments</h2>
+<form>
+  <input id="name" placeholder="your name" maxlength=16 required>
+  <textarea id="comment-body\" placeholder=\"your comment\" required></textarea>
+  <button id="submit-button" type="button" onclick="saveComment()"> Submit </button>
+</form>
+<div id="comments">
+<!-- Individual comments will be inserted here -->
+</div>;
 #+END_SRC
 
-Next I had to think about my user perspective as the post publisher; would I need to do anything
-extra to enable commenting on a new post? The first problem I had was how to include the footer into every post 
-that I write. Furthermore, how will that post know which number it is so that it can save comments that
-are associated with itself? If I were using a web server with php it would be trivial:
+Next I thought about how to give each post a unique identifier. I contemplated a few complex solutions,
+but eventually decided to keep it simple: include a script tag in every post to declare a constant.
 
-#+BEGIN_SRC php
-<?php
-  $post_number = 6;
-  include 'partial/footer.php';
-?>
+#+BEGIN_SRC html
+<script type="text/javascript">
+const postNum = 6;
+</script>
 #+END_SRC
 
-It was crucial that my workflow for publishing a post be no different than it has been:
+Ideally I would insert this automatically when the post is compiled by sorting the posts by their dates and
+counting up.
 
-1. `$ vim 6.md` - write the post in a markdown
-2. `$ git add 6.md && git commit -m "write post 6" && git push` - so that I can pull and edit the post on other machines
-3. `$ create-post 6` - compile `6.md` into `6.html` and update the table in `blog.html`
-4. `$ upload-site` - upload `6.html` to my [S3](5.html) bucket
-5. and voila! this post is available on the web
+With the markup done, I moved on to creating an API for getting and posting to comment database.
 
-Adding `footer.html` to the end of all my posts was straightforward as `create-post` already included header.html
-, which is the partial file that creates the grey bar at the top of this page. The only minor hiccup was 
-finding a way to tell the footer which post number it was. I initially thought to edit the footer after reading 
-it, and change the `onclick="saveComment()"` to have the post number as a parameter, something like 
-`onclick="saveComment(6)"`. That would either lead to messy python or regex sorcery. Either way it wouldn't be 
-very easy to read or maintain. A more simple method is to simply include a script tag with the post number 
-declared as a constant above the footer markup.
-
-new code in [create-post](https://github.com/knoebber/personal-website/blob/master/scripts/create-post)
-
-#+BEGIN_SRC python
-# read header and footer
-h = open(partial_dir+'/header.html')
-header = h.read()
-h.close()
-f = open(partial_dir+'/footer.html')
-footer = f.read()
-f.close()
- # add a post number variable to the footer so it knows how to save comments
-footer = "<script> const postNum = "+post_num + ";</script>" + footer;
- # create post html from header, markdown, and footer
-html = markdown(md.read())
-html = header + '\n' + html + '\n' + footer
-md.close()
-#+END_SRC
-
-With the markup done, there still remained the tasks of creating a back end to process/save the comments,
-and writing the client side JavaScript to interact with this. I chose to write the back end first, 
-with the following tasks in mind:
-
-1. create database schema
-2. create function to write to database
-3. create function to read from database
-
-Normally I would add delete and edit as well, but in this case I stuck to only to read and write.
-To delete and edit there needs to be a way to tell which user owns the content, and I do not plan on adding
-a user login system to this project. Not only would that be way outside the scope of what I wanted to accomplish,
-but it would take away from how I want it to work - a simple system to leave and read comments that doesn't
-get in your way.
-
-*# Creating a Table in DynamoDB
+*** Creating a Table in DynamoDB
 
 DynamoDB is a NoSQL database that can scale to any level. You can either choose to pay for the amount
 read/writes that you want to allow per second, or you can let it auto scale, up to a claimed 20 million
 requests per second. I went with the former, which is called provisioned capacity.
 
-[[file:../../images/dynamo_scaling.png]]
+[[file:../../images/dynamo-scaling.png]]
 
-So my table is able to handle 2 requests per second for now, but it is as simple as changing the values in
-the "Provisioned Capacity" box if this proves to be too little. One of things that I struggled with when
-setting up my comments table is the "NoSQL" bit. I didn't quite grasp that it means exactly what it says:
-DynamoDB is +not+ SQL. Where a SQL table has a set amount of columns and a robust language to query based on
-any of these columns, a DynamoDB table has one primary key column which uniquely identifies any kind of JSON
-object that is stored in the table.
-The great part of NoSQL is that it allows for any structure of data to be stored in it, the bad part is that it
-makes efficient SQL like queries for non primary key attributes impossible.
+I set my table is to handle 2 requests per second for now. This can be edited at anytime, which allows you
+to start small and increase it as you see fit.
 
-As I've worked with SQL a fair amount, my first instinct was to design a table that looked something like this.
+One of things that I struggled with when setting up my comments table is the "NoSQL" bit. 
+I didn't quite grasp that it means exactly what it says: DynamoDB is /not/ SQL. 
+A SQL table has a set amount of columns and robust language to make fast queries on any column.
 
---------------------------------------------------------------------------------
-~id (primary key), post_number, name, comment, time_stamp++~
---------------------------------------------------------------------------------
+In contrast, a DynamoDB table has a primary key which uniquely identifies any kind of JSON
+object that is stored in the table. The benefit is that it allows for any structure of data to be stored in it. 
+The downside is that it makes efficient SQL like queries for non primary key attributes impossible.
 
-The problem with this is that the comments must be pulled by their post number, and ordered by their time stamp.
-After I created this table in DynamoDB, I quickly realized that I would have to iterate through every row in 
-the table, picking only the comments with the post number that I wanted.
-Then I would have to sort the resulting list by `time_stamp`. A far cry from a simple SQL query like this:
+If I were doing SQL, I would make a table like this:
 
+| id | post_number | comment_name | comment_body             | time_stamp |
+|----+-------------+--------------+--------------------------+------------|
+|  1 |           6 | nicolas      | cool post                | 1/14/19    |
+|  2 |           6 | nicolas      | sql is better than nosql | 1/14/19    |
+
+And query for it like this:
 #+BEGIN_SRC sql
-SELECT time_stamp, name, body FROM comments WHERE post_number = 6 ORDER BY time_stamp;
+SELECT time_stamp, 
+       comment_name, 
+       comment_body 
+FROM comments 
+WHERE post_number = 6 ORDER BY time_stamp;
 #+END_SRC
 
-I needed a primary key that would always be unique, which I could also use to get all the comments from a
-specific post. At this point I dove into the DynamoDB docs, and found that it is possible to create a
-composite primary key. A composite primary key is combination of a partition key and sort key, where
-multiple items may share the same partition key, but their sort keys must be unique. I dropped the `id` column,
-made a partition key for `post_number`, and a sort key for `time_stamp`.
+The problem with making this table in DynamoDB is that posts must be pulled by their post number, and then
+ordered by their timestamp. I wouldn't be able to query by the post number because ~id~ is the unique primary key.
 
-[[file:../../images/comments_table.png]]
+If I wanted to use this schema, I would have to use the following algorithm:
 
-Note that the `comment_body` and `comment_name` columns were not specified at all in the creation of this table.
-I can actually submit data with +any+ key name to this table, and it would create a new column for it. The only
-requirements are that `post_number` exists and that `time_stamp` is unique. This also solves the problem of how
-to sort the resulting data - the sort key does this automatically when the table is queried.
+1. Pull every comment in the table
+2. Make a list of all the comments of the post
+3. Sort this list by its date.
 
-*# Making API calls to Lambda for DynamoDB operations
+I needed a primary key that would always be unique, which I could also use to get all the comments for a specific
+post. 
 
-With the `comment` table setup, the next task was to create some back end functions to perform read/write 
-operations. I chose to use Node.js with Lamdba to accomplish this. Lambda is an AWS service that lets you upload 
-code which will be ran depending on how you configure its triggers. The main benefit of Lambda is that you pay 
-for the execution time of the code rather than paying for a server to run 24/7. I set up my Lambda functions to 
-use a trigger from API Gateway, an AWS service that lets you set up RESTful API routes.
+I pulled up the DynamoDB docs, and learned about composite primary key's.
+A composite primary key is combination of a ~partition key~ and ~sort key~.
+Multiple items may share the same partition key, but their sort keys must be unique. 
+A list of rows can be pulled by their partition key, and they will come out ordered by their sort key.
+
+I dropped the ~id~ key. I replaced it with composite key: ~post_number~ being the partition, and ~time_stamp~ 
+being the sort key.
+
+[[file:../../images/comments-table.png]]
+
+Note that the ~comment_body~ and ~comment_name~ columns are not specified.
+I can actually submit data with /any/ key to this table and it would create a new column for it. The only
+requirements are that ~post_number~ exists and that ~time_stamp~ is unique.
+
+*** Making API calls to Lambda for DynamoDB operations
+
+With the ~comment~ table setup, the next task was to create some back end functions to perform read/write 
+operations. I chose to use Node.js with Lamdba / API Gateway to accomplish this.
 
 [[file:../../images/lambda-triggers.png]]
 
 Writing the Node.js to communicate with DynamoDB was straightforward, and before long I had two routes that I
-could call from cURL that saved and retrieved comments: <br>
-[get comments handler](https://github.com/knoebber/personal-website/blob/master/lambda/get_comments/index.js)<br>
-[post comment handler](https://github.com/knoebber/personal-website/blob/master/lambda/post_comment/index.js)
+could call from cURL that saved and retrieved comments:
 
-Great, I thought. Now all I had to was add some JavaScript to the
-footer to handle the submit button, and I was done. I started with something like this:
+[[https://github.com/knoebber/personal-website/blob/master/lambda/get_comments/index.js][Get comments handler]]
 
-addition to [footer.html](https://github.com/knoebber/personal-website/blob/master/posts/partial/footer.html)
+[[https://github.com/knoebber/personal-website/blob/master/lambda/post_comment/index.js][Post comments handler]]
+
+Next I added some JavaScript to handle the submit button:
 
 #+BEGIN_SRC javascript
  function saveComment(){
@@ -174,15 +138,12 @@ addition to [footer.html](https://github.com/knoebber/personal-website/blob/mast
 }
  function displayComment(comment){
   const comments = document.getElementById('comments');
-   // Remove the "There's nothing here yet" text on the first comment insert.
-  if (comments.children.length == 0 ) {
-    comments.innerHTML = ''
-  }
   const date = new Date(parseInt(comment.time_stamp.N))
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  let newComment = document.createElement('div');
+
+  const newComment = document.createElement('div');
   newComment.classList.add("comment");
   newComment.innerHTML = `
     <div class="comment-name">
@@ -194,36 +155,23 @@ addition to [footer.html](https://github.com/knoebber/personal-website/blob/mast
    comments.prepend(newComment);
 }
 #+END_SRC
-I
-So I eagerly hit the submit comment button ... 
-only to see a yellow message pop up in my console: "Cross-Origin Request Blocked". After some googling, I learned
-that my browser was protecting me from fetching resources from a different server than the page was hosted on. On
-a classic web server setup, the html files are hosted on the same server that the back end is on, so browsers
-added this as a security check to protect against malicious scripts fetching resources from foreign servers.
+
+I hit the submit button and a yellow message popped up in my console: ~"Cross-Origin Request Blocked"~. 
+I discovered that my browser was protecting me from fetching resources from a different server than 
+the page was hosted on. 
+
+On a classic web server this isn't a problem because the backend files are in the same domain as the html.
 At this point I hit the biggest roadblock that I faced in the project - figuring out how to get around this.
 
 I learned that cross origin requests can be allowed through CORS, or Cross Origin Resource
 Sharing. This can be enabled on the server that the resources are being requested from. At first I thought
-all I had to do was add a header to the HTTP response from Lambda:
+all I had to do was add a header to the lambda response: ~"Access-Control-Allow-Origin" : "*"~
 
-#+BEGIN_SRC javascript
-const respond = (code,response) => callback(null,
-  {
-    statusCode:code,
-    body: JSON.stringify(response),
-    headers:{
-      "Access-Control-Allow-Origin" : "+"
-    }
-  })
-#+END_SRC
-The important bit here is `"Access-Control-Allow-Origin":"+"`, which means "allow any website to request
-this resource". I could change the `+` to `nicolasknoebber.com`, but I test this often from localhost, so I chose
-to leave it as the wild card. So with my new shiny Node.js code uploaded to Lambda, I hit the submit comment
-button again, only to see the same notice show up. My first instinct was to test that the header was actually
-being sent in the response, so I hit the end point with cURL's verbose option. It was indeed being sent back. 
+This means "allow any website to request this resource". I could change the ~*~ to ~nicolasknoebber.com~,
+but I test this often from localhost, so I chose to leave it as the wild card. 
 
-I went back to the AWS docs, and eventually found [this article](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html). 
-Basically, in addition to the `Access-Control-Allow-Origin` header, I would need to create another method
+I went back to the AWS docs, and eventually found [[https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html][this article.]]
+In addition to the ~Access-Control-Allow-Origin~ header, I would need to create another method
 in API Gateway, a so called "Preflight" check. Luckily, API Gateway automates this process.
 
 [[file:../../images/api-gateway-cors.png]]
@@ -232,18 +180,24 @@ So when a script in one of my blog posts makes an API call to AWS, it will first
 which API Gateway will respond back and say OK, this CORS request can go through. After receiving this reply,
 the actual POST request will be sent out that saves the comment.
 
-*# Finishing up
+*** Finishing up
 
-The rest of the project came together quickly once I was able to contact Lambda from JavaScript embedded in the 
-footer. I made another `fetch` call to get all the comments for the post using the `/get_comments` API route 
-with the `postNum` constant as its parameter. Next I added some CSS to the comments so that they float in
-rather than appearing suddenly. I also added some preventative measures to protect
-against the user spamming the API. While I could of used Captcha, I would rather say no to having my
-readers train Googles AI. Instead I went with preventing the same comment from being submitted twice by
-creating a set of all the current comments on the page , and checking if the new comment exists on submission. On
-top of this I disabled the submit button while a create request is still asynchronously processing (because
-I know how we love to keep clicking a button when it doesn't work instantly).
+The rest of the project came together quickly once I was able to contact API gateway from local JavaScript.
+I added another fetch to get all the comments with the ~postNum~ constant as its parameter. 
 
-More importantly I have auto scaling set to off in my AWS services, so if my API does get flooded, I won't have
-to pay for it. I would like to build an email notification system so I know when a new comment is made, 
-which would let me moderate more easily.
+I added a few basic anti spam measures. While I could of used Captcha, I would rather say no to having my
+readers train Googles AI. 
+
++ Prevent the same comment from being submitted twice by using a JavaScript ~Set~
++ Disable the submit button while a create request is still asynchronously processing
++ Sanitize comments from being saved with HTML tags
+
+Here's the final script for client side comment handling: [[../../posts/js/comments.js][comments.js]].
+
+More importantly I have auto scaling set to off in my AWS services, so my bill won't get large if a spammer does 
+target me. For my entire AWS stack (S3 + DynamoDB + Lambda + API Gateway + Route53) I still pay only $1 a month.
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 6;
+</script>
+#+END_EXPORT

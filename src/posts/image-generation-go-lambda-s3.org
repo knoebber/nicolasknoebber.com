@@ -1,36 +1,102 @@
 #+TITLE: Generating and Uploading Images to S3 with Golang
 Sun 02/10/19
 --------------------------------------------------------------------------------
+#+BEGIN_EXPORT html
+<style>
+#create-tree-form input {
+    width: 90px;
+}
+#submit-tree {
+    margin-top: 20px;
+}
+</style>
+<img id="lambda-go-tree" src="http://nicolasknoebber.com/posts/images/lambda-go-tree.png">
+<form id="create-tree-form">
+  <div>
+    <h3>Left Branch Propagation </h3>
+    <strong> Length Change </strong>
+    <input id="left-length" type="number" value="12" placeholder="Length">
+    &nbsp;&nbsp;
+    <strong> Angle Change </strong>
+    <input id="left-angle" type="number" value="20" placeholder="Angle">
+  </div>
+  <div>
+    <h3>Right Branch Propagation </h3>
+    <strong> Length Change </strong>
+    <input id="right-length" type="number" value="12" placeholder="Length">
+    &nbsp;&nbsp;
+    <strong> Angle Change </strong>
+    <input id="right-angle" type="number" value="20" placehoder="Angle">
+  </div>
+  <div id="submit-tree">
+    <select id="prebuilt-trees" onChange="changeTree()">
+      <option value="-1"> Custom </option>
+    </select>
+    <button type="button" id="create-tree-button" onClick="createTree(true)"> Submit </button>
+  </div>
+</form>
+<script type="text/javascript" src="js/post-tree.js"></script>
+#+END_EXPORT
 
-I love to write programs that generate interesting pictures. I will always get a warm
-tingly feeling when the output something that I wrote surprises me.
-One way to achieve this is to recursively draw lines according to some rules. My first real
-attempt at this was in 2015, in the early days of Rust. Back then there wasn't fully fledged
-graphics library for Rust. Instead there was an image library where you could create an array,
-which you could fill with pixel structs and then export it as a png. And no, it wasn't
-a 2D array, you had to transform (x,y) coordinates into indexes for a 1D array. Fun! So I
-implemented a function to draw a line, a function to draw a circle, and then recursively
-called them - [[https://github.com/knoebber/Rustals/blob/master/src/main.rs][src]]
+I love to write programs that generate interesting pictures. 
+One way to achieve this is to recursively draw lines according to some rules. 
+
+In 2015 I did this with Rust. The graphics library was bare bones, so I implemented a function to draw
+a line, and another to draw a circle ([[https://github.com/knoebber/Rustals/blob/master/src/main.rs][source]]).
+
 Here's a few of my favorites images that it generated:
 
 *click to expand or hide*
 #+BEGIN_EXPORT html
+<style>
+.expandable-image {
+    margin-top:5px;
+    line-height:0;
+}
+
+.expandable-image input {
+    display:none;
+}
+
+.expandable-image label:hover {
+    background:#f0f0f0;
+}
+.expandable-image label{
+    min-width:20%;
+    padding:.5rem;
+    display:inline-block;
+    border: solid black 1px;
+}
+
+.expandable-image img {
+    height:0;
+}
+
+.toggle:checked + label {
+    width:100%;
+}
+
+.toggle:checked + label > img {
+    height:100%;
+    max-width:100%;
+}
+</style>
 <div id="image-gallery">
   <div class="expandable-image">
-<input type="checkbox" id="circle-toggle" class="toggle" />
-<label for="circle-toggle">circles<img src="../images/rustal-circle.png"  alt="circle"></label>
+    <input type="checkbox" id="circle-toggle" class="toggle" />
+    <label for="circle-toggle">circles<img src="../images/rustal-circle.png"  alt="circle"></label>
   </div>
   <div class="expandable-image">
-<input type="checkbox" id="shell-toggle" class="toggle" />
-<label for="shell-toggle">shell<img src="../images/rustal-shell.png"  alt="shell"></label>
+    <input type="checkbox" id="shell-toggle" class="toggle" />
+    <label for="shell-toggle">shell<img src="../images/rustal-shell.png"  alt="shell"></label>
   </div>
   <div class="expandable-image">
-<input type="checkbox" id="tree-toggle" class="toggle" />
-<label for="tree-toggle">tree<img src="../images/rustal-rand-tree.png"  alt="tree"></label>
+    <input type="checkbox" id="tree-toggle" class="toggle" />
+    <label for="tree-toggle">tree<img src="../images/rustal-rand-tree.png"  alt="tree"></label>
   </div>
   <div class="expandable-image">
-<input type="checkbox" id="square-toggle" class="toggle" />
-<label for="square-toggle">squares<img src="../images/rustal-square.png"  alt="square"></label>
+    <input type="checkbox" id="square-toggle" class="toggle" />
+    <label for="square-toggle">squares<img src="../images/rustal-square.png"  alt="square"></label>
   </div>
 </div>
 #+END_EXPORT
@@ -44,18 +110,17 @@ end for it on my website that let the user specify a few different parameters:
 + angle: the angle that a new branch is drawn from its parent
 
 Here's an example of a [[../../images/tree-d-4-b-5-l-200-a-25.png][result]] and here's the [[https://github.com/knoebber/personal-website/tree/e78e112376580580bbf8d36bf02cd71ccdcc9feb/trees][source]].
-This worked by using php to call the python program which used pygame headless - instead of showing the tree
-being built , it would just save the image. Sadly, when I moved my website over to be [[./migrating-to-S3.org][statically hosted]], 
-I did not reimplement it and so it died.
+This worked by using php to call the python program which was running pygame headless. 
+Instead of showing the tree being built, it would just save the image. 
+Unfortunately when I moved my website over to be [[./migrating-to-S3.org][statically hosted]] I did not reimplement it.
 
-The Resurrection
+I decided it would be fun to redo this with Go and Lambda. I wanted to see if was possible to generate images
+in a serverless function, and then save them to a S3 bucket.
 
-Armed with my new knowledge from [making an api for a static page with lambda](6.html), and writing
-in Go for my current job, I jumped into making a simple image generator. The first step was to create
-a Go program that could generate and save an image. I decided to use the
-[Go Graphics](https://github.com/fogleman/gg) library.
+The first step was to create a Go program that could generate and save an image. 
+I decided to use the [[https://github.com/fogleman/gg][Go Graphics]] library.
 
-Drawing and saving a simple image in go
+Drawing and saving a simple image in go:
 
 #+BEGIN_SRC go
 package main
@@ -72,90 +137,93 @@ package main
     }
 #+END_SRC
 
-So I could save an image of a circle to my local file system. The immediate problem I saw
-was that I wanted to save it to a S3 bucket, not my computer. To solve this I
-looked through the docs for `gg` and `aws-sdk-go`. I needed to find the type
-that an S3 bucket expected to receive as the body of its upload, and then find how to convert an
-image from the `go graphics` library into this type. This is where Go shines over the other options
-for lambda handlers: it is a typed language vs the untyped Python and Nodejs. I could find a
-solution by looking at types, and be confident that if compiled it would work.
+So I could save an image of a circle to my local file system. The next challenge was finding a way to save
+it to a S3 bucket. First I looked through the docs of ~aws-sdk-go~.  I needed to find the type
+that an S3 bucket expected to receive as the body of its upload.  I found the ~putObject~  function in the 
+~github.com/aws/aws-sdk-go/service/s3~ package.
 
-I found that I would need to use the ~"github.com/aws/aws-sdk-go/service/s3"~ package to call
-~putObject~. This method takes a ~+PutObjectInput~ as its only parameter, which has has many [[https://docs.aws.amazon.com/sdk-for-go/api/service/s3/#PutObjectInput][options]].
+This method takes a ~*PutObjectInput~ as its only parameter.
+It has has many [[https://docs.aws.amazon.com/sdk-for-go/api/service/s3/#PutObjectInput][options]], but only three are required:
 
-These are the required parameters: 
 + Bucket - the name of the S3 bucket
 + Body - the data to be uploaded
-+ Key - the name for the data in the bucket (the key of this page is "posts/7.html")
++ Key - the name for the data in the bucket, basically a file name.
 
-I would have to set `Body` to the image that I generated. It's type is a `io.ReadSeeker`.
-Next I looked in the `go graphics` package for some methods that might return a type that would work
-with this. I found the `EncodePNG` method that can be called on the context. It has an `io.Writer`
-type as its parameter. The `io` types cannot be instantiated, instead they are interfaces that other
-structs can implement through duck typing. If you are familiar with Java,
-then `abstract class` or `interface` is similar - except in Go you don't need
-to tell the compiler that a class `extends` or `implements`, it's done automatically.
-The structs that I used are from the golang `"bytes"` package - which implements the `io` reading and
-writing functionality. This let me write the bytes from the image in the `gg`  context  to a byte buffer, and
-then have the s3 input object read them. Here's a working example of creating an image with `gg` and then
-uploading it to a S3 bucket:
+I would need to set the body to the generated image. 
+The type of body is a ~io.ReadSeeker~.
+
+Next I looked in the go graphics package for a method that would work with this type.
+I found the ~EncodePNG~ method that can be called on the context. It has an ~io.Writer~
+type as its parameter. The built in ~bytes~ package has types that implement these interfaces.
+So I could convert the image context to a byte buffer, and then set this to the body of the S3 upload struct.
+
+Here's a working example of creating an image in Go and then uploading it to a S3 bucket:
 
 #+BEGIN_SRC go
 package main
- import (
-  "bytes"
-  "fmt"
-  "github.com/aws/aws-sdk-go/aws"
-  "github.com/aws/aws-sdk-go/service/s3"
-  "github.com/aws/aws-sdk-go/aws/session"
-  "github.com/fogleman/gg"
+
+import (
+	"bytes"
+	"fmt"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/fogleman/gg"
 )
- func draw() (buffer +bytes.Buffer, err error) {
-  c := gg.NewContext(1000, 1000)
-  // Create the image.
-  c.SetRGB(200,200, 0)
-  c.DrawCircle(400, 400, 400)
-  c.Fill()
-  // Write the bytes from the image in the context to a buffer.
-  buffer = new(bytes.Buffer)
-  if err = c.EncodePNG(buffer); err != nil {
-    fmt.Printf("failed to encode png %s",err.Error())
-  }
-  return
+
+func draw() (buffer *bytes.Buffer, err error) {
+	c := gg.NewContext(1000, 1000)
+	// Create the image.
+	c.SetRGB(200, 200, 0)
+	c.DrawCircle(400, 400, 400)
+	c.Fill()
+	// Write the bytes from the image in the context to a buffer.
+	buffer = new(bytes.Buffer)
+	if err = c.EncodePNG(buffer); err != nil {
+		fmt.Printf("failed to encode png %s", err.Error())
+	}
+	return
 }
- func main() {
-  buffer, err := draw()
-  if err != nil {
-    return
-  }
-   // Create a S3 client
-  session := session.Must(session.NewSession(&aws.Config{
-    Region: aws.String("us-west-2"),
-  }))
-  svc := s3.New(session)
-   // Read the bytes from the byte buffer that contains the image.
-  reader := bytes.NewReader(buffer.Bytes())
-  putInput := s3.PutObjectInput{
-    Bucket: aws.String("nicolasknoebber.com"),
-    Body:   reader,
-    Key:    aws.String("test_upload.png"),
-  }
-  _, err := svc.PutObject(&putInput)
-  if err != nil {
-    fmt.Println(err.Error())
-  }
+
+func main() {
+	buffer, err := draw()
+	if err != nil {
+		return
+	}
+	// Create a S3 client
+	session := session.Must(session.NewSession(&aws.Config{
+		Region: aws.String("us-west-2"),
+	}))
+	svc := s3.New(session)
+	// Read the bytes from the byte buffer that contains the image.
+	reader := bytes.NewReader(buffer.Bytes())
+	putInput := s3.PutObjectInput{
+		Bucket: aws.String("nicolasknoebber.com"),
+		Body:   reader,
+		Key:    aws.String("test_upload.png"),
+	}
+	if _, err := svc.PutObject(&putInput); err != nil {
+		panic(err)
+	}
 }
 #+END_SRC
-[[../../images/test_upload.png][It worked!]]. You may have noticed that there is no access key specified here.
-The secret is in the `session` variable - somewhere in the `aws/session` package it is getting the
-access key that I set when I ran `aws configure` in my terminal.
 
-That circle isn't very interesting though. So next I replaced `draw()` with  a function that generates binary trees
-according to a few paremeters. I set the width of the line to get less for each
-child. A branch will stop growing if the width is 0 , or if it's off the screen.
-Next I set how the branches should grow from their parents - each time the length should get less by some amount, and the angle of the line
-should change. If it's on the left side, the angle is subtracted, if on the right side the angle is added to.
-I decided to let the user decide on the values that make the length and angle change, which can lead to surprising results.
+[[../../test_upload.png][It worked!]]. You may have noticed that there is no access key specified here.
+This comes from the ~session~ variable - it's reading the access key that I set when I ran ~aws configure~
+in my terminal.
+
+The circle isn't very interesting though. Next I replaced ~draw()~ with a function that generates binary trees
+according to a few parameters / rules.
+
+*Rules*
++ A parent has a left and a right branch
++ A branch stops growing when its width is 0 or its off the screen
++ The length of each child should get less by some amount
++ The angle of each branch should change by some amount
+
+*User Parameters*
++ Left / Right length change
++ Left / Right angle change
 
 #+BEGIN_SRC go
 const (
@@ -198,7 +266,9 @@ func createTree(p TreeParam) (buffer *bytes.Buffer, err error) {
 	return
 }
 #+END_SRC
-Next I created a public api endpoint to call this via Lambda / API Gateway, where the request object configures the length and angle change:
+
+Next I created a public api endpoint to run this code. I put the above code in a lambda function and created
+a request object that has the parameters.
 
 #+BEGIN_SRC go
 type TreeParam struct {
@@ -208,50 +278,11 @@ type TreeParam struct {
 	RightAngle  float64 `json:"rightAngle"`
 }
 #+END_SRC
-Finally I added a form and script to this post to send out the requests. Give it a try! A good starting point is using 20 for the angles, and
-12 for the length. A bigger value for length means that side of the tree will get smaller faster, while a bigger angle means that side of the tree will curve more.
+
+Finally, I added the form that's at the top of this page, and a [[../../posts/js/post-tree.js][script]] to create the post request.
 
 #+BEGIN_EXPORT html
-<img id="lambda-go-tree" src="images/lambda-go-tree.png">
-<div class="row">
-  <div class="column">
-    <strong> Left Branch Propagation </strong>
-    <div><span> length <input id="left-length" type="number"> </span></div>
-    <div><span> angle <input id="left-angle" type="number"> </span></div>
-  </div>
-  <div class="column">
-    <strong> Right Branch Propagation </strong>
-    <div><span> length <input id="right-length" type="number"> </span></div>
-    <div><span> angle <input id="right-angle" type="number"></span></div>
-  </div>
-</div>
-<button id="create-tree-button" onClick="createTree()"> Submit </button>
-
-<script>
-function createTree() {
-    document.getElementById("create-tree-button").disabled = true;
-    const rightLength = document.getElementById("right-length").value
-    const rightAngle = document.getElementById("right-angle").value
-    const leftLength = document.getElementById("left-length").value
-    const leftAngle = document.getElementById("left-angle").value
-
-    // To prevent caching from displaying same image.
-    const newImage = "images/lambda-go-tree.png?" + new Date()
-    fetch('https://jkdh1nfr8j.execute-api.us-west-2.amazonaws.com/default/trees', {
-	method: 'POST',
-	body: JSON.stringify({
-	    rightLength: parseInt(rightLength),
-	    rightAngle: parseInt(rightAngle),
-	    leftLength: parseInt(leftLength),
-	    leftAngle: parseInt(leftAngle)
-	}),
-	headers: {
-	    'Content-Type':'application/json'
-	}
-	}).then(response => response.json())
-	.then(data => document.getElementById("lambda-go-tree").src = newImage)
-	.catch(err => console.log(err))
-	.finally(() => document.getElementById("create-tree-button").disabled = false);
-}
+<script type="text/javascript">
+const postNum = 7;
 </script>
 #+END_EXPORT

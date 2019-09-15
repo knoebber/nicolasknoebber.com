@@ -2,22 +2,20 @@
 Sat 06/10/18
 --------------------------------------------------------------------------------
 
-About a month ago I finished my contract work doing LAMP stack web development at FabPro1. Since then I've been spending some time catching
-up on other parts of my life. 
+A month ago I finished my contract work doing LAMP stack web development at FabPro1. 
+Since then I've been competing in [[http://ama-d36.org][d36]] cross country dirt bikes races.
+It's my favorite sport, and its been a blast to fully commit myself to it this season. 
 
-I went to back to Grinnell to see graduation. It was a bit weird being back - college feels
-like a different life now. I'm glad to be back in California. Iowa is nice but the weather volatility
-makes it difficult to have the lifestyle that I want. 
+A race begins by everyone bringing their own machines to the starting line. The lines are divided by engine size, age, and the riders skill. 
+A gun shot is fired for each line, and the pack takes off in a mad dash. It's free for all until you cross the line at the end. A race usually takes between one and two hours.
+During this time there are a slew of possible problems:
 
-Other than that I've been finishing up the [[http://ama-d36.org][d36]] spring cross country season. This is the first time that
-I've entered all the races. It has been a learning experience. 
-
-Cross country motorcycle racing is crazy sport. Everyone brings their own machine to the starting line. The gun shoots and the pack takes off in a mad dash. It's free for all until you cross the line at the end. 
-People might crash into you, you could fly off a cliff of no return, your bike could suffer mechanical failure, or you could break your own body. It's all about finishing
-the race in one piece without damages. 
-
-I've learned that the preparing is incredibly important. Eating and hydrating before, bringing extra supplies in a pack, and having the bike tuned right
-are all musts. 
++ Crashing
++ Other rider crashes into you
++ Flying of a cliff of no return
++ Mechanical problems
++ Can't see anything because goggles are muddy
++ Difficult terrain
 
 During the race I've learned that being smooth and consistent is more important than trying for raw speed. The first lap is for learning
 the course, and the following laps are for optimizing. Finding the lines that take less energy, remembering safe places to pass, and then being able to execute the next time around is key.
@@ -25,19 +23,14 @@ the course, and the following laps are for optimizing. Finding the lines that ta
 I finished first in class 3 times this season. The first two from the Sawmill Two Day Enduro and then Leoni Meadows.
 Overall I finished first place in points for C 250 4Stk, which I am definitely happy about!
 
-Me leading the pack at Honey Lake:
+Shredding a corner at Leoni Meadows:
+[[file:../../images/leoni-meadows.jpg]]
+
+Leading the pack at Honey Lake:
 [[file:../../images/honey-lake.jpg]]
 
---------------------------------------------------------------------------------
-
-With the racing season over and having no current work the idea of travelling has popped into my head. My grandparents
-are always telling me, "You're young, see the world!", so I figure I should listen to their wisdom.
-So when a Canadian sailboat was blown into my home harbor, and their crew jumped ship because it was "too rough", I knew what I had to do. The captain and his
-wife needed someone to help them sail south. I told them I would be willing join them. I knew nothing about sailing, but eager I was eager to learn and ready for adventure. I would be working for food, board,
-sailing lessons, and a ticket to Mexico.
-
-Pretty good deal!
-
-The captain, Michael, and his vessal, Emma.
-
-[[file:../../images/michael-and-emma.jpg]]
+ #+BEGIN_EXPORT html
+ <script>
+ const postNum = 1;
+ </script>
+ #+END_EXPORT

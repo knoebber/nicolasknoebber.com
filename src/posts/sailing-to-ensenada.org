@@ -3,23 +3,41 @@ Mon 06/25/18
 
 --------------------------------------------------------------------------------
 
-My trip has been going well thus far. I have been in Ensenada for the last 10 days ,
+[[file:../../images/michael-and-emma.jpg]]
+
+I've had an itch to travel lately. So when a Canadian sailboat was blown into my home harbor, 
+and their crew jumped ship because it was "too rough", I knew what I had to do. 
+
+The captain and his wife needed someone to help them sail south. I told them I would be willing join them. 
+I knew nothing about sailing, but I was eager to learn and ready for adventure. 
+I would be joining Michael and Rayana aboard the SV Emma, a 42 foot fiberglass sloop.
+
+The first leg of the trip was from Noyo Harbor to Ensenada. The first few nights we were pounded with high seas.
+The boat rolled and water sloshed in over the decks. I spent 12 hours a day watching the decks. I wore a waterproof
+jumper with a harness that I kept clipped into the boat at all times. It was cold, wet, and sometimes terrifying.
+
+I practiced tying knots, studied nautical slang, and read books in my downtime.
+
+---
+*From Journal Entries*
+---
+
+My trip has been going well thus far. I have been in Ensenada for the last 10 days,
 which has been much nicer than I thought it would be. The people are so kind , and the food is great!
 I have been staying on the boat with the captain and his wife in a marina on the main strip of town.
 
 It is quite a touristy area, but I have been surprised to find that there are much more
 Mexican tourists than Americans. The tourist area of the town is well marked - all the sidewalks are
-kept clean, there are security guards, water fountains that kids play in , live music ,
+kept clean, there are security guards, water fountains with frolicking kids, live music,
 food stands, a larger than life Mexican flag, boat rides, a train that runs up and down, and
-stunning views of the port.  Everyday it fills to the brim with Mexican families and their kids
-frolicking about. Really nice to see.
+stunning views of the port.  
 
-That is until one of the the Carnival cruise ships docks for the day.
-Then the town crawls with white people for about 6 hours , until the ship honks its horn
+The landscape changes when a Carnival cruise ships docks for the day.
+Then town crawls with white people for about 6 hours, until the ship honks its horn
 before dark and they all are gone in an eye blink - whereupon it returns to the local scene.
 It makes me feel almost like a local compared to the rest of the US visitors.
 
-I have been running for an hour every morning , which has been good for me.
+I have been running for an hour every morning, which has been good for me.
 I even joined a 6k race the other day! It was amazing how many people entered.
 I didn't come in first, but I definitely should of won the award for
 'tallest racer' . There must have been almost a thousand people there.
@@ -39,3 +57,8 @@ of work relearning to do.
 Tomorrow we set off for Cabo San Lucas.  We might stop at a few anchorages a long the way to
 snorkel and wind surf, but we will probably try to get down as fast as we can.
 Hopefully the winds will be good!
+ #+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 2;
+</script>
+ #+END_EXPORT

@@ -30,7 +30,6 @@ thought was to use many `--exclude` tags to achieve this. But it was difficult t
 of files reliably, and it had no future proofing in the case that I added some other type of file to this repo.
 Instead of blacklisting, it is possible to white list by excluding everything, and then including only certain types.
 
-**** upload-site
 #+BEGIN_SRC bash
 #!/usr/bin/bash
  aws s3 sync $HOME/projects/personal-website s3://nicolasknoebber.com \
@@ -97,3 +96,8 @@ Google makes this easy though with their "Use custom name servers" option.
 [[file:../../images/google-domains.png]]
 
 And that's it! Or so I thought. Turns out DNS settings take a while to come into affect. I had to wait about 10 hours before I could hit my website from `nicolasknoebber.com`.
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 5;
+</script>
+ #+END_EXPORT html

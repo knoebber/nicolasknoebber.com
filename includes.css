@@ -40,8 +40,8 @@ body {
 #postamble, #copyright, #made-with {
     position: absolute;
     bottom: 0;
-    line-height: 0;
 }
+
 #postamble img {
     display: unset;
     width: unset;

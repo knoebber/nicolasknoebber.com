@@ -2,6 +2,9 @@
 Thu 07/19/18
 --------------------------------------------------------------------------------
 
+*edit:* I have since replaced this python/markdown system: [[./blogging-with-emacs-and-org.org][Blogging with Emacs and Org]]
+
+
 Today I've started working on creating a new blogging platform for my website.
 Previously I had my blog setup with Wordpress, but I found that I wasn't using it much,
 and that it provided much more than I needed.
@@ -31,12 +34,12 @@ Then I will need to open the markdown file, read it into a string, pass it into 
 and finally write it into a .html file. The only information the program will need for me
 is the post number, which can come from a command line argument.
 
-After this the script will have to insert a new table row (`<tr>`) element into `blog.html`
+After this the script will have to insert a new table row (~<tr>~) element into ~blog.html~
 #+BEGIN_SRC html
 <tr><td><a href="posts/4.html">Creating My Own Blogging Platform </a></td><td>Thu 07/19/18</td></tr>
 #+END_SRC
 This needs three things: the link, the date of the post, and the title.
-The link will always be 'posts/(post-number).html', so that's easy. The title can be found by looking
+The link will always be 'posts/<post-number>.html', so that's easy. The title can be found by looking
 at the first line of the .md file, and the date will be on the second line.
 
 The outputted html needs to include a few more things. First a `<link>` tag so that all the posts
@@ -47,16 +50,17 @@ html = '<LINK REL=StyleSheet HREF="style.css" TYPE="text/css">\n' + html
 And finally a fixed header so that readers can navigate back to the index page. For this I'll create
 a partial file and have the script read it and paste it into the output.
 
-header.html
+*header.html*
 #+BEGIN_SRC html
 <div class="header">
     <form action="../blog.html">
       <input type="submit" value="blog" />
     </form>
 </div>
+#+END_SRC
 
-
-create_post.py
+*create-post.py*
+#+BEGIN_SRC python
  #!/usr/bin/python3
 from markdown import markdown
 from sys      import argv
@@ -87,7 +91,7 @@ def add_entry_to_list(post_num) :
       html.close()
       return
     i -= 1
- """
+"""
 reads from the markdown file (post_num).md and writes (post_num).html
 """
 def add_entry(post_num) :
@@ -197,6 +201,7 @@ Finally the button itself needs colors, and should highlight on mouse over.
 <script>
 document.getElementById('before-after').addEventListener('click',function() {
   document.styleSheets[0].disabled = !document.styleSheets[0].disabled;
+  document.styleSheets[1].disabled = !document.styleSheets[1].disabled;
 });
 </script>
 #+END_EXPORT
@@ -209,11 +214,18 @@ be able to support whatever interactive elements I feel like making. Pretty cool
 <script>
 document.getElementById('before-after').addEventListener('click',function() {
   document.styleSheets[0].disabled = !document.styleSheets[0].disabled;
+  document.styleSheets[1].disabled = !document.styleSheets[1].disabled;
 });
 </script>
 #+END_SRC
 The style looks okay for now, but I will most likely keep tinkering with it.
 
-**EDIT**: I have indeed tinkered with it a lot since then.
+**EDIT**: I have made significant changes since then.
 [[../../posts/old/old_post.html][Here's the result of the above style]]
 [[https://github.com/knoebber/personal-website/tree/master/][Updated source code can be found here]]
+
+ #+BEGIN_EXPORT html
+<script type="text/javascript">
+ const postNum = 4;
+ </script>
+ #+END_EXPORT

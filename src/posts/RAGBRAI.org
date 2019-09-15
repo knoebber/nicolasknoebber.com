@@ -61,7 +61,7 @@ It was confusing to say the least.
 There were also the words that people were shouting while riding. 
 Certain events triggered a shout, and then the mass of bikes would echo it so riders further back could hear it as well.
 
-~RAGBRAI expression / meaning~
+*RAGBRAI expression / meaning*
 #+BEGIN_SRC Fundamental
 "CAR UP":       A car is up the road driving opposite the flow of bikes.
 
@@ -107,3 +107,9 @@ As the week went on the chain stretched out more and pedalling got smoother. Eve
 I rode it like that for about 190 miles till the end in Keokuk on Saturday.
 
 [[file:../../images/ragbrai-finish.jpg]]
+
+ #+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 9;
+</script>
+ #+END_EXPORT

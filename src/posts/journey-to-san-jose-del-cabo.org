@@ -11,7 +11,7 @@ Good bye land!
 
 The first few nights were great. I much more comfortable on the boat after living on it for
 the past 2 weeks, and so I wasn't as nervous about breaking things.
-We were doing a steady 6 knots under the full moon.
+We were doing a steady 6 knots.
 
 I fell into a comfortable schedule. My watches were 6am -12pm and 6pm-12am,
 and the captain took the other half of the day. This was really nice,
@@ -53,9 +53,14 @@ A few days later we finally limped into port. The engine fired up after draining
 I climbed the mast to tighten bolts on the spreaders, and take pictures of the rigging at the
 very top to see why our main halyard was chafing. It's lot taller than it seems up there!
 
-[[file:../../images/its_high.jpg]]
+[[file:../../images/its-high.jpg]]
 
 I stayed there for a little under a week, before deciding that it was too late in the hurricane
 season to venture further south , so I got a plane ticket back. Rayana also flew
 back on the same day. The captain is still down there burning under the sun, repairing the boat,
 looking for new crew, and dreaming of sailing south.
+ #+BEGIN_EXPORT html
+ <script>
+ const postNum = 3;
+ </script>
+ #+END_EXPORT

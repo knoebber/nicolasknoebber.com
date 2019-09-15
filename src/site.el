@@ -22,18 +22,19 @@
 
 (defun postamble-version (version)
   "Wraps VERSION in a span with class version-number."
-  (format "<span class=\"postamble-text version-number\">v%s</span>" version))
+  (format "<span class=\"postamble-text version-number\">%s</span>" version))
+
 
 (defconst html-postamble
   (concat
    "<span id=\"made-with\">"
-   (postamble-text "powered by&nbsp;")
+   (postamble-text "powered by&nbsp;&nbsp;")
    "<a href=\"https://www.gnu.org/software/emacs\">"
-   "<img src=\"../logo/emacs.svg\" id=\"emacs-logo\" alt=\"emacs logo\">"
+   "<img src=\"../logo/emacs.svg\" id=\"emacs-logo\" alt=\"Emacs\">"
    "</a>"
    (postamble-version emacs-version)
    "&nbsp<a href=\"https://orgmode.org\">"
-   "<img src=\"../logo/org-mode.svg\" id=\"org-mode-logo\" alt=\"org mode logo\">"
+   "<img src=\"../logo/org-mode.svg\" id=\"org-mode-logo\" alt=\"Org\">"
    "</a>"
    (postamble-version org-version)
    "</span>"
@@ -41,6 +42,10 @@
    (format "© %s" (format-time-string "%Y"))
    "</span>"))
 
+(defconst html-posts-postamble
+  (concat
+   html-postamble
+   "<script type=\"text/javascript\" src=\"js/comments.js\"></script>"))
 
 (setq org-publish-project-alist
       `(("personal-website"
@@ -67,7 +72,7 @@
 	 :html-head-include-scripts nil
 	 :html-head-include-default-style nil
 	 :html-preamble "<a href=\"../blog.html\">Blog</a>"
-	 :html-postamble ,html-postamble
+	 :html-postamble ,html-posts-postamble
 	 )))
 
 
