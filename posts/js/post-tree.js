@@ -88,7 +88,7 @@ function createTree(submitPressed) {
   const leftAngle = document.getElementById('left-angle').value;
 
   // To prevent caching from displaying same image.
-  const newImage = 'http://nicolasknoebber.com/posts/images/lambda-go-tree.png?' + new Date();
+  const newImage = 'images/lambda-go-tree.png?' + new Date();
   fetch('https://jkdh1nfr8j.execute-api.us-west-2.amazonaws.com/default/trees', {
     method: 'POST',
     body: JSON.stringify({

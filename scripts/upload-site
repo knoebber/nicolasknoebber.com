@@ -3,11 +3,13 @@
 aws s3 sync $HOME/projects/personal-website s3://nicolasknoebber.com \
 --exclude "*" \
 --include "*.html" \
---exclude "posts/partial/header.html" \
---exclude "posts/partial/footer.html" \
 --include "*.png" \
 --include "*.jpg" \
 --include "*.css" \
+--include "*.svg" \
+--include "*.js" \
+--exclude "lambda/post_comment/index.js" \
+--exclude "lambda/get_comments/index.js" \
 --include "resume.pdf" \
---include "icon.ico" \
+--include "favicon.ico" \
 $1

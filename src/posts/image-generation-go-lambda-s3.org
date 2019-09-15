@@ -10,7 +10,7 @@ Sun 02/10/19
     margin-top: 20px;
 }
 </style>
-<img id="lambda-go-tree" src="http://nicolasknoebber.com/posts/images/lambda-go-tree.png">
+<img id="lambda-go-tree" src="images/lambda-go-tree.png">
 <form id="create-tree-form">
   <div>
     <h3>Left Branch Propagation </h3>
