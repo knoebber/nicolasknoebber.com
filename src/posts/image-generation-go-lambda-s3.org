@@ -35,6 +35,7 @@ Sun 02/10/19
     <button type="button" id="create-tree-button" onClick="createTree(true)"> Submit </button>
   </div>
 </form>
+<noscript>Enable scripts to edit tree.</noscript>
 <script type="text/javascript" src="js/post-tree.js"></script>
 #+END_EXPORT
 

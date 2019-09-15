@@ -68,6 +68,10 @@ body {
     bottom: 6px;
 }
 
+#no-script-comment-message {
+    margin-left: 50%;
+}
+
 .postamble-text {
     vertical-align: 50%;
 }

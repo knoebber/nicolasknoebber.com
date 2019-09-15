@@ -45,6 +45,7 @@
 (defconst html-posts-postamble
   (concat
    html-postamble
+   "<noscript><div id=\"no-script-comment-message\">Enable scripts to see and post comments.</div></noscript>"
    "<script type=\"text/javascript\" src=\"js/comments.js\"></script>"))
 
 (setq org-publish-project-alist
