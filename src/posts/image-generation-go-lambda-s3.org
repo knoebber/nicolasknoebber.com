@@ -38,8 +38,19 @@ Sun 02/10/19
 <script type="text/javascript" src="js/post-tree.js"></script>
 #+END_EXPORT
 
-I love to write programs that generate interesting pictures. 
-One way to achieve this is to recursively draw lines according to some rules. 
+The above widget is a simple binary tree generator that I created with the following AWS stack: 
++ API Gateway
++ Lambda + Golang
++ S3
+
+In this post I explain my motivation for writing this, and the implementation details.
+
+*Disclaimer:* /I could of made a more interesting version of this in less time with client side JavaScript. I chose to do it this way because I wanted to practice this stack - particularly how I could upload arbitrary data to a S3 bucket from a Lambda handler./
+
+----------------------------------------------------------------------------------------------------
+
+** Motivation
+I love to write programs that generate interesting pictures. One way to achieve this is to recursively draw lines according to some rules. 
 
 In 2015 I did this with Rust. The graphics library was bare bones, so I implemented a function to draw
 a line, and another to draw a circle ([[https://github.com/knoebber/Rustals/blob/master/src/main.rs][source]]).
@@ -114,10 +125,11 @@ This worked by using php to call the python program which was running pygame hea
 Instead of showing the tree being built, it would just save the image. 
 Unfortunately when I moved my website over to be [[./migrating-to-S3.org][statically hosted]] I did not reimplement it.
 
-I decided it would be fun to redo this with Go and Lambda. I wanted to see if was possible to generate images
-in a serverless function, and then save them to a S3 bucket.
+** Implementation
 
-The first step was to create a Go program that could generate and save an image. 
+I decided it would be fun to redo this app with Go and Lambda. I wanted to learn how to generate images in a serverless function, and then save them to a S3 bucket.
+
+The first step was to create a Go program that could generate and save an image.
 I decided to use the [[https://github.com/fogleman/gg][Go Graphics]] library.
 
 Drawing and saving a simple image in go:
