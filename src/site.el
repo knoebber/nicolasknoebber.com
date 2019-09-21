@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;
 ;; Set org config for publishing this website.
-;;
-;; Site Map
-;; TODO use tree.
 
 ;;; Code:
 
@@ -38,8 +35,8 @@
    "</a>"
    (postamble-version org-version)
    "</span>"
-   "<span id=\"copyright\">"
-   (format "© %s" (format-time-string "%Y"))
+   "<span id=\"published\">"
+   (format "%s" (format-time-string "%m/%e/%y"))
    "</span>"))
 
 (defconst html-posts-postamble

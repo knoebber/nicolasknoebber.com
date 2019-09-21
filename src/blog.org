@@ -1,6 +1,9 @@
 #+TITLE: Nicolas Knoebber - Blog
 
 #+begin_posts
+
+[[file:posts/blogging-with-emacs-and-org.org][Blogging with Emacs and Org]]
+
 [[./posts/RAGBRAI.org][RAGBRAI]]
 
 [[./posts/surviving-the-winter.org][Surviving the Winter]]

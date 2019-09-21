@@ -1,40 +1,57 @@
-#+TITLE: Converting My Site with Emacs and Org
-Wed, 08/14/19
+#+TITLE: Blogging with Emacs and Org
+Wed 08/14/19
 
 --------------------------------------------------------------------------------
+#+BEGIN_EXPORT html
+<style>
+.logos p:nth-child(1){
+width:50%;
+}
+</style>
+#+END_EXPORT
+[[file:../../../logo/emacs.svg]]
+[[file:../../../logo/org-mode.svg]]
 
-Lately Emacs has been taking over my computing experience. 
+/Emacs has been taking over my computing experience./
+
 I discovered evil-mode is a better vi emulator than vim. 
-At work I realized that Emacs could let me forget I was using OSX's terrible window manager.
-I spent hours learning elisp and configuring my major modes so that all my common tasks are an easy key bind away.
-I organized my life with org-mode. 
 
-But there remained one huge annoyance:
+I realized Emacs could let me have the same environment regardless of what platform I was on.
 
-This website was created with a hodgepodge of html, python, and markdown. 
-I couldn't resist when I realized I could replace this with org and elisp.
+I studied elisp and configured my major modes so that all my common tasks are an easy key bind away.
+
+But there remained one huge annoyance: This website was created with a hodgepodge of HTML, python, and markdown.
+
+*In this post I describe how I generate my site from Org source files.*
+
+If you aren't familar with [[https://www.gnu.org/software/emacs][emacs]] or [[https://orgmode.org][org]] then here's a quick summary:
+Emacs is a lisp interpreter that comes with functions for editing text. It's a platform that allows you to 
+build your own IDE. Org is an Emacs extension for writing, formatting, and publishing documents.
+
+The benefit to using Org is that it integrates well with Emacs. 
+Links are clickable and open in a new buffer, code blocks have the same syntax highlighting as they would
+in their own major mode buffer, and there are key bindings/functions available for most common tasks.
 
 ** Changing markdown into org with elisp
-The first step was to change my markdown files into org.
-Disclaimer: I probably would of spent less time on this if I did this manually, but it was a good excuse to
-practice elisp/regexes.
+The first step was to change my markdown files into org. I wrote a few functions that I could run from a markdown buffer that would do some of 
+the tedious conversions for me.
 
-Lisp macros are like html templating engines; the code after the back tick is the template,
-and code after the comma is the value to be inserted.
-This will cause my functions to be expanded at compile time.
+First some helpers:
 #+BEGIN_SRC elisp
+;;; A macro for moving point to start of buffer and saving the match data.
 (defmacro goto-min-save-match-data (body)
   `(progn 
     (goto-char (point-min))
      (save-match-data ,body)))
-#+END_SRC
-#+BEGIN_SRC elisp
+
+;;; Replace pattern with new in the current buffer
 (defun replace-regex-current-buffer (pattern new)
   (goto-min-save-match-data
    (while (re-search-forward pattern nil t) nil t
 	  (replace-match new))))
 #+END_SRC
 
+Change some common tags over:
 #+BEGIN_SRC elisp
 (defun replace-simple-md ()
   (interactive)
@@ -52,21 +69,21 @@ This will cause my functions to be expanded at compile time.
 #+END_SRC
 
 My least favorite feature of markdown is the code syntax. In a markdown file, four spaces before a line 
-means that it will be compiled as a code block. This function deindents markdown code blocks by 4 spaces.
-Luckily I included language tags before code blocks for highlighting.
-#+BEGIN_SRC python
-    :::python
-    def hello()
-        print("hello")
-#+END_SRC 
-
-This means that I can easily find the beginning of code blocks by looking for ~:::~ followed by a word.
-The following function replaces wraps markdown code blocks in ~#+BEGIN_SRC~ and ~#+END_SRC#~. It captures the
-language tag and adds it after the BEGIN tag.
+means that it will be treated as a code block. This function captures the language tag in markdown code block,
+and wraps it in an Org source block.
 #+BEGIN_SRC elisp
+;; Replaces a block like this
+;;
+;;     :::python
+;;     print("Begone markdown")
+;;
+;; With:
+;;
+;;     #+BEGIN_SRC python
+;;     print("Begone markdown")
+;;     #+END_SRC
 (defun replace-code-section ()
-  (interactive)
-  (goto-char (point-min))
+  (goto-min-save-match-data
   (save-match-data
     (while (re-search-forward "^[[:blank:]]+:::\\(\\w+\\)" nil t) nil t
 	   (replace-match "#+BEGIN_SRC \\1")
@@ -74,16 +91,7 @@ language tag and adds it after the BEGIN tag.
            (move-beginning-of-line nil)
            (newline)
 	   (insert "#+END_SRC")
-	   (newline))))
-#+END_SRC
-#+BEGIN_SRC elisp
-;;; ![cors](images/api-gateway-cors.jpg) => [[file:../../images/api-gateway-cors.png]]
-(defun convert-link ()
- (interactive)
-  (goto-min-save-match-data
-   (while (re-search-forward "!\\[.+(\\(.+\\))/" nil t) nil t
-     (replace-match "[[file:..\\/..\\/\\1]]"))))
-     
+	   (newline)))))
 #+END_SRC
 Finally, deindent the old markdown code blocks by 4 spaces.
 #+BEGIN_SRC elisp
@@ -94,3 +102,226 @@ Finally, deindent the old markdown code blocks by 4 spaces.
 	  (replace-match "")
 	  (next-line))))
 #+END_SRC
+
+** Creating a Site Structure
+Next I decided on a site structure. Most org-mode publishing examples show the directory containing
+the HTML separate from the source files.
+
+E.G. ~~/projects/personal-website => ~/public_html~
+
+I wanted the HTML to be in the same directory as the org source. 
+The trick is a ~src/~ folder that mirrors the parent directory.
+#+BEGIN_SRC
+.
+├── index.html
+├── blog.html
+├── style.css
+├── includes.css
+├── images
+├── lambda/ <aws lambda handlers>
+├── logo/  <svg logos>
+├── posts
+│   ├── <post_name>.html
+│   ├── style.css
+│   ├── js/
+│   └── old/
+├── scripts/ <shell scripts for interacting with aws>
+└── src
+    ├── site.el
+    ├── index.org
+    ├── blog.org
+    └── posts 
+        └── <post_name>.org
+#+END_SRC
+
+~org-publish-project-alist~ is an association list variable that tells org how to publish the site. 
+You can configure it with a list of components that make up the project. 
+I split my website into two components: main, and posts. 
+
+#+BEGIN_SRC elisp
+(setq org-publish-project-alist
+      `(("personal-website"
+         :components ("main" "posts"))
+	("main"
+	 :publishing-directory "~/projects/personal-website"
+	 :base-directory "~/projects/personal-website/src")
+	 :publishing-function org-html-publish-to-html
+        ("posts"
+         :publishing-directory "~/projects/personal-website/posts"
+	 :base-directory "~/projects/personal-website/src/posts"
+	 :publishing-function org-html-publish-to-html)))
+#+END_SRC
+
+** Setting a header / footer and including style
+
+Next I configured the publisher to include a header and footer in every page. I wanted these to look the same
+on all the pages. You can specify these by setting the ~html-postamble~ and ~html-preamble~ properties in the
+project association list. 
+
+You can also set the content that is inserted in the ~<head>~ tag. I used this to include CSS files.
+I split up my CSS into 3 files: 
+
+- includes.css :: Style the header and footer that is included in both components.
+- style.css :: Style the main component.
+- posts/style.css :: Style the posts.
+
+I made the header a simple link that goes back up a level.
+
+For the footer I added links to Emacs/Org, their logos, their respective versions that were used, and 
+the date the file was last exported.
+For the posts component, I also add a noscript tag for comments.
+
+#+BEGIN_SRC elisp
+;; Style components
+(defconst html-style "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />")
+
+;; Set main <head>
+(defconst html-main-head
+  (concat "<link rel=\"stylesheet\" type=\"text/css\" href=\"includes.css\" />" html-style))
+
+;; Set posts <head>
+(defconst html-posts-head
+  (concat "<link rel=\"stylesheet\" type=\"text/css\" href=\"../includes.css\" />" html-style))
+
+(defun postamble-text (text)
+  "Wraps TEXT in a span with class postamble-text."
+  (format "<span class=\"postamble-text\">%s</span>" text))
+
+(defun postamble-version (version)
+  "Wraps VERSION in a span with class version-number."
+  (format "<span class=\"postamble-text version-number\">%s</span>" version))
+
+(defconst html-postamble
+  (concat
+   "<span id=\"made-with\">"
+   (postamble-text "powered by&nbsp;&nbsp;")
+   "<a href=\"https://www.gnu.org/software/emacs\">"
+   "<img src=\"../logo/emacs.svg\" id=\"emacs-logo\" alt=\"Emacs\">"
+   "</a>"
+   (postamble-version emacs-version)
+   "&nbsp<a href=\"https://orgmode.org\">"
+   "<img src=\"../logo/org-mode.svg\" id=\"org-mode-logo\" alt=\"Org\">"
+   "</a>"
+   (postamble-version org-version)
+   "</span>"
+   "<span id=\"published\">"
+   (format "exported on %s" (format-time-string "%M/%D/%Y"))
+   "</span>"))
+
+(defconst html-postamble
+  (concat
+   "<span id=\"made-with\">"
+   (postamble-text "powered by&nbsp;&nbsp;")
+   "<a href=\"https://www.gnu.org/software/emacs\">"
+   "<img src=\"../logo/emacs.svg\" id=\"emacs-logo\" alt=\"Emacs\">"
+   "</a>"
+   (postamble-version emacs-version)
+   "&nbsp<a href=\"https://orgmode.org\">"
+   "<img src=\"../logo/org-mode.svg\" id=\"org-mode-logo\" alt=\"Org\">"
+   "</a>"
+   (postamble-version org-version)
+   "</span>"
+   "<span id=\"published\">"
+   (format "%s" (format-time-string "%m/%e/%y"))
+   "</span>"))
+#+END_SRC
+
+I disabled some of the default org publishing behavior such as their included CSS/JavaScript, table of contents,
+and section numbers.
+
+*Completed org-publish-project-alist*
+#+BEGIN_SRC elisp
+(setq org-publish-project-alist
+      `(("personal-website"
+         :components ("main" "posts"))
+	("main"
+	 :publishing-directory "~/projects/personal-website"
+	 :base-directory "~/projects/personal-website/src"
+	 :publishing-function org-html-publish-to-html
+	 :section-numbers nil
+	 :with-toc nil
+	 :with-title nil
+	 :html-head ,html-main-head ;; The , is so the macro evaluates the expression (because it uses concat).
+	 :html-preamble "<a href=\"/\">Nicolas Knoebber</a>"
+	 :html-postamble ,html-postamble
+	 :html-head-include-scripts nil
+	 :html-head-include-default-style nil)
+	("posts"
+         :publishing-directory "~/projects/personal-website/posts"
+	 :base-directory "~/projects/personal-website/src/posts"
+	 :publishing-function org-html-publish-to-html
+	 :section-numbers nil
+	 :with-toc nil
+	 :html-head ,html-posts-head
+	 :html-head-include-scripts nil
+	 :html-head-include-default-style nil
+	 :html-preamble "<a href=\"../blog.html\">Blog</a>"
+	 :html-postamble ,html-posts-postamble
+	 )))
+#+END_SRC
+
+I added all of this elisp to [[https://github.com/knoebber/personal-website/blob/master/src/site.el][src/site.el]]. Finally I created a key bind to load this file and publish all of 
+my org files. This is convenient when I change site.el and I need to update the output HTML.
+
+*Addition to [[https://github.com/knoebber/.emacs.d][init.el]]*
+#+BEGIN_SRC elisp
+(defun publish-site ()
+  "Build nicolasknoebber.com."
+  (interactive)
+  (load-file "~/projects/personal-website/src/site.el")
+  (org-publish "personal-website" t)) ;; Add t to force all files to republish.
+
+(with-eval-after-load "org"
+  (define-key org-mode-map (kbd "C-c c") 'publish-site))
+#+END_SRC
+
+When I don't need to republish all the files, I use ~org-publish-current-file~ from within the
+org buffer that I'm editing.
+
+** Results
+
+This is a great improvement from my previous system. The main benefits are ease of publishing, and a better
+environment for writing. 
+
+A frustration I had with markdown was accidentally creating dead links while writing, and not knowing until I exported it. 
+Now creating links is a streamlined process:
+
+1. Type /C-c C-l/ to call ~org-insert-link~ 
+2. Select /file:/ which opens Helms fuzzy file finder
+3. Find my file and name the link
+4. Click the new link, which opens the contents in a new buffer
+
+Emacs will even display images. Web links are also clickable and open in your default browser.
+
+Another frustration I had was syntax in exported code blocks. I was using [[http://pygments.org/][pygments]], which did a nice job usually.
+However, it was a pain to change color schemes, and exported code always looked different than it did in my editor.
+
+Now exported code looks the same as it does in Emacs:
+
+*Screenshot of Golang code in Emacs*
+[[file:../../images/go-src.png]]
+
+*Exported Golang code*
+#+BEGIN_SRC go
+// Returns a function that initializes dotfile storage.
+// The result function must be ran at the time of a command being run so that
+// the user can override default storage configuration with --storage-dir or --storage-name.
+func getStorageClosure(home string, dir, name *string) func() (*file.Storage, error) {
+	return func() (*file.Storage, error) {
+		storage := &file.Storage{}
+
+		if err := storage.Setup(home, *dir, *name); err != nil {
+			return nil, errors.Wrap(err, "failed to setup dotfile storage")
+		}
+		return storage, nil
+	}
+}
+#+END_SRC
+
+Overall I'm happy with the results, and will mostly likely continue to use Emacs+Org as a static site generator.
+
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 10;
+</script>
+ #+END_EXPORT

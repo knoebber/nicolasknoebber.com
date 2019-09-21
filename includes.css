@@ -37,7 +37,7 @@ body {
     margin-bottom: .2rem;
 }
 
-#postamble, #copyright, #made-with {
+#postamble, #published, #made-with {
     position: absolute;
     bottom: 0;
 }
@@ -63,7 +63,7 @@ body {
     max-height: 45px;
 }
 
-#copyright {
+#published {
     right: 10px;
     bottom: 6px;
 }
