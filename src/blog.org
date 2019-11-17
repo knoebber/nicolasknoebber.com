@@ -1,6 +1,7 @@
 #+TITLE: Nicolas Knoebber - Blog
 
 #+begin_posts
+[[file:posts/running-season-2019.org][Running Season 2018-2019]]
 
 [[file:posts/blogging-with-emacs-and-org.org][Blogging with Emacs and Org]]
 
