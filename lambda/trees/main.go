@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"time"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
@@ -29,7 +31,6 @@ func HandleRequest(request events.APIGatewayProxyRequest) (response events.APIGa
 	)
 
 	if err = json.Unmarshal([]byte(request.Body), &p); err != nil {
-		fmt.Printf("request: %+v\n", request)
 		response.StatusCode = 400
 		return
 	}
@@ -39,17 +40,16 @@ func HandleRequest(request events.APIGatewayProxyRequest) (response events.APIGa
 		return
 	}
 
+	fileName := fmt.Sprintf("lambda-go-tree-%d.png", time.Now().Unix())
 	// Create a S3 client
 	session := session.Must(session.NewSession())
 	svc := s3.New(session)
 
 	reader := bytes.NewReader(buffer.Bytes())
-	fmt.Printf("%d bytes", reader.Len())
-
 	putInput := s3.PutObjectInput{
 		Bucket: aws.String("nicolasknoebber.com"),
 		Body:   reader,
-		Key:    aws.String("/posts/images/lambda-go-tree.png"),
+		Key:    aws.String(fmt.Sprintf("/posts/images/trees/%s", fileName)),
 	}
 
 	_, err = svc.PutObject(&putInput)
@@ -59,7 +59,7 @@ func HandleRequest(request events.APIGatewayProxyRequest) (response events.APIGa
 	}
 
 	response.StatusCode = 200
-	response.Body = `{"message":"tree created"}`
+	response.Body = fmt.Sprintf(`{"message":"%s"}`, fileName)
 	return
 }
 

@@ -87,8 +87,6 @@ function createTree(submitPressed) {
   const leftLength = document.getElementById('left-length').value;
   const leftAngle = document.getElementById('left-angle').value;
 
-  // To prevent caching from displaying same image.
-  const newImage = 'images/lambda-go-tree.png?' + new Date();
   fetch('https://jkdh1nfr8j.execute-api.us-west-2.amazonaws.com/default/trees', {
     method: 'POST',
     body: JSON.stringify({
@@ -101,7 +99,7 @@ function createTree(submitPressed) {
       'Content-Type':'application/json'
     }
   }).then(response => response.json())
-    .then(data => document.getElementById('lambda-go-tree').src = newImage)
+    .then(data => document.getElementById('lambda-go-tree').src = `images/trees/${data.message}`)
     .catch(err => console.log(err))
     .finally(() => {
       document.getElementById('create-tree-button').disabled = false;
