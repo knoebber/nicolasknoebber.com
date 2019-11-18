@@ -324,7 +324,7 @@ func getStorageClosure(home string, dir, name *string) func() (*file.Storage, er
 }
 #+END_SRC
 
-Overall I'm happy with the results, and will mostly likely continue to use Emacs+Org as a static site generator.
+Overall I'm happy with the results and will most likely continue to use Emacs+Org as a static site generator.
 
 #+BEGIN_EXPORT html
 <script type="text/javascript">
