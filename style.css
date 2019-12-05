@@ -15,7 +15,10 @@ html {
 
 .posts {
     display: flex;
-    gap: 1rem;
+}
+
+.life {
+    margin-right: 1rem;
 }
 
 @media (max-width:1010px) {
@@ -23,3 +26,4 @@ html {
         flex-direction: column;
     }
 }
+
