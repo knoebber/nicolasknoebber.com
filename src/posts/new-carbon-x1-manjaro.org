@@ -1,0 +1,113 @@
+#+TITLE: Lenovo Carbon X1 Gen 7 + Manjaro Linux
+Sun 12/29/19
+--------------------------------------------------------------------------------
+#+BEGIN_EXPORT html
+<style>
+img {
+   image-orientation: from-image;
+}
+</style>
+ #+END_EXPORT
+[[file:../../images/x1-carbon.jpg]]
+
+I recently got a new laptop:
+
+- Model :: 20qd001uus
+- Ram :: 16 gb
+- CPU :: Intel Core i5-8265U @ 8x 3.9GHz 
+- Screen :: 2560x1440
+- Disk :: 500gb SSD
+
+I debated what to install on it for a while. I run Arch on my desktop PC, and in the past have ran Ubuntu on my laptops.
+I find pacman easier to use than apt, but I like the ease of installation and device support with Ubuntu.
+
+For a laptop this is specifically important. I don't enjoy configuring media keys, or finding why closing the lid doesn't make the machine sleep.
+I also don't have the patience to configure system themes.
+
+I chose Manjaro because it's based on Arch and claims to be user friendly.
+Here are some [[https://wiki.manjaro.org/index.php?title=Manjaro:_A_Different_Kind_of_Beast][differences between Arch and Manjaro]].
+
+**Installing**
+
+I downloaded the Manjaro Architect installer.
+It took me a while to figure out how to get the flash drive to boot. Eventually I went into windows and did system recovery which finally gave me access to the bios.
+
+The live media OS is impressive. It walks you through the installation process in a CLI. You don't need to type bash commands like you would
+in an Arch install (manual gparted commands are scary!). I chose minimal desktop installation with i3.
+Be careful as there are lots of menus to go through. I recommend having another computer available with an installation guide open.
+
+Make sure to check mirror speeds before starting the package installation, I didn't do this my first try and it went /really/ slow. So much that I started over again.
+
+My second try everything went well except one mistake: I set my boot partition to ~/boot/efi~ and then selected ~systemd-boot~ for a bootloader. 
+~systemd-boot~ expects that its mounted to ~/boot~.
+
+I tried to fix this by chrooting in and editing ~/etc/fstab~ to change the mount point to ~/boot/~  but it didn't work. I decided to give up and install ~grub~ instead.
+After removing ~bootctl~ and installing ~grub~ my machine booted.
+
+Tips on fixing an installation from the Manjaro Architect live environment:
+
+After logging in do ~$ install~. This lets you easily configure an internet connection.
+Exit the installer after configuring the network. Now you can download new packages as needed.
+
+Now mount the installed system. Use ~# manjaro-chroot -a~ instead of ~# mount /dev/xxx /mnt && chroot /mnt /bin/bash~. This will keep your internet connection and devices working properly.
+
+**The Good**
+
+- Graphical login screen
+- i3 gaps
+- Lots of useful base packages installed
+- Nicely configured i3 bar with useful widgets
+  - Update manager
+  - Network manager
+  - Clipboard manager
+  - Sound control
+- Conky running on deskop
+- Sane default dotfiles
+  - Cool PS1 prompt
+  - Nice i3 config that's well integrated with OS
+- Comes with BMenu - a CLI system preferences interface, which works well.
+- Cohesive system theme
+- Comes with a screen locker
+- Media keys work
+- Camera works
+
+**The bad**
+
+- Everything is tiny from high DPI screen
+- Sound doesn't work
+- Emacs feels laggy (well, laggier than usual)
+- Closing the lid freezed the system
+- Mic doesn't work
+
+**Fixes**
+
+Unfortunately, it looks like I'll have to do some serious fidding to get [[https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_7)#Microphone][the mic to work]].
+I'm just going to think of this as a security feature.
+
+I made a few changes in ~/.Xresources~ to fix scaling issues.
+
+Scale the DPI up:
+
+~Xft.dpi: 140~
+
+Make terminal font size bigger:
+
+~URxvt.font: xft:TerminessTTFNerdFontMono:pixelsize=23~
+
+Installing pulse audio ~$ install_pulse~ fixes audio, but adjusting it via the applet on the i3 bar doesn't work.
+[[https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_7)#Volume_controls][Fix for volume controls]] worked for me.
+
+Here's a screenshot after the above fixes with everything else default.
+
+[[file:../../images/manjaro-i3.png]]
+
+** [0/3] TODO
+ - [ ] Fix closing lid - should sleep
+ - [ ] Test emacs without a compositor running, may be causing lag
+ - [ ] Configure wayland + sway
+
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 12;
+</script>
+ #+END_EXPORT
