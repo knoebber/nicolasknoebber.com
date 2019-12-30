@@ -1,13 +1,6 @@
 #+TITLE: Lenovo Carbon X1 Gen 7 + Manjaro Linux
 Sun 12/29/19
 --------------------------------------------------------------------------------
-#+BEGIN_EXPORT html
-<style>
-img {
-   image-orientation: from-image;
-}
-</style>
- #+END_EXPORT
 [[file:../../images/x1-carbon.jpg]]
 
 I recently got a new laptop:
