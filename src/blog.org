@@ -33,4 +33,9 @@
 
 [[./posts/creating-my-blog.org][Creating My Own Blogging Platform]]
 #+end_tech
+#+begin_fiction
+**Fiction**
+
+[[./posts/once-well.org][Once Well By Roger Knoebber]]
+#+end_fiction
 #+end_posts
