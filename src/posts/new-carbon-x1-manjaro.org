@@ -93,9 +93,12 @@ Here's a screenshot after the above fixes with everything else default.
 
 [[file:../../images/manjaro-i3.png]]
 
-** [0/3] TODO
- - [ ] Fix closing lid - should sleep
+** [2/4] TODO
+ - [X] Fix closing lid - should sleep
+   - Set sleep mode to 'linux' in bios
  - [ ] Test emacs without a compositor running, may be causing lag
+ - [X] Get mic to work
+   - https://bbs.archlinux.org/viewtopic.php?id=249900
  - [ ] Configure wayland + sway
 
 #+BEGIN_EXPORT html
