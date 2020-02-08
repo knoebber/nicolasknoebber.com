@@ -21,6 +21,7 @@ I chose Manjaro because it's based on Arch and claims to be user friendly.
 Here are some [[https://wiki.manjaro.org/index.php?title=Manjaro:_A_Different_Kind_of_Beast][differences between Arch and Manjaro]].
 
 **Installing**
+
 I downloaded the [[https://www.manjaro.org/download/official/architect/][Manjaro Architect disc image]].
 It took me a while to figure out how to get the flash drive to boot. Eventually I went into windows and did system recovery which finally gave me access to the bios.
 
