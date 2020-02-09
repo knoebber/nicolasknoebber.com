@@ -1,0 +1,27 @@
+#+TITLE: Personal Bests
+#+BEGIN_EXPORT html
+<style>
+html {
+    font-size: 20px;
+}
+</style>
+#+END_EXPORT
+* Personal Bests
+----------------------------------
+
+** Running
+
+| Distance      |    Time | Mile Pace |
+|---------------+---------+-----------|
+| 1 mile        |    4:58 |      4:58 |
+| 3 miles       |   18:52 |      6:17 |
+| 10 kilometers |   40:46 |      6:34 |
+| 13.1 miles    | 1:33:06 |      7:06 |
+| 26.2 miles    | 3:34:08 |      8:11 |
+
+** Super Mario 64
+
+| Category |    Time |
+|----------+---------|
+| 16 stars |   23:08 |
+| 70 stars | 1:29:18 |

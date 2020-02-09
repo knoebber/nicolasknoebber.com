@@ -1,10 +1,9 @@
 #+TITLE: Nicolas Knoebber
-[[file:blog.html][blog]]
 
-[[https://github.com/knoebber][github]]
+[[file:blog.html][Blog]]
 
-[[./resume.pdf][resume]]
+[[https://github.com/knoebber][Github]]
 
-[[./posts/about-me.html][about me]]
+[[./personal-bests.org][Bests]]
 
-[[mailto:knoebber@gmail.com][knoebber@gmail.com]]
+[[./posts/about-me.org][About]]
