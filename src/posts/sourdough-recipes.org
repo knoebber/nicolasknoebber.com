@@ -1,0 +1,59 @@
+#+TITLE: Sourdough Recipes
+Mon 03/30/20
+--------------------------------------------------------------------------------
+
+**Bread**
+
+Mix:
+
++ 50g active starter 
++ 350g warm water
++ 500g bread flour
++ 1 1/2 tsp sea salt (or eyeball by spreading evenly over dough)
++ table spoon of olive oil (optional - I also eyeball this)
+
+Kneed it a bit.
+Let sit for 8 to 12 hours or until double in size.
+
+Bake at 450 in dutch oven. Greese with olive oil or place on top of parchment paper.
+
++ 30 minutes lid on
++ 20 minutes with lid off.
+
+This recipe is inspired from [[https://www.theclevercarrot.com][Emilie's]] excellent book "Artisan Sourdough Made Simple".
+
+**Pizza Dough**
+
+Mix:
+
++ 47g active starter
++ 212g water
++ 285g all purpose flour or 50/50 mix with bread flour
++ 32g whole wheat flour
++ 9g sea salt
+
+Kneed till firm.
+
+Let sit for 2.5 hours on counter.
+During this period fold the dough over a few times every thirty minutes.
+
+Add a bit of olive oil and let sit in covered bowl in fridge over night.
+
+Divide dough in half (should be ~290g balls) and let sit for 6 hours at room temperature.
+
+Preheat oven as hot as it goes. Turn the broiler on too.
+
+Cook time depends on what you bake it in.
+Keep an eye on it.
+
+This recipe is from: https://www.theperfectloaf.com/sourdough-pizza-dough-and-recipes/ 
+
+**Thoughts**
+
+I've been baking more now that I'm stuck inside from the corona quarantine.
+
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 14;
+</script>
+ #+END_EXPORT
