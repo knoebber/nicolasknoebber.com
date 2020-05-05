@@ -8,6 +8,10 @@ html {
     background:lightblue;
 }
 
+body {
+    padding-bottom: 5rem;
+}
+
 img {
     display: block;
     width: auto;
