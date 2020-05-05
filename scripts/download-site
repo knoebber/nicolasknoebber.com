@@ -3,5 +3,7 @@
 aws s3 sync s3://nicolasknoebber.com $HOME/projects/personal-website \
 --exclude "*" \
 --include "*.png" \
---include "resume.pdf" \
+--include "*.jpg" \
+--include "*.html" \
+--include "favicon.ico" \
 $1
