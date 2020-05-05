@@ -5,11 +5,11 @@ Sun 12/29/19
 
 I recently got a new laptop:
 
-- Model :: 20qd001uus
-- Ram :: 16 gb
-- CPU :: Intel Core i5-8265U @ 8x 3.9GHz 
-- Screen :: 2560x1440
-- Disk :: 500gb SSD
+- Model : 20qd001uus
+- Ram : 16 gb
+- CPU : Intel Core i5-8265U
+- Screen : 2560x1440
+- Disk : 500gb SSD
 
 I debated what to install on it for a while. I run Arch on my desktop PC, and in the past have ran Ubuntu on my laptops.
 I find pacman easier to use than apt, but I like the ease of installation and device support with Ubuntu.
@@ -31,18 +31,17 @@ Be careful as there are lots of menus to go through. I recommend having another 
 
 Make sure to check mirror speeds before starting the package installation, I didn't do this my first try and it went /really/ slow. So much that I started over again.
 
-My second try everything went well except one mistake: I set my boot partition to ~/boot/efi~ and then selected ~systemd-boot~ for a bootloader. 
-~systemd-boot~ expects that its mounted to ~/boot~.
-
-I tried to fix this by chrooting in and editing ~/etc/fstab~ to change the mount point to ~/boot/~  but it didn't work. I decided to give up and install ~grub~ instead.
-After removing ~bootctl~ and installing ~grub~ my machine booted.
+My second try everything worked except that it wouldn't boot due to a mistake with systemd-boot.
+Luckily I was able to fix it with the live media.
 
 Tips on fixing an installation from the Manjaro Architect live environment:
 
-After logging in do ~$ install~. This lets you easily configure an internet connection.
-Exit the installer after configuring the network. Now you can download new packages as needed.
+After logging in do ~$ setup~. This lets you easily configure an internet connection.
+Exit the installer after configuring the network.
 
-Now mount the installed system. Use ~# manjaro-chroot -a~ instead of ~# mount /dev/xxx /mnt && chroot /mnt /bin/bash~. This will keep your internet connection and devices working properly.
+Now mount the installed system. Use ~# manjaro-chroot -a~ instead of ~# mount /dev/xxx /mnt && chroot /mnt /bin/bash~. 
+This will keep your internet connection and devices working properly. 
+Now you can install or fix packages.
 
 **The Good**
 
@@ -68,6 +67,7 @@ Now mount the installed system. Use ~# manjaro-chroot -a~ instead of ~# mount /d
 
 - Everything is tiny from high DPI screen
 - Sound doesn't work
+- Videos don't play in full screen in firefox/chrome
 - Emacs feels laggy (well, laggier than usual)
 - Closing the lid freezes the system
 - Mic doesn't work
@@ -76,15 +76,14 @@ Now mount the installed system. Use ~# manjaro-chroot -a~ instead of ~# mount /d
 
 Unfortunately, it looks like I'll have to do some serious fidding to get [[https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_7)#Microphone][the mic to work]].
 I'm just going to think of this as a security feature.
+(EDIT: mic fix https://bbs.archlinux.org/viewtopic.php?id=249900)
 
 I made a few changes in ~/.Xresources~ to fix scaling issues.
 
 Scale the DPI up:
-
 ~Xft.dpi: 140~
 
 Make terminal font size bigger:
-
 ~URxvt.font: xft:TerminessTTFNerdFontMono:pixelsize=23~
 
 Installing pulse audio ~$ install_pulse~ fixes audio, but adjusting it via the applet on the i3 bar doesn't work.
@@ -94,13 +93,9 @@ Here's a screenshot after the above fixes with everything else default.
 
 [[file:../../images/manjaro-i3.png]]
 
-** [2/4] TODO
- - [X] Fix closing lid - should sleep
-   - Set sleep mode to 'linux' in bios
- - [ ] Test emacs without a compositor running, may be causing lag
- - [X] Get mic to work
-   - https://bbs.archlinux.org/viewtopic.php?id=249900
- - [ ] Configure wayland + sway
+**And... back to Ubuntu!**
+I couldn't resist trying the new Ubuntu 20.04 release. The machine is working a fair amount better now.
+I still think Manjaro is a nice distro worth trying. It would be especially good on a deskop without hardware to support.
 
 #+BEGIN_EXPORT html
 <script type="text/javascript">
