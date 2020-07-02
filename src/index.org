@@ -1,5 +1,6 @@
 #+TITLE: Nicolas Knoebber
 
+#+begin_header-links
 [[file:blog.html][Blog]]
 
 [[https://github.com/knoebber][Github]]
@@ -7,3 +8,4 @@
 [[./personal-bests.org][Bests]]
 
 [[./posts/about-me.org][About]]
+#+end_header-links

@@ -2,15 +2,15 @@ html {
     background: url(images/tree-d-4-b-5-l-200-a-25.png) no-repeat center center fixed;
     background-size: cover;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 50px;
+    font-size: 25px;
+}
+
+.header-links {
+    font-size: 2rem;
 }
 
 #content {
     margin: 50px;
-}
-
-.posts, a[href="mailto:knoebber@gmail.com"] {
-    font-size: .5rem;
 }
 
 .posts {
