@@ -21,6 +21,20 @@
   "Wraps VERSION in a span with class version-number."
   (format "<span class=\"postamble-text version-number\">%s</span>" version))
 
+(defun publish-nicolasknoebber-file ()
+  "Exports current org file to html and uploads to s3://nicolasknoebber.com."
+  (interactive)
+  (org-publish-current-file)
+  (let* (
+	 (org-file (buffer-file-name (buffer-base-buffer)))
+	 (publishing-dir (org-publish-property :publishing-directory
+                                               (org-publish-get-project-from-filename org-file)))
+         (html-file (replace-regexp-in-string "org$" "html" (buffer-name)))
+	 (html-file-path (concat publishing-dir "/" html-file))
+	 (site-path (replace-regexp-in-string ".+personal-website" "" html-file-path))
+         (aws-s3-cmd
+          (concat "aws s3 cp " html-file-path " s3://nicolasknoebber.com" site-path)))
+    (eshell-command aws-s3-cmd)))
 
 (defconst html-postamble
   (concat
