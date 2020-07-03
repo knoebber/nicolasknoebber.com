@@ -13,8 +13,9 @@ Plus we can have fun picnics.
 For chatting on the road!
 ** TODO Tarp
 Cover my stuff in the back of my truck
-* [0/9] Things to get rid off / Sell
+* [0/11] Things to get rid off / Sell
 ** TODO CRT
+** TODO TV
 ** TODO Small Spider Plant
 I think I'm going to give this to Scott.
 ** TODO Vine Plant
@@ -24,4 +25,7 @@ I think I'm going to give this to Scott.
 ** TODO Speaker set
 ** TODO Bed
 ** TODO Bathroom shelves
-
+** TODO Apartment Keys
+* [0/2] Tasks
+** TODO Tell PM I'm leaving
+** TODO Visit friends
