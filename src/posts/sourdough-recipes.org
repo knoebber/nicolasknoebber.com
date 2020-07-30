@@ -23,14 +23,16 @@ Bake at 450 in dutch oven. Greese with olive oil or place on top of parchment pa
 This recipe is inspired from [[https://www.theclevercarrot.com][Emilie's]] excellent book "Artisan Sourdough Made Simple".
 
 **Pizza Dough**
+/Makes two large pizzas/
 
 Mix:
 
-+ 47g active starter
++ 100g active starter
 + 212g water
-+ 285g all purpose flour or 50/50 mix with bread flour
-+ 32g whole wheat flour
-+ 9g sea salt
++ 285g all purpose flour
++ 285g bread flour
++ 64g whole wheat flour
++ 16g sea salt
 
 Kneed till firm.
 
@@ -39,9 +41,7 @@ During this period fold the dough over a few times every thirty minutes.
 
 Add a bit of olive oil and let sit in covered bowl in fridge over night.
 
-In the morning take the dough out. If you want smaller pizzas with 
-thinner crust you can split the dough in two at this point. 
-Let it rise for the day.
+In the morning take the dough out and let it rise all day.
 
 Preheat the oven as hot as it goes and dress the pizza.
 
