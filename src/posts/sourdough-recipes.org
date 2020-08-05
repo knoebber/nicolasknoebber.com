@@ -28,7 +28,7 @@ This recipe is inspired from [[https://www.theclevercarrot.com][Emilie's]] excel
 Mix:
 
 + 100g active starter
-+ 212g water
++ 414g water
 + 285g all purpose flour
 + 285g bread flour
 + 64g whole wheat flour
