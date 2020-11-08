@@ -1,6 +1,7 @@
 #+TITLE: Blogging with Emacs and Org
-Wed 08/14/19
-
+#+OPTIONS: toc:t
+#+KEYWORDS: org emacs org-mode blog export elisp regex static site html
+#+DATE: <2019-08-14 Wed>
 --------------------------------------------------------------------------------
 #+BEGIN_EXPORT html
 <style>
@@ -12,31 +13,31 @@ width:50%;
 [[file:../../../logo/emacs.svg]]
 [[file:../../../logo/org-mode.svg]]
 
-/Emacs has been taking over my computing experience./
+* Quick Links
+I read quite a few other blog posts that described setting up
+org-mode as a static generator. Confession: sometimes I skipped all the words and
+went right for the elisp examples. To return the favor, here's my
+up to date code:
++ [[https://github.com/knoebber/personal-website/blob/master/src/site.el][site.el]]
++ [[https://dotfilehub.com/knoebber/emacs][init.el]]
+* Introduction
+Recently I've been using emacs for more of my workflow. It's great to
+have the same environment regardless of platform. Packages like
+evil-mode, helm and magit make emacs a joy to use.
 
-I discovered evil-mode is a better vi emulator than vim. 
-
-I realized Emacs could let me have the same environment regardless of what platform I was on.
-
-I studied elisp and configured my major modes so that all my common tasks are an easy key bind away.
-
-But there remained one huge annoyance: This website was created with a hodgepodge of HTML, python, and markdown.
+But I had one major annoyance: this website was created with a
+hodgepodge of HTML, python, and markdown.
 
 *In this post I describe how I generate my site from Org source files.*
 
 If you aren't familar with [[https://www.gnu.org/software/emacs][emacs]] or [[https://orgmode.org][org]] then here's a quick summary:
-Emacs is a lisp interpreter that comes with functions for editing text. It's a platform that allows you to 
-build your own IDE. Org is an Emacs extension for writing, formatting, and publishing documents.
-
-The benefit to using Org is that it integrates well with Emacs. 
-Links are clickable and open in a new buffer, code blocks have the same syntax highlighting as they would
-in their own major mode buffer, and there are key bindings/functions available for most common tasks.
-
-** Changing markdown into org with elisp
-The first step was to change my markdown files into org. I wrote a few functions that I could run from a markdown buffer that would do some of 
-the tedious conversions for me.
-
-First some helpers:
+Emacs is a lisp interpreter that comes with functions for editing
+text. It's a platform that allows you to build your own IDE. Org is an
+Emacs extension for writing, formatting, and publishing documents.
+* Regex Replace with Elisp
+The first step was changing markdown files into org. I took it as an
+opportunity to practice elisp and regex. Here are a few functions I
+wrote that do search and replace on buffer.
 #+BEGIN_SRC elisp
 ;;; A macro for moving point to start of buffer and saving the match data.
 (defmacro goto-min-save-match-data (body)
@@ -68,9 +69,10 @@ Change some common tags over:
   (replace-regex-current-buffer "!\\[.+(\\(.+\\))" "[[file:../../\\1]]"))
 #+END_SRC
 
-My least favorite feature of markdown is the code syntax. In a markdown file, four spaces before a line 
-means that it will be treated as a code block. This function captures the language tag in markdown code block,
-and wraps it in an Org source block.
+My least favorite feature of markdown is the code syntax. In a
+markdown file, four spaces before a line means that it will be treated
+as a code block. This function captures the language tag in markdown
+code block, and wraps it in an org source block.
 #+BEGIN_SRC elisp
 ;; Replaces a block like this
 ;;
@@ -102,15 +104,14 @@ Finally, deindent the old markdown code blocks by 4 spaces.
 	  (replace-match "")
 	  (next-line))))
 #+END_SRC
-
-** Creating a Site Structure
-Next I decided on a site structure. Most org-mode publishing examples show the directory containing
-the HTML separate from the source files.
+* Site Structure
+Next I decided on a site structure. Most org-mode publishing examples
+show the directory containing the HTML separate from the source files.
 
 E.G. ~~/projects/personal-website => ~/public_html~
 
-I wanted the HTML to be in the same directory as the org source. 
-The trick is a ~src/~ folder that mirrors the parent directory.
+I wanted the HTML to be in the same directory as the org source.  The
+trick is a ~src/~ folder that mirrors the parent directory.
 #+BEGIN_SRC
 .
 ├── index.html
@@ -133,11 +134,10 @@ The trick is a ~src/~ folder that mirrors the parent directory.
     └── posts 
         └── <post_name>.org
 #+END_SRC
-
-~org-publish-project-alist~ is an association list variable that tells org how to publish the site. 
-You can configure it with a list of components that make up the project. 
-I split my website into two components: main, and posts. 
-
+~org-publish-project-alist~ is an association list variable that tells
+org how to publish the site.  You can configure it with a list of
+components that make up the project.  I split my website into two
+components: main, and posts.
 #+BEGIN_SRC elisp
 (setq org-publish-project-alist
       `(("personal-website"
@@ -151,26 +151,20 @@ I split my website into two components: main, and posts.
 	 :base-directory "~/projects/personal-website/src/posts"
 	 :publishing-function org-html-publish-to-html)))
 #+END_SRC
+* Include Files
+Next I configured the publisher to include a header and footer in
+every page. I wanted these to look the same on all the pages. You can
+specify these by setting the ~html-postamble~ and ~html-preamble~
+properties in the project association list.
 
-** Setting a header / footer and including style
+You can also set the content that is inserted in the ~<head>~ tag. I
+used this to include CSS files. I made the header a simple link that
+goes back up a level.
 
-Next I configured the publisher to include a header and footer in every page. I wanted these to look the same
-on all the pages. You can specify these by setting the ~html-postamble~ and ~html-preamble~ properties in the
-project association list. 
-
-You can also set the content that is inserted in the ~<head>~ tag. I used this to include CSS files.
-I split up my CSS into 3 files: 
-
-- includes.css :: Style the header and footer that is included in both components.
-- style.css :: Style the main component.
-- posts/style.css :: Style the posts.
-
-I made the header a simple link that goes back up a level.
-
-For the footer I added links to Emacs/Org, their logos, their respective versions that were used, and 
-the date the file was last exported.
-For the posts component, I also add a noscript tag for comments.
-
+For the footer I added links to Emacs/Org, their logos, their
+respective versions that were used, and the date the file was last
+exported. For the posts component, I also add a noscript tag for
+comments.
 #+BEGIN_SRC elisp
 ;; Style components
 (defconst html-style "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />")
@@ -231,9 +225,8 @@ For the posts component, I also add a noscript tag for comments.
    "<noscript><div id=\"no-script-comment-message\">Enable scripts to see and post comments.</div></noscript>"
    "<script type=\"text/javascript\" src=\"js/comments.js\"></script>"))
 #+END_SRC
-
-I disabled some of the default org publishing behavior such as their included CSS/JavaScript, table of contents,
-and section numbers.
+I disabled some of the default org publishing behavior such as
+included CSS/JavaScript, table of contents, and section numbers.
 
 *Completed org-publish-project-alist*
 #+BEGIN_SRC elisp
@@ -265,13 +258,13 @@ and section numbers.
 	 :html-postamble ,html-posts-postamble
 	 )))
 #+END_SRC
+* Functions for Publishing
+I created a key bind to load =site.el= and publish all of my org
+files.
 
-I added all of this elisp to [[https://github.com/knoebber/personal-website/blob/master/src/site.el][src/site.el]]. Finally I created a key bind to load this file and publish all of 
-my org files. This is convenient when I change site.el and I need to update the output HTML.
-
-*Addition to [[https://github.com/knoebber/.emacs.d][init.el]]*
+*Addition to [[https://dotfilehub.com/knoebber/emacs][init.el]]*
 #+BEGIN_SRC elisp
-(defun publish-site ()
+(defun export-nicolasknoebber ()
   "Build nicolasknoebber.com."
   (interactive)
   (load-file "~/projects/personal-website/src/site.el")
@@ -281,26 +274,45 @@ my org files. This is convenient when I change site.el and I need to update the 
   (define-key org-mode-map (kbd "C-c c") 'publish-site))
 #+END_SRC
 
-When I don't need to republish all the files, I use ~org-publish-current-file~ from within the
-org buffer that I'm editing.
+Finally I added a function to publish and upload the current buffer to
+my site's s3 bucket.
+#+BEGIN_SRC elisp
+(defun publish-nicolasknoebber-file ()
+  "Exports current org file to html and uploads to s3://nicolasknoebber.com."
+  (interactive)
+  (org-publish-current-file)
+  (let* (
+	 (org-file (buffer-file-name (buffer-base-buffer)))
+	 (publishing-dir (org-publish-property :publishing-directory
+                                               (org-publish-get-project-from-filename org-file)))
+         (html-file (replace-regexp-in-string "org$" "html" (buffer-name)))
+	 (html-file-path (concat publishing-dir "/" html-file))
+	 (site-path (replace-regexp-in-string ".+personal-website" "" html-file-path))
+         (aws-s3-cmd
+          (concat "aws s3 cp " html-file-path " s3://nicolasknoebber.com" site-path)))
+    (eshell-command aws-s3-cmd)))
+#+END_SRC
+* Results
+This is a great improvement from my previous system. The main benefits
+are ease of publishing, a better environment for writing, and easy to
+setup on a new machine.
 
-** Results
-
-This is a great improvement from my previous system. The main benefits are ease of publishing, and a better
-environment for writing. 
-
-A frustration I had with markdown was accidentally creating dead links while writing, and not knowing until I exported it. 
-Now creating links is a streamlined process:
+In markdown I would often accidentally create dead links
+and not know until I exported it. Now creating
+links is a streamlined process:
 
 1. Type /C-c C-l/ to call ~org-insert-link~ 
 2. Select /file:/ which opens Helms fuzzy file finder
 3. Find my file and name the link
 4. Click the new link, which opens the contents in a new buffer
 
-Emacs will even display images. Web links are also clickable and open in your default browser.
+Emacs will even display images. Web links are also clickable and open
+in your default browser.
 
-Another frustration I had was syntax in exported code blocks. I was using [[http://pygments.org/][pygments]], which did a nice job usually.
-However, it was a pain to change color schemes, and exported code always looked different than it did in my editor.
+Another frustration I had was syntax in exported code blocks. I was
+using [[http://pygments.org/][pygments]], which did a nice job usually.  However, it was a pain
+to change color schemes, and exported code always looked different
+than it did in my editor.
 
 Now exported code looks the same as it does in Emacs:
 
@@ -324,8 +336,8 @@ func getStorageClosure(home string, dir, name *string) func() (*file.Storage, er
 }
 #+END_SRC
 
-Overall I'm happy with the results and will most likely continue to use Emacs+Org as a static site generator.
-
+Overall I'm happy with the results and will most likely continue to
+use Emacs+Org as a static site generator.
 #+BEGIN_EXPORT html
 <script type="text/javascript">
 const postNum = 10;

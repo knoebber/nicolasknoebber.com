@@ -1,5 +1,5 @@
 #+TITLE: Sourdough Recipes
-Mon 03/30/20
+#+DATE: <2020-03-30 Mon>
 --------------------------------------------------------------------------------
 
 **Bread**
@@ -11,24 +11,25 @@ Mix:
 + 500g bread flour
 + 9g sea salt
 
-Kneed it a bit.
-Add a drip of olive oil.
-Let sit for 8 to 12 hours or until double in size.
+Kneed it a bit.  Add a drip of olive oil.  Let sit for 8 to 12 hours
+or until double in size.
 
-The dough will be sticky and difficult to work with. Work a bit more flour in until
-it starts to take shape. Preheat the oven to 400.
+The dough will be sticky and difficult to work with. Work a bit more
+flour in until it starts to take shape. Preheat the oven to 400.
 
-I use a cookie sheet or a pizza stone to bake the bread. Add a dusting of flour before
-putting the dough on.
+I use a cookie sheet or a pizza stone to bake the bread. Add a dusting
+of flour before putting the dough on.
 
-Bake for 50 minutes at 400 on the top rack of the oven.
-On the bottom rack add a sheet with a handful of ice cubes.
+Bake for 50 minutes at 400 on the top rack of the oven.  On the bottom
+rack add a sheet with a handful of ice cubes.
 
-This recipe is inspired from [[https://www.theclevercarrot.com][Emilie's]] excellent book "Artisan Sourdough Made Simple".
+This recipe is inspired from [[https://www.theclevercarrot.com][Emilie's]] excellent book "Artisan
+Sourdough Made Simple".
 
 **Pizza Dough**
 
-This recipe takes 24 hours and makes enough dough for two medium sized pizzas. 
+This recipe takes 24 hours and makes enough dough for two medium sized
+pizzas.
 
 On the first night mix the following:
 
@@ -42,15 +43,17 @@ On the first night mix the following:
 Kneed till firm. I like to slap it on the counter.
 After kneeding add a dribble of olive oil and wipe it around the dough.
 
-Let it rest for 1-2 hours. Put it in a covered bowl in the fridge overnight.
+Let it rest for 1-2 hours. Put it in a covered bowl in the fridge
+overnight.
 
 In the morning take the dough out and let it rise all day.
 
 Preheat the oven to 500 degrees and dress the pizza.
 
-Cook time depends on many variables. In my experience its usually about 7 minutes, but keep an eye on it.
+Cook time depends on many variables. In my experience its usually
+about 7 minutes, but keep an eye on it.
 
-[[https://www.theperfectloaf.com/sourdough-pizza-dough-and-recipes/][Original]] 
+[[https://www.theperfectloaf.com/sourdough-pizza-dough-and-recipes/][Original]]
 
 #+BEGIN_EXPORT html
 <script type="text/javascript">

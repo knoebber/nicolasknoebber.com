@@ -27,7 +27,7 @@
 
 [[file:posts/blogging-with-emacs-and-org.org][Blogging with Emacs and Org]]
 
-[[./posts/image-generation-go-lambda-s3.org][Generating and Uploading Images to S3 with Golang]]
+[[./posts/image-generation-go-lambda-s3.org][Draw Trees in AWS with Golang]]
 
 [[./posts/adding-comments.org][Adding a Serverless Commenting System to My Blog]]
 

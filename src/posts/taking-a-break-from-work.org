@@ -1,14 +1,18 @@
 #+TITLE: Taking a Break From Work
-Sat 06/10/18
+#+DATE: <2018-06-10 Sun>
 --------------------------------------------------------------------------------
 
-A month ago I finished my contract work doing LAMP stack web development at FabPro1. 
-Since then I've been competing in [[http://ama-d36.org][d36]] cross country dirt bikes races.
-It's my favorite sport, and its been a blast to fully commit myself to it this season. 
+A month ago I finished my contract work doing LAMP stack web
+development at FabPro1.  Since then I've been competing in [[http://ama-d36.org][d36]] cross
+country dirt bikes races.  It's my favorite sport, and its been a
+blast to fully commit myself to it this season.
 
-A race begins by everyone bringing their own machines to the starting line. The lines are divided by engine size, age, and the riders skill. 
-A gun shot is fired for each line, and the pack takes off in a mad dash. It's free for all until you cross the line at the end. A race usually takes between one and two hours.
-During this time there are a slew of possible problems:
+A race begins by everyone bringing their own machines to the starting
+line. The lines are divided by engine size, age, and the riders skill.
+A gun shot is fired for each line, and the pack takes off in a mad
+dash. It's free for all until you cross the line at the end. A race
+usually takes between one and two hours.  During this time there are a
+slew of possible problems:
 
 + Crashing
 + Other rider crashes into you
@@ -17,11 +21,16 @@ During this time there are a slew of possible problems:
 + Can't see anything because goggles are muddy
 + Difficult terrain
 
-During the race I've learned that being smooth and consistent is more important than trying for raw speed. The first lap is for learning
-the course, and the following laps are for optimizing. Finding the lines that take less energy, remembering safe places to pass, and then being able to execute the next time around is key.
+During the race I've learned that being smooth and consistent is more
+important than trying for raw speed. The first lap is for learning the
+course, and the following laps are for optimizing. Finding the lines
+that take less energy, remembering safe places to pass, and then being
+able to execute the next time around is key.
 
-I finished first in class 3 times this season. The first two from the Sawmill Two Day Enduro and then Leoni Meadows.
-Overall I finished first place in points for C 250 4Stk, which I am definitely happy about!
+I finished first in class 3 times this season. The first two from the
+Sawmill Two Day Enduro and then Leoni Meadows.  Overall I finished
+first place in points for C 250 4Stk, which I am definitely happy
+about!
 
 Shredding a corner at Leoni Meadows:
 [[file:../../images/leoni-meadows.jpg]]

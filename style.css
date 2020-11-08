@@ -5,8 +5,8 @@ html {
     font-size: 25px;
 }
 
-.header-links {
-    font-size: 2rem;
+h2 {
+    font-weight: 1;
 }
 
 #content {

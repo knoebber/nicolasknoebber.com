@@ -1,19 +1,20 @@
 #+OPTIONS: ^:nil
 #+TITLE: Adding a Serverless Commenting System with AWS
-Mon 01/14/19
+#+DATE: <2019-01-14 Mon>
 
 --------------------------------------------------------------------------------
 
-My goal for this post is explain how I implemented a serverless commenting system with AWS.
-The first step was to figure out the requirements:
+My goal for this post is explain how I implemented a serverless
+commenting system with AWS.  The first step was to figure out the
+requirements:
 
 + An input for a name
 + A text area for the comment body
 + A button to submit
 + An area to show previously submitted comments, newest first
 + A way to give a post a unique identifier so that it could pull its own comments
-+ An api to get and post
-+ A database to store comments
++ An API to GET and POST comments
++ A database
 
 I started with the easy part first - a form.
 
@@ -29,38 +30,45 @@ I started with the easy part first - a form.
 </div>;
 #+END_SRC
 
-Next I thought about how to give each post a unique identifier. I contemplated a few complex solutions,
-but eventually decided to keep it simple: include a script tag in every post to declare a constant.
-
+Next I had to figure out how to embed an identifier in each post. I
+decided to keep it simple: include a script tag in every post that
+declares a constant:
 #+BEGIN_SRC html
 <script type="text/javascript">
 const postNum = 6;
 </script>
 #+END_SRC
 
-Ideally I would insert this automatically when the post is compiled by sorting the posts by their dates and
-counting up.
+Ideally I would insert this automatically when the post is compiled by
+sorting the posts by their dates and counting up.
 
-With the markup done, I moved on to creating an API for getting and posting to comment database.
+With the markup done, I moved on to creating an API for getting and
+posting to comment database.
 
 *** Creating a Table in DynamoDB
 
-DynamoDB is a NoSQL database that can scale to any level. You can either choose to pay for the amount
-read/writes that you want to allow per second, or you can let it auto scale, up to a claimed 20 million
-requests per second. I went with the former, which is called provisioned capacity.
+DynamoDB is a NoSQL database that can scale to any level. You can
+either choose to pay for the amount read/writes that you want to allow
+per second, or you can let it auto scale, up to a claimed 20 million
+requests per second. I went with the former, which is called
+provisioned capacity.
 
 [[file:../../images/dynamo-scaling.png]]
 
-I set my table is to handle 2 requests per second for now. This can be edited at anytime, which allows you
-to start small and increase it as you see fit.
+I set my table is to handle 2 requests per second for now. This can be
+edited at anytime, which allows you to start small and increase it as
+you see fit.
 
-One of things that I struggled with when setting up my comments table is the "NoSQL" bit. 
-I didn't quite grasp that it means exactly what it says: DynamoDB is /not/ SQL. 
-A SQL table has a set amount of columns and robust language to make fast queries on any column.
+One of things that I struggled with when setting up my comments table
+is the "NoSQL" bit.  I didn't quite grasp that it means exactly what
+it says: DynamoDB is /not/ SQL.  A SQL table has a set amount of
+columns and robust language to make fast queries on any column.
 
-In contrast, a DynamoDB table has a primary key which uniquely identifies any kind of JSON
-object that is stored in the table. The benefit is that it allows for any structure of data to be stored in it. 
-The downside is that it makes efficient SQL like queries for non primary key attributes impossible.
+In contrast, a DynamoDB table has a primary key which uniquely
+identifies any kind of JSON object that is stored in the table. The
+benefit is that it allows for any structure of data to be stored in
+it.  The downside is that it makes efficient SQL like queries for non
+primary key attributes impossible.
 
 If I were doing SQL, I would make a table like this:
 
@@ -78,10 +86,13 @@ FROM comments
 WHERE post_number = 6 ORDER BY time_stamp;
 #+END_SRC
 
-The problem with making this table in DynamoDB is that posts must be pulled by their post number, and then
-ordered by their timestamp. I wouldn't be able to query by the post number because ~id~ is the unique primary key.
+The problem with making this table in DynamoDB is that posts must be
+pulled by their post number, and then ordered by their timestamp. I
+wouldn't be able to query by the post number because ~id~ is the
+unique primary key.
 
-If I wanted to use this schema, I would have to use the following algorithm:
+If I wanted to use this schema, I would have to use the following
+algorithm:
 
 1. Pull every comment in the table
 2. Make a list of all the comments of the post
@@ -90,36 +101,39 @@ If I wanted to use this schema, I would have to use the following algorithm:
 I needed a primary key that would always be unique, which I could also use to get all the comments for a specific
 post. 
 
-I pulled up the DynamoDB docs, and learned about composite primary key's.
-A composite primary key is combination of a ~partition key~ and ~sort key~.
-Multiple items may share the same partition key, but their sort keys must be unique. 
-A list of rows can be pulled by their partition key, and they will come out ordered by their sort key.
+I pulled up the DynamoDB docs, and learned about composite primary
+key's.  A composite primary key is combination of a ~partition key~
+and ~sort key~.  Multiple items may share the same partition key, but
+their sort keys must be unique.  A list of rows can be pulled by their
+partition key, and they will come out ordered by their sort key.
 
-I dropped the ~id~ key. I replaced it with composite key: ~post_number~ being the partition, and ~time_stamp~ 
-being the sort key.
+I dropped the ~id~ key. I replaced it with composite key:
+~post_number~ being the partition, and ~time_stamp~ being the sort
+key.
 
 [[file:../../images/comments-table.png]]
 
-Note that the ~comment_body~ and ~comment_name~ columns are not specified.
-I can actually submit data with /any/ key to this table and it would create a new column for it. The only
-requirements are that ~post_number~ exists and that ~time_stamp~ is unique.
-
+Note that the ~comment_body~ and ~comment_name~ columns are not
+specified.  I can actually submit data with /any/ key to this table
+and it would create a new column for it. The only requirements are
+that ~post_number~ exists and that ~time_stamp~ is unique.
 *** Making API calls to Lambda for DynamoDB operations
 
-With the ~comment~ table setup, the next task was to create some back end functions to perform read/write 
-operations. I chose to use Node.js with Lamdba / API Gateway to accomplish this.
+With the ~comment~ table setup, the next task was to create some back
+end functions to perform read/write operations. I chose to use Node.js
+with Lamdba / API Gateway to accomplish this.
 
 [[file:../../images/lambda-triggers.png]]
 
-Writing the Node.js to communicate with DynamoDB was straightforward, and before long I had two routes that I
-could call from cURL that saved and retrieved comments:
+Writing the Node.js to communicate with DynamoDB was straightforward,
+and before long I had two routes that I could call from cURL that
+saved and retrieved comments:
 
 [[https://github.com/knoebber/personal-website/blob/master/lambda/get_comments/index.js][Get comments handler]]
 
 [[https://github.com/knoebber/personal-website/blob/master/lambda/post_comment/index.js][Post comments handler]]
 
 Next I added some JavaScript to handle the submit button:
-
 #+BEGIN_SRC javascript
  function saveComment(){
   fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment', {
@@ -156,37 +170,47 @@ Next I added some JavaScript to handle the submit button:
 }
 #+END_SRC
 
-I hit the submit button and a yellow message popped up in my console: ~"Cross-Origin Request Blocked"~. 
-I discovered that my browser was protecting me from fetching resources from a different server than 
-the page was hosted on. 
+I hit the submit button and a yellow message popped up in my console:
+~"Cross-Origin Request Blocked"~.  I discovered that my browser was
+protecting me from fetching resources from a different server than the
+page was hosted on.
 
-On a classic web server this isn't a problem because the backend files are in the same domain as the html.
-At this point I hit the biggest roadblock that I faced in the project - figuring out how to get around this.
+On a classic web server this isn't a problem because the backend files
+are in the same domain as the html.  At this point I hit the biggest
+roadblock that I faced in the project - figuring out how to get around
+this.
 
-I learned that cross origin requests can be allowed through CORS, or Cross Origin Resource
-Sharing. This can be enabled on the server that the resources are being requested from. At first I thought
-all I had to do was add a header to the lambda response: ~"Access-Control-Allow-Origin" : "*"~
+I learned that cross origin requests can be allowed through CORS, or
+Cross Origin Resource Sharing. This can be enabled on the server that
+the resources are being requested from. At first I thought all I had
+to do was add a header to the lambda response:
+~"Access-Control-Allow-Origin" : "*"~
 
-This means "allow any website to request this resource". I could change the ~*~ to ~nicolasknoebber.com~,
-but I test this often from localhost, so I chose to leave it as the wild card. 
+This means "allow any website to request this resource". I could
+change the ~*~ to ~nicolasknoebber.com~, but I test this often from
+localhost, so I chose to leave it as the wild card.
 
-I went back to the AWS docs, and eventually found [[https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html][this article.]]
-In addition to the ~Access-Control-Allow-Origin~ header, I would need to create another method
-in API Gateway, a so called "Preflight" check. Luckily, API Gateway automates this process.
+I went back to the AWS docs, and eventually found [[https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html][this article.]]  In
+addition to the ~Access-Control-Allow-Origin~ header, I would need to
+create another method in API Gateway, a so called "Preflight"
+check. Luckily, API Gateway automates this process.
 
 [[file:../../images/api-gateway-cors.png]]
 
-So when a script in one of my blog posts makes an API call to AWS, it will first send an OPTIONS request,
-which API Gateway will respond back and say OK, this CORS request can go through. After receiving this reply,
-the actual POST request will be sent out that saves the comment.
-
+So when a script in one of my blog posts makes an API call to AWS, it
+will first send an OPTIONS request, which API Gateway will respond
+back and say OK, this CORS request can go through. After receiving
+this reply, the actual POST request will be sent out that saves the
+comment.
 *** Finishing up
 
-The rest of the project came together quickly once I was able to contact API gateway from local JavaScript.
-I added another fetch to get all the comments with the ~postNum~ constant as its parameter. 
+The rest of the project came together quickly once I was able to
+contact API gateway from local JavaScript.  I added another fetch to
+get all the comments with the ~postNum~ constant as its parameter.
 
-I added a few basic anti spam measures. While I could of used Captcha, I would rather say no to having my
-readers train Googles AI. 
+I added a few basic anti spam measures. While I could of used
+recaptcha, I would rather say no to having my readers train Googles
+AI.
 
 + Prevent the same comment from being submitted twice by using a JavaScript ~Set~
 + Disable the submit button while a create request is still asynchronously processing
@@ -194,8 +218,10 @@ readers train Googles AI.
 
 Here's the final script for client side comment handling: [[../../posts/js/comments.js][comments.js]].
 
-More importantly I have auto scaling set to off in my AWS services, so my bill won't get large if a spammer does 
-target me. For my entire AWS stack (S3 + DynamoDB + Lambda + API Gateway + Route53) I still pay only $1 a month.
+More importantly I have auto scaling set to off in my AWS services, so
+my bill won't get large if a spammer does target me. For my entire AWS
+stack (S3 + DynamoDB + Lambda + API Gateway + Route53) I still pay
+only $1 a month.
 #+BEGIN_EXPORT html
 <script type="text/javascript">
 const postNum = 6;

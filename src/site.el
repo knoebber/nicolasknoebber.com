@@ -88,4 +88,14 @@
 	 )))
 
 
+(add-to-list 'org-export-filter-timestamp-functions
+             #'filter-timestamps)
+(defun filter-timestamps(data backend _channel)
+  "Remove <> around timestamps.  DATA is transcoded from the export BACKEND."
+  (replace-regexp-in-string "&[lg]t;" "" data))
+
+(setq-default org-display-custom-times t)
+(setq org-time-stamp-custom-formats
+      '("<%m/%d/%Y>" . "<%m/%d/%Y"))
+
 ;;; site.el ends here

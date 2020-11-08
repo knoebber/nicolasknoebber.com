@@ -1,66 +1,100 @@
 #+TITLE: Running Season 2018-2019
-Sat 11/16/19
+#+DATE: <2019-11-16 Sat>
 --------------------------------------------------------------------------------
 
 [[file:../../images/detroit-finish.jpg]]
 
-I read the book /Born to Run/ last year while I was [[file:sailing-to-ensenada.org][hundreds of miles offshore sailing]]. It chronicles the journey
-of ultra long distance runners, and their motivation for pushing themselves to the brink of human limits. 
-The most surprising thing that I learned is that humans are the best distance runners on earth.
-Some theories suggest that the marathon distance was a regular undertaking for members of early nomadic societies.
-They posit that we would hunt animals by running them for 20 or 30 miles until they fell over from exhaustion.
+I read the book /Born to Run/ last year while I was [[file:sailing-to-ensenada.org][hundreds of miles
+offshore sailing]]. It chronicles the journey of ultra long distance
+runners, and their motivation for pushing themselves to the brink of
+human limits.  The most surprising thing that I learned is that humans
+are the best distance runners on earth.  Some theories suggest that
+the marathon distance was a regular undertaking for members of early
+nomadic societies.  They posit that we would hunt animals by running
+them for 20 or 30 miles until they fell over from exhaustion.
 
-The book points out that we have only been using special running shoes for the last half century. This begs the following questions: 
+The book points out that we have only been using special running shoes
+for the last half century. This begs the following questions:
 
-+ Why would we need Nike's, when our body is already so highly adapted to run?
-+ Why are so many modern runners injuring themselves, even though our biomechanics are optimized for this movement?
++ Why would we need Nike's, when our body is already so highly adapted
+  to run?
++ Why are so many modern runners injuring themselves, even though our
+  biomechanics are optimized for this movement?
 
-In high school I competed in track and cross country. I did well in my league.  I posted a 4:58 mile time on the track, and usually was a top finisher in 5K races.
-I wore running shoes or track spikes and never had an issue with injuries.
-I was a heel-striker - I had a long stride and fell on my heel first. Many argue that this can cause knee problems. All the energy
-of impact goes directly into your knee, instead of being dampened by our natural spring system - the foot arches and calf muscles.
+In high school I competed in track and cross country. I did well in my
+league.  I posted a 4:58 mile time on the track, and usually was a top
+finisher in 5K races.  I wore running shoes or track spikes and never
+had an issue with injuries.  I was a heel-striker - I had a long
+stride and fell on my heel first. Many argue that this can cause knee
+problems. All the energy of impact goes directly into your knee,
+instead of being dampened by our natural spring system - the foot
+arches and calf muscles.
 
-Last year I decided to focus on running again. I set myself a goal to run a marathon in under four hours. I would have to run 26.2 miles at an
-average mile pace of 9:09 or better. I wanted to do it in minimal footwear, to see if the ideas in /Born to Run/ had any merit.
+Last year I decided to focus on running again. I set myself a goal to
+run a marathon in under four hours. I would have to run 26.2 miles at
+an average mile pace of 9:09 or better. I wanted to do it in minimal
+footwear, to see if the ideas in /Born to Run/ had any merit.
 
-I started training without any shoes at all. It was difficult at first. I was tearing my feet up because my stride was inefficient, and I could only run a mile or two.
-Pain is a great indicator of sub optimal form, so I adapted quickly. The main problem was my stride: heel striking had to go.
-I became lighter on my feet, and started falling more towards the front. I increased my cadence, and reduced friction on the ground as much as possible.
-I worked up to a 12 mile run on a mountainous Northern Californian road. I had to stay on the white line to avoid singing my feet on the hot summer asphalt.
-I was going too slowly though. It was time to find some footwear.
+I started training without any shoes at all. It was difficult at
+first. I was tearing my feet up because my stride was inefficient, and
+I could only run a mile or two.  Pain is a great indicator of sub
+optimal form, so I adapted quickly. The main problem was my stride:
+heel striking had to go.  I became lighter on my feet, and started
+falling more towards the front. I increased my cadence, and reduced
+friction on the ground as much as possible.  I worked up to a 12 mile
+run on a mountainous Northern Californian road. I had to stay on the
+white line to avoid singing my feet on the hot summer asphalt.  I was
+going too slowly though. It was time to find some footwear.
 
-/Born to Run/ follows the indigenous [[https://en.wikipedia.org/wiki/Rar%C3%A1muri][Tarahumara]] tribe, who are known for their long distance running ability.
-They run in sandals called [[https://www.earthrunners.com/pages/tarahumara-huarache-sandals-ultimate-minimalist-footwear][huaraches]] that they craft from recycled tire treads. I decided to try my hand at making a pair. 
-The design is simple, and I thought it would be a fun project. I discovered that tire tread is difficult to work with. 
-Instead I used the rubber from a car floor mat. Here's the result:
+/Born to Run/ follows the indigenous [[https://en.wikipedia.org/wiki/Rar%C3%A1muri][Tarahumara]] tribe, who are known
+for their long distance running ability.  They run in sandals called
+[[https://www.earthrunners.com/pages/tarahumara-huarache-sandals-ultimate-minimalist-footwear][huaraches]] that they craft from recycled tire treads. I decided to try
+my hand at making a pair.  The design is simple, and I thought it
+would be a fun project. I discovered that tire tread is difficult to
+work with.  Instead I used the rubber from a car floor mat. Here's the
+result:
 
 [[../../images/home-made-sandals.jpg]]
 
-They worked well at first and I was able to put in more miles. I entered my first half marathon with them.
-Unfortunately one the laces fell out of its hole 6 miles into the race. I didn't mind though - I took them off, and finished the last 6 miles holding
-my broken sandals in my hands.
+They worked well at first and I was able to put in more miles. I
+entered my first half marathon with them.  Unfortunately one the laces
+fell out of its hole 6 miles into the race. I didn't mind though - I
+took them off, and finished the last 6 miles holding my broken sandals
+in my hands.
 
 [[file:../../images/noyo-half-finish.jpg]]
 
-I finished in 1:49:50, which is about an 8:23 mile pace. I fixed my sandals up and ran in them a bit more, but ultimately decided that I didn't want to maintain my shoes.
-I bought a pair of [[https://xeroshoes.com/shop/genesis/genesis-men/][xero shoes]] instead. What a difference a real shoe makes! I felt like I could fly.
+I finished in 1:49:50, which is about an 8:23 mile pace. I fixed my
+sandals up and ran in them a bit more, but ultimately decided that I
+didn't want to maintain my shoes.  I bought a pair of [[https://xeroshoes.com/shop/genesis/genesis-men/][xero shoes]]
+instead. What a difference a real shoe makes! I felt like I could fly.
 
 [[file:../../images/xero-shoes.jpg]]
 
-This took place around October 2018. I signed up for the Detroit marathon, which would happen one year from then.
+This took place around October 2018. I signed up for the Detroit
+marathon, which would happen one year from then.
 
-Once the spring came around, I started to get more serious about training. I was entering races in Des Moines almost every weekend.
-I had a great time making friends with the local runners, and I loved the friendly competition. I ran mostly in my sandals, but I still made sure
-to train barefoot once or twice a week. I think it's a great way to keep my form in check. I tried entering a few races barefoot because I wanted to see
-what would happen to my times. I surprised my self by setting personal bests on both my barefoot races: a 40:46 10k, and a 18:50 3 mile.
-I got pretty bad toe blisters during those races however. I was not properly trained for that pace barefoot.
+Once the spring came around, I started to get more serious about
+training. I was entering races in Des Moines almost every weekend.  I
+had a great time making friends with the local runners, and I loved
+the friendly competition. I ran mostly in my sandals, but I still made
+sure to train barefoot once or twice a week. I think it's a great way
+to keep my form in check. I tried entering a few races barefoot
+because I wanted to see what would happen to my times. I surprised my
+self by setting personal bests on both my barefoot races: a 40:46 10k,
+and a 18:50 3 mile.  I got pretty bad toe blisters during those races
+however. I was not properly trained for that pace barefoot.
 
 [[file:../../images/race-crowd.jpg]]
 
-After I finished riding [[file:RAGBRAI.org][RAGBRAI]] in July, I turned my focus towards the marathon. As much as I wanted to do the full marathon barefoot, I settled on using my sandals. I didn't want to risk anything.
-I upped my weekly mileage to around 35. The race snuck up on me quickly. I was stressing that I wasn't prepared enough.
-I kept telling myself to just focus on finishing the race, but I couldn't help thinking about getting a good time.
-I figured my best possible scenario was around a 3:30:00.
+After I finished riding [[file:RAGBRAI.org][RAGBRAI]] in July, I turned my focus towards the
+marathon. As much as I wanted to do the full marathon barefoot, I
+settled on using my sandals. I didn't want to risk anything.  I upped
+my weekly mileage to around 35. The race snuck up on me quickly. I was
+stressing that I wasn't prepared enough.  I kept telling myself to
+just focus on finishing the race, but I couldn't help thinking about
+getting a good time.  I figured my best possible scenario was around a
+3:30:00.
 
 **Training log 2019**
 | Month     |                   Miles |
@@ -76,27 +110,37 @@ I figured my best possible scenario was around a 3:30:00.
 | September |                     124 |
 | October   |      (race month) 66.43 |
 
-The morning of the race came. It was a chilly morning and the forecast called for 50 degree weather that day. It was ideal. I ate a package of energy goop for breakfast, and took off at an eight minute pace.
-I was having a great time cruising along until about mile 22. Every muscle in my legs started screaming at me that it was time to stop. I pushed on and my pace started to suffer. It 
-was awful. I just wanted to be done. The last mile was the hardest. I was so close!
+The morning of the race came. It was a chilly morning and the forecast
+called for 50 degree weather that day. It was ideal. I ate a package
+of energy goop for breakfast, and took off at an eight minute pace.  I
+was having a great time cruising along until about mile 22. Every
+muscle in my legs started screaming at me that it was time to stop. I
+pushed on and my pace started to suffer. It was awful. I just wanted
+to be done. The last mile was the hardest. I was so close!
 
 [[file:../../images/marathon-pain.jpg]]
 
-Crossing the finish line was extremely emotional. The pain coupled with the satisfaction of a year of training paying off washed over me in a wave.
-All I could do was cry a little bit before sitting down on the sidewalk. I found that I couldn't get back up. My legs were finished.
-I was happy with the results:
+Crossing the finish line was extremely emotional. The pain coupled
+with the satisfaction of a year of training paying off washed over me
+in a wave.  All I could do was cry a little bit before sitting down on
+the sidewalk. I found that I couldn't get back up. My legs were
+finished.  I was happy with the results:
 
 [[file:../../images/detroit-marathon-cert.png]]
 
-I took two weeks off after that before entering my last race of the season - the Hill Billy Hike half marathon.
-It was thirty degrees that morning. The trail was icy and I kept slipping in my sandals. I clocked in at 1:33:06 - a 7:06 pace.
+I took two weeks off after that before entering my last race of the
+season - the Hill Billy Hike half marathon.  It was thirty degrees
+that morning. The trail was icy and I kept slipping in my sandals. I
+clocked in at 1:33:06 - a 7:06 pace.
 [[file:../../images/hill-billy-hike.jpg]]
 
-Overall I'm happy with the improvement I made in a year.
-Running minimally was a good tool to improve my form, but other than that I think footwear is a small factor in my performance. 
-Miles and quality of training seems to make a much bigger impact.
-I believe that I would have achieved similar results regardless of what shoes I was wearing. 
-Next season I may buy some fancy shoes and see what it does to my times as an experiment.
+Overall I'm happy with the improvement I made in a year.  Running
+minimally was a good tool to improve my form, but other than that I
+think footwear is a small factor in my performance.  Miles and quality
+of training seems to make a much bigger impact.  I believe that I
+would have achieved similar results regardless of what shoes I was
+wearing.  Next season I may buy some fancy shoes and see what it does
+to my times as an experiment.
 
 #+BEGIN_EXPORT html
 <script type="text/javascript">

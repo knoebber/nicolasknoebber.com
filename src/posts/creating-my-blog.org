@@ -1,19 +1,23 @@
 #+TITLE: Creating My Own Blogging Platform
-Thu 07/19/18
+#+DATE: <2018-07-19 Thu>
 --------------------------------------------------------------------------------
 
-*edit:* I have since replaced this python/markdown system: [[./blogging-with-emacs-and-org.org][Blogging with Emacs and Org]]
+*edit:* I have since replaced this python/markdown system: [[./blogging-with-emacs-and-org.org][Blogging
+with Emacs and Org]]
 
 
-Today I've started working on creating a new blogging platform for my website.
-Previously I had my blog setup with Wordpress, but I found that I wasn't using it much,
-and that it provided much more than I needed.
+Today I've started working on creating a new blogging platform for my
+website.  Previously I had my blog setup with Wordpress, but I found
+that I wasn't using it much, and that it provided much more than I
+needed.
 
-As a minimalist, I like the idea of a barebones style platform that I can create all the features
-for. It should be easy to install and maintain, which means using as little packages as possible.
-Currently the features that I am aiming for are the following:
+As a minimalist, I like the idea of a barebones style platform that I
+can create all the features for. It should be easy to install and
+maintain, which means using as little packages as possible.  Currently
+the features that I am aiming for are the following:
 
-+ index page for the blog where all the posts are listed in reverse chronological order
++ index page for the blog where all the posts are listed in reverse
+  chronological order
 + a way for me to easily publish a markdown file
 + a serverless backend using the AWS ecosystem
 + a commenting system
@@ -25,30 +29,34 @@ Publishing a markdown file has two steps:
 + create a new html file from a markdown file
 + update contents of blog.html to include a link to the new page.
 
-Both of these are straightforward. First I need a way convert markdown to html. Python should be able to handle this:
- pip install markdown
+Both of these are straightforward. First I need a way convert markdown
+ to html. Python should be able to handle this: pip install markdown
 
 Perfect!
 
-Then I will need to open the markdown file, read it into a string, pass it into markdown(),
-and finally write it into a .html file. The only information the program will need for me
-is the post number, which can come from a command line argument.
+Then I will need to open the markdown file, read it into a string,
+pass it into markdown(), and finally write it into a .html file. The
+only information the program will need for me is the post number,
+which can come from a command line argument.
 
-After this the script will have to insert a new table row (~<tr>~) element into ~blog.html~
+After this the script will have to insert a new table row (~<tr>~)
+element into ~blog.html~
 #+BEGIN_SRC html
 <tr><td><a href="posts/4.html">Creating My Own Blogging Platform </a></td><td>Thu 07/19/18</td></tr>
 #+END_SRC
-This needs three things: the link, the date of the post, and the title.
-The link will always be 'posts/<post-number>.html', so that's easy. The title can be found by looking
-at the first line of the .md file, and the date will be on the second line.
+This needs three things: the link, the date of the post, and the
+title.  The link will always be 'posts/<post-number>.html', so that's
+easy. The title can be found by looking at the first line of the .md
+file, and the date will be on the second line.
 
-The outputted html needs to include a few more things. First a `<link>` tag so that all the posts
-can share the same style sheet:
+The outputted html needs to include a few more things. First a
+`<link>` tag so that all the posts can share the same style sheet:
 #+BEGIN_SRC html
 html = '<LINK REL=StyleSheet HREF="style.css" TYPE="text/css">\n' + html
 #+END_SRC
-And finally a fixed header so that readers can navigate back to the index page. For this I'll create
-a partial file and have the script read it and paste it into the output.
+And finally a fixed header so that readers can navigate back to the
+index page. For this I'll create a partial file and have the script
+read it and paste it into the output.
 
 *header.html*
 #+BEGIN_SRC html
@@ -116,9 +124,11 @@ def add_entry(post_num) :
   post_num = argv[1]
   add_entry(post_num)
 #+END_SRC
-Next up is adding some CSS.  I'm all for minimalism, but plain markdown is pretty bland.
-Padding, a bigger font size, and a light background will made it easier on the eyes.  The post
-title should be in the middle and images should be kept from taking the entire page up.
+Next up is adding some CSS.  I'm all for minimalism, but plain
+markdown is pretty bland.  Padding, a bigger font size, and a light
+background will made it easier on the eyes.  The post title should be
+in the middle and images should be kept from taking the entire page
+up.
 
 #+BEGIN_SRC css
 html {
@@ -146,8 +156,8 @@ html {
   font-size: 18px;
 }
 #+END_SRC
-For the code snippets I'll make a thin outline and give them a lighter background so
-that it stands out.
+For the code snippets I'll make a thin outline and give them a lighter
+background so that it stands out.
 
 #+BEGIN_SRC css
 pre {
@@ -158,8 +168,8 @@ pre {
 
 
 #+END_SRC
-The header should be fixed so users don't need to scroll all the way up to go back. A darker
-background will work well.
+The header should be fixed so users don't need to scroll all the way
+up to go back. A darker background will work well.
 
 #+BEGIN_SRC css
 .header {
@@ -173,7 +183,8 @@ background will work well.
   font-size:25px;
 }
 #+END_SRC
-Finally the button itself needs colors, and should highlight on mouse over.
+Finally the button itself needs colors, and should highlight on mouse
+over.
 
 #+BEGIN_SRC css
 .header form {
@@ -206,8 +217,9 @@ document.getElementById('before-after').addEventListener('click',function() {
 </script>
 #+END_EXPORT
 
-A great part of markdown is that you can add any html tag whenever you need it. So my blog will
-be able to support whatever interactive elements I feel like making. Pretty cool!
+A great part of markdown is that you can add any html tag whenever you
+need it. So my blog will be able to support whatever interactive
+elements I feel like making. Pretty cool!
 
 #+BEGIN_SRC html
 <button id="before-after"> Before/After </button>
@@ -218,7 +230,8 @@ document.getElementById('before-after').addEventListener('click',function() {
 });
 </script>
 #+END_SRC
-The style looks okay for now, but I will most likely keep tinkering with it.
+The style looks okay for now, but I will most likely keep tinkering
+with it.
 
 **EDIT**: I have made significant changes since then.
 [[../../posts/old/old_post.html][Here's the result of the above style]]

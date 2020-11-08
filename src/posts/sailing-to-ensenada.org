@@ -1,62 +1,76 @@
 #+TITLE: Sailing to Ensenada
-Mon 06/25/18
+#+DATE: <2018-06-25 Mon>
 
 --------------------------------------------------------------------------------
 
 [[file:../../images/michael-and-emma.jpg]]
 
-I've had an itch to travel lately. So when a Canadian sailboat was blown into my home harbor, 
-and their crew jumped ship because it was "too rough", I knew what I had to do. 
+I've had an itch to travel lately. So when a Canadian sailboat was
+blown into my home harbor, and their crew jumped ship because it was
+"too rough", I knew what I had to do.
 
-The captain and his wife needed someone to help them sail south. I told them I would be willing join them. 
-I knew nothing about sailing, but I was eager to learn and ready for adventure. 
-I would be joining Michael and Rayana aboard the SV Emma, a 42 foot fiberglass sloop.
+The captain and his wife needed someone to help them sail south. I
+told them I would be willing join them.  I knew nothing about sailing,
+but I was eager to learn and ready for adventure.  I would be joining
+Michael and Rayana aboard the SV Emma, a 42 foot fiberglass sloop.
 
-The first leg of the trip was from Noyo Harbor to Ensenada. The first few nights we were pounded with high seas.
-The boat rolled and water sloshed in over the decks. I spent 12 hours a day watching the decks. I wore a waterproof
-jumper with a harness that I kept clipped into the boat at all times. It was cold, wet, and sometimes terrifying.
+The first leg of the trip was from Noyo Harbor to Ensenada. The first
+few nights we were pounded with high seas.  The boat rolled and water
+sloshed in over the decks. I spent 12 hours a day watching the
+decks. I wore a waterproof jumper with a harness that I kept clipped
+into the boat at all times. It was cold, wet, and sometimes
+terrifying.
 
-I practiced tying knots, studied nautical slang, and read books in my downtime.
+I practiced tying knots, studied nautical slang, and read books in my
+downtime.
 
 ---
 *From Journal Entries*
 ---
 
-My trip has been going well thus far. I have been in Ensenada for the last 10 days,
-which has been much nicer than I thought it would be. The people are so kind , and the food is great!
-I have been staying on the boat with the captain and his wife in a marina on the main strip of town.
+My trip has been going well thus far. I have been in Ensenada for the
+last 10 days, which has been much nicer than I thought it would
+be. The people are so kind , and the food is great!  I have been
+staying on the boat with the captain and his wife in a marina on the
+main strip of town.
 
-It is quite a touristy area, but I have been surprised to find that there are much more
-Mexican tourists than Americans. The tourist area of the town is well marked - all the sidewalks are
-kept clean, there are security guards, water fountains with frolicking kids, live music,
-food stands, a larger than life Mexican flag, boat rides, a train that runs up and down, and
-stunning views of the port.  
+It is quite a touristy area, but I have been surprised to find that
+there are much more Mexican tourists than Americans. The tourist area
+of the town is well marked - all the sidewalks are kept clean, there
+are security guards, water fountains with frolicking kids, live music,
+food stands, a larger than life Mexican flag, boat rides, a train that
+runs up and down, and stunning views of the port.
 
 The landscape changes when a Carnival cruise ships docks for the day.
-Then town crawls with white people for about 6 hours, until the ship honks its horn
-before dark and they all are gone in an eye blink - whereupon it returns to the local scene.
-It makes me feel almost like a local compared to the rest of the US visitors.
+Then town crawls with white people for about 6 hours, until the ship
+honks its horn before dark and they all are gone in an eye blink -
+whereupon it returns to the local scene.  It makes me feel almost like
+a local compared to the rest of the US visitors.
 
-I have been running for an hour every morning, which has been good for me.
-I even joined a 6k race the other day! It was amazing how many people entered.
-I didn't come in first, but I definitely should of won the award for
-'tallest racer' . There must have been almost a thousand people there.
-It was free to enter and I got a free shirt. Pretty good deal.
+I have been running for an hour every morning, which has been good for
+me.  I even joined a 6k race the other day! It was amazing how many
+people entered.  I didn't come in first, but I definitely should of
+won the award for 'tallest racer' . There must have been almost a
+thousand people there.  It was free to enter and I got a free
+shirt. Pretty good deal.
 
 [[file:../../images/finishing.jpg]]
 
-I have been thinking a lot about running lately (sparked by an excellent book that I read,
-'Born to Run') and I want to get into longer distances. First I need to relearn how to run in a
-more efficient way. So naturally , I tried to go for an hour barefoot today
-(half was on the sidewalk / street, half on the beach) . Now I'm limping because of blisters on
-my toes. The idea is that if your feet are hurting while running barefoot, you are striking
-the ground too hard and in the the wrong way. Judging by how my feet feel now, I have a lot
-of work relearning to do.
+I have been thinking a lot about running lately (sparked by an
+excellent book that I read, 'Born to Run') and I want to get into
+longer distances. First I need to relearn how to run in a more
+efficient way. So naturally , I tried to go for an hour barefoot today
+(half was on the sidewalk / street, half on the beach) . Now I'm
+limping because of blisters on my toes. The idea is that if your feet
+are hurting while running barefoot, you are striking the ground too
+hard and in the the wrong way. Judging by how my feet feel now, I have
+a lot of work relearning to do.
 
 
-Tomorrow we set off for Cabo San Lucas.  We might stop at a few anchorages a long the way to
-snorkel and wind surf, but we will probably try to get down as fast as we can.
-Hopefully the winds will be good!
+Tomorrow we set off for Cabo San Lucas.  We might stop at a few
+anchorages a long the way to snorkel and wind surf, but we will
+probably try to get down as fast as we can.  Hopefully the winds will
+be good!
  #+BEGIN_EXPORT html
 <script type="text/javascript">
 const postNum = 2;
