@@ -1,0 +1,65 @@
+#+title: I Wrote a Version Control System in Golang
+#+date: <2020-12-26 Sat>
+#+description: Creating dotfile and dotfilehub, a version control system for single files
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 15;
+</script>
+ #+END_EXPORT
+* Introduction
+
+I've tried a few different methods for managing [[https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory][dotfiles]] over the
+years. I was frustrated that they either required git and/or system
+links. I saw an opportunity to create a version control and file sharing
+system for single files with an emphasis on being user
+friendly.
+
+Initially I spent quite a bit of time learning how git worked. In
+summary: it models a directory of files as a tree of commits. A
+commit stores the changes between versions. This works well for a
+directory of related files where changes across multiple files should
+be bundled into the same commit.
+
+For single unrelated files this isn't needed.
+If I only cared about a single file's history then I could
+make a more simple system that avoided common pitfalls.
+
+In summary I wrote a CLI tool and a web front end for sharing files
+between machines. 
+
+**Introducing:** [[https://github.com/knoebber/dotfile][dotfile]] and https://dotfilehub.com
+* Requirements
+Here are the features that I wanted:
+
++ Save and restore past versions of files
++ Push and pull files via remote server
++ No merge conflicts
++ Easily install files on a fresh or foreign system without
+  dependencies
+
+* CLI Design
+The first step was designing a data structure for the
+tracked files. I wanted to store the following:
+
++ The file's path
++ The current revision
++ A list of commits
++ An alias for the file
+
+I decided to create aliases for files so that the user wouldn't have
+to memorize long paths for all the files that they wanted to track. So
+instead of doing ~git commit -am ~/.config/nvim/init.vim~, a user
+could instead do ~dotfile commit vim~. This also allows for quick
+access: ~dotfile edit vim~ or ~dotfile show vim~.
+
+See the [[https://dotfilehub.com/docs/cli.org][cli documentation]] for the complete functionality.
+
+I found golang to be a great choice for interacting with the file
+system. The standard library packages such as ~encoding/json~,
+~path/filepath~, ~io/ioutil~, ~os~, and ~bytes~ made most tasks
+straightforward to implement. Many times I found myself writing
+functions only to find that they already existed in one
+of these packages. For example ~os.RemoveAll~ or ~filepath.Join~.
+
+See [[https://github.com/knoebber/dotfile/tree/master/local][package local]] for code examples.
+* Web Design
