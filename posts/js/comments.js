@@ -1,6 +1,6 @@
 const savedComments = new Set();
 
-if (postNum) fetchComments()
+if (typeof postNum !== 'undefined') fetchComments()
 
 function fetchComments() {
   fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/get_comments', {
