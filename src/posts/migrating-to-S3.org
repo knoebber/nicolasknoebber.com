@@ -1,7 +1,10 @@
-#+OPTIONS: ^:nil
-#+TITLE: Moving My Website to Amazon S3
-#+DATE: <2018-07-24 Tue>
---------------------------------------------------------------------------------
+#+title: Moving My Website to Amazon S3
+#+date: <2018-07-24 Tue>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 5;
+</script>
+ #+END_EXPORT
 
 For the last year I've had this website hosted on an Amazon EC2
 instance, which has cost about $10 a month.  That's not too expensive,
@@ -135,8 +138,3 @@ makes this easy though with their "Use custom name servers" option.
 And that's it! Or so I thought. Turns out DNS settings take a while to
 come into affect. I had to wait about 10 hours before I could hit my
 website from ~nicolasknoebber.com~.
-#+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 5;
-</script>
- #+END_EXPORT

@@ -1,8 +1,10 @@
-#+TITLE: RAGBRAI
-#+DATE: <2019-08-03 Sat>
---------------------------------------------------------------------------------
-
-(org-publish-find-date "RAGBRAI.org" "personal-website")
+#+title: RAGBRAI
+#+date: <2019-08-03 Sat>
+ #+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 9;
+</script>
+ #+END_EXPORT
 
 [[file:../../images/ragbrai-crowd.jpg]]
 
@@ -138,8 +140,3 @@ for about 190 miles till the end in Keokuk on Saturday.
 
 [[file:../../images/ragbrai-finish.jpg]]
 
- #+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 9;
-</script>
- #+END_EXPORT

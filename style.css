@@ -1,29 +1,166 @@
-html {
-    background: url(images/tree-d-4-b-5-l-200-a-25.png) no-repeat center center fixed;
-    background-size: cover;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 25px;
+:root{
+    --content-width: 750px;
 }
 
-h2 {
-    font-weight: 1;
+html {
+    font-family: Georgia, "Times New Roman", serif;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    margin: 20px auto;
+    border-radius:2px;
+}
+
+body {
+    position: relative;
+    max-width: var(--content-width);
+}
+
+h1 {
+    text-align: center;
+    border-bottom: solid 2px black;
+}
+
+
+pre, code {
+    font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
+    font-size: .7rem;
+}
+
+pre {
+    padding: 10px;
+    background: #292b2e;
+    border-radius:5px;
+    overflow: auto;
+    color: white;
+}
+
+code {
+    padding:.2rem;
+    border: 1px solid #BCBEC0;
+    background: #F1F3F5;
+    border-radius:5px;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+#preamble > a {
+    margin-left: 1rem;
 }
 
 #content {
+    /* Force a scroll bar on the index page so that background stays same size between pages */
+    /* TODO add more content so scroll bar makes sense... */
+    min-height: 79vh;
     margin: 50px;
+    line-height: 1.59;
 }
 
-.posts {
+#postamble {
+    margin-bottom: .2rem;
+}
+
+#postamble img {
+    display: unset;
+    width: unset;
+    height: unset;
+    max-width: unset;
+    margin: unset;
+    border-radius: unset;
+}
+
+
+#emacs-logo {
+    max-height: 30px;
+}
+
+#org-mode-logo {
+    max-height: 45px;
+}
+
+#comment-section form {
+    margin-bottom: 1rem;
+}
+
+#comment-section input, #comment-section textarea {
+    display: block;
+    padding:.3rem;
+    margin-bottom: .3rem;
+}
+
+#comment-section textarea {
+    min-width:40%;
+}
+
+#comment-section button {
+    padding:.3rem;
+}
+
+.sitemap > ul > li {
     display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
 }
 
-.life {
-    margin-right: 1rem;
+.sitemap > ul > li > code {
+    background: unset;
+    border: unset;
+    font-size: .8rem;
 }
 
-@media (max-width:1010px) {
-    .posts {
-        flex-direction: column;
+.comment {
+    animation: slide-in 1.3s ease;
+    margin-top: 1rem;
+    border:2px solid darkslateblue;
+    box-shadow: 3px 5px #888888;
+    padding:.5rem 1rem .5rem 1rem;
+    border-radius:5px;
+}
+
+.comment-body {
+    margin-top:1rem;
+}
+
+.date{
+    font-style:italic;
+    float:right;
+}
+
+.postamble-text {
+    vertical-align: 50%;
+}
+
+@keyframes slide-in {
+    0% {
+	opacity: 0;
+	transform: translateX(-100px);
+    }
+    100% {
+	opacity: 1;
     }
 }
 
+@media (min-width: 1051px) {
+    /* Break point for desktop views */
+    html {
+
+	/* Tree background on the right */
+	background: no-repeat fixed right/70% url(images/tree-d-4-b-5-l-200-a-25.png);
+    }
+
+    html {
+	/* Create a margin the size of the scroll bar.
+	 * Prevents layout from jumping between pages with and without vertical scroll bar */
+	margin-left: calc(100vw - 100%);
+    }
+}

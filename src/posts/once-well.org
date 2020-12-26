@@ -1,6 +1,11 @@
-#+TITLE: Once Well By Roger Knoebber
-#+DATE: <2019-12-29 Sun>
---------------------------------------------------------------------------------
+#+title: Once Well By Roger Knoebber
+#+date: <2019-12-29 Sun>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 13;
+</script>
+ #+END_EXPORT
+
 [[file:../../images/once-well.jpg]]
 
 This is a short story written by my grandfather. I am digitizing it
@@ -788,8 +793,3 @@ nagging shoes off to relieve the pinching on my frogs.
 --------------------------------------------------------------------------------
 
 Roger Knoebber, Paris, 1994
-#+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 13;
-</script>
- #+END_EXPORT

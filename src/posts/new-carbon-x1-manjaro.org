@@ -1,6 +1,11 @@
-#+TITLE: Lenovo Carbon X1 Gen 7 + Manjaro Linux
-#+DATE: <2019-12-29 Sun>
---------------------------------------------------------------------------------
+#+title: Lenovo Carbon X1 Gen 7 + Manjaro Linux
+#+date: <2019-12-28 Sat>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 12;
+</script>
+ #+END_EXPORT
+
 [[file:../../images/x1-carbon.jpg]]
 
 I recently got a new laptop:
@@ -114,8 +119,3 @@ default.
 still think Manjaro is a nice distro worth trying. It would be
 especially good on a deskop without hardware to support.
 
-#+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 12;
-</script>
- #+END_EXPORT

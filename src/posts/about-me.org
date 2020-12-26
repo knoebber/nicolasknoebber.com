@@ -1,13 +1,9 @@
-#+TITLE: About Me
-#+DATE: <2018-07-07 Sat>
+#+title: About Me
+#+date: <2018-07-07 Sat>
 
---------------------------------------------------------------------------------
-
-Hi! I'm a computer science major who is interested in a whole lot of
+Hi! I'm a software engineer who is interested in a whole lot of
 stuff. I grew up in Mendocino, a small town on the coast of Northern
 California.  I graduated from [[https://grinnell.edu][Grinnell College]] in 2017.
-
-I work as a software developer.
 
 Outside of computers I enjoy long distance running, racing, writing,
 reading, and playing games.
@@ -20,8 +16,3 @@ share any kind of idea, please email me!  knoebber@gmail.com
 
 me:
 [[file:../../images/garden-portrait.jpg]]
- #+BEGIN_EXPORT html
-<script type="text/javascript">
- const postNum = 0;
-</script>
- #+END_EXPORT

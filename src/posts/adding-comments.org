@@ -1,8 +1,10 @@
-#+OPTIONS: ^:nil
-#+TITLE: Adding a Serverless Commenting System with AWS
-#+DATE: <2019-01-14 Mon>
-
---------------------------------------------------------------------------------
+#+title: Adding a Serverless Commenting System with AWS
+#+date: <2019-01-14 Mon>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 6;
+</script>
+#+END_EXPORT
 
 My goal for this post is explain how I implemented a serverless
 commenting system with AWS.  The first step was to figure out the
@@ -222,8 +224,3 @@ More importantly I have auto scaling set to off in my AWS services, so
 my bill won't get large if a spammer does target me. For my entire AWS
 stack (S3 + DynamoDB + Lambda + API Gateway + Route53) I still pay
 only $1 a month.
-#+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 6;
-</script>
-#+END_EXPORT

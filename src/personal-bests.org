@@ -1,14 +1,4 @@
 #+TITLE: Personal Bests
-#+BEGIN_EXPORT html
-<style>
-html {
-    font-size: 20px;
-}
-</style>
-#+END_EXPORT
-* Personal Bests
-----------------------------------
-
 ** Running ([[File:running-journal.org][log]])
 | Distance      |    Time | Mile Pace |
 |---------------+---------+-----------|

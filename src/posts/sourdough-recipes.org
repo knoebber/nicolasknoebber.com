@@ -1,9 +1,12 @@
-#+TITLE: Sourdough Recipes
-#+DATE: <2020-03-30 Mon>
---------------------------------------------------------------------------------
+#+title: Sourdough Recipes
+#+date: <2020-03-30 Mon>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 14;
+</script>
+ #+END_EXPORT
 
-**Bread**
-
+* Bread
 Mix:
 
 + 50g active starter 
@@ -26,8 +29,7 @@ rack add a sheet with a handful of ice cubes.
 This recipe is inspired from [[https://www.theclevercarrot.com][Emilie's]] excellent book "Artisan
 Sourdough Made Simple".
 
-**Pizza Dough**
-
+* Pizza Dough
 This recipe takes 24 hours and makes enough dough for two medium sized
 pizzas.
 
@@ -54,9 +56,3 @@ Cook time depends on many variables. In my experience its usually
 about 7 minutes, but keep an eye on it.
 
 [[https://www.theperfectloaf.com/sourdough-pizza-dough-and-recipes/][Original]]
-
-#+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 14;
-</script>
- #+END_EXPORT

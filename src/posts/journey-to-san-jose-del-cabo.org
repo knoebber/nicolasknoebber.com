@@ -1,7 +1,10 @@
-#+TITLE: Journey to San Jose del Cabo
-#+DATE: <2018-07-12 Thu>
-
---------------------------------------------------------------------------------
+#+title: Journey to San Jose del Cabo
+#+date: <2018-07-12 Thu>
+ #+BEGIN_EXPORT html
+ <script>
+ const postNum = 3;
+ </script>
+ #+END_EXPORT
 
 Here's an update on my journey after leaving Ensenada:
 
@@ -68,8 +71,3 @@ too late in the hurricane season to venture further south , so I got a
 plane ticket back. Rayana also flew back on the same day. The captain
 is still down there burning under the sun, repairing the boat, looking
 for new crew, and dreaming of sailing south.
- #+BEGIN_EXPORT html
- <script>
- const postNum = 3;
- </script>
- #+END_EXPORT

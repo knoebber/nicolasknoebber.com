@@ -1,8 +1,11 @@
-#+TITLE: Draw Trees in AWS with Golang
-#+OPTIONS: toc:t
-#+KEYWORDS: golang lambda aws fractal tree api gateway s3
-#+DATE: Sun 02/10/19
---------------------------------------------------------------------------------
+#+title: Draw Trees in AWS with Golang
+#+keywords: golang lambda aws fractal tree api gateway s3
+#+date: <2019-02-10 Sun>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 7;
+</script>
+#+END_EXPORT
 * Tree Generator
 #+BEGIN_EXPORT html
 <style>
@@ -138,16 +141,16 @@ Drawing and saving a simple image in go:
 #+BEGIN_SRC go
 package main
 
-    import "github.com/fogleman/gg"
+import "github.com/fogleman/gg"
 
-    func main() {
-        // gg - Go Graphics.
-        c := gg.NewContext(1000, 1000)
-        c.DrawCircle(400, 400, 400)
-        c.SetRGB(0, 0, 0)
-        c.Fill()
-        c.SavePNG("circle.png")
-    }
+func main() {
+    // gg - Go Graphics.
+    c := gg.NewContext(1000, 1000)
+    c.DrawCircle(400, 400, 400)
+    c.SetRGB(0, 0, 0)
+    c.Fill()
+    c.SavePNG("circle.png")
+}
 #+END_SRC
 
 So I could save an image of a circle to my local file system. The next
@@ -298,9 +301,3 @@ type TreeParam struct {
 
 Finally, I added the form that's at the top of this page, and a [[../../posts/js/post-tree.js][script]]
 to create the post request.
-
-#+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 7;
-</script>
-#+END_EXPORT

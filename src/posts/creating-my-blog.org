@@ -1,6 +1,11 @@
-#+TITLE: Creating My Own Blogging Platform
-#+DATE: <2018-07-19 Thu>
---------------------------------------------------------------------------------
+#+title: Creating My Own Blogging Platform
+#+date: <2018-07-19 Thu>
+ #+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 4;
+ </script>
+ #+END_EXPORT
+
 
 *edit:* I have since replaced this python/markdown system: [[./blogging-with-emacs-and-org.org][Blogging
 with Emacs and Org]]
@@ -237,8 +242,3 @@ with it.
 [[../../posts/old/old_post.html][Here's the result of the above style]]
 [[https://github.com/knoebber/personal-website/tree/master/][Updated source code can be found here]]
 
- #+BEGIN_EXPORT html
-<script type="text/javascript">
- const postNum = 4;
- </script>
- #+END_EXPORT

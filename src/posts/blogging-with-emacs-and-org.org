@@ -1,13 +1,12 @@
-#+TITLE: Blogging with Emacs and Org
-#+OPTIONS: toc:t
-#+KEYWORDS: org emacs org-mode blog export elisp regex static site html
-#+DATE: <2019-08-14 Wed>
---------------------------------------------------------------------------------
+#+title: Blogging with Emacs and Org
+#+keywords: org emacs org-mode blog export elisp regex static site html
+#+date: <2019-08-14 Wed>
 #+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 10;
+</script>
 <style>
-.logos p:nth-child(1){
-width:50%;
-}
+.logos p:nth-child(1){ width:50%; }
 </style>
 #+END_EXPORT
 [[file:../../../logo/emacs.svg]]
@@ -238,7 +237,6 @@ included CSS/JavaScript, table of contents, and section numbers.
 	 :base-directory "~/projects/personal-website/src"
 	 :publishing-function org-html-publish-to-html
 	 :section-numbers nil
-	 :with-toc nil
 	 :with-title nil
 	 :html-head ,html-main-head ;; The , is so the macro evaluates the expression (because it uses concat).
 	 :html-preamble "<a href=\"/\">Nicolas Knoebber</a>"
@@ -250,7 +248,6 @@ included CSS/JavaScript, table of contents, and section numbers.
 	 :base-directory "~/projects/personal-website/src/posts"
 	 :publishing-function org-html-publish-to-html
 	 :section-numbers nil
-	 :with-toc nil
 	 :html-head ,html-posts-head
 	 :html-head-include-scripts nil
 	 :html-head-include-default-style nil
@@ -338,8 +335,3 @@ func getStorageClosure(home string, dir, name *string) func() (*file.Storage, er
 
 Overall I'm happy with the results and will most likely continue to
 use Emacs+Org as a static site generator.
-#+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 10;
-</script>
- #+END_EXPORT

@@ -1,6 +1,10 @@
-#+TITLE: Surviving the Winter
-#+DATE: <2019-11-17 Sun>
---------------------------------------------------------------------------------
+#+title: Surviving the Winter
+#+date: <2019-11-17 Sun>
+ #+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 8;
+</script>
+ #+END_EXPORT
 
 It's been cold in Iowa. Really cold. The so called 'polar vortex' has
 been turning the Midwest into a winter wasteland. The snow, ice, and
@@ -65,8 +69,3 @@ shelter helped to keep the light breeze off which made all the
 difference. I woke up twice in the night, but otherwise slept
 okay. When I woke it was -2f.
 
- #+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 8;
-</script>
- #+END_EXPORT

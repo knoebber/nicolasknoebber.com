@@ -1,6 +1,10 @@
-#+TITLE: Taking a Break From Work
-#+DATE: <2018-06-10 Sun>
---------------------------------------------------------------------------------
+#+title: Taking a Break From Work
+#+date: <2018-06-10 Sun>
+#+BEGIN_EXPORT html
+<script>
+const postNum = 1;
+</script>
+#+END_EXPORT
 
 A month ago I finished my contract work doing LAMP stack web
 development at FabPro1.  Since then I've been competing in [[http://ama-d36.org][d36]] cross
@@ -37,9 +41,3 @@ Shredding a corner at Leoni Meadows:
 
 Leading the pack at Honey Lake:
 [[file:../../images/honey-lake.jpg]]
-
- #+BEGIN_EXPORT html
- <script>
- const postNum = 1;
- </script>
- #+END_EXPORT

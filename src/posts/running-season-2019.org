@@ -1,6 +1,10 @@
-#+TITLE: Running Season 2018-2019
-#+DATE: <2019-11-16 Sat>
---------------------------------------------------------------------------------
+#+title: Running Season 2018-2019
+#+date: <2019-11-16 Sat>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 11;
+</script>
+ #+END_EXPORT
 
 [[file:../../images/detroit-finish.jpg]]
 
@@ -142,8 +146,3 @@ would have achieved similar results regardless of what shoes I was
 wearing.  Next season I may buy some fancy shoes and see what it does
 to my times as an experiment.
 
-#+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 11;
-</script>
- #+END_EXPORT

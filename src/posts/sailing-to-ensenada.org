@@ -1,7 +1,10 @@
-#+TITLE: Sailing to Ensenada
-#+DATE: <2018-06-25 Mon>
-
---------------------------------------------------------------------------------
+#+title: Sailing to Ensenada
+#+date: <2018-06-25 Mon>
+ #+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 2;
+</script>
+ #+END_EXPORT
 
 [[file:../../images/michael-and-emma.jpg]]
 
@@ -71,8 +74,3 @@ Tomorrow we set off for Cabo San Lucas.  We might stop at a few
 anchorages a long the way to snorkel and wind surf, but we will
 probably try to get down as fast as we can.  Hopefully the winds will
 be good!
- #+BEGIN_EXPORT html
-<script type="text/javascript">
-const postNum = 2;
-</script>
- #+END_EXPORT

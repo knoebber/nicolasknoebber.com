@@ -1,7 +1,6 @@
-#+TITLE: Nicolas Knoebber
-#+DESCRIPTION: Nicolas Knoebber's personal website
-#+KEYWORDS: blog, tech, knoebber, golang, emacs, org-mode, javascript, jamstack
-* [[file:blog.html][Blog]]
+#+title: Nicolas Knoebber
+#+description: Nicolas Knoebber's personal website
+* [[file:posts/index.org][Blog]]
 * [[https://github.com/knoebber][Github]]
 * [[./personal-bests.org][Bests]]
 * [[./posts/about-me.org][About]]
