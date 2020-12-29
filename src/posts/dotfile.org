@@ -46,7 +46,7 @@ Here are the features that I wanted:
 + [[https://github.com/knoebber/dotfile/tree/master/cli/edit.go][edit.go]] open a file in ~$EDITOR~ with ~os/exec~
 + [[https://github.com/knoebber/dotfile/tree/master/local/local.go][local.go]] utility functions for interacting with file system
 + [[https://github.com/knoebber/dotfile/tree/master/local/storage.go][storage.go]] manipulate dotfile tracking data
-+ [[https://github.com/knoebber/dotfile/tree/master/dotfile/dotfile.go][dotfile.go]] Compress and decompress data with zlib, regular
++ [[https://github.com/knoebber/dotfile/tree/master/dotfile/dotfile.go][dotfile.go]] compress and decompress data with zlib, regular
   expressions, sha1 hashes
 
 The first step was designing a data structure for a
@@ -237,7 +237,7 @@ func loadCommits(w http.ResponseWriter, r *http.Request, p *Page) (done bool) {
 Setting ~p.Data["commits"]~ makes it available to the go template. In
 Ruby on Rails this might read: ~@commits = User.commit_list~.
 * Conclusion
-Overall I'm happy with Dotfile I find it to be useful
+I'm happy with Dotfile overall. I find it to be useful
 for more than just dotfiles. It's sort of like pastebin
 with a CLI and versioning. I like being able to track and share any
 random file without headache.

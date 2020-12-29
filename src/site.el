@@ -35,12 +35,14 @@
   (concat
    "<span id=\"made-with\">
    exported by&nbsp;&nbsp;
-   <a href=\"https://www.gnu.org/software/emacs\"
-     ><img src=\"../logo/emacs.svg\" id=\"emacs-logo\" alt=\"Emacs\">
-   </a>"
-   emacs-version "&nbsp
-   <a href=\"https://orgmode.org\">
-     <img src=\"../logo/org-mode.svg\" id=\"org-mode-logo\" alt=\"Org\"></a>"
+   <a
+     href=\"https://www.gnu.org/software/emacs\"
+   ><img src=\"../logo/emacs.svg\" id=\"emacs-logo\" alt=\"Emacs\"></a>"
+   "&nbsp;" emacs-version "&nbsp;"
+   "<a href=\"https://orgmode.org\"
+    ><img
+         src=\"../logo/org-mode.svg\"
+         id=\"org-mode-logo\" alt=\"Org\"></a>"
    org-version
    (format " on %s" (format-time-string "%m/%d/%y"))
    "</span>"))
@@ -57,7 +59,7 @@
 
 (defconst html-preamble "<a href=\"/\">Home</a>")
 (defconst html-posts-preamble
-  (concat html-preamble "<a href=\"/posts/\">Posts</a>"))
+  (concat html-preamble "<a href=\"/posts/\">Blog</a>"))
 
   
 (defun generate-sitemap(title list)

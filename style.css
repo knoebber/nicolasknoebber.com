@@ -1,9 +1,9 @@
-:root{
+:root {
     --content-width: 750px;
 }
 
 html {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Roboto, Arial, sans-serif;
     box-sizing: border-box;
     font-size: 20px;
 }
@@ -36,7 +36,6 @@ pre, code {
 pre {
     padding: 10px;
     background: #292b2e;
-    border-radius:5px;
     overflow: auto;
     color: white;
 }
@@ -54,19 +53,26 @@ code {
     box-sizing: inherit;
 }
 
+#preamble {
+    margin-top: 1rem;
+    padding: .6rem;
+    background: lightgrey;
+}
+
 #preamble > a {
     margin-left: 1rem;
+    color: black;
 }
 
 #content {
     /* Force a scroll bar on the index page so that background stays same size between pages */
     /* TODO add more content so scroll bar makes sense... */
-    min-height: 79vh;
-    margin: 50px;
+    min-height: 83vh;
     line-height: 1.59;
 }
 
 #postamble {
+    font-size: .8rem;
     margin-bottom: .2rem;
 }
 
@@ -94,16 +100,20 @@ code {
 
 #comment-section input, #comment-section textarea {
     display: block;
-    padding:.3rem;
+    padding: .3rem;
     margin-bottom: .3rem;
 }
 
 #comment-section textarea {
-    min-width:40%;
+    min-width: 40%;
 }
 
 #comment-section button {
-    padding:.3rem;
+    padding: .3rem;
+}
+
+.sitemap > ul {
+    padding: 0;
 }
 
 .sitemap > ul > li {
@@ -121,19 +131,19 @@ code {
 .comment {
     animation: slide-in 1.3s ease;
     margin-top: 1rem;
-    border:2px solid darkslateblue;
+    border: 2px solid darkslateblue;
     box-shadow: 3px 5px #888888;
-    padding:.5rem 1rem .5rem 1rem;
-    border-radius:5px;
+    padding: .5rem 1rem .5rem 1rem;
+    border-radius: 5px;
 }
 
 .comment-body {
-    margin-top:1rem;
+    margin-top: 1rem;
 }
 
 .date{
-    font-style:italic;
-    float:right;
+    font-style: italic;
+    float: right;
 }
 
 .postamble-text {
@@ -151,16 +161,13 @@ code {
 }
 
 @media (min-width: 1051px) {
-    /* Break point for desktop views */
+    /* Applies to large screen sizes */
     html {
-
-	/* Tree background on the right */
+	margin-left: 50px;
 	background: no-repeat fixed right/70% url(images/tree-d-4-b-5-l-200-a-25.png);
     }
+}
 
-    html {
-	/* Create a margin the size of the scroll bar.
-	 * Prevents layout from jumping between pages with and without vertical scroll bar */
-	margin-left: calc(100vw - 100%);
-    }
+@media (max-width: 900px) {
+    /* Applies to small screen sizes */
 }
