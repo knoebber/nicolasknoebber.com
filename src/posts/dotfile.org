@@ -1,12 +1,14 @@
 #+title: I Wrote a Version Control System in Golang
 #+date: <2020-12-26 Sat>
-#+description: Creating dotfile and dotfilehub, a version control system for single files
+#+description: I created Dotfile and Dotfilehub, a version control system for single files
 #+BEGIN_EXPORT html
 <script type="text/javascript">
 const postNum = 15;
 </script>
  #+END_EXPORT
 * Introduction
+**Search for "Quick Links" to jump to Golang code
+samples and documentation.**
 
 I've tried a few different methods for managing [[https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory][dotfiles]] over the
 years. I was frustrated that they either required git and/or system
@@ -14,7 +16,7 @@ links. I saw an opportunity to create a version control and file sharing
 system for single files with an emphasis on being user
 friendly.
 
-Initially I spent quite a bit of time learning how git worked. In
+Initially I spent some time learning how git worked. In
 summary: it models a directory of files as a tree of commits. A
 commit stores the changes between versions. This works well for a
 directory of related files where changes across multiple files should
@@ -22,10 +24,10 @@ be bundled into the same commit.
 
 For single unrelated files this isn't needed.
 If I only cared about a single file's history then I could
-make a more simple system that avoided common pitfalls.
+make simpler system that would avoided common pitfalls.
 
 In summary I wrote a CLI tool and a web front end for sharing files
-between machines. 
+between machines.
 
 **Introducing:** [[https://github.com/knoebber/dotfile][dotfile]] and https://dotfilehub.com
 * Requirements
@@ -36,30 +38,216 @@ Here are the features that I wanted:
 + No merge conflicts
 + Easily install files on a fresh or foreign system without
   dependencies
++ Web application for finding other peoples files
+* CLI
+**Quick Links**
++ [[https://dotfilehub.com/docs/cli.org][dotfile cli docs]]
++ [[https://github.com/knoebber/dotfile/tree/master/cli/cli.go][cli.go]] set up command line parsing with [[https://github.com/alecthomas/kingpin][kingpin]]
++ [[https://github.com/knoebber/dotfile/tree/master/cli/edit.go][edit.go]] open a file in ~$EDITOR~ with ~os/exec~
++ [[https://github.com/knoebber/dotfile/tree/master/local/local.go][local.go]] utility functions for interacting with file system
++ [[https://github.com/knoebber/dotfile/tree/master/local/storage.go][storage.go]] manipulate dotfile tracking data
++ [[https://github.com/knoebber/dotfile/tree/master/dotfile/dotfile.go][dotfile.go]] Compress and decompress data with zlib, regular
+  expressions, sha1 hashes
 
-* CLI Design
-The first step was designing a data structure for the
-tracked files. I wanted to store the following:
+The first step was designing a data structure for a
+tracked file. I decided to store the following:
 
 + The file's path
 + The current revision
 + A list of commits
 + An alias for the file
+  
+Commits are stored as list in chronological order. Each commit points
+to a full compressed revision of the file instead of the delta. This
+means commits are not dependent on each other, which avoids
+problems with merging unrelated histories. The downside is that is
+uses more disk space, though with small text files the difference
+is negligible.
 
-I decided to create aliases for files so that the user wouldn't have
-to memorize long paths for all the files that they wanted to track. So
-instead of doing ~git commit -am ~/.config/nvim/init.vim~, a user
-could instead do ~dotfile commit vim~. This also allows for quick
-access: ~dotfile edit vim~ or ~dotfile show vim~.
+I mapped aliases to files so that the user wouldn't have
+to memorize paths.
+When a file is initialized the user can choose to set an alias or
+take the default. 
 
-See the [[https://dotfilehub.com/docs/cli.org][cli documentation]] for the complete functionality.
+If ~~/.config/nvim/init.vim~ was aliased to ~vim~ then the equivalent
+to the git command
+#+begin_src bash
+git commit -am ~/.config/nvim/init.vim "<commit message>"
+#+end_src
+would be
+#+begin_src bash
+dotfile commit vim
+#+end_src
+Much simpler! 
+* Web
+**Quick Links**
++ https://dotfilehub.com
++ [[https://dotfilehub.com/docs/web.org][dotfilehub docs]]
++ [[https://github.com/knoebber/dotfile/tree/master/db][package db]] sqlite3 queries, ~database/sql~ code examples, database interfaces
++ [[https://github.com/knoebber/dotfile/tree/master/server/handlers.go][handlers.go]] generic and pluggable http handler with closures
++ [[https://github.com/knoebber/dotfile/blob/master/server/templates/base.tmpl][base.tmpl]] base template and dark theme support
++ [[https://github.com/knoebber/dotfile/tree/master/server/page.go][page.go]] go templates setup, ~FuncMap~ for injecting content into layout,
+  flash errors, protected pages, user sessions
++ [[https://github.com/knoebber/dotfile/tree/master/server/routes.go][routes.go]] http router with gorilla/mux
++ [[https://github.com/knoebber/dotfile/tree/master/server/api.go][api.go]] rest api
 
-I found golang to be a great choice for interacting with the file
-system. The standard library packages such as ~encoding/json~,
-~path/filepath~, ~io/ioutil~, ~os~, and ~bytes~ made most tasks
-straightforward to implement. Many times I found myself writing
-functions only to find that they already existed in one
-of these packages. For example ~os.RemoveAll~ or ~filepath.Join~.
+I completed all the CLI functions that I wanted except for ~push~ and
+~pull~. For this I would need a web server. 
 
-See [[https://github.com/knoebber/dotfile/tree/master/local][package local]] for code examples.
-* Web Design
+ I decided against using any major frameworks. At my work we use [[https://github.com/gin-gonic/gin][gin]]
+and [[https://github.com/go-gorm/gorm][gorm]] which I like, but for this project I wanted to explore the
+standard library further.
+
+One of my goals was making the UI simple and accessible from basic
+browsers that don't support JavaScript. That way users could still
+find files in an environment without graphics using something like
+[[https://lynx.browser.org/][lynx]]. This led me to learn more about using semantic http and how
+server side rendering can be leveraged.
+
+Another goal was to make files always available without
+dependencies. I added a special case to the file page to return plain
+text depending on the ~Accept~ header. So if you visit
+https://dotfilehub.com/knoebber/vim in a browser it will return HTML,
+but if you pass that url to CURL it will return the raw file.
+
+This allows me to download my ~vimrc~ anywhere:
+#+begin_src bash
+curl https://dotfilehub.com/knoebber/vim > ~/.vimrc
+#+end_src
+
+**Database**
+
+I chose [[https://sqlite.org/index.html][sqlite]] because of its excellent documentation, performance,
+and ease of use. Honestly I couldn't recommend it enough.
+
+I wanted the database to use the same interface that the CLI uses on local
+file systems for modifying files. This would let them reuse code for
+operations like ~init~, ~commit~, ~checkout~, ~diff~, etc. I made
+interfaces ~Reverter~, ~Commiter~, ~Getter~ in [[https://github.com/knoebber/dotfile/tree/master/dotfile][package dotfile]] to
+accomplish this.
+
+Next I designed the schema. The tables were ~users~,
+~reserved_usernames~, ~sessions~, ~files~, ~temp_files~, and
+~commits~.
+
+I built some functions up to make common
+database tasks easier. The main component is the Executor interface:
+#+begin_src go
+// Executor is an interface for executing SQL.
+type Executor interface {
+	Exec(string, ...interface{}) (sql.Result, error)
+	Query(string, ...interface{}) (*sql.Rows, error)
+	QueryRow(string, ...interface{}) *sql.Row
+}
+#+end_src
+Then I made every database function use a signature like:
+#+begin_src go
+// File retrieves a file record.
+func File(e Executor, username string, alias string) (*FileRecord, error)
+#+end_src
+The advantage is that ~e~ can be both a plain database connection or
+a transaction.
+
+Finally I made a function to generalize inserting records:
+#+begin_src go
+type inserter interface {
+	insertStmt(Executor) (sql.Result, error)
+}
+
+type checker interface {
+	check(Executor) error
+}
+
+func insert(e Executor, i inserter) (id int64, err error) {
+	if err = validate.Struct(i); err != nil {
+		log.Print(err)
+		return 0, usererror.Invalid("Values are missing or improperly formatted.")
+	}
+
+	if c, ok := i.(checker); ok {
+		if err := c.check(e); err != nil {
+			return 0, err
+		}
+	}
+
+	res, err := i.insertStmt(e)
+	if err != nil {
+		return 0, err
+	}
+
+	id, err = res.LastInsertId()
+
+	if err != nil {
+		return 0, err
+	}
+
+	return id, nil
+}
+#+end_src
+This [[https://gopkg.in/go-playground/validator.v9][validates]] the struct's data, optionally does a check, inserts the
+record, and returns the id of the new record.
+
+**Router**
+
+I considered building my own router, but after some research I decided
+that it would take too much time to implement the features that I
+wanted. I went with gorilla [[https://github.com/gorilla/mux][mux]] for routing and gorilla [[https://github.com/gorilla/handlers][handlers]] for
+logging middleware. I like these because they use the
+~net/http.HandlerFunc~ signature.
+
+**Templates**
+
+I made all the views with go templates. I used something close to a
+MVC style, though I had to hook it all up myself.  I made a struct for
+passing data to templates:
+#+begin_src go
+// Page renders pages and tracks request state.
+// Exported fields/methods may be used within templates.
+type Page struct {
+	Title          string
+	SuccessMessage string
+	ErrorMessage   string
+	Links          []Link
+	Vars           map[string]string
+	Data           map[string]interface{}
+
+	Table        *db.HTMLTable
+	Session      *db.UserSession
+	templateName string
+	htmlFile     string
+	// Page access is restricted to their owners when true.
+	protected bool
+}
+#+end_src
+With this setup individual handlers look like:
+#+begin_src go
+func loadCommits(w http.ResponseWriter, r *http.Request, p *Page) (done bool) {
+	alias := p.Vars["alias"]
+	commits, err := db.CommitList(db.Connection, p.Vars["username"], alias, p.Timezone())
+	if err != nil {
+		return p.setError(w, err)
+	}
+
+	p.Data["commits"] = commits
+	p.Title = "commits"
+	return
+}
+#+end_src
+
+Setting ~p.Data["commits"]~ makes it available to the go template. In
+Ruby on Rails this might read: ~@commits = User.commit_list~.
+* Conclusion
+Overall I'm happy with Dotfile I find it to be useful
+for more than just dotfiles. It's sort of like pastebin
+with a CLI and versioning. I like being able to track and share any
+random file without headache.
+
+Obviously I have bias. Lot's of people create their own system for
+managing their files, and I'm not suggesting that anyone move to
+this. It works for me, but I would encourage everyone to find their own
+way.
+
+One of my main takeaways is a much a better knowledge of the golang
+standard library. It's such a great resource. This project was a lot
+of fun for me because of the variety of areas is touched: CLI, file
+system, compression, regex, database, etc.
