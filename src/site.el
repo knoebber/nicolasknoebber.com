@@ -59,7 +59,7 @@
 
 (defconst html-preamble "<a href=\"/\">Home</a>")
 (defconst html-posts-preamble
-  (concat html-preamble "<a href=\"/posts/\">Blog</a>"))
+  (concat html-preamble "<a href=\"/posts/index.html\">Blog</a>"))
 
   
 (defun generate-sitemap(title list)
