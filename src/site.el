@@ -117,45 +117,6 @@ project."
 	    pubdate
 	    )))
 
-;; (defun format-posts-rss-feed-entry (entry _style project)
-;;   "Format ENTRY for the posts RSS feed in PROJECT."
-;;   (let* (
-;; 	 ;; (file (org-publish--expand-file-name entry project))
-;; 	 ;; (date (format-time-string "%Y-%m-%d" (org-publish-find-date entry project)))
-;; 	 (title (org-publish-find-title entry project))
-;; 	 (link (concat (file-name-sans-extension entry) ".html"))
-;; 	 (date (car (cdr (cdr (cdr (car (cdr (car ;; Finds :raw-value in date list.
-;; 	  (org-publish-find-property entry :date project))))))))))
-;;     (format "%s\n:properties:\n:rss_permalink: %s\n:pubdate: %s\n:end:\n"
-;; 	    title
-;; 	    link
-;; 	    date
-;; 	    )))
-    ;; (with-temp-buffer
-    ;;   (insert title)
-    ;;   (org-set-property "RSS_PERMALINK" link)
-    ;;   (org-set-property "PUBDATE" date)
-    ;;   (buffer-string))))
-;; (org-publish-find-property "dotfile.org" :date
-;; 	'("posts-rss"
-;; 	 :publishing-directory "~/projects/personal-website/posts"
-;;          :base-directory "~/projects/personal-website/src/posts"
-;; 	 :base-extension "org"
-;; 	 :exclude "index.org"
-;; 	 :publishing-function publish-posts-rss-feed
-;; 	 :rss-extension "xml"
-;; 	 :html-link-home "https://nicolasknoebber.com/posts/index.html"
-;; 	 :html-link-use-abs-url t
-;; 	 :html-link-org-files-as-html t
-;; 	 :auto-sitemap t
-;; 	 :sitemap-function posts-rss-feed
-;; 	 :sitemap-title "Nicolas Knoebber's Blog"
-;; 	 :sitemap-filename "rss.org"
-;; 	 :sitemap-style list
-;; 	 :sitemap-sort-files anti-chronologically
-;; 	 :sitemap-format-entry format-posts-rss-feed-entry)
-;; 	)
-
 
 (defun format-exported-timestamps(timestamp _backend _channel)
   "Remove <> from exported org TIMESTAMP."
