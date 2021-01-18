@@ -4,17 +4,9 @@
 ;; Set org config for publishing this website.
 
 ;;; Code:
-
+(require 'ox)
 (defconst html-main-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />")
 (defconst html-posts-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" />")
-
-;; (defun postamble-text (text)
-;;   "Wraps TEXT in a span with class postamble-text."
-;;   (format "<span class=\"postamble-text\">%s</span>" text))
-
-;; (defun postamble-version (version)
-;;   "Wraps VERSION in a span with class version-number."
-;;   (format "<span class=\"postamble-text version-number\">%s</span>" version))
 
 (defun publish-nicolasknoebber-file ()
   "Exports current org file to html and uploads to s3://nicolasknoebber.com."
@@ -33,15 +25,15 @@
 
 (defconst html-postamble
   (concat
-   "<span id=\"made-with\">
-   exported by&nbsp;&nbsp;
+   "   <span id=\"made-with\">
+   &nbsp;&nbsp;generated with&nbsp;&nbsp;
    <a
      href=\"https://www.gnu.org/software/emacs\"
-   ><img src=\"../logo/emacs.svg\" id=\"emacs-logo\" alt=\"Emacs\"></a>"
+   ><img src=\"/logo/emacs.svg\" id=\"emacs-logo\" alt=\"Emacs\"></a>"
    "&nbsp;" emacs-version "&nbsp;"
    "<a href=\"https://orgmode.org\"
     ><img
-         src=\"../logo/org-mode.svg\"
+         src=\"/logo/org-mode.svg\"
          id=\"org-mode-logo\" alt=\"Org\"></a>"
    org-version
    (format " on %s" (format-time-string "%m/%d/%y"))
@@ -59,10 +51,14 @@
 
 (defconst html-preamble "<a href=\"/\">Home</a>")
 (defconst html-posts-preamble
-  (concat html-preamble "<a href=\"/posts/index.html\">Blog</a>"))
+  (concat html-preamble "
+<a href=\"/posts/index.html\">Blog</a>
+<a href=\"/posts/rss.xml\">
+       <img id=\"rss-logo\" src=\"/logo/rss.png\"></a>
+"))
 
   
-(defun generate-sitemap(title list)
+(defun generate-posts-sitemap(title list)
   "Default site map, as a string.
 TITLE is the title of the site map.  LIST is an internal
 representation for the files to include, as returned by
@@ -77,17 +73,96 @@ The only change I made is wrapping it in the .sitemap div."
    "\n#+end_sitemap"))
 
 (defun format-sitemap-entry (entry _style project)
-  "Format ENTRY in PROJECT."
+  "Format ENTRY in PROJECT.
+Leaves the rss page out of the main sitemap list."
+  (if (equal "rss.org" entry) ""
     (format "[[file:%s][%s]] =%s="
 	    entry
 	    (org-publish-find-title entry project)
-	    (format-time-string "%m/%d/%Y" (org-publish-find-date entry project))))
+	    (format-time-string "%m/%d/%Y" (org-publish-find-date entry project)))))
+
+(defun publish-posts-rss-feed (plist filename dir)
+  "Publish PLIST to RSS when FILENAME is rss.org.
+DIR is the location of the output."
+  (if (equal "rss.org" (file-name-nondirectory filename))
+      (org-rss-publish-to-rss plist filename dir)))
+
+(defun posts-rss-feed (title list)
+  "Generate a sitemap of posts that is exported as a RSS feed.
+TITLE is the title of the RSS feed.  LIST is an internal
+representation for the files to include.  PROJECT is the current
+project."
+  (concat
+   "#+TITLE: " title "\n\n"
+          (org-list-to-subtree list)))
+
+
+(defun format-posts-rss-feed-entry (entry _style project)
+  "Format ENTRY for the posts RSS feed in PROJECT."
+  (let* (
+	 ;; (file (org-publish--expand-file-name entry project))
+	 ;; (date (format-time-string "%Y-%m-%d" (org-publish-find-date entry project)))
+	 (title (org-publish-find-title entry project))
+	 (link (concat (file-name-sans-extension entry) ".html"))
+	 (pubdate (format-time-string (car org-time-stamp-formats)
+	  (org-publish-find-date entry project))))
+    (message pubdate)
+    (format "%s
+:properties:
+:rss_permalink: %s
+:pubdate: %s
+:end:\n"
+	    title
+	    link
+	    pubdate
+	    )))
+
+;; (defun format-posts-rss-feed-entry (entry _style project)
+;;   "Format ENTRY for the posts RSS feed in PROJECT."
+;;   (let* (
+;; 	 ;; (file (org-publish--expand-file-name entry project))
+;; 	 ;; (date (format-time-string "%Y-%m-%d" (org-publish-find-date entry project)))
+;; 	 (title (org-publish-find-title entry project))
+;; 	 (link (concat (file-name-sans-extension entry) ".html"))
+;; 	 (date (car (cdr (cdr (cdr (car (cdr (car ;; Finds :raw-value in date list.
+;; 	  (org-publish-find-property entry :date project))))))))))
+;;     (format "%s\n:properties:\n:rss_permalink: %s\n:pubdate: %s\n:end:\n"
+;; 	    title
+;; 	    link
+;; 	    date
+;; 	    )))
+    ;; (with-temp-buffer
+    ;;   (insert title)
+    ;;   (org-set-property "RSS_PERMALINK" link)
+    ;;   (org-set-property "PUBDATE" date)
+    ;;   (buffer-string))))
+;; (org-publish-find-property "dotfile.org" :date
+;; 	'("posts-rss"
+;; 	 :publishing-directory "~/projects/personal-website/posts"
+;;          :base-directory "~/projects/personal-website/src/posts"
+;; 	 :base-extension "org"
+;; 	 :exclude "index.org"
+;; 	 :publishing-function publish-posts-rss-feed
+;; 	 :rss-extension "xml"
+;; 	 :html-link-home "https://nicolasknoebber.com/posts/index.html"
+;; 	 :html-link-use-abs-url t
+;; 	 :html-link-org-files-as-html t
+;; 	 :auto-sitemap t
+;; 	 :sitemap-function posts-rss-feed
+;; 	 :sitemap-title "Nicolas Knoebber's Blog"
+;; 	 :sitemap-filename "rss.org"
+;; 	 :sitemap-style list
+;; 	 :sitemap-sort-files anti-chronologically
+;; 	 :sitemap-format-entry format-posts-rss-feed-entry)
+;; 	)
+
 
 (defun format-exported-timestamps(timestamp _backend _channel)
   "Remove <> from exported org TIMESTAMP."
   (print (replace-regexp-in-string "&[lg]t;" "" timestamp))
   (replace-regexp-in-string "&[lg]t;" "" timestamp)
 )
+
 
 (eval-after-load 'ox
   '(add-to-list
@@ -97,35 +172,52 @@ The only change I made is wrapping it in the .sitemap div."
 (setq org-publish-project-alist
       `(("personal-website"
          :components ("main" "posts"))
-	("main"
-	 :publishing-directory "~/projects/personal-website"
-	 :base-directory "~/projects/personal-website/src"
-	 :publishing-function org-html-publish-to-html
-	 :section-numbers nil
-	 :with-toc nil
-	 :html-head ,html-main-head
-	 :html-preamble ,html-preamble
-	 :html-postamble ,html-postamble
-	 :html-head-include-scripts nil
-	 :html-head-include-default-style nil
-         )
-	("posts"
-         :publishing-directory "~/projects/personal-website/posts"
-	 :base-directory "~/projects/personal-website/src/posts"
-	 :publishing-function org-html-publish-to-html
-	 :html-head ,html-posts-head
+        ("main"
+         :publishing-directory "~/projects/personal-website"
+         :base-directory "~/projects/personal-website/src"
+         :publishing-function org-html-publish-to-html
+         :section-numbers nil
+         :with-toc nil
+         :html-head ,html-main-head
+         :html-preamble ,html-preamble
+         :html-postamble ,html-postamble
          :html-head-include-scripts nil
          :html-head-include-default-style nil
-	 :html-preamble ,html-posts-preamble
-	 :html-postamble ,html-posts-postamble
-	 :auto-sitemap t
+         )
+        ("posts"
+         :publishing-directory "~/projects/personal-website/posts"
+         :base-directory "~/projects/personal-website/src/posts"
+         :publishing-function org-html-publish-to-html
+         :html-head ,html-posts-head
+         :html-head-include-scripts nil
+         :html-head-include-default-style nil
+         :html-preamble ,html-posts-preamble
+         :html-postamble ,html-posts-postamble
+         :auto-sitemap t
          :sitemap-title "Blog"
-         :sitemap-function generate-sitemap
+         :sitemap-function generate-posts-sitemap
          :sitemap-format-entry format-sitemap-entry
          :sitemap-style list
          :sitemap-sort-files anti-chronologically
          :sitemap-filename "index.org"
-         )))
+	 )
+	("posts-rss"
+	 :publishing-directory "~/projects/personal-website/posts"
+         :base-directory "~/projects/personal-website/src/posts"
+	 :base-extension "org"
+	 :exclude "index.org"
+	 :publishing-function publish-posts-rss-feed
+	 :rss-extension "xml"
+	 :html-link-home "https://nicolasknoebber.com/posts/"
+	 :html-link-use-abs-url t
+	 :html-link-org-files-as-html t
+	 :auto-sitemap t
+	 :sitemap-function posts-rss-feed
+	 :sitemap-title "Nicolas Knoebber's Blog"
+	 :sitemap-filename "rss.org"
+	 :sitemap-style list
+	 :sitemap-sort-files anti-chronologically
+	 :sitemap-format-entry format-posts-rss-feed-entry)
+	))
 
 ;;; site.el ends here
-

@@ -1,0 +1,98 @@
+#+TITLE: Nicolas Knoebber's Blog
+
+* I Wrote a Version Control System in Golang
+:properties:
+:rss_permalink: dotfile.html
+:pubdate: <2020-12-26 Sat>
+:ID:       3f8e6587-3453-4eaa-9d6c-2f29d8fdd849
+:END:
+* Sourdough Recipes
+:properties:
+:rss_permalink: sourdough-recipes.html
+:pubdate: <2020-03-30 Mon>
+:ID:       9e9e1040-c27e-442a-83cc-ecac15efcd7d
+:END:
+* Once Well By Roger Knoebber
+:properties:
+:rss_permalink: once-well.html
+:pubdate: <2019-12-29 Sun>
+:ID:       bfefa691-4e67-4c1c-bbfa-311f178e5cd5
+:END:
+* Lenovo Carbon X1 Gen 7 + Manjaro Linux
+:properties:
+:rss_permalink: new-carbon-x1-manjaro.html
+:pubdate: <2019-12-28 Sat>
+:ID:       21c5790e-a41e-4400-8343-6bc0608275ce
+:END:
+* Surviving the Winter
+:properties:
+:rss_permalink: surviving-the-winter.html
+:pubdate: <2019-11-17 Sun>
+:ID:       c958d1fa-1841-4ec0-bf83-32a31318d61b
+:END:
+* Running Season 2018-2019
+:properties:
+:rss_permalink: running-season-2019.html
+:pubdate: <2019-11-16 Sat>
+:ID:       af68e6ac-8d95-4c62-8544-80c5db610e53
+:END:
+* Blogging with Emacs and Org
+:properties:
+:rss_permalink: blogging-with-emacs-and-org.html
+:pubdate: <2019-08-14 Wed>
+:ID:       d9bd7b54-6871-43a6-8f7b-df13930e4296
+:END:
+* RAGBRAI
+:properties:
+:rss_permalink: RAGBRAI.html
+:pubdate: <2019-08-03 Sat>
+:ID:       08804e2f-b9cf-42fb-8e5b-fc2eff43c4bc
+:END:
+* Draw Trees in AWS with Golang
+:properties:
+:rss_permalink: image-generation-go-lambda-s3.html
+:pubdate: <2019-02-10 Sun>
+:ID:       7d441c71-da0f-437f-ba0e-afe49e74e1cc
+:END:
+* Adding a Serverless Commenting System with AWS
+:properties:
+:rss_permalink: adding-comments.html
+:pubdate: <2019-01-14 Mon>
+:ID:       670d89ee-0567-472d-9539-803dda793b59
+:END:
+* Moving My Website to Amazon S3
+:properties:
+:rss_permalink: migrating-to-S3.html
+:pubdate: <2018-07-24 Tue>
+:ID:       32844ab6-63fe-417a-b9b3-0c928be415b0
+:END:
+* Creating My Own Blogging Platform
+:properties:
+:rss_permalink: creating-my-blog.html
+:pubdate: <2018-07-19 Thu>
+:ID:       2ebf495d-7cf4-49c6-80c1-774344fe42f7
+:END:
+* Journey to San Jose del Cabo
+:properties:
+:rss_permalink: journey-to-san-jose-del-cabo.html
+:pubdate: <2018-07-12 Thu>
+:ID:       97b2e320-0e61-4190-9878-a834fc374dc5
+:END:
+* About Me
+:properties:
+:rss_permalink: about-me.html
+:pubdate: <2018-07-07 Sat>
+:ID:       55529a54-77a6-4799-a23f-af6b2db49bcc
+:END:
+* Sailing to Ensenada
+:properties:
+:rss_permalink: sailing-to-ensenada.html
+:pubdate: <2018-06-25 Mon>
+:ID:       5776ee93-eab3-4d6d-baa9-b43cb76afdf5
+:END:
+* Taking a Break From Work
+:properties:
+:rss_permalink: taking-a-break-from-work.html
+:pubdate: <2018-06-10 Sun>
+:ID:       9c274140-7dfc-4a82-bac2-b42ed11bff15
+:END:

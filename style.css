@@ -85,6 +85,13 @@ code {
     border-radius: unset;
 }
 
+#rss-logo {
+    max-height: 1rem;
+    display: inline;
+    margin: unset;
+    border-radius: unset;
+    float: right;
+}
 
 #emacs-logo {
     max-height: 30px;

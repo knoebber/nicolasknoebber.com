@@ -250,4 +250,4 @@ way.
 One of my main takeaways is a much a better knowledge of the golang
 standard library. It's such a great resource. This project was a lot
 of fun for me because of the variety of areas is touched: CLI, file
-system, compression, regex, database, etc.
+system, http server, compression, regex, database, etc.
