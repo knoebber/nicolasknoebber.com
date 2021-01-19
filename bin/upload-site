@@ -8,6 +8,7 @@ aws s3 sync $HOME/projects/personal-website s3://nicolasknoebber.com \
 --include "*.css" \
 --include "*.svg" \
 --include "*.js" \
+--include "*.xml" \
 --exclude "lambda/post_comment/index.js" \
 --exclude "lambda/get_comments/index.js" \
 --include "resume.pdf" \
