@@ -4,3 +4,4 @@
 * [[https://github.com/knoebber][Github]]
 * [[./personal-bests.org][Bests]]
 * [[./posts/about-me.org][About]]
+* [[file:resume.pdf][Resume]]

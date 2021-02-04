@@ -67,7 +67,7 @@ code {
 #content {
     /* Force a scroll bar on the index page so that background stays same size between pages */
     /* TODO add more content so scroll bar makes sense... */
-    min-height: 83vh;
+    min-height: 82vh;
     line-height: 1.59;
 }
 
