@@ -24,7 +24,7 @@ be bundled into the same commit.
 
 For single unrelated files this isn't needed.
 If I only cared about a single file's history then I could
-make simpler system that would avoided common pitfalls.
+make simpler system that avoided common pitfalls.
 
 In summary I wrote a CLI tool and a web front end for sharing files
 between machines.
@@ -91,18 +91,18 @@ Much simpler!
 + [[https://github.com/knoebber/dotfile/tree/master/server/routes.go][routes.go]] http router with gorilla/mux
 + [[https://github.com/knoebber/dotfile/tree/master/server/api.go][api.go]] rest api
 
-I completed all the CLI functions that I wanted except for ~push~ and
-~pull~. For this I would need a web server. 
+When it was time to implement ~push~ and ~pull~ I started on a web server.
 
- I decided against using any major frameworks. At my work we use [[https://github.com/gin-gonic/gin][gin]]
+I decided against using any major frameworks. At my work we use [[https://github.com/gin-gonic/gin][gin]]
 and [[https://github.com/go-gorm/gorm][gorm]] which I like, but for this project I wanted to explore the
 standard library further.
 
-One of my goals was making the UI simple and accessible from basic
-browsers that don't support JavaScript. That way users could still
-find files in an environment without graphics using something like
-[[https://lynx.browser.org/][lynx]]. This led me to learn more about using semantic http and how
-server side rendering can be leveraged.
+One of my goals was to make the UI simple and accessible enough that
+it would be possible to browse from basic browsers that don't support
+JavaScript. That way users could still find files in an environment
+without graphics using something like [[https://lynx.browser.org/][lynx]]. This led me to learn more
+about using semantic http and how server side rendering can be
+leveraged.
 
 Another goal was to make files always available without
 dependencies. I added a special case to the file page to return plain
@@ -121,7 +121,7 @@ I chose [[https://sqlite.org/index.html][sqlite]] because of its excellent docum
 and ease of use. Honestly I couldn't recommend it enough.
 
 I wanted the database to use the same interface that the CLI uses on local
-file systems for modifying files. This would let them reuse code for
+file systems for modifying files. This would let it reuse code for
 operations like ~init~, ~commit~, ~checkout~, ~diff~, etc. I made
 interfaces ~Reverter~, ~Commiter~, ~Getter~ in [[https://github.com/knoebber/dotfile/tree/master/dotfile][package dotfile]] to
 accomplish this.
@@ -198,7 +198,7 @@ logging middleware. I like these because they use the
 **Templates**
 
 I made all the views with go templates. I used something close to a
-MVC style, though I had to hook it all up myself.  I made a struct for
+MVC style. First I made a struct for
 passing data to templates:
 #+begin_src go
 // Page renders pages and tracks request state.
@@ -234,20 +234,21 @@ func loadCommits(w http.ResponseWriter, r *http.Request, p *Page) (done bool) {
 }
 #+end_src
 
-Setting ~p.Data["commits"]~ makes it available to the go template. In
+Setting ~p.Data["commits"] = commits~ makes it available to the go template. In
 Ruby on Rails this might read: ~@commits = User.commit_list~.
 * Conclusion
-I'm happy with Dotfile overall. I find it to be useful
-for more than just dotfiles. It's sort of like pastebin
-with a CLI and versioning. I like being able to track and share any
-random file without headache.
+I'm happy with Dotfile overall. I find it to be useful for more than
+just dotfiles. It's sort of like pastebin with a CLI and versioning. I
+like being able to track and share any random file without
+headache. Here's the files I have pushed:
+[[https://dotfilehub.com/knoebber]]
 
-Obviously I have bias. Lot's of people create their own system for
+Obviously I have bias -  lot's of people create their own system for
 managing their files, and I'm not suggesting that anyone move to
-this. It works for me, but I would encourage everyone to find their own
+this. It works for me, but I encourage everyone to find their own
 way.
 
-One of my main takeaways is a much a better knowledge of the golang
-standard library. It's such a great resource. This project was a lot
-of fun for me because of the variety of areas is touched: CLI, file
+One of my main takeaways is a much a better knowledge of the Golang
+standard library. It's such a great resource. This project was fun for 
+me because of the variety of areas is touched: CLI, file
 system, http server, compression, regex, database, etc.
