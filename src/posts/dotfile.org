@@ -240,15 +240,10 @@ Ruby on Rails this might read: ~@commits = User.commit_list~.
 I'm happy with Dotfile overall. I find it to be useful for more than
 just dotfiles. It's sort of like pastebin with a CLI and versioning. I
 like being able to track and share any random file without
-headache. Here's the files I have pushed:
+headache. Here are the files that I've pushed:
 [[https://dotfilehub.com/knoebber]]
 
 Obviously I have bias -  lot's of people create their own system for
 managing their files, and I'm not suggesting that anyone move to
 this. It works for me, but I encourage everyone to find their own
 way.
-
-One of my main takeaways is a much a better knowledge of the Golang
-standard library. It's such a great resource. This project was fun for 
-me because of the variety of areas is touched: CLI, file
-system, http server, compression, regex, database, etc.

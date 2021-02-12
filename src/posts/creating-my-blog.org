@@ -240,5 +240,5 @@ with it.
 
 **EDIT**: I have made significant changes since then.
 [[../../posts/old/old_post.html][Here's the result of the above style]]
-[[https://github.com/knoebber/personal-website/tree/master/][Updated source code can be found here]]
+[[https://github.com/knoebber/nicolasknoebber.com/tree/master/][Updated source code can be found here]]
 

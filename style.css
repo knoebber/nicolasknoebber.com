@@ -6,6 +6,7 @@ html {
     font-family: Roboto, Arial, sans-serif;
     box-sizing: border-box;
     font-size: 20px;
+    margin-left: 50px;
 }
 
 img {
@@ -170,11 +171,13 @@ code {
 @media (min-width: 1051px) {
     /* Applies to large screen sizes */
     html {
-	margin-left: 50px;
 	background: no-repeat fixed right/70% url(images/tree-d-4-b-5-l-200-a-25.png);
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 770px) {
     /* Applies to small screen sizes */
+    html {
+        margin-left: unset;
+    }
 }

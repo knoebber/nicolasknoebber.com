@@ -1,0 +1,20 @@
+#+title: Personal Website: nicolasknoebber.com
+
+My website and blog.
+
+Built with:
++ Emacs
+  + elisp
+  + org-mode
++ JavaScript
++ CSS
++ Golang
++ AWS
+  + S3
+  + Cloudfront
+  + Route53
+  + Lambda
+  + API Gateway
+  + DynamoDB
+
+Makefile's in the ~lambda/~ directory rely on a script I wrote: [[https://dotfilehub.com/knoebber/golamb][golamb]]

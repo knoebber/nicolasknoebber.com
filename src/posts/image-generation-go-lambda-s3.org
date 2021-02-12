@@ -124,7 +124,7 @@ that let the user specify a few different parameters:
 + length: how long in pixels each branch should be
 + angle: the angle that a new branch is drawn from its parent
 
-Here's an example of a [[../../images/tree-d-4-b-5-l-200-a-25.png][result]] and here's the [[https://github.com/knoebber/personal-website/tree/e78e112376580580bbf8d36bf02cd71ccdcc9feb/trees][source]].
+Here's an example of a [[../../images/tree-d-4-b-5-l-200-a-25.png][result]] and here's the [[https://github.com/knoebber/nicolasknoebber.com/tree/e78e112376580580bbf8d36bf02cd71ccdcc9feb/trees][source]].
 This worked by using php to call the python program which was running pygame headless. 
 Instead of showing the tree being built, it would just save the image. 
 Unfortunately when I moved my website over to be [[./migrating-to-S3.org][statically hosted]] I

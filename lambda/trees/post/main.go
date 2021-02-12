@@ -13,6 +13,8 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 )
 
+var dev = false
+
 // TreeParam is the structure that HandleRequest expects to receive.
 type TreeParam struct {
 	LeftLength  float64 `json:"leftLength"`
@@ -62,8 +64,6 @@ func HandleRequest(request events.APIGatewayProxyRequest) (response events.APIGa
 	response.Body = fmt.Sprintf(`{"message":"%s"}`, fileName)
 	return
 }
-
-var dev = false
 
 func main() {
 	// For testing locally

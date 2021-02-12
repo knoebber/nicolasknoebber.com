@@ -1,102 +1,84 @@
-const savedComments = new Set();
+const commentAPI = 'https://atmxemymx0.execute-api.us-west-2.amazonaws.com/prod/comments';
 
+// postNum is expected to be included in posts that embed this script.
 if (typeof postNum !== 'undefined') fetchComments()
 
 function fetchComments() {
-  fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/get_comments', {
-      method: 'POST',
-      body: JSON.stringify({ post_number: postNum }),
-      headers: {
-        'Content-Type':'application/json'
-      }
-    }).then(response => handleResponse(response))
-      .then(data     => handleComments(data))
-      .catch(err     => console.log(err));
+  fetch(`${commentAPI}/${postNum}`)
+    .then((response) => parseResponse(response))
+    .then((data) => renderComments(data))
+    .catch((err) => console.log(err));
 }
 
-function handleResponse(response) {
+function parseResponse(response) {
   if (response.ok) return response.json();
   throw new Error(response.statusText);
 }
 
-function handleComments(comments){
+function renderComments(comments){
   const commentDiv = document.createElement('div');
   commentDiv.setAttribute('id', 'comment-section');
   commentDiv.innerHTML = `
       <hr/>
       <h2>Comments</h2>
-      <form>
-        <input id=\"name\" placeholder=\"your name\" maxlength=16 required>
-        <textarea id=\"comment-body\" placeholder=\"your comment\" required></textarea>
-        <button id=\"submit-button\" type=\"button\" onclick=\"saveComment()\"> Submit </button>
+      <form id="comment-form" onsubmit="postComment(event)">
+        <label for="commentName">Name:</label>
+        <input name="commentName" maxlength=16 required>
+        <label for="commentBody">Comment:</label>
+        <textarea name="commentBody" required></textarea>
+        <input id="submit-button" type="submit" value="Submit">
       </form>
-      <div id=\"comments\">
+      <div id="comments">
       </div>`;
-  document
-    .getElementById('content')
-    .appendChild(commentDiv);
 
-  if (!comments || comments.length === 0) {
-    document
-      .getElementById('comments')
-      .innerHTML("There's nothing here yet")
-  } else {
-    comments.Items.forEach(c => displayComment(c));
-  }
+  document.getElementById('content').appendChild(commentDiv);
+  comments.forEach((c) => renderComment(c));
 }
 
-function displayComment(comment){
-  // Strip the comment of all white space and add it to the comment set.
-  savedComments.add(comment.comment_body.S.replace(/\s/g,''));
+// Strip HTML from user submitted content.
+function sanitizeString(s) {
+    const temp = document.createElement('div');
+    temp.textContent = s;
+    return temp.innerHTML;
+}
 
+function renderComment({ commentName, commentBody, timestamp }){
   const commentSection = document.getElementById('comments');
 
-  const date = new Date(parseInt(comment.time_stamp.N))
+  const date = new Date(timestamp);
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
   const newComment = document.createElement('div');
 
-  newComment.classList.add("comment");
+  newComment.classList.add('comment');
   newComment.innerHTML = `
     <div class="comment-name">
-      <strong>${comment.comment_name.S}<span class="date">${month}/${day}/${year}</span></strong>
+      <strong>${sanitizeString(commentName)}<span class="date">${month}/${day}/${year}</span></strong>
     </div>
     <div class="comment-body">
-      ${comment.comment_body.S}
+      ${sanitizeString(commentBody)}
     </div>`;
 
   commentSection.prepend(newComment);
 }
 
-function saveComment(){
-  const sanitizeString = (s) => {
-    const temp = document.createElement('div');
-    temp.textContent = s;
-    return temp.innerHTML;
-  };
+function postComment(e) {
+  e.preventDefault();
 
-  const commentName = sanitizeString(document.getElementById('name').value);
-  const commentBody = sanitizeString(document.getElementById('comment-body').value);
-
-  // Check that the comment name/body are not empty, and that the comment body is not a duplicate.
-  if (!(commentName || commentBody) || savedComments.has(commentBody.replace(/\s/g,''))) return;
-
-  document.getElementById("submit-button").disabled = true;
-
-  fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment', {
+  const formData = new FormData(e.target);
+  const body = { postNumber: postNum };
+  [...formData.entries()].forEach(([key, value]) => body[key] = sanitizeString(value));
+  document.getElementById('submit-button').disabled = true;
+  fetch(commentAPI, {
     method: 'POST',
-    body: JSON.stringify({
-      postNumber: postNum,
-      commentName,
-      commentBody,
-    }),
+    body: JSON.stringify(body),
     headers: {
       'Content-Type':'application/json'
     }
-  }).then(response => response.json())
-    .then(data     => displayComment(data))
-    .then(()       => document.getElementById("submit-button").disabled = false)
-    .catch(err     => console.log(err));
+  }).then((response) => parseResponse(response))
+    .then((data) => renderComment(data))
+    .then(() => document.getElementById('submit-button').disabled = false)
+    .catch((err) => alert(`falied to post comment: ${err}`))
 }

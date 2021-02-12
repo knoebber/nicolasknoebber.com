@@ -5,49 +5,28 @@
 const postNum = 6;
 </script>
 #+END_EXPORT
+* Introduction
+In this post I explain how I implemented a serverless commenting
+system with AWS. Requirements:
 
-My goal for this post is explain how I implemented a serverless
-commenting system with AWS.  The first step was to figure out the
-requirements:
-
-+ An input for a name
-+ A text area for the comment body
-+ A button to submit
-+ An area to show previously submitted comments, newest first
 + A way to give a post a unique identifier so that it could pull its own comments
++ Database of comments
 + An API to GET and POST comments
-+ A database
++ HTML form
++ A display for previously submitted comments, newest first
 
-I started with the easy part first - a form.
-
-#+BEGIN_SRC html
-<h2>Comments</h2>
-<form>
-  <input id="name" placeholder="your name" maxlength=16 required>
-  <textarea id="comment-body\" placeholder=\"your comment\" required></textarea>
-  <button id="submit-button" type="button" onclick="saveComment()"> Submit </button>
-</form>
-<div id="comments">
-<!-- Individual comments will be inserted here -->
-</div>;
-#+END_SRC
-
-Next I had to figure out how to embed an identifier in each post. I
-decided to keep it simple: include a script tag in every post that
-declares a constant:
+The first problem I faced was giving each post it's own number. I
+decided to keep it simple and embed a script in the source of each post:
 #+BEGIN_SRC html
 <script type="text/javascript">
 const postNum = 6;
 </script>
 #+END_SRC
 
-Ideally I would insert this automatically when the post is compiled by
-sorting the posts by their dates and counting up.
-
-With the markup done, I moved on to creating an API for getting and
-posting to comment database.
-
-*** Creating a Table in DynamoDB
+* DynamoDB
+Next I had to find a way to store the data. In general I use SQL
+databases, but for this task it seemed overkill as I don't have any
+other relational data for this site. I decided to use AWS DynamoDB.
 
 DynamoDB is a NoSQL database that can scale to any level. You can
 either choose to pay for the amount read/writes that you want to allow
@@ -74,10 +53,10 @@ primary key attributes impossible.
 
 If I were doing SQL, I would make a table like this:
 
-| id | post_number | comment_name | comment_body             | time_stamp |
-|----+-------------+--------------+--------------------------+------------|
-|  1 |           6 | nicolas      | cool post                | 1/14/19    |
-|  2 |           6 | nicolas      | sql is better than nosql | 1/14/19    |
+| ~id~ | ~post_number~ | ~comment_name~ | ~comment_body~           | ~time_stamp~ |
+|------+---------------+----------------+--------------------------+--------------|
+|    1 |             6 | nicolas        | cool post                | 1/14/19      |
+|    2 |             6 | nicolas        | sql is better than nosql | 1/14/19      |
 
 And query for it like this:
 #+BEGIN_SRC sql
@@ -116,60 +95,29 @@ key.
 [[file:../../images/comments-table.png]]
 
 Note that the ~comment_body~ and ~comment_name~ columns are not
-specified.  I can actually submit data with /any/ key to this table
-and it would create a new column for it. The only requirements are
+specified.  I can submit data with /any/ key to this table
+and a new column will be created for it. The only requirements are
 that ~post_number~ exists and that ~time_stamp~ is unique.
-*** Making API calls to Lambda for DynamoDB operations
+* API
 
-With the ~comment~ table setup, the next task was to create some back
-end functions to perform read/write operations. I chose to use Node.js
-with Lamdba / API Gateway to accomplish this.
+With the ~comment~ table setup, the next task was to create some
+Lambda functions to perform read/write operations. I used Golang to
+accomplish this.
 
 [[file:../../images/lambda-triggers.png]]
 
-Writing the Node.js to communicate with DynamoDB was straightforward,
-and before long I had two routes that I could call from cURL that
-saved and retrieved comments:
+Here are the Lambda handlers: [[https://github.com/knoebber/nicolasknoebber.com/blob/master/lambda/comment/get/main.go][get comments]] and [[https://github.com/knoebber/nicolasknoebber.com/blob/master/lambda/comment/post/main.go][post comment]]. I hooked
+these up with API Gateway as proxy integrations.
 
-[[https://github.com/knoebber/personal-website/blob/master/lambda/get_comments/index.js][Get comments handler]]
+I wrote some JavaScript to handle generating the form, retrieving comments,
+and posting comments: [[https://github.com/knoebber/nicolasknoebber.com/blob/master/posts/js/comments.js][comments.js]]
 
-[[https://github.com/knoebber/personal-website/blob/master/lambda/post_comment/index.js][Post comments handler]]
-
-Next I added some JavaScript to handle the submit button:
-#+BEGIN_SRC javascript
- function saveComment(){
-  fetch('https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment', {
-    method: 'POST',
-    body: JSON.stringify({
-      postNumber:postNum,
-      commentName:name,
-      commentBody:comment
-    }),
-    headers: {
-      'Content-Type':'application/json'
-    }
-  }).then(response => response.json())
-    .then(data     => displayComment(data))
-    .catch(err     => console.log(err));
-}
- function displayComment(comment){
-  const comments = document.getElementById('comments');
-  const date = new Date(parseInt(comment.time_stamp.N))
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  const newComment = document.createElement('div');
-  newComment.classList.add("comment");
-  newComment.innerHTML = `
-    <div class="comment-name">
-       <strong>${comment.comment_name.S}<span class="date">${month}/${day}/${year}</span></strong>
-    </div>
-    <div class="comment-body">
-      ${comment.comment_body.S}
-    </div>`;
-   comments.prepend(newComment);
-}
+Then I updated my static site generator to embed the following in every post:
+#+BEGIN_SRC html
+<noscript>
+  <div id=\"no-script-comment-message\">Enable scripts to see and post comments.</div>
+</noscript>
+<script type="text/javascript" src="js/comments.js"></script>
 #+END_SRC
 
 I hit the submit button and a yellow message popped up in my console:
@@ -184,9 +132,12 @@ this.
 
 I learned that cross origin requests can be allowed through CORS, or
 Cross Origin Resource Sharing. This can be enabled on the server that
-the resources are being requested from. At first I thought all I had
-to do was add a header to the lambda response:
-~"Access-Control-Allow-Origin" : "*"~
+the resources are being requested from. I added the following to my
+lambda handlers:
+#+begin_src go
+response.Headers = map[string]string{"Access-Control-Allow-Origin": "*"}
+#+end_src
+
 
 This means "allow any website to request this resource". I could
 change the ~*~ to ~nicolasknoebber.com~, but I test this often from
@@ -204,23 +155,15 @@ will first send an OPTIONS request, which API Gateway will respond
 back and say OK, this CORS request can go through. After receiving
 this reply, the actual POST request will be sent out that saves the
 comment.
-*** Finishing up
 
-The rest of the project came together quickly once I was able to
-contact API gateway from local JavaScript.  I added another fetch to
-get all the comments with the ~postNum~ constant as its parameter.
+* Finishing Up
+After I got around the CORs roadblock the rest of the project came
+together quickly. I added a bit of CSS to make the comments float in
+and thought about some anti spam measures. I decided not to worry
+about spam too much because I get such low traffic. Most importantly I
+have auto scaling off so my bill wouldn't spike if I were targeted for
+some reason.
 
-I added a few basic anti spam measures. While I could of used
-recaptcha, I would rather say no to having my readers train Googles
-AI.
-
-+ Prevent the same comment from being submitted twice by using a JavaScript ~Set~
-+ Disable the submit button while a create request is still asynchronously processing
-+ Sanitize comments from being saved with HTML tags
-
-Here's the final script for client side comment handling: [[../../posts/js/comments.js][comments.js]].
-
-More importantly I have auto scaling set to off in my AWS services, so
-my bill won't get large if a spammer does target me. For my entire AWS
-stack (S3 + DynamoDB + Lambda + API Gateway + Route53) I still pay
-only $1 a month.
+I'm happy with the result. It's easy to maintain and cheap: with my
+stack of CloudFront + S3 + DynamoDB + Lambda + API Gateway + Route53 I
+pay around $1 a month.

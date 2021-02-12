@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-curl $1 \
-  -H "Content-Type: application/json" \
-  -d @example_request.json \
-  https://l4oejeyzok.execute-api.us-west-2.amazonaws.com/default/post_comment | python -mjson.tool

@@ -18,7 +18,7 @@
                                                (org-publish-get-project-from-filename org-file)))
          (html-file (replace-regexp-in-string "org$" "html" (buffer-name)))
 	 (html-file-path (concat publishing-dir "/" html-file))
-	 (site-path (replace-regexp-in-string ".+personal-website" "" html-file-path))
+	 (site-path (replace-regexp-in-string ".+nicolasknoebber.com" "" html-file-path))
          (aws-s3-cmd
           (concat "aws s3 cp " html-file-path " s3://nicolasknoebber.com" site-path)))
     (eshell-command aws-s3-cmd)))
@@ -131,11 +131,11 @@ project."
     'format-exported-timestamps))
 
 (setq org-publish-project-alist
-      `(("personal-website"
+      `(("nicolasknoebber.com"
          :components ("main" "posts"))
         ("main"
-         :publishing-directory "~/projects/personal-website"
-         :base-directory "~/projects/personal-website/src"
+         :publishing-directory "~/projects/nicolasknoebber.com"
+         :base-directory "~/projects/nicolasknoebber.com/src"
          :publishing-function org-html-publish-to-html
          :section-numbers nil
          :with-toc nil
@@ -146,8 +146,8 @@ project."
          :html-head-include-default-style nil
          )
         ("posts"
-         :publishing-directory "~/projects/personal-website/posts"
-         :base-directory "~/projects/personal-website/src/posts"
+         :publishing-directory "~/projects/nicolasknoebber.com/posts"
+         :base-directory "~/projects/nicolasknoebber.com/src/posts"
          :publishing-function org-html-publish-to-html
          :html-head ,html-posts-head
          :html-head-include-scripts nil
@@ -163,8 +163,8 @@ project."
          :sitemap-filename "index.org"
 	 )
 	("posts-rss"
-	 :publishing-directory "~/projects/personal-website/posts"
-         :base-directory "~/projects/personal-website/src/posts"
+	 :publishing-directory "~/projects/nicolasknoebber.com/posts"
+         :base-directory "~/projects/nicolasknoebber.com/src/posts"
 	 :base-extension "org"
 	 :exclude "index.org"
 	 :publishing-function publish-posts-rss-feed

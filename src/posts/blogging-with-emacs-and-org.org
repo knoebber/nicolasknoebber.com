@@ -17,7 +17,7 @@ I read quite a few other blog posts that described setting up
 org-mode as a static generator. Confession: sometimes I skipped all the words and
 went right for the elisp examples. To return the favor, here's my
 up to date code:
-+ [[https://github.com/knoebber/personal-website/blob/master/src/site.el][site.el]]
++ [[https://github.com/knoebber/nicolasknoebber.com/blob/master/src/site.el][site.el]]
 + [[https://dotfilehub.com/knoebber/emacs][init.el]]
 * Introduction
 Recently I've been using emacs for more of my workflow. It's great to
@@ -107,7 +107,7 @@ Finally, deindent the old markdown code blocks by 4 spaces.
 Next I decided on a site structure. Most org-mode publishing examples
 show the directory containing the HTML separate from the source files.
 
-E.G. ~~/projects/personal-website => ~/public_html~
+E.G. ~~/projects/nicolasknoebber.com => ~/public_html~
 
 I wanted the HTML to be in the same directory as the org source.  The
 trick is a ~src/~ folder that mirrors the parent directory.
@@ -139,15 +139,15 @@ components that make up the project.  I split my website into two
 components: main, and posts.
 #+BEGIN_SRC elisp
 (setq org-publish-project-alist
-      `(("personal-website"
+      `(("nicolasknoebber.com"
          :components ("main" "posts"))
 	("main"
-	 :publishing-directory "~/projects/personal-website"
-	 :base-directory "~/projects/personal-website/src")
+	 :publishing-directory "~/projects/nicolasknoebber.com"
+	 :base-directory "~/projects/nicolasknoebber.com/src")
 	 :publishing-function org-html-publish-to-html
         ("posts"
-         :publishing-directory "~/projects/personal-website/posts"
-	 :base-directory "~/projects/personal-website/src/posts"
+         :publishing-directory "~/projects/nicolasknoebber.com/posts"
+	 :base-directory "~/projects/nicolasknoebber.com/src/posts"
 	 :publishing-function org-html-publish-to-html)))
 #+END_SRC
 * Include Files
@@ -230,11 +230,11 @@ included CSS/JavaScript, table of contents, and section numbers.
 *Completed org-publish-project-alist*
 #+BEGIN_SRC elisp
 (setq org-publish-project-alist
-      `(("personal-website"
+      `(("nicolasknoebber.com"
          :components ("main" "posts"))
 	("main"
-	 :publishing-directory "~/projects/personal-website"
-	 :base-directory "~/projects/personal-website/src"
+	 :publishing-directory "~/projects/nicolasknoebber.com"
+	 :base-directory "~/projects/nicolasknoebber.com/src"
 	 :publishing-function org-html-publish-to-html
 	 :section-numbers nil
 	 :with-title nil
@@ -244,8 +244,8 @@ included CSS/JavaScript, table of contents, and section numbers.
 	 :html-head-include-scripts nil
 	 :html-head-include-default-style nil)
 	("posts"
-         :publishing-directory "~/projects/personal-website/posts"
-	 :base-directory "~/projects/personal-website/src/posts"
+         :publishing-directory "~/projects/nicolasknoebber.com/posts"
+	 :base-directory "~/projects/nicolasknoebber.com/src/posts"
 	 :publishing-function org-html-publish-to-html
 	 :section-numbers nil
 	 :html-head ,html-posts-head
@@ -264,8 +264,8 @@ files.
 (defun export-nicolasknoebber ()
   "Build nicolasknoebber.com."
   (interactive)
-  (load-file "~/projects/personal-website/src/site.el")
-  (org-publish "personal-website" t)) ;; Add t to force all files to republish.
+  (load-file "~/projects/nicolasknoebber.com/src/site.el")
+  (org-publish "nicolasknoebber.com" t)) ;; Add t to force all files to republish.
 
 (with-eval-after-load "org"
   (define-key org-mode-map (kbd "C-c c") 'publish-site))
@@ -284,7 +284,7 @@ my site's s3 bucket.
                                                (org-publish-get-project-from-filename org-file)))
          (html-file (replace-regexp-in-string "org$" "html" (buffer-name)))
 	 (html-file-path (concat publishing-dir "/" html-file))
-	 (site-path (replace-regexp-in-string ".+personal-website" "" html-file-path))
+	 (site-path (replace-regexp-in-string ".+nicolasknoebber.com" "" html-file-path))
          (aws-s3-cmd
           (concat "aws s3 cp " html-file-path " s3://nicolasknoebber.com" site-path)))
     (eshell-command aws-s3-cmd)))

@@ -1,6 +1,7 @@
 #+title: Moving My Website to Amazon S3
 #+date: <2018-07-24 Tue>
 #+BEGIN_EXPORT html
+<!-- TODO update for cloudfront -->
 <script type="text/javascript">
 const postNum = 5;
 </script>
@@ -52,7 +53,7 @@ and then including only certain types.
 
 #+BEGIN_SRC bash
 #!/usr/bin/bash
- aws s3 sync $HOME/projects/personal-website s3://nicolasknoebber.com \
+ aws s3 sync $HOME/projects/nicolasknoebber.com s3://nicolasknoebber.com \
 --exclude "*" \
 --include "*.html" \
 --include "*.png" \
@@ -69,7 +70,7 @@ to my bucket.
 
 *~/.bash_profile*
 #+BEGIN_SRC bash
-export PATH=$PATH:/$HOME/projects/personal-website/scripts
+export PATH=$PATH:/$HOME/projects/nicolasknoebber.com/scripts
 #+END_SRC
 
 Now for the important part: making these uploaded html files public on
@@ -111,9 +112,9 @@ but under the static web hosting menu I'll check 'Redirect all
 requests', and then point it to the original bucket name.
 
 There are many DNS services, but to keep with the Amazon theme, I'll
-use [Amazon Route 53](https://aws.amazon.com/route53/) From here
-navigate into hosted zones. I'll create a new hosted zone with the
-same name as my bucket, *nicolasknoebber.com*
+use [[https://aws.amazon.com/route53/][Amazon Route 53]] From here navigate into hosted zones. I'll create
+a new hosted zone with the same name as my bucket,
+*nicolasknoebber.com*
 
 This generate a NS (name server) type row. Now Route53 needs to be
 told to point the traffic towards S3. I'll create a record set named

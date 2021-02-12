@@ -1,3 +1,4 @@
+const treeAPI = 'https://atmxemymx0.execute-api.us-west-2.amazonaws.com/prod/trees';
 
 const prebuiltTrees = [
   {
@@ -87,7 +88,7 @@ function createTree(submitPressed) {
   const leftLength = document.getElementById('left-length').value;
   const leftAngle = document.getElementById('left-angle').value;
 
-  fetch('https://jkdh1nfr8j.execute-api.us-west-2.amazonaws.com/default/trees', {
+  fetch(treeAPI, {
     method: 'POST',
     body: JSON.stringify({
       rightLength: parseInt(rightLength),
@@ -99,7 +100,7 @@ function createTree(submitPressed) {
       'Content-Type':'application/json'
     }
   }).then(response => response.json())
-    .then(data => document.getElementById('lambda-go-tree').src = `images/trees/${data.message}`)
+    .then(data => document.getElementById('lambda-go-tree').src = `https://nicolasknoebber.com/posts/images/trees/${data.message}`)
     .catch(err => console.log(err))
     .finally(() => {
       document.getElementById('create-tree-button').disabled = false;
