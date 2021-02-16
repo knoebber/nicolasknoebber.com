@@ -20,16 +20,16 @@ up to date code:
 + [[https://github.com/knoebber/nicolasknoebber.com/blob/master/src/site.el][site.el]]
 + [[https://dotfilehub.com/knoebber/emacs][init.el]]
 * Introduction
-Recently I've been using emacs for more of my workflow. It's great to
+Recently I've been using Emacs for more and more of my workflow. It's great to
 have the same environment regardless of platform. Packages like
-evil-mode, helm and magit make emacs a joy to use.
+evil-mode, helm and magit make Emacs a joy to use.
 
 But I had one major annoyance: this website was created with a
 hodgepodge of HTML, python, and markdown.
 
 *In this post I describe how I generate my site from Org source files.*
 
-If you aren't familar with [[https://www.gnu.org/software/emacs][emacs]] or [[https://orgmode.org][org]] then here's a quick summary:
+If you aren't familar with [[https://www.gnu.org/software/emacs][Emacs]] or [[https://orgmode.org][org-mode]] then here's a quick summary:
 Emacs is a lisp interpreter that comes with functions for editing
 text. It's a platform that allows you to build your own IDE. Org is an
 Emacs extension for writing, formatting, and publishing documents.
@@ -150,111 +150,230 @@ components: main, and posts.
 	 :base-directory "~/projects/nicolasknoebber.com/src/posts"
 	 :publishing-function org-html-publish-to-html)))
 #+END_SRC
-* Include Files
+* Include and Generate Content
 Next I configured the publisher to include a header and footer in
 every page. I wanted these to look the same on all the pages. You can
 specify these by setting the ~html-postamble~ and ~html-preamble~
 properties in the project association list.
 
 You can also set the content that is inserted in the ~<head>~ tag. I
-used this to include CSS files. I made the header a simple link that
-goes back up a level.
+use this to include a CSS stylesheet. I included a header with a few
+links for navigation.
 
 For the footer I added links to Emacs/Org, their logos, their
 respective versions that were used, and the date the file was last
-exported. For the posts component, I also add a noscript tag for
+exported. For the posts component, I also have a noscript tag for
 comments.
+
+I utilize org's sitemap feature to automatically generate [[https://raw.githubusercontent.com/knoebber/nicolasknoebber.com/master/src/posts/index.org][index.org]]
+which links to all the posts.
+
+Here are a few snippets from [[https://github.com/knoebber/nicolasknoebber.com/blob/master/src/site.el][site.el]]
 #+BEGIN_SRC elisp
-;; Style components
-(defconst html-style "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />")
-
-;; Set main <head>
-(defconst html-main-head
-  (concat "<link rel=\"stylesheet\" type=\"text/css\" href=\"includes.css\" />" html-style))
-
-;; Set posts <head>
-(defconst html-posts-head
-  (concat "<link rel=\"stylesheet\" type=\"text/css\" href=\"../includes.css\" />" html-style))
-
-(defun postamble-text (text)
-  "Wraps TEXT in a span with class postamble-text."
-  (format "<span class=\"postamble-text\">%s</span>" text))
-
-(defun postamble-version (version)
-  "Wraps VERSION in a span with class version-number."
-  (format "<span class=\"postamble-text version-number\">%s</span>" version))
+(require 'ox)
+(defconst html-main-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\" />")
+(defconst html-posts-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\" />")
 
 (defconst html-postamble
   (concat
-   "<span id=\"made-with\">"
-   (postamble-text "powered by&nbsp;&nbsp;")
-   "<a href=\"https://www.gnu.org/software/emacs\">"
-   "<img src=\"../logo/emacs.svg\" id=\"emacs-logo\" alt=\"Emacs\">"
-   "</a>"
-   (postamble-version emacs-version)
-   "&nbsp<a href=\"https://orgmode.org\">"
-   "<img src=\"../logo/org-mode.svg\" id=\"org-mode-logo\" alt=\"Org\">"
-   "</a>"
-   (postamble-version org-version)
-   "</span>"
-   "<span id=\"published\">"
-   (format "exported on %s" (format-time-string "%M/%D/%Y"))
+   "   <span id=\"made-with\">
+   &nbsp;&nbsp;generated with&nbsp;&nbsp;
+   <a
+     href=\"https://www.gnu.org/software/emacs\"
+   ><img src=\"/logo/emacs.svg\" id=\"emacs-logo\" alt=\"Emacs\"></a>"
+   "&nbsp;" emacs-version "&nbsp;"
+   "<a href=\"https://orgmode.org\"
+    ><img
+         src=\"/logo/org-mode.svg\"
+         id=\"org-mode-logo\" alt=\"Org\"></a>"
+   org-version
+   (format " on %s" (format-time-string "%m/%d/%y"))
    "</span>"))
 
-(defconst html-postamble
-  (concat
-   "<span id=\"made-with\">"
-   (postamble-text "powered by&nbsp;&nbsp;")
-   "<a href=\"https://www.gnu.org/software/emacs\">"
-   "<img src=\"../logo/emacs.svg\" id=\"emacs-logo\" alt=\"Emacs\">"
-   "</a>"
-   (postamble-version emacs-version)
-   "&nbsp<a href=\"https://orgmode.org\">"
-   "<img src=\"../logo/org-mode.svg\" id=\"org-mode-logo\" alt=\"Org\">"
-   "</a>"
-   (postamble-version org-version)
-   "</span>"
-   "<span id=\"published\">"
-   (format "%s" (format-time-string "%m/%e/%y"))
-   "</span>"))
 
 (defconst html-posts-postamble
   (concat
    html-postamble
-   "<noscript><div id=\"no-script-comment-message\">Enable scripts to see and post comments.</div></noscript>"
-   "<script type=\"text/javascript\" src=\"js/comments.js\"></script>"))
-#+END_SRC
-I disabled some of the default org publishing behavior such as
-included CSS/JavaScript, table of contents, and section numbers.
+   "
+<noscript>
+  <div id=\"no-script-comment-message\">Enable scripts to see and post comments.</div>
+</noscript>
+<script type=\"text/javascript\" src=\"js/comments.js\"></script>"))
 
-*Completed org-publish-project-alist*
-#+BEGIN_SRC elisp
+(defconst html-preamble "<a href=\"/\">Home</a>")
+(defconst html-posts-preamble
+  (concat html-preamble "
+<a href=\"/posts/index.html\">Blog</a>
+<a href=\"/posts/rss.xml\">
+       <img id=\"rss-logo\" src=\"/logo/rss.png\"></a>
+"))
+
+  
+(defun generate-posts-sitemap(title list)
+  "Default site map, as a string.
+TITLE is the title of the site map.  LIST is an internal
+representation for the files to include, as returned by
+`org-list-to-lisp'.  PROJECT is the current project.  This is
+almost identical to the version in the org publish source code.
+The only change I made is wrapping it in the .sitemap div."
+  (concat
+   "#+TITLE: " title
+   "\n\n"
+   "#+begin_sitemap\n"
+   (org-list-to-org list)
+   "\n#+end_sitemap"))
+
+(defun format-sitemap-entry (entry _style project)
+  "Format ENTRY in PROJECT.
+Leaves the rss page out of the main sitemap list."
+  (if (equal "rss.org" entry) ""
+    (format "[[file:%s][%s]] =%s="
+	    entry
+	    (org-publish-find-title entry project)
+	    (format-time-string "%m/%d/%Y" (org-publish-find-date entry project)))))
+
+(defun format-exported-timestamps(timestamp _backend _channel)
+  "Remove <> from exported org TIMESTAMP."
+  (print (replace-regexp-in-string "&[lg]t;" "" timestamp))
+  (replace-regexp-in-string "&[lg]t;" "" timestamp)
+)
+
+
+(eval-after-load 'ox
+  '(add-to-list
+    'org-export-filter-timestamp-functions
+    'format-exported-timestamps))
+
 (setq org-publish-project-alist
       `(("nicolasknoebber.com"
          :components ("main" "posts"))
-	("main"
-	 :publishing-directory "~/projects/nicolasknoebber.com"
-	 :base-directory "~/projects/nicolasknoebber.com/src"
-	 :publishing-function org-html-publish-to-html
-	 :section-numbers nil
-	 :with-title nil
-	 :html-head ,html-main-head ;; The , is so the macro evaluates the expression (because it uses concat).
-	 :html-preamble "<a href=\"/\">Nicolas Knoebber</a>"
-	 :html-postamble ,html-postamble
-	 :html-head-include-scripts nil
-	 :html-head-include-default-style nil)
-	("posts"
+        ("main"
+         :publishing-directory "~/projects/nicolasknoebber.com"
+         :base-directory "~/projects/nicolasknoebber.com/src"
+         :publishing-function org-html-publish-to-html
+         :section-numbers nil
+         :with-toc nil
+         :html-head ,html-main-head
+         :html-preamble ,html-preamble
+         :html-postamble ,html-postamble
+         :html-head-include-scripts nil
+         :html-head-include-default-style nil
+         )
+        ("posts"
          :publishing-directory "~/projects/nicolasknoebber.com/posts"
-	 :base-directory "~/projects/nicolasknoebber.com/src/posts"
-	 :publishing-function org-html-publish-to-html
-	 :section-numbers nil
-	 :html-head ,html-posts-head
-	 :html-head-include-scripts nil
-	 :html-head-include-default-style nil
-	 :html-preamble "<a href=\"../blog.html\">Blog</a>"
-	 :html-postamble ,html-posts-postamble
+         :base-directory "~/projects/nicolasknoebber.com/src/posts"
+         :publishing-function org-html-publish-to-html
+         :html-head ,html-posts-head
+         :html-head-include-scripts nil
+         :html-head-include-default-style nil
+         :html-preamble ,html-posts-preamble
+         :html-postamble ,html-posts-postamble
+         :auto-sitemap t
+         :sitemap-title "Blog"
+         :sitemap-function generate-posts-sitemap
+         :sitemap-format-entry format-sitemap-entry
+         :sitemap-style list
+         :sitemap-sort-files anti-chronologically
+         :sitemap-filename "index.org"
 	 )))
 #+END_SRC
+* RSS Feed
+The final step was to add an RSS feed. This was the trickiest bit as
+its not a default feature of org-mode. I found [[https://code.orgmode.org/bzg/org-mode/raw/master/contrib/lisp/ox-rss.el][ox-rss]] which is
+included in the [[https://orgmode.org/worg/org-contrib/index.html][org-contrib]] package. To load the library I added the
+following to my [[https://dotfilehub.com/knoebber/emacs][init.el]]:
+#+begin_src elisp
+  (use-package org
+    :ensure org-plus-contrib)
+#+end_src
+The problem was that ~ox-rss~ expects a single org file to convert
+into a XML feed.  However, my blog is composed of many org files, so
+this wouldn't work out of the box.
+
+I searched the web found and found [[https://writepermission.com/org-blogging-rss-feed.html#org9e3dd75][this post]] which outlines a solution: hack
+the sitemap generator to automatically generate a single file from
+all the posts and then tell ~ox-rss~ to export that. I decided to
+create another sitemap instead of using the one I already had because the
+formats are different.
+
+The RSS exporter expects entries formatted like this:
+#+begin_src org
+  #+TITLE: Example Feed
+  * Example Post
+  :properties:
+  :rss_permalink: example.html
+  :pubdate: <2020-12-26 Sat>
+  :ID:       f0ccd140-db92-4af4-9759-831fdf69b447
+  :END:
+  * Another Post
+  :properties:
+  :rss_permalink: another-post.html
+  :pubdate: <2020-03-30 Mon>
+  :ID:       a42371e7-f67a-4445-b4df-000e76bdce86
+  :END:
+#+end_src
+To make the RSS sitemap match this format I provided the following functions:
+#+begin_src emacs-lisp
+    (defun posts-rss-feed (title list)
+      "Generate a sitemap of posts that is exported as a RSS feed.
+    TITLE is the title of the RSS feed.  LIST is an internal
+    representation for the files to include.  PROJECT is the current
+    project."
+      (concat
+       "#+TITLE: " title "\n\n"
+	      (org-list-to-subtree list)))
+
+
+    (defun format-posts-rss-feed-entry (entry _style project)
+      "Format ENTRY for the posts RSS feed in PROJECT."
+      (let* (
+	     (title (org-publish-find-title entry project))
+	     (link (concat (file-name-sans-extension entry) ".html"))
+	     (pubdate (format-time-string (car org-time-stamp-formats)
+	      (org-publish-find-date entry project))))
+	(message pubdate)
+	(format "%s
+    :properties:
+    :rss_permalink: %s
+    :pubdate: %s
+    :end:\n"
+		title
+		link
+		pubdate)))
+#+end_src
+Finally I added a new project to my publish alist:
+#+begin_src emacs-lisp
+  ("posts-rss"
+   :publishing-directory "~/projects/nicolasknoebber.com/posts"
+   :base-directory "~/projects/nicolasknoebber.com/src/posts"
+   :base-extension "org"
+   :exclude "index.org"
+   :publishing-function publish-posts-rss-feed
+   :rss-extension "xml"
+   :html-link-home "https://nicolasknoebber.com/posts/"
+   :html-link-use-abs-url t
+   :html-link-org-files-as-html t
+   :auto-sitemap t
+   :sitemap-function posts-rss-feed
+   :sitemap-title "Nicolas Knoebber's Blog"
+   :sitemap-filename "rss.org"
+   :sitemap-style list
+   :sitemap-sort-files anti-chronologically
+   :sitemap-format-entry format-posts-rss-feed-entry)
+  )
+	#+end_src
+Here's the sitemap generates: [[https://raw.githubusercontent.com/knoebber/nicolasknoebber.com/master/src/posts/rss.org][rss.org]]
+
+Then I configured ~ox-rss~ to ignore everything but rss.org and export it as rss:
+#+begin_src emacs-lisp
+  (defun publish-posts-rss-feed (plist filename dir)
+    "Publish PLIST to RSS when FILENAME is rss.org.
+  DIR is the location of the output."
+    (if (equal "rss.org" (file-name-nondirectory filename))
+	(org-rss-publish-to-rss plist filename dir)))
+
+#+end_src
+Final result: https://nicolasknoebber.com/posts/rss.xml
 * Functions for Publishing
 I created a key bind to load =site.el= and publish all of my org
 files.
@@ -290,9 +409,9 @@ my site's s3 bucket.
     (eshell-command aws-s3-cmd)))
 #+END_SRC
 * Results
-This is a great improvement from my previous system. The main benefits
-are ease of publishing, a better environment for writing, and easy to
-setup on a new machine.
+This is a great improvement from my previous system: it's easy to
+publish, the writing environment is amazing, I have a RSS feed,
+and it's easy to setup on a new machine.
 
 In markdown I would often accidentally create dead links
 and not know until I exported it. Now creating
@@ -304,7 +423,7 @@ links is a streamlined process:
 4. Click the new link, which opens the contents in a new buffer
 
 Emacs will even display images. Web links are also clickable and open
-in your default browser.
+in the default browser.
 
 Another frustration I had was syntax in exported code blocks. I was
 using [[http://pygments.org/][pygments]], which did a nice job usually.  However, it was a pain

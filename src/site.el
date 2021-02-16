@@ -5,8 +5,8 @@
 
 ;;; Code:
 (require 'ox)
-(defconst html-main-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />")
-(defconst html-posts-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\" />")
+(defconst html-main-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\" />")
+(defconst html-posts-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\" />")
 
 (defun publish-nicolasknoebber-file ()
   "Exports current org file to html and uploads to s3://nicolasknoebber.com."
@@ -100,8 +100,6 @@ project."
 (defun format-posts-rss-feed-entry (entry _style project)
   "Format ENTRY for the posts RSS feed in PROJECT."
   (let* (
-	 ;; (file (org-publish--expand-file-name entry project))
-	 ;; (date (format-time-string "%Y-%m-%d" (org-publish-find-date entry project)))
 	 (title (org-publish-find-title entry project))
 	 (link (concat (file-name-sans-extension entry) ".html"))
 	 (pubdate (format-time-string (car org-time-stamp-formats)
@@ -132,7 +130,7 @@ project."
 
 (setq org-publish-project-alist
       `(("nicolasknoebber.com"
-         :components ("main" "posts"))
+         :components ("main" "posts" "posts-rss"))
         ("main"
          :publishing-directory "~/projects/nicolasknoebber.com"
          :base-directory "~/projects/nicolasknoebber.com/src"

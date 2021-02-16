@@ -4,95 +4,95 @@
 :properties:
 :rss_permalink: dotfile.html
 :pubdate: <2020-12-26 Sat>
-:ID:       3f8e6587-3453-4eaa-9d6c-2f29d8fdd849
+:ID:       f0ccd140-db92-4af4-9759-831fdf69b447
 :END:
 * Sourdough Recipes
 :properties:
 :rss_permalink: sourdough-recipes.html
 :pubdate: <2020-03-30 Mon>
-:ID:       9e9e1040-c27e-442a-83cc-ecac15efcd7d
+:ID:       a42371e7-f67a-4445-b4df-000e76bdce86
 :END:
 * Once Well By Roger Knoebber
 :properties:
 :rss_permalink: once-well.html
 :pubdate: <2019-12-29 Sun>
-:ID:       bfefa691-4e67-4c1c-bbfa-311f178e5cd5
+:ID:       bc1d3738-2afb-46c0-a2a7-a796aee1c358
 :END:
 * Lenovo Carbon X1 Gen 7 + Manjaro Linux
 :properties:
 :rss_permalink: new-carbon-x1-manjaro.html
 :pubdate: <2019-12-28 Sat>
-:ID:       21c5790e-a41e-4400-8343-6bc0608275ce
+:ID:       f365afb0-16e2-41b1-8923-5684bcbcc48f
 :END:
 * Surviving the Winter
 :properties:
 :rss_permalink: surviving-the-winter.html
 :pubdate: <2019-11-17 Sun>
-:ID:       c958d1fa-1841-4ec0-bf83-32a31318d61b
+:ID:       09401448-8eb0-462f-af46-314e4ab111e4
 :END:
 * Running Season 2018-2019
 :properties:
 :rss_permalink: running-season-2019.html
 :pubdate: <2019-11-16 Sat>
-:ID:       af68e6ac-8d95-4c62-8544-80c5db610e53
+:ID:       40d19e2d-7847-449b-95ab-5347b056c947
 :END:
 * Blogging with Emacs and Org
 :properties:
 :rss_permalink: blogging-with-emacs-and-org.html
 :pubdate: <2019-08-14 Wed>
-:ID:       d9bd7b54-6871-43a6-8f7b-df13930e4296
+:ID:       41669622-9db0-42f2-b4ef-289d7ad201da
 :END:
 * RAGBRAI
 :properties:
 :rss_permalink: RAGBRAI.html
 :pubdate: <2019-08-03 Sat>
-:ID:       08804e2f-b9cf-42fb-8e5b-fc2eff43c4bc
+:ID:       d1a84f21-ef98-4309-9a01-22b9a790d38f
 :END:
 * Draw Trees in AWS with Golang
 :properties:
 :rss_permalink: image-generation-go-lambda-s3.html
 :pubdate: <2019-02-10 Sun>
-:ID:       7d441c71-da0f-437f-ba0e-afe49e74e1cc
+:ID:       23ad1bec-8142-4b1d-8b84-85c9ad631417
 :END:
 * Adding a Serverless Commenting System with AWS
 :properties:
 :rss_permalink: adding-comments.html
 :pubdate: <2019-01-14 Mon>
-:ID:       670d89ee-0567-472d-9539-803dda793b59
+:ID:       32fc6f1d-129d-4936-8fb4-b3ad2625a5b8
 :END:
 * Moving My Website to Amazon S3
 :properties:
 :rss_permalink: migrating-to-S3.html
 :pubdate: <2018-07-24 Tue>
-:ID:       32844ab6-63fe-417a-b9b3-0c928be415b0
+:ID:       98093ee3-7817-42dc-97c2-043f03d6ce9a
 :END:
 * Creating My Own Blogging Platform
 :properties:
 :rss_permalink: creating-my-blog.html
 :pubdate: <2018-07-19 Thu>
-:ID:       2ebf495d-7cf4-49c6-80c1-774344fe42f7
+:ID:       b8779cdf-3dd3-43b4-98a7-5bb98db0f71d
 :END:
 * Journey to San Jose del Cabo
 :properties:
 :rss_permalink: journey-to-san-jose-del-cabo.html
 :pubdate: <2018-07-12 Thu>
-:ID:       97b2e320-0e61-4190-9878-a834fc374dc5
+:ID:       b1fcd84b-2816-4874-82b5-f9551c5472c5
 :END:
 * About Me
 :properties:
 :rss_permalink: about-me.html
 :pubdate: <2018-07-07 Sat>
-:ID:       55529a54-77a6-4799-a23f-af6b2db49bcc
+:ID:       15ed155a-8e27-4858-94a2-ae2b572eb2b5
 :END:
 * Sailing to Ensenada
 :properties:
 :rss_permalink: sailing-to-ensenada.html
 :pubdate: <2018-06-25 Mon>
-:ID:       5776ee93-eab3-4d6d-baa9-b43cb76afdf5
+:ID:       936e362f-b35f-4bc0-8ad6-0d61a93a7893
 :END:
 * Taking a Break From Work
 :properties:
 :rss_permalink: taking-a-break-from-work.html
 :pubdate: <2018-06-10 Sun>
-:ID:       9c274140-7dfc-4a82-bac2-b42ed11bff15
+:ID:       9a02c668-6c35-45c7-84f8-a5bdcd568c24
 :END:
