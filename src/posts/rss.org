@@ -1,98 +1,104 @@
 #+TITLE: Nicolas Knoebber's Blog
 
+* Desks
+:properties:
+:rss_permalink: desks.html
+:pubdate: <2021-02-16 Tue>
+:ID:       5185fe6d-5164-4d2c-81b7-ca44e7559ba9
+:END:
 * I Wrote a Version Control System in Golang
 :properties:
 :rss_permalink: dotfile.html
 :pubdate: <2020-12-26 Sat>
-:ID:       f0ccd140-db92-4af4-9759-831fdf69b447
+:ID:       bb129100-2717-4ce9-807f-b6cb37aa7782
 :END:
 * Sourdough Recipes
 :properties:
 :rss_permalink: sourdough-recipes.html
 :pubdate: <2020-03-30 Mon>
-:ID:       a42371e7-f67a-4445-b4df-000e76bdce86
+:ID:       fd675ad9-6965-46fb-8f5a-be29cb4228b9
 :END:
 * Once Well By Roger Knoebber
 :properties:
 :rss_permalink: once-well.html
 :pubdate: <2019-12-29 Sun>
-:ID:       bc1d3738-2afb-46c0-a2a7-a796aee1c358
+:ID:       5483fa9c-55ff-494a-b713-aba35f7aed33
 :END:
 * Lenovo Carbon X1 Gen 7 + Manjaro Linux
 :properties:
 :rss_permalink: new-carbon-x1-manjaro.html
 :pubdate: <2019-12-28 Sat>
-:ID:       f365afb0-16e2-41b1-8923-5684bcbcc48f
+:ID:       fa794f80-ce18-4609-88c0-c8c57534c552
 :END:
 * Surviving the Winter
 :properties:
 :rss_permalink: surviving-the-winter.html
 :pubdate: <2019-11-17 Sun>
-:ID:       09401448-8eb0-462f-af46-314e4ab111e4
+:ID:       257ebf10-c5cc-4329-81ec-f5dc237a7c14
 :END:
 * Running Season 2018-2019
 :properties:
 :rss_permalink: running-season-2019.html
 :pubdate: <2019-11-16 Sat>
-:ID:       40d19e2d-7847-449b-95ab-5347b056c947
+:ID:       836d410f-dbb2-4c03-96b0-11d9a2fa3e52
 :END:
 * Blogging with Emacs and Org
 :properties:
 :rss_permalink: blogging-with-emacs-and-org.html
 :pubdate: <2019-08-14 Wed>
-:ID:       41669622-9db0-42f2-b4ef-289d7ad201da
+:ID:       fdf2eb6a-9a8b-4dc2-8afc-d6b2aedb9cd1
 :END:
 * RAGBRAI
 :properties:
 :rss_permalink: RAGBRAI.html
 :pubdate: <2019-08-03 Sat>
-:ID:       d1a84f21-ef98-4309-9a01-22b9a790d38f
+:ID:       f9d4dc92-280d-4591-a786-9f199dbda2bf
 :END:
 * Draw Trees in AWS with Golang
 :properties:
 :rss_permalink: image-generation-go-lambda-s3.html
 :pubdate: <2019-02-10 Sun>
-:ID:       23ad1bec-8142-4b1d-8b84-85c9ad631417
+:ID:       3e19bf99-19f6-44d9-95a9-f34975273878
 :END:
 * Adding a Serverless Commenting System with AWS
 :properties:
 :rss_permalink: adding-comments.html
 :pubdate: <2019-01-14 Mon>
-:ID:       32fc6f1d-129d-4936-8fb4-b3ad2625a5b8
+:ID:       13656295-0600-4e41-9619-b1fc2d05f701
 :END:
 * Moving My Website to Amazon S3
 :properties:
 :rss_permalink: migrating-to-S3.html
 :pubdate: <2018-07-24 Tue>
-:ID:       98093ee3-7817-42dc-97c2-043f03d6ce9a
+:ID:       e4267a92-2455-4f90-9bc5-085e2d3ba58e
 :END:
 * Creating My Own Blogging Platform
 :properties:
 :rss_permalink: creating-my-blog.html
 :pubdate: <2018-07-19 Thu>
-:ID:       b8779cdf-3dd3-43b4-98a7-5bb98db0f71d
+:ID:       bcd2bb5d-1cce-429b-a97c-d7774eee1f7c
 :END:
 * Journey to San Jose del Cabo
 :properties:
 :rss_permalink: journey-to-san-jose-del-cabo.html
 :pubdate: <2018-07-12 Thu>
-:ID:       b1fcd84b-2816-4874-82b5-f9551c5472c5
+:ID:       5b78da5e-fe3b-415e-9467-daa365940b7a
 :END:
 * About Me
 :properties:
 :rss_permalink: about-me.html
 :pubdate: <2018-07-07 Sat>
-:ID:       15ed155a-8e27-4858-94a2-ae2b572eb2b5
+:ID:       fee17c09-4ef8-476f-8aa4-e169b249647f
 :END:
 * Sailing to Ensenada
 :properties:
 :rss_permalink: sailing-to-ensenada.html
 :pubdate: <2018-06-25 Mon>
-:ID:       936e362f-b35f-4bc0-8ad6-0d61a93a7893
+:ID:       493d5f4f-6be1-49a8-a70c-a425cca6e25a
 :END:
 * Taking a Break From Work
 :properties:
 :rss_permalink: taking-a-break-from-work.html
 :pubdate: <2018-06-10 Sun>
-:ID:       9a02c668-6c35-45c7-84f8-a5bdcd568c24
+:ID:       6bde0fb4-4352-41ed-b3cf-dfda574885b4
 :END:

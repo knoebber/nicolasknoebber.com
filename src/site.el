@@ -75,11 +75,10 @@ The only change I made is wrapping it in the .sitemap div."
 (defun format-sitemap-entry (entry _style project)
   "Format ENTRY in PROJECT.
 Leaves the rss page out of the main sitemap list."
-  (if (equal "rss.org" entry) ""
-    (format "[[file:%s][%s]] =%s="
-	    entry
-	    (org-publish-find-title entry project)
-	    (format-time-string "%m/%d/%Y" (org-publish-find-date entry project)))))
+  (format "[[file:%s][%s]] =%s="
+          entry
+          (org-publish-find-title entry project)
+          (format-time-string "%m/%d/%Y" (org-publish-find-date entry project))))
 
 (defun publish-posts-rss-feed (plist filename dir)
   "Publish PLIST to RSS when FILENAME is rss.org.
@@ -87,14 +86,15 @@ DIR is the location of the output."
   (if (equal "rss.org" (file-name-nondirectory filename))
       (org-rss-publish-to-rss plist filename dir)))
 
-(defun posts-rss-feed (title list)
+(defun generate-posts-rss-sitemap (title list)
   "Generate a sitemap of posts that is exported as a RSS feed.
 TITLE is the title of the RSS feed.  LIST is an internal
 representation for the files to include.  PROJECT is the current
 project."
   (concat
-   "#+TITLE: " title "\n\n"
-          (org-list-to-subtree list)))
+   "#+TITLE: " title
+   "\n\n"
+   (org-list-to-subtree list)))
 
 
 (defun format-posts-rss-feed-entry (entry _style project)
@@ -104,8 +104,7 @@ project."
 	 (link (concat (file-name-sans-extension entry) ".html"))
 	 (pubdate (format-time-string (car org-time-stamp-formats)
 	  (org-publish-find-date entry project))))
-    (message pubdate)
-    (format "%s
+    (format "\n%s
 :properties:
 :rss_permalink: %s
 :pubdate: %s
@@ -153,6 +152,7 @@ project."
          :html-preamble ,html-posts-preamble
          :html-postamble ,html-posts-postamble
          :auto-sitemap t
+         :exclude "rss.org"
          :sitemap-title "Blog"
          :sitemap-function generate-posts-sitemap
          :sitemap-format-entry format-sitemap-entry
@@ -171,12 +171,12 @@ project."
 	 :html-link-use-abs-url t
 	 :html-link-org-files-as-html t
 	 :auto-sitemap t
-	 :sitemap-function posts-rss-feed
 	 :sitemap-title "Nicolas Knoebber's Blog"
-	 :sitemap-filename "rss.org"
+	 :sitemap-function generate-posts-rss-sitemap
 	 :sitemap-style list
 	 :sitemap-sort-files anti-chronologically
-	 :sitemap-format-entry format-posts-rss-feed-entry)
-	))
+	 :sitemap-format-entry format-posts-rss-feed-entry
+	 :sitemap-filename "rss.org"
+	)))
 
 ;;; site.el ends here
