@@ -23,7 +23,7 @@ yelling at strangers over the internet?). I could SSH into our
 departments Linux machines and finish lab work. Pretty slick!
 
 This was my first real at home development setup. Someone gave me an
-old low resolution monitor that hooked up without hesitation. Two
+old low resolution monitor that I hooked up without hesitation. Two
 monitors must be better then one, right? Now I could write code and
 browse Reddit at the same time! Very productive.
 
@@ -50,7 +50,7 @@ much furniture, but I was able to work with what I had.
 
 New year, new apartment. I transitioned to a single monitor + standup
 desk.  See if you can spot the 4 computers.
-[[file:../..//images/i-spy-4-computers.jpg]]
+[[file:../../images/i-spy-4-computers.jpg]]
 
 Bonus setup from the same apartment: working from the dining
 table. Instead of dual monitors, I was experimenting with dual
@@ -63,8 +63,8 @@ point in having them connected?
 
 I stayed at a house in Eugene for a few weeks and worked
 remotely. This is maybe my most conventional desk yet! A civilized
-MacBook + dongle setup. The mug has a delicious late in it for the
-record.  [[file:../../images/eugene-desk.jpg]]
+MacBook + dongle setup. (the mug has a delicious late in it)
+[[file:../../images/eugene-desk.jpg]]
 
 **Little River California, 2020**
 
