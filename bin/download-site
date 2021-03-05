@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-aws s3 sync s3://nicolasknoebber.com $HOME/projects/personal-website \
+aws s3 sync s3://nicolasknoebber.com ~/projects/nicolasknoebber.com \
 --exclude "*" \
 --include "*.png" \
 --include "*.jpg" \
