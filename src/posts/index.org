@@ -1,6 +1,7 @@
 #+TITLE: Blog
 
 #+begin_sitemap
+- [[file:fruit-trees.org][Fruit Trees]] =03/13/2021=
 - [[file:desks.org][Desks]] =02/16/2021=
 - [[file:dotfile.org][I Wrote a Version Control System in Golang]] =12/26/2020=
 - [[file:sourdough-recipes.org][Sourdough Recipes]] =03/30/2020=

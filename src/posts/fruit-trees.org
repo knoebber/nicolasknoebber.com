@@ -1,0 +1,29 @@
+#+title: Fruit Trees
+#+date: <2021-03-13 Sat>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 17;
+</script>
+ #+END_EXPORT
+
+We planted some fruit trees in Comptche - two apples,
+and one pear. I took some pictures of them and wrote down their
+traits to have a reference in the future. Maybe in 10 years I'll write
+another post showing how much they have grown!
+* [[https://en.wikipedia.org/wiki/Golden_Delicious][Golden Delicious Apple]]
+[[file:../../images/golden-delicious-apple.jpg]]
+
++ Harvests mid to mid late season
++ Self fruitful, pollenizer for Red Delicious
+
+* [[https://www.localharvest.org/ark/sierra-beauty-apple][Sierra Beauty Apple]]
+[[file:../../images/sierra-beauty-apple.jpg]]
+
++ Harvests late season
++ Self fruitful
+
+* [[https://extension.oregonstate.edu/crop-production/fruit-trees/born-garbage-dump-20th-century-asian-pear][20th Century Asian Pear]]
+[[file:../../images/20th-century-pear.jpg]]
+
++ Harvests mid season
++ Self fruitful or pollenized by other Asian pears like Bartlett or Shinseiki
