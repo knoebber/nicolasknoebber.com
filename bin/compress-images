@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Compresses jpg files in images to 1M.
+
+set -e
+
+start_path=$(pwd)
+cd ~/projects/nicolasknoebber.com/images/ || exit
+
+find . -type f -size +1M -exec jpegoptim {} --size=1000k \;
+
+cd "$start_path" || exit
