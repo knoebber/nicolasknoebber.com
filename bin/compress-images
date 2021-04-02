@@ -6,6 +6,6 @@ set -e
 start_path=$(pwd)
 cd ~/projects/nicolasknoebber.com/images/ || exit
 
-find . -type f -size +1M -exec jpegoptim {} --size=1000k \;
+find . -type f -size +1M -exec jpegoptim {} --size=1024k \;
 
 cd "$start_path" || exit
