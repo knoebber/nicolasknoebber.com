@@ -1,0 +1,31 @@
+#+title: Nut, Goddess of the Sky
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 18;
+</script>
+ #+END_EXPORT
+
+[[file:../../images/nut-7.jpg]]
+
+[[https://en.wikipedia.org/wiki/Nut_(goddess)][Nut]] is the Egyptian sky goddess. She is often depicted as a nude woman
+arching over the earth.
+
+[[file:../../images/nut-6.jpg]]
+
+My Granny sculpted this piece for her masters of art thesis. She welded
+her together with rebar and copper. The sculpture is built to burn - she
+has participated in the original Burning Man festivals back when they
+happened on the beaches of San Francisco. 
+
+[[file:../../images/nut-5.jpg]]
+
+We recently moved the goddess up the road. It was a bit sketchy - she
+swung, flexed, and teetered while an excavator hung her by a
+chain.
+
+[[file:../../images/nut-1.jpg]]
+
+But she is as lithe as ever. We were able to stand her up again after
+some work reinforcing her legs.  What a beauty!
+
+[[file:../../images/nut-2.jpg]]
