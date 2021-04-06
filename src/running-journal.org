@@ -1,6 +1,7 @@
 #+TITLE: Running Journal
 |------------------+-------+---------+------|
 | Date             | Miles |    Time | Pace |
+| <2021-04-05 Mon> |  5.40 |   47:58 | 8:52 |
 | <2021-03-16 Tue> |  [[https://www.strava.com/activities/4959693239][5.40]] |   48:58 | 9:04 |
 | <2021-03-12 Fri> |  [[https://www.strava.com/activities/4936916940][6.36]] |   51:48 | 8:09 |
 | <2021-03-10 Wed> |  [[https://www.strava.com/activities/4926775025][3.93]] |   33:21 | 8:28 |
