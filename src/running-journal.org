@@ -4,7 +4,7 @@
 | <2021-04-08 Thu> |  5.40 |   47:45 | 8:50 |
 | <2021-04-05 Mon> |  5.40 |   47:58 | 8:52 |
 | <2021-03-16 Tue> |  [[https://www.strava.com/activities/4959693239][5.40]] |   48:58 | 9:04 |
-| <2021-03-12 Fri> |  [[https://www.strava.com/activities/4936916940][6.36]] |   51:48 | 8:09 |
+| <2021-03-12 Fri> |  [[https://www.strava.com/activities/4936916940][5.60]] |   51:48 | 9:15 |
 | <2021-03-10 Wed> |  [[https://www.strava.com/activities/4926775025][3.93]] |   33:21 | 8:28 |
 | <2021-03-08 Mon> | [[https://www.strava.com/activities/4915615956][11.19]] | 1:28:01 | 7:52 |
 | <2021-02-26 Fri> |  [[https://www.strava.com/activities/4855091477][7.04]] |   55:58 | 7:57 |
