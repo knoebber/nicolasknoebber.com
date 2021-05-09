@@ -1,6 +1,7 @@
 #+title: Nicolas Knoebber
 #+description: Nicolas Knoebber's personal website
 * [[file:posts/index.org][Blog]]
+* [[file:microblog/index.html][Microblog]]
 * [[https://github.com/knoebber][Github]]
 * [[./personal-bests.org][Bests]]
 * [[./posts/about-me.org][About]]
