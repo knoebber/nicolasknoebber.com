@@ -114,8 +114,5 @@ default.
 
 [[file:../../images/manjaro-i3.png]]
 
-**And... back to Ubuntu!** I couldn't resist trying the new Ubuntu
-20.04 release. The machine is working a fair amount better now.  I
-still think Manjaro is a nice distro worth trying. It would be
-especially good on a deskop without hardware to support.
-
+**Edit: ** I distro hopped a few times after that, and ended up on
+Arch. Notes [[file:carbon-x1-arch.org][here]].

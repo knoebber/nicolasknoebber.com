@@ -1,0 +1,74 @@
+#+title: Lenovo Carbon X1 Gen 7 + Arch Linux
+#+date: <2021-05-28 Fri>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 19;
+</script>
+ #+END_EXPORT
+
+[[file:../../images/x1-carbon-arch-desktop.png]]
+
+* Introduction
+  In [[file:new-carbon-x1-manjaro.org][late 2019 I got a new thinkpad]]. In that post I wrote about
+installing Manjaro linux. In retrospect I think it went just ok - I
+had some pain with the architect installer and some key system
+features weren't working right. After that I tried Ubuntu and then
+Fedora. They worked well enough but I wasn't totally satisfied.
+
+The other day I was inspired to install Arch.  I downloaded the iso,
+ran ~dd~, and rebooted. Once the boot media loaded I ran [[https://wiki.archlinux.org/title/Archinstall][archinstall]] -
+a new addition to arch that does a basic installation
+automatically. ~archinstall~ ran without problems, and overall was
+easier than going through the Manjaro Architect installer. I didn't
+install a profile so I was left with a barebones system.
+
+In general you should follow advice from the Arch Wiki, not from blog
+posts like this. Here's a good place to start:
+
+[[https://wiki.archlinux.org/title/Lenovo_ThinkPad_X1_Carbon_(Gen_7)]] 
+* Setup
+** Bios
+Change the "Sleep State" to "Windows".  I've had it on "Linux"
+for the last year and have had problems with waking. This
+fixes it.
+** Linux Console
+https://wiki.archlinux.org/title/Linux_console#Persistent_configuration
+
+The text in the TTY was tiny after the installation. Here's how I
+increased the font size:
+1. ~pacman -S terminus-font~
+2. Update [[https://dotfilehub.com/knoebber/linux-console][/etc/vconsole.conf]]
+** SMBus Errors
+ After booting I was getting errors in the console like ~i801_smbus
+ timeout~. To fix this [[https://dotfilehub.com/knoebber/boot-arch][I blacklisted]] the ~i2c_i801~ kernel module.
+** i3 WM
+Here is how I setup my i3 environment. I'm definitely missing quite a
+few things, so check the arch wiki when in doubt.
+
+i3 config: https://dotfilehub.com/knoebber/i3
+
+*** pacman -S
++ ~xorg-server i3-gaps dmenu i3status lightdm lightdm-gtk-greeter
+  pulseaudio pulseaudio-alsa firefox gnome-terminal~
++ ~feh~ set a background picture
++ ~nm-applet~ configure network from tray
++ ~pasystray~ configure audio volume and output from tray
++ ~scrot~ screenshot tool
+*** X Config
++ Initiaize X: [[https://dotfilehub.com/knoebber/xinitrc][~/.xinitrc]]
++ Increase DPI: [[https://dotfilehub.com/knoebber/xresources][~/.Xresources]] 
++ Set a background in lightdm: [[https://dotfilehub.com/knoebber/lightdm-gtk-greeter][/etc/lightdm/lightdm-gtk-greeter.conf]] 
+*** Scripts
+Scripts I wrote that I bind in my i3 config. I store these
+locally in ~~/bin/~ (added to ~$PATH~ in my [[https://dotfilehub.com/knoebber/profile][profile]]).
+
++ Bind [[https://dotfilehub.com/knoebber/toggle-display][toggle-display]] to the display media key (~XF86Display~). It
+  switches my display to an external monitor if it's plugged in, or
+  back to my laptop screen.
++ Bind [[https://dotfilehub.com/knoebber/screenshot][screenshot]] to the PrtSc key (~code: 107~).  Saves a screenshot
+  to ~~/Pictures/screenshots~.
+* Conclusion
+Everything is working better than expected. Webcam, microphone and
+media keys work. I've been enjoying the simplicity and documentation
+of Arch. Setting it up has been fun and problems feel
+solvable. Hopefully my distrohopping is over for now!
