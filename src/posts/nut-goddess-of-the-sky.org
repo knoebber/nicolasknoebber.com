@@ -1,4 +1,5 @@
 #+title: Nut, Goddess of the Sky
+#+date: <2021-04-01 Thu>
 #+BEGIN_EXPORT html
 <script type="text/javascript">
 const postNum = 18;

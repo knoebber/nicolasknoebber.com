@@ -48,6 +48,10 @@ code {
     border-radius:5px;
 }
 
+a {
+    color: black;
+}
+
 *,
 *:before,
 *:after {
@@ -62,7 +66,6 @@ code {
 
 #preamble > a {
     margin-left: 1rem;
-    color: black;
 }
 
 #content {
