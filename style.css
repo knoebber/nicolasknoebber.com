@@ -1,5 +1,6 @@
 :root {
     --content-width: 750px;
+    --link-color: midnightblue;
 }
 
 html {
@@ -49,7 +50,7 @@ code {
 }
 
 a {
-    color: black;
+    color: var(--link-color);
 }
 
 *,

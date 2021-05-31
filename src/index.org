@@ -1,7 +1,7 @@
 #+title: Nicolas Knoebber
 #+description: Nicolas Knoebber's personal website
-* [[file:posts/index.org][Blog]]
-* [[https://github.com/knoebber][Github]]
-* [[./personal-bests.org][Bests]]
-* [[./posts/about-me.org][About]]
-* [[file:resume.pdf][Resume]]
++ [[file:posts/index.org][Blog]]
++ [[https://github.com/knoebber][Github]]
++ [[./personal-bests.org][Bests]]
++ [[./posts/about-me.org][About]]
++ [[file:resume.pdf][Resume]]
