@@ -1,7 +1,8 @@
 package microblog
 
 import (
-	"crypto/sha1"
+	"crypto/rand"
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"io"
@@ -24,6 +25,17 @@ var (
 	ErrImageNotFound = errors.New("image not found")
 )
 
+// Used for generating random IDs.
+func randomBytes(n int) ([]byte, error) {
+	buff := make([]byte, n)
+
+	if _, err := io.ReadFull(rand.Reader, buff); err != nil {
+		return nil, err
+	}
+
+	return buff, nil
+}
+
 func ListPosts(sess *session.Session) ([]Post, error) {
 	var result []Post
 
@@ -43,11 +55,26 @@ func ListPosts(sess *session.Session) ([]Post, error) {
 	return result, nil
 }
 
+func GetPost(sess *session.Session, postID string) (*Post, error) {
+	result := &Post{ID: postID}
+
+	if err := result.Get(dynamodb.New(sess)); err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
 func CreatePost(sess *session.Session, text string) (*Post, error) {
 	db := dynamodb.New(sess)
 
+	randomBuff, err := randomBytes(7)
+	if err != nil {
+		return nil, fmt.Errorf("generating random bytes for post id: %w", err)
+	}
+
 	post := &Post{
-		Hash:    fmt.Sprintf("%x", sha1.Sum([]byte(text))),
+		ID:      base64.URLEncoding.EncodeToString(randomBuff),
 		Created: time.Now().UTC(),
 		Text:    text,
 		Images:  []Image{},
@@ -60,20 +87,20 @@ func CreatePost(sess *session.Session, text string) (*Post, error) {
 	return post, nil
 }
 
-func AttachImage(sess *session.Session, body io.Reader, postHash string, img Image) (*Post, error) {
+func AttachImage(sess *session.Session, postID string, img *Image) (*Post, error) {
 	db := dynamodb.New(sess)
 	s3 := s3.New(sess)
 
-	post := &Post{Hash: postHash}
+	post := &Post{ID: postID}
 	if err := post.Get(db); err != nil {
 		return nil, err
 	}
 
-	if err := img.Upload(s3, postHash, body); err != nil {
+	if err := img.Upload(s3, postID); err != nil {
 		return nil, err
 	}
 
-	post.Images = append(post.Images, img)
+	post.Images = append(post.Images, *img)
 
 	if err := post.Save(db); err != nil {
 		return post, nil
@@ -82,10 +109,10 @@ func AttachImage(sess *session.Session, body io.Reader, postHash string, img Ima
 	return post, nil
 }
 
-func UpdatePostText(sess *session.Session, postHash string, newText string) (*Post, error) {
+func UpdatePost(sess *session.Session, postID string, newText string) (*Post, error) {
 	db := dynamodb.New(sess)
 
-	post := &Post{Hash: postHash}
+	post := &Post{ID: postID}
 	if err := post.Get(db); err != nil {
 		return nil, err
 	}
@@ -100,10 +127,10 @@ func UpdatePostText(sess *session.Session, postHash string, newText string) (*Po
 
 }
 
-func UpdateImage(sess *session.Session, postHash, filename, newCaption, newAlt string) (*Post, error) {
+func UpdateImage(sess *session.Session, postID, filename, newCaption, newAlt string) (*Post, error) {
 	db := dynamodb.New(sess)
 
-	post := &Post{Hash: postHash}
+	post := &Post{ID: postID}
 	if err := post.Get(db); err != nil {
 		return nil, err
 	}
@@ -131,11 +158,11 @@ func UpdateImage(sess *session.Session, postHash, filename, newCaption, newAlt s
 	return post, nil
 }
 
-func DeleteImage(sess *session.Session, postHash, filename string) (*Post, error) {
+func DeleteImage(sess *session.Session, postID, filename string) (*Post, error) {
 	db := dynamodb.New(sess)
 	s3 := s3.New(sess)
 
-	post := &Post{Hash: postHash}
+	post := &Post{ID: postID}
 	if err := post.Get(db); err != nil {
 		return nil, err
 	}
@@ -154,9 +181,31 @@ func DeleteImage(sess *session.Session, postHash, filename string) (*Post, error
 		return nil, ErrImageNotFound
 	}
 
-	if err := imageToDelete.Delete(s3, postHash); err != nil {
+	if err := imageToDelete.Delete(s3, postID); err != nil {
 		return nil, err
 	}
 
 	return post, nil
+}
+
+func DeletePost(sess *session.Session, postID string) error {
+	db := dynamodb.New(sess)
+	s3 := s3.New(sess)
+
+	post := &Post{ID: postID}
+	if err := post.Get(db); err != nil {
+		return err
+	}
+
+	for _, img := range post.Images {
+		if err := img.Delete(s3, postID); err != nil {
+			return err
+		}
+	}
+
+	if _, err := db.DeleteItem(&dynamodb.DeleteItemInput{Key: post.primaryKey()}); err != nil {
+		return fmt.Errorf("deleting post %q from dynamodb: %w", postID, err)
+	}
+
+	return nil
 }

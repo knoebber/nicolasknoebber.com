@@ -11,24 +11,24 @@ import (
 
 // Post is a microblog post.
 type Post struct {
-	Hash    string    `json:"id" dynamodbav:"id"`
+	ID      string    `json:"id" dynamodbav:"id"`
 	Created time.Time `json:"created" dynamodbav:"created"`
 	Text    string    `json:"body" dynamodbav:"body"`
 	Images  []Image   `json:"images" dynamodbav:"images"`
 }
 
 func (p *Post) primaryKey() map[string]*dynamodb.AttributeValue {
-	return map[string]*dynamodb.AttributeValue{"hash": {S: aws.String(p.Hash)}}
+	return map[string]*dynamodb.AttributeValue{"hash": {S: aws.String(p.ID)}}
 }
 
-// Get gets a post by its primary key, hash.
+// Get gets a post by its primary key.
 func (p *Post) Get(svc *dynamodb.DynamoDB) error {
 	output, err := svc.GetItem(&dynamodb.GetItemInput{
 		TableName: aws.String(tableName),
 		Key:       p.primaryKey(),
 	})
 	if err != nil {
-		return fmt.Errorf("getting dynamodb entry for %q: %w", p.Hash, err)
+		return fmt.Errorf("getting dynamodb entry for %q: %w", p.ID, err)
 	}
 
 	if output.Item == nil {
@@ -37,7 +37,7 @@ func (p *Post) Get(svc *dynamodb.DynamoDB) error {
 
 	err = dynamodbattribute.UnmarshalMap(output.Item, p)
 	if err != nil {
-		return fmt.Errorf("unmarshaling post %q: %w", p.Hash, err)
+		return fmt.Errorf("unmarshaling post %q: %w", p.ID, err)
 	}
 
 	return nil
