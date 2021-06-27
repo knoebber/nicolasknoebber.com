@@ -10,6 +10,13 @@ const postNum = 16;
 I like to document the desks that I write code at. It's interesting
 to reflect on my environments from over the years. 
 
+**Grinnell Iowa, 2014**
+
+Here's my desk from my first year at Grinnell College. I was taking
+intro to CS in Scheme, though I wasn't using this battlestation for
+that. The highlight here is the custom poster that I printed and taped
+together.  [[file:../../images/grinnell-first-year.jpg]]
+
 **Grinnell Iowa, 2015**
 
 This is my dorm room in my second year of college. I was taking a data

@@ -4,119 +4,119 @@
 :properties:
 :rss_permalink: carbon-x1-arch.html
 :pubdate: <2021-05-28 Fri>
-:ID:       f45de5b0-aa74-45e9-8abf-280bd360c629
+:ID:       bb4913da-4a13-4655-a98d-2ecbafcbcfd8
 :END:
 * Nut, Goddess of the Sky
 :properties:
 :rss_permalink: nut-goddess-of-the-sky.html
 :pubdate: <2021-04-01 Thu>
-:ID:       420d2ecc-eaf2-4d19-bcac-6d92fdfcc360
+:ID:       c61f8314-bc8e-4fa2-bcc4-9fd09685c80f
 :END:
 * Fruit Trees
 :properties:
 :rss_permalink: fruit-trees.html
 :pubdate: <2021-03-13 Sat>
-:ID:       6311187d-0e60-40cb-9a7d-b119c38c3bd9
+:ID:       fa859c8e-2935-463d-b769-c3bf8a11bdf1
 :END:
 * Desks
 :properties:
 :rss_permalink: desks.html
 :pubdate: <2021-02-16 Tue>
-:ID:       db3a3928-2715-4993-b74e-bb5f0b0f6124
+:ID:       14bdcff3-f4fc-4c38-95d8-9240ae6f5071
 :END:
 * I Wrote a Version Control System in Golang
 :properties:
 :rss_permalink: dotfile.html
 :pubdate: <2020-12-26 Sat>
-:ID:       90550500-dadc-468e-920b-a1c167f74699
+:ID:       ab21744c-9d9c-4041-b70b-655a38fd32d4
 :END:
 * Sourdough Recipes
 :properties:
 :rss_permalink: sourdough-recipes.html
 :pubdate: <2020-03-30 Mon>
-:ID:       10968ff0-786f-4ed6-b970-290796be43ba
+:ID:       e4768cf5-de3d-4eaf-aa12-2e5bcd192b8a
 :END:
 * Once Well By Roger Knoebber
 :properties:
 :rss_permalink: once-well.html
 :pubdate: <2019-12-29 Sun>
-:ID:       c584d646-5d12-472d-9a6d-46f1ffcb0a4a
+:ID:       27b25712-bef2-4a39-8818-dffa450ce689
 :END:
 * Lenovo Carbon X1 Gen 7 + Manjaro Linux
 :properties:
 :rss_permalink: new-carbon-x1-manjaro.html
 :pubdate: <2019-12-28 Sat>
-:ID:       283f22b0-1675-4628-a9f0-5bddb74f5595
+:ID:       8bde11cf-21ef-415b-b774-716a5172a4cd
 :END:
 * Surviving the Winter
 :properties:
 :rss_permalink: surviving-the-winter.html
 :pubdate: <2019-11-17 Sun>
-:ID:       e7bd2dbe-d6f1-4066-9014-cb26c1f10085
+:ID:       8fa35a04-827a-4198-bf60-583c1147cb33
 :END:
 * Running Season 2018-2019
 :properties:
 :rss_permalink: running-season-2019.html
 :pubdate: <2019-11-16 Sat>
-:ID:       7daadb98-2d08-4c64-911a-a42e44f80134
+:ID:       ddb94972-2301-4957-9335-9abedbfdcb8d
 :END:
 * Blogging with Emacs and Org
 :properties:
 :rss_permalink: blogging-with-emacs-and-org.html
 :pubdate: <2019-08-14 Wed>
-:ID:       48254d26-6480-499b-9cc1-c15f700096d2
+:ID:       9d0db6d4-58bd-4aaf-9bb1-355e6017a6af
 :END:
 * RAGBRAI
 :properties:
 :rss_permalink: RAGBRAI.html
 :pubdate: <2019-08-03 Sat>
-:ID:       09f4ee5c-637d-4300-9f72-21c64fddae6b
+:ID:       cecb1cd6-8d59-45bb-aa06-8790f5599f00
 :END:
 * Draw Trees in AWS with Golang
 :properties:
 :rss_permalink: image-generation-go-lambda-s3.html
 :pubdate: <2019-02-10 Sun>
-:ID:       5dbf0083-b432-4c7b-b0d3-a428eb598866
+:ID:       77220e4c-4e80-4e63-8554-2bca91fe724f
 :END:
 * Adding a Serverless Commenting System with AWS
 :properties:
 :rss_permalink: adding-comments.html
 :pubdate: <2019-01-14 Mon>
-:ID:       6c0b1f0e-9406-4cec-9dc8-a2e96bad5770
+:ID:       f8bfb711-6b1d-47ce-b927-168e8c43a5ef
 :END:
 * Moving My Website to Amazon S3
 :properties:
 :rss_permalink: migrating-to-S3.html
 :pubdate: <2018-07-24 Tue>
-:ID:       753d5312-875e-45c9-b7e0-782ef829362c
+:ID:       92de722c-c6cc-433b-92f6-de3bfd2c48b6
 :END:
 * Creating My Own Blogging Platform
 :properties:
 :rss_permalink: creating-my-blog.html
 :pubdate: <2018-07-19 Thu>
-:ID:       0254bf11-b77f-41a0-8331-aa037bb536dc
+:ID:       d4d528f8-fa5d-47f1-be89-94c3795dfbfa
 :END:
 * Journey to San Jose del Cabo
 :properties:
 :rss_permalink: journey-to-san-jose-del-cabo.html
 :pubdate: <2018-07-12 Thu>
-:ID:       b0b3d5f4-40d6-4e3e-9c87-25790d2bbb54
+:ID:       8ba24642-3f07-4b81-840d-f0e323af6cf0
 :END:
 * About Me
 :properties:
 :rss_permalink: about-me.html
 :pubdate: <2018-07-07 Sat>
-:ID:       b7d94b6b-cbda-4fc6-918b-da3af8de1bc2
+:ID:       7c75b1b5-c89c-4beb-85bc-f1366302eaa4
 :END:
 * Sailing to Ensenada
 :properties:
 :rss_permalink: sailing-to-ensenada.html
 :pubdate: <2018-06-25 Mon>
-:ID:       f0568457-008b-487d-9cea-b0660d4748b6
+:ID:       63bcd01e-c477-4a84-a45e-ac652d078d56
 :END:
 * Taking a Break From Work
 :properties:
 :rss_permalink: taking-a-break-from-work.html
 :pubdate: <2018-06-10 Sun>
-:ID:       4d9caf28-2ef2-4e70-887e-e0ee969be950
+:ID:       d2117df8-5dd9-44f6-824e-0fe8c50688e3
 :END:
