@@ -17,4 +17,4 @@ Built with:
   + API Gateway
   + DynamoDB
 
-Makefile's in the ~lambda/~ directory rely on a script I wrote: [[https://dotfilehub.com/knoebber/golamb][golamb]]
+Makefiles in the ~lambda/~ directory rely on a script I wrote: [[https://dotfilehub.com/knoebber/golamb][golamb]]
