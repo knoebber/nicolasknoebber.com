@@ -4,5 +4,6 @@
 *.html
 *~
 posts/old/
+src/drafts/
 images/
 api-key
