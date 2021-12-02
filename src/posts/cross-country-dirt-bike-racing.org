@@ -6,7 +6,7 @@ const postNum = 1;
 </script>
 #+END_EXPORT
 
-Recently I've been competing in [[http://ama-d36.org][d36]] cross country dirt bikes races.
+Recently I've been competing in [[http://ama-d36.org][d36]] cross country dirt bike races.
 It's my favorite sport, and its been a blast to fully commit myself to
 it. I used to race a bit as a kid, but this has been the first time
 that I completed an entire season.
