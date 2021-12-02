@@ -20,5 +20,5 @@
 - [[file:journey-to-san-jose-del-cabo.org][Journey to San Jose del Cabo]] =07/12/2018=
 - [[file:about-me.org][About Me]] =07/07/2018=
 - [[file:sailing-to-ensenada.org][Sailing to Ensenada]] =06/25/2018=
-- [[file:taking-a-break-from-work.org][Taking a Break From Work]] =06/10/2018=
+- [[file:cross-country-dirt-bike-racing.org][Cross Country Dirt Bike Racing]] =06/10/2018=
 #+end_sitemap

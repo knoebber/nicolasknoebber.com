@@ -4,119 +4,119 @@
 :properties:
 :rss_permalink: carbon-x1-arch.html
 :pubdate: <2021-05-28 Fri>
-:ID:       bb4913da-4a13-4655-a98d-2ecbafcbcfd8
+:ID:       F55DDFA4-1F3E-42E9-AAE4-753A93F55985
 :END:
 * Nut, Goddess of the Sky
 :properties:
 :rss_permalink: nut-goddess-of-the-sky.html
 :pubdate: <2021-04-01 Thu>
-:ID:       c61f8314-bc8e-4fa2-bcc4-9fd09685c80f
+:ID:       576F7B32-6929-4B1C-8957-B21F3238B0B3
 :END:
 * Fruit Trees
 :properties:
 :rss_permalink: fruit-trees.html
 :pubdate: <2021-03-13 Sat>
-:ID:       fa859c8e-2935-463d-b769-c3bf8a11bdf1
+:ID:       D7EF5C86-C31C-45D6-9C8A-1BBD6766BD32
 :END:
 * Desks
 :properties:
 :rss_permalink: desks.html
 :pubdate: <2021-02-16 Tue>
-:ID:       14bdcff3-f4fc-4c38-95d8-9240ae6f5071
+:ID:       19AF344F-6B94-47FF-A57A-61FD212CB3EC
 :END:
 * I Wrote a Version Control System in Golang
 :properties:
 :rss_permalink: dotfile.html
 :pubdate: <2020-12-26 Sat>
-:ID:       ab21744c-9d9c-4041-b70b-655a38fd32d4
+:ID:       E58EC504-7E48-47CA-98ED-EBB9457A64C2
 :END:
 * Sourdough Recipes
 :properties:
 :rss_permalink: sourdough-recipes.html
 :pubdate: <2020-03-30 Mon>
-:ID:       e4768cf5-de3d-4eaf-aa12-2e5bcd192b8a
+:ID:       FFC5A929-AC18-46B1-AEFF-4670940068BB
 :END:
 * Once Well By Roger Knoebber
 :properties:
 :rss_permalink: once-well.html
 :pubdate: <2019-12-29 Sun>
-:ID:       27b25712-bef2-4a39-8818-dffa450ce689
+:ID:       BF12E3BB-AEF3-48A4-82D0-1AB1CD1BF7B9
 :END:
 * Lenovo Carbon X1 Gen 7 + Manjaro Linux
 :properties:
 :rss_permalink: new-carbon-x1-manjaro.html
 :pubdate: <2019-12-28 Sat>
-:ID:       8bde11cf-21ef-415b-b774-716a5172a4cd
+:ID:       A0DA5A8E-CD34-4D5A-AC21-E0B4778592AA
 :END:
 * Surviving the Winter
 :properties:
 :rss_permalink: surviving-the-winter.html
 :pubdate: <2019-11-17 Sun>
-:ID:       8fa35a04-827a-4198-bf60-583c1147cb33
+:ID:       7C92F3E0-01AA-440E-909B-5BFA4DD3FAEA
 :END:
 * Running Season 2018-2019
 :properties:
 :rss_permalink: running-season-2019.html
 :pubdate: <2019-11-16 Sat>
-:ID:       ddb94972-2301-4957-9335-9abedbfdcb8d
+:ID:       BF533078-ED0A-4E54-A945-54FFD721B21F
 :END:
 * Blogging with Emacs and Org
 :properties:
 :rss_permalink: blogging-with-emacs-and-org.html
 :pubdate: <2019-08-14 Wed>
-:ID:       9d0db6d4-58bd-4aaf-9bb1-355e6017a6af
+:ID:       CBBFF741-F996-4533-A792-3F2AF267ED53
 :END:
 * RAGBRAI
 :properties:
 :rss_permalink: RAGBRAI.html
 :pubdate: <2019-08-03 Sat>
-:ID:       cecb1cd6-8d59-45bb-aa06-8790f5599f00
+:ID:       1E78A1CB-AF91-4E6A-8C4B-2AEE52532323
 :END:
 * Draw Trees in AWS with Golang
 :properties:
 :rss_permalink: image-generation-go-lambda-s3.html
 :pubdate: <2019-02-10 Sun>
-:ID:       77220e4c-4e80-4e63-8554-2bca91fe724f
+:ID:       EBFE96A0-BBBB-4CA2-A344-CC306CCBD3A0
 :END:
 * Adding a Serverless Commenting System with AWS
 :properties:
 :rss_permalink: adding-comments.html
 :pubdate: <2019-01-14 Mon>
-:ID:       f8bfb711-6b1d-47ce-b927-168e8c43a5ef
+:ID:       CAACFAEB-F19D-4153-B7F4-A93FA344D5E5
 :END:
 * Moving My Website to Amazon S3
 :properties:
 :rss_permalink: migrating-to-S3.html
 :pubdate: <2018-07-24 Tue>
-:ID:       92de722c-c6cc-433b-92f6-de3bfd2c48b6
+:ID:       6913D730-F921-4E0B-A3CC-4EF61A09B0CA
 :END:
 * Creating My Own Blogging Platform
 :properties:
 :rss_permalink: creating-my-blog.html
 :pubdate: <2018-07-19 Thu>
-:ID:       d4d528f8-fa5d-47f1-be89-94c3795dfbfa
+:ID:       3722E203-AA75-4B5A-864D-ED042057648C
 :END:
 * Journey to San Jose del Cabo
 :properties:
 :rss_permalink: journey-to-san-jose-del-cabo.html
 :pubdate: <2018-07-12 Thu>
-:ID:       8ba24642-3f07-4b81-840d-f0e323af6cf0
+:ID:       1D2123CB-1626-4E41-97A0-7AA4B28ED0F1
 :END:
 * About Me
 :properties:
 :rss_permalink: about-me.html
 :pubdate: <2018-07-07 Sat>
-:ID:       7c75b1b5-c89c-4beb-85bc-f1366302eaa4
+:ID:       2E091BB2-FDD8-45E9-A2EB-53E21D388B56
 :END:
 * Sailing to Ensenada
 :properties:
 :rss_permalink: sailing-to-ensenada.html
 :pubdate: <2018-06-25 Mon>
-:ID:       63bcd01e-c477-4a84-a45e-ac652d078d56
+:ID:       88D3BD75-D5DC-48C8-941F-D07FACA397F9
 :END:
-* Taking a Break From Work
+* Cross Country Dirt Bike Racing
 :properties:
-:rss_permalink: taking-a-break-from-work.html
+:rss_permalink: cross-country-dirt-bike-racing.html
 :pubdate: <2018-06-10 Sun>
-:ID:       d2117df8-5dd9-44f6-824e-0fe8c50688e3
+:ID:       E732E930-F1A5-411A-A9BF-57C016048192
 :END:
