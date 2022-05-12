@@ -5,6 +5,7 @@
 
 ;;; Code:
 (require 'ox)
+(load-file "~/projects/nicolasknoebber.com/src/ox-rss.el")
 (defconst html-main-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\" />")
 (defconst html-posts-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\" />")
 
