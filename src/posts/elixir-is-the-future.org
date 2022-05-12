@@ -1,0 +1,106 @@
+#+title: Elixir is the Future
+#+date: <2022-05-03 Tue>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 20;
+</script>
+ #+END_EXPORT
+
+I've been working on a [[https://github.com/knoebber/purple][side project]] project in [[https://elixir-lang.org][elixir]] for the past
+month. My initial impression is that I like it. It's /fun/.
+
+Functional pipelines and pattern matching make expressing logic
+concise. Pipelines solve the problem of lots of nested function calls
+becoming hard to read. For example, my project has logic that creates
+a thumbnail image. It does the following:
+
+1. Get file path
+2. Open an image
+3. Convert it to ~.png~
+4. Resize it to 250x250
+5. Fix orientation
+6. Save it
+
+To do this in a another language might look like:
+#+begin_src python
+save(orient(resize(convert(open("file.jpg"), ".png"), "250x250"), "/thumbnail/path"))
+#+end_src
+
+One way to refactor this would be to create a few create intermediate
+variables. However, naming things is hard, so I prefer to inline
+expressions whenever possible.
+
+Here's what I wrote:
+#+begin_src elixir
+file_ref
+|> get_full_upload_path
+|> Mogrify.open()
+|> Mogrify.format(thumb_format())
+|> Mogrify.resize_to_fill("#{thumb_x()}x#{thumb_y()}")
+|> Mogrify.auto_orient()
+|> Mogrify.save(path: get_full_thumbnail_path(file_ref))
+#+end_src
+
+This looks and works a bit like chaining methods in an object oriented
+language. It's passing the result of the previous function
+as the first argument to the next function.
+
+Pattern matching is the other killer language feature. It lets the
+programmer describe what kind of data can pass without declaring
+explicit types.
+
+For example, here is some code from my project that extracts tags from
+different structures:
+#+begin_src elixir
+def extract_tags(content) when is_binary(content) do
+  Regex.scan(~r/#([a-zA-Z0-9]{2,})/, content)
+  |> Enum.flat_map(fn [_, match] -> [String.downcase(match)] end)
+  |> Enum.uniq()
+end
+
+def extract_tags(%Purple.Activities.Run{} = run) do
+  extract_tags(run.description)
+end
+
+def extract_tags(%Purple.Board.Item{} = item) do
+  item.entries
+  |> Enum.reduce(
+    extract_tags(item.description),
+    fn entry, acc ->
+      acc ++ extract_tags_from_markdown(entry.content)
+    end
+  )
+  |> Enum.uniq()
+end
+#+end_src
+
+Here I'm declaring multiple functions with the same name that have
+different parameters. Elixir will pick the one that matches when
+the function called. This lets me avoid declaring
+functions a bunch of functions like ~extract_tags_from_string~,
+~extract_tags_from_run~, ~extract_tags_from_item~, etc.
+
+This language construct can take care of most control flow. For
+example, instead of an ~if~ or a ~switch~ statement:
+
+#+begin_src elixir
+defp page_title(item_id, :show), do: "Item #{item_id}"
+defp page_title(item_id, :edit_item), do: "Edit Item #{item_id}"
+defp page_title(_, :create_entry), do: "Create Item Entry"
+defp page_title(_, :edit_entry), do: "Edit Item Entry"
+#+end_src
+
+This coupled with functional pipelines result in nice and flat code. Nice!
+
+The real killer feature of Elixir is the community and
+ecosystem. Everyone is friendly, and there are quite a few polished
+packages available.
+
+Phoenix is probably the most well known library. It's actively
+developed by some of the same folks who worked on Ruby on Rails.  This
+framework makes developing web applications a joy. Some highlights
+are:
+
+1. Simplicity - it's easy to find out what's going on under the hood
+2. Ecto - This ORM is awesome
+3. LiveView - Write a SPA without any JavaScript!
