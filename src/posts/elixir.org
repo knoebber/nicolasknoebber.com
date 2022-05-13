@@ -1,4 +1,4 @@
-#+title: Elixir is the Future
+#+title: Elixir
 #+date: <2022-05-03 Tue>
 #+BEGIN_EXPORT html
 <script type="text/javascript">
@@ -45,7 +45,7 @@ This looks and works a bit like chaining methods in an object oriented
 language. It's passing the result of the previous function
 as the first argument to the next function.
 
-Pattern matching is the other killer language feature. It lets the
+Pattern matching is another great feature. It lets the
 programmer describe what kind of data can pass without declaring
 explicit types.
 
@@ -75,10 +75,10 @@ end
 #+end_src
 
 Here I'm declaring multiple functions with the same name that have
-different parameters. Elixir will pick the one that matches when
-the function called. This lets me avoid declaring
-functions a bunch of functions like ~extract_tags_from_string~,
-~extract_tags_from_run~, ~extract_tags_from_item~, etc.
+different parameters. Elixir will pick the one that matches when the
+function is called. This lets me avoid declaring a bunch of functions
+like ~extract_tags_from_string~, ~extract_tags_from_run~,
+~extract_tags_from_item~, etc.
 
 This language construct can take care of most control flow. For
 example, instead of an ~if~ or a ~switch~ statement:
@@ -90,17 +90,17 @@ defp page_title(_, :create_entry), do: "Create Item Entry"
 defp page_title(_, :edit_entry), do: "Edit Item Entry"
 #+end_src
 
-This coupled with functional pipelines result in nice and flat code. Nice!
+This coupled with functional pipelines result in flat code. Nice!
 
 The real killer feature of Elixir is the community and
 ecosystem. Everyone is friendly, and there are quite a few polished
 packages available.
 
-Phoenix is probably the most well known library. It's actively
+[[https://www.phoenixframework.org][Phoenix]] is probably the most well known library. It's actively
 developed by some of the same folks who worked on Ruby on Rails.  This
 framework makes developing web applications a joy. Some highlights
 are:
 
 1. Simplicity - it's easy to find out what's going on under the hood
-2. Ecto - This ORM is awesome
-3. LiveView - Write a SPA without any JavaScript!
+2. [[https://hexdocs.pm/phoenix/ecto.html][Ecto]]  - This ORM is awesome
+3. [[https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html][LiveView]] - Write a SPA without any JavaScript! 

@@ -1,7 +1,7 @@
 #+TITLE: Blog
 
 #+begin_sitemap
-- [[file:elixir-is-the-future.org][Elixir is the Future]] =05/03/2022=
+- [[file:elixir.org][Elixir]] =05/03/2022=
 - [[file:carbon-x1-arch.org][Lenovo Carbon X1 Gen 7 + Arch Linux]] =05/28/2021=
 - [[file:nut-goddess-of-the-sky.org][Nut, Goddess of the Sky]] =04/01/2021=
 - [[file:fruit-trees.org][Fruit Trees]] =03/13/2021=
