@@ -1,128 +1,134 @@
 #+TITLE: Nicolas Knoebber's Blog
 
+* A Year in Alaska
+:properties:
+:rss_permalink: a-year-in-alaska.html
+:pubdate: <2022-08-20 Sat>
+:ID:       0EC1712B-EEAE-4A79-B8B4-0C3D85888D1D
+:END:
 * Elixir
 :properties:
 :rss_permalink: elixir.html
 :pubdate: <2022-05-03 Tue>
-:ID:       DB43753B-7C38-4125-8EBA-EB0FBDE02A1C
+:ID:       65A49401-FF0C-4743-BD1D-043B7B480E55
 :END:
 * Lenovo Carbon X1 Gen 7 + Arch Linux
 :properties:
 :rss_permalink: carbon-x1-arch.html
 :pubdate: <2021-05-28 Fri>
-:ID:       89FD5E8A-BFFA-4483-A8A3-ED378C8F330E
+:ID:       54004BD1-DF92-42E2-B0C1-87A262D9C580
 :END:
 * Nut, Goddess of the Sky
 :properties:
 :rss_permalink: nut-goddess-of-the-sky.html
 :pubdate: <2021-04-01 Thu>
-:ID:       B0514F00-8D27-4B3A-BFE3-C7F20D1C4AB2
+:ID:       E4EB59B1-518B-4375-9A9B-2C6E557E8C99
 :END:
 * Fruit Trees
 :properties:
 :rss_permalink: fruit-trees.html
 :pubdate: <2021-03-13 Sat>
-:ID:       D76297FD-6B79-47F5-BE75-C3336E25A817
+:ID:       F4F7B020-1F44-4577-B45C-0456B14B005C
 :END:
 * Desks
 :properties:
 :rss_permalink: desks.html
 :pubdate: <2021-02-16 Tue>
-:ID:       5341BA68-F990-47C2-8206-EB549717EF2F
+:ID:       984928E4-D39C-4212-8381-E31EDFBF5F84
 :END:
 * I Wrote a Version Control System in Golang
 :properties:
 :rss_permalink: dotfile.html
 :pubdate: <2020-12-26 Sat>
-:ID:       D05164FF-54C2-4217-B355-46FEB3569811
+:ID:       399E474D-B62D-409D-87D1-4A2325E927B6
 :END:
 * Sourdough Recipes
 :properties:
 :rss_permalink: sourdough-recipes.html
 :pubdate: <2020-03-30 Mon>
-:ID:       36B41DEB-1D4D-4700-8535-4F1AA72BBC61
+:ID:       AA0E6554-FAB8-442E-8619-53126CCC87F2
 :END:
 * Once Well By Roger Knoebber
 :properties:
 :rss_permalink: once-well.html
 :pubdate: <2019-12-29 Sun>
-:ID:       832453CE-3A29-4045-8DEC-D9C9B28FBAE6
+:ID:       38BC8120-503A-47E0-99F8-4FBF1EF3B2F0
 :END:
 * Lenovo Carbon X1 Gen 7 + Manjaro Linux
 :properties:
 :rss_permalink: new-carbon-x1-manjaro.html
 :pubdate: <2019-12-28 Sat>
-:ID:       0F6FA7EC-9AA0-424F-B326-9B073D9C8A47
+:ID:       3505F9EC-AFD4-4E3F-8A46-8F494C7DCE2A
 :END:
 * Surviving the Winter
 :properties:
 :rss_permalink: surviving-the-winter.html
 :pubdate: <2019-11-17 Sun>
-:ID:       CA77FADC-E4BD-417A-910E-5F51D9206DED
+:ID:       5F24829C-B62F-4367-89CB-956CD6793021
 :END:
 * Running Season 2018-2019
 :properties:
 :rss_permalink: running-season-2019.html
 :pubdate: <2019-11-16 Sat>
-:ID:       745D964C-E2CD-4346-98F2-07B0061E54B6
+:ID:       7AC7FA85-A6C0-4555-9268-847DB652D99F
 :END:
 * Blogging with Emacs and Org
 :properties:
 :rss_permalink: blogging-with-emacs-and-org.html
 :pubdate: <2019-08-14 Wed>
-:ID:       32CB5882-571E-42B3-9FD8-A9D8E08F4FA6
+:ID:       DBD08A2E-A7A6-4761-9F6C-63C749028BD6
 :END:
 * RAGBRAI
 :properties:
 :rss_permalink: RAGBRAI.html
 :pubdate: <2019-08-03 Sat>
-:ID:       460B0B13-369F-47D6-97A3-84F8AC59298D
+:ID:       4DD1A53E-FBED-4F94-A980-85E65FEDCFCF
 :END:
 * Draw Trees in AWS with Golang
 :properties:
 :rss_permalink: image-generation-go-lambda-s3.html
 :pubdate: <2019-02-10 Sun>
-:ID:       8F128684-2369-4851-BE3E-FAB3CF2AC372
+:ID:       258417CE-EF00-4E34-95B3-101B5F3E1815
 :END:
 * Adding a Serverless Commenting System with AWS
 :properties:
 :rss_permalink: adding-comments.html
 :pubdate: <2019-01-14 Mon>
-:ID:       AF483427-31AC-46FC-9818-625D88B52EBD
+:ID:       95E752D9-9D91-484B-95A3-F1E8E281A50B
 :END:
 * Moving My Website to Amazon S3
 :properties:
 :rss_permalink: migrating-to-S3.html
 :pubdate: <2018-07-24 Tue>
-:ID:       1C16925B-5041-4B89-A7CB-EBB5C0C39E1F
+:ID:       46B95679-6D4B-4FEB-8924-155C2AADE05D
 :END:
 * Creating My Own Blogging Platform
 :properties:
 :rss_permalink: creating-my-blog.html
 :pubdate: <2018-07-19 Thu>
-:ID:       F098CC63-2A5B-4A1D-B8B7-443452AA64C9
+:ID:       AE6A84BE-7BBF-4726-B154-90C2F6CABC89
 :END:
 * Journey to San Jose del Cabo
 :properties:
 :rss_permalink: journey-to-san-jose-del-cabo.html
 :pubdate: <2018-07-12 Thu>
-:ID:       C29F1315-6432-4212-8D31-AA81E688C127
+:ID:       311CE16C-48A6-4003-8E90-17F424ADAE64
 :END:
 * About Me
 :properties:
 :rss_permalink: about-me.html
 :pubdate: <2018-07-07 Sat>
-:ID:       3E9A85DE-E1B5-49A2-B8AD-3485E2F637C2
+:ID:       663460E5-35C5-4F49-8AA0-D2725E4FB34F
 :END:
 * Sailing to Ensenada
 :properties:
 :rss_permalink: sailing-to-ensenada.html
 :pubdate: <2018-06-25 Mon>
-:ID:       8EF58861-E095-456B-9B9D-E6852E4E4251
+:ID:       817CCA55-C3BF-4184-8C7A-A64EEB5263C4
 :END:
 * Cross Country Dirt Bike Racing
 :properties:
 :rss_permalink: cross-country-dirt-bike-racing.html
 :pubdate: <2018-06-10 Sun>
-:ID:       321842E4-701A-4127-A768-1AC1D9B9C2EA
+:ID:       0DE772D8-10F7-45D9-9F3D-706EA753C7C3
 :END:

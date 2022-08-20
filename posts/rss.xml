@@ -14,10 +14,10 @@
   <link>https://nicolasknoebber.com/posts/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Thu, 12 May 2022 17:06:02 -0800</pubDate>
-  <lastBuildDate>Thu, 12 May 2022 17:06:02 -0800</lastBuildDate>
-  <generator>Emacs 29.0 Org-mode 9.5.2</generator>
-  <webMaster>nicolasknoebber@Nicolass-Air.home (Nicolas Knoebber)</webMaster>
+  <pubDate>Sat, 20 Aug 2022 09:55:47 -0700</pubDate>
+  <lastBuildDate>Sat, 20 Aug 2022 09:55:47 -0700</lastBuildDate>
+  <generator>Emacs 29.0 Org-mode 9.5.4</generator>
+  <webMaster>nicolasknoebber@Nicolass-MacBook-Air.local (Nicolas Knoebber)</webMaster>
   <image>
     <url>http://orgmode.org/img/org-mode-unicorn-logo.png</url>
     <title>(Nicolas Knoebber's Blog)</title>
@@ -26,11 +26,20 @@
 
 
   <item>
+    <title>A Year in Alaska</title>
+    <link>https://nicolasknoebber.com/posts/a-year-in-alaska.html</link>
+    <author>Nicolas Knoebber</author>
+    <guid isPermaLink="false">https://nicolasknoebber.com/posts/a-year-in-alaska.html</guid>
+    <pubDate>Sat, 20 Aug 2022 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
     <title>Elixir</title>
     <link>https://nicolasknoebber.com/posts/elixir.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/elixir.html</guid>
-    <pubDate>Tue, 03 May 2022 01:00:00 -0800</pubDate>
+    <pubDate>Tue, 03 May 2022 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -39,7 +48,7 @@
     <link>https://nicolasknoebber.com/posts/carbon-x1-arch.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/carbon-x1-arch.html</guid>
-    <pubDate>Fri, 28 May 2021 01:00:00 -0800</pubDate>
+    <pubDate>Fri, 28 May 2021 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -48,7 +57,7 @@
     <link>https://nicolasknoebber.com/posts/nut-goddess-of-the-sky.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/nut-goddess-of-the-sky.html</guid>
-    <pubDate>Thu, 01 Apr 2021 01:00:00 -0800</pubDate>
+    <pubDate>Thu, 01 Apr 2021 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -57,7 +66,7 @@
     <link>https://nicolasknoebber.com/posts/fruit-trees.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/fruit-trees.html</guid>
-    <pubDate>Sat, 13 Mar 2021 00:00:00 -0900</pubDate>
+    <pubDate>Sat, 13 Mar 2021 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -66,7 +75,7 @@
     <link>https://nicolasknoebber.com/posts/desks.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/desks.html</guid>
-    <pubDate>Tue, 16 Feb 2021 00:00:00 -0900</pubDate>
+    <pubDate>Tue, 16 Feb 2021 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -75,7 +84,7 @@
     <link>https://nicolasknoebber.com/posts/dotfile.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/dotfile.html</guid>
-    <pubDate>Sat, 26 Dec 2020 00:00:00 -0900</pubDate>
+    <pubDate>Sat, 26 Dec 2020 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -84,7 +93,7 @@
     <link>https://nicolasknoebber.com/posts/sourdough-recipes.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/sourdough-recipes.html</guid>
-    <pubDate>Mon, 30 Mar 2020 01:00:00 -0800</pubDate>
+    <pubDate>Mon, 30 Mar 2020 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -93,7 +102,7 @@
     <link>https://nicolasknoebber.com/posts/once-well.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/once-well.html</guid>
-    <pubDate>Sun, 29 Dec 2019 00:00:00 -0900</pubDate>
+    <pubDate>Sun, 29 Dec 2019 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -102,7 +111,7 @@
     <link>https://nicolasknoebber.com/posts/new-carbon-x1-manjaro.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/new-carbon-x1-manjaro.html</guid>
-    <pubDate>Sat, 28 Dec 2019 00:00:00 -0900</pubDate>
+    <pubDate>Sat, 28 Dec 2019 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -111,7 +120,7 @@
     <link>https://nicolasknoebber.com/posts/surviving-the-winter.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/surviving-the-winter.html</guid>
-    <pubDate>Sun, 17 Nov 2019 00:00:00 -0900</pubDate>
+    <pubDate>Sun, 17 Nov 2019 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -120,7 +129,7 @@
     <link>https://nicolasknoebber.com/posts/running-season-2019.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/running-season-2019.html</guid>
-    <pubDate>Sat, 16 Nov 2019 00:00:00 -0900</pubDate>
+    <pubDate>Sat, 16 Nov 2019 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -129,7 +138,7 @@
     <link>https://nicolasknoebber.com/posts/blogging-with-emacs-and-org.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/blogging-with-emacs-and-org.html</guid>
-    <pubDate>Wed, 14 Aug 2019 01:00:00 -0800</pubDate>
+    <pubDate>Wed, 14 Aug 2019 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -138,7 +147,7 @@
     <link>https://nicolasknoebber.com/posts/RAGBRAI.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/RAGBRAI.html</guid>
-    <pubDate>Sat, 03 Aug 2019 01:00:00 -0800</pubDate>
+    <pubDate>Sat, 03 Aug 2019 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -147,7 +156,7 @@
     <link>https://nicolasknoebber.com/posts/image-generation-go-lambda-s3.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/image-generation-go-lambda-s3.html</guid>
-    <pubDate>Sun, 10 Feb 2019 00:00:00 -0900</pubDate>
+    <pubDate>Sun, 10 Feb 2019 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -156,7 +165,7 @@
     <link>https://nicolasknoebber.com/posts/adding-comments.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/adding-comments.html</guid>
-    <pubDate>Mon, 14 Jan 2019 00:00:00 -0900</pubDate>
+    <pubDate>Mon, 14 Jan 2019 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -165,7 +174,7 @@
     <link>https://nicolasknoebber.com/posts/migrating-to-S3.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/migrating-to-S3.html</guid>
-    <pubDate>Tue, 24 Jul 2018 01:00:00 -0800</pubDate>
+    <pubDate>Tue, 24 Jul 2018 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -174,7 +183,7 @@
     <link>https://nicolasknoebber.com/posts/creating-my-blog.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/creating-my-blog.html</guid>
-    <pubDate>Thu, 19 Jul 2018 01:00:00 -0800</pubDate>
+    <pubDate>Thu, 19 Jul 2018 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -183,7 +192,7 @@
     <link>https://nicolasknoebber.com/posts/journey-to-san-jose-del-cabo.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/journey-to-san-jose-del-cabo.html</guid>
-    <pubDate>Thu, 12 Jul 2018 01:00:00 -0800</pubDate>
+    <pubDate>Thu, 12 Jul 2018 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -192,7 +201,7 @@
     <link>https://nicolasknoebber.com/posts/about-me.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/about-me.html</guid>
-    <pubDate>Sat, 07 Jul 2018 01:00:00 -0800</pubDate>
+    <pubDate>Sat, 07 Jul 2018 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -201,7 +210,7 @@
     <link>https://nicolasknoebber.com/posts/sailing-to-ensenada.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/sailing-to-ensenada.html</guid>
-    <pubDate>Mon, 25 Jun 2018 01:00:00 -0800</pubDate>
+    <pubDate>Mon, 25 Jun 2018 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -210,7 +219,7 @@
     <link>https://nicolasknoebber.com/posts/cross-country-dirt-bike-racing.html</link>
     <author>Nicolas Knoebber</author>
     <guid isPermaLink="false">https://nicolasknoebber.com/posts/cross-country-dirt-bike-racing.html</guid>
-    <pubDate>Sun, 10 Jun 2018 01:00:00 -0800</pubDate>
+    <pubDate>Sun, 10 Jun 2018 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>

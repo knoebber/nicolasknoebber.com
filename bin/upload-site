@@ -5,6 +5,7 @@ aws s3 sync ~/projects/nicolasknoebber.com s3://nicolasknoebber.com \
 --include "*.html" \
 --include "*.png" \
 --include "*.jpg" \
+--include "*.jpeg" \
 --include "*.css" \
 --include "*.svg" \
 --include "*.js" \

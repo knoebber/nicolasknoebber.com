@@ -1,0 +1,96 @@
+#+title: A Year in Alaska
+#+date: <2022-08-20 Sat>
+#+BEGIN_EXPORT html
+<script type="text/javascript">
+const postNum = 21;
+</script>
+ #+END_EXPORT
+
+[[file:../../images/alaska/cabin.jpeg]]
+
+My girlfriend and I lived in a dry log cabin in [[https://www.openstreetmap.org/search?whereami=1&query=61.9993%2C-145.3573#map=9/62.0009/-145.3711][Copper Center, Alaska]] for a year
+starting in May 2021. Overall it was a fun/interesting/educational
+experience. This post will have a few pictures and thoughts on it.
+
+[[file:../../images/alaska/map.jpeg]]
+
+** It's Big
+
+Everything is bigger in Alaska. Not sure why Texas thought they could
+use this tag line. 
+Mountains, rivers, glaciers, moose, bear, fish, etc.
+
+This was the best part. There are amazing views, great hiking,
+and general natural beauty all around. If you haven't walked on a
+glacier I recommend it; the feeling of walking on top of
+hundreds feet of solid ice is pretty neat.
+
+The state is massive, there is so much to see. We only explored
+a fraction.
+
+[[file:../../images/alaska/glacier.jpeg]]
+
+Inside the cave pictured above:
+
+[[file:../../images/alaska/in-the-cave.jpeg]]
+
+On the coast in Valdez:
+
+[[file:../../images/alaska/snowy-nap.jpeg]]
+
+** Winter Sports
+
+You should enjoy at least one winter sport if you are going to spend a
+winter in Alaska. We like to ski:
+
+[[file:../../images/alaska/skiing.jpeg]]
+
+** Lots of bugs
+
+Make sure to bring your bug suit.
+
+[[file:../../images/alaska/bugsuit.jpeg]]
+
+** So many berries!
+
+
+I bought a berry book, and learned that most of the berries are
+eatable (you should still double check though!).
+
+[[file:../../images/alaska/foraging.jpeg]]
+
+Here are some bear
+berries that I ate way too many of:
+
+[[file:../../images/alaska/bear-berry.jpeg]]
+
+** The weather sucks
+
+It never really got hot enough where we were - it rained all summer,
+and the winter got miserably cold, lowest temps were around
+-40f. Also, lots of snow!
+
+[[file:../../images/alaska/driveway.jpeg]]
+
+** Blast from the Past
+
+It feels like going back in time 20 years. We saw a radio shack and a
+block buster!
+
+
+** South East Alaska
+
+On our way back to the lower 48 we took the ferry through South East
+Alaska. This was fun - we put our tent on the deck of the boat,
+and got to enjoy a scenic cruise through the south east
+passage. There are a ton of super cute towns along the way, and the
+weather seemed much better. Next time I visit I'd like to explore this
+area more.
+
+[[file:../../images/alaska/southeast.jpeg]]
+[[file:../../images/alaska/tent.jpeg]]
+[[file:../../images/alaska/ketchikan.jpeg]]
+
+** Conclusion
+
+Check out Alaska if you haven't! It's worth it.

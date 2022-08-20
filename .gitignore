@@ -1,5 +1,7 @@
 *.pdf
 *.png
+*.jpeg
+*.jpg
 *.swp
 *.html
 *~
@@ -7,3 +9,4 @@ posts/old/
 src/drafts/
 images/
 api-key
+.DS_Store

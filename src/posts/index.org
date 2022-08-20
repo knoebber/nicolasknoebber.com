@@ -1,6 +1,7 @@
 #+TITLE: Blog
 
 #+begin_sitemap
+- [[file:a-year-in-alaska.org][A Year in Alaska]] =08/20/2022=
 - [[file:elixir.org][Elixir]] =05/03/2022=
 - [[file:carbon-x1-arch.org][Lenovo Carbon X1 Gen 7 + Arch Linux]] =05/28/2021=
 - [[file:nut-goddess-of-the-sky.org][Nut, Goddess of the Sky]] =04/01/2021=
