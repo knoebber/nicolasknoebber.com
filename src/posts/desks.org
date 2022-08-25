@@ -15,7 +15,7 @@ to reflect on my environments from over the years.
 Here's my desk from my first year at Grinnell College. I was taking
 intro to CS in Scheme, though I wasn't using this battlestation for
 that. The highlight here is the custom poster that I printed and taped
-together.  [[file:../../images/grinnell-first-year.jpg]]
+together.  [[file:../../images/desks/grinnell-first-year.jpg]]
 
 **Grinnell Iowa, 2015**
 
@@ -35,7 +35,7 @@ monitors must be better then one, right? Now I could write code and
 browse Reddit at the same time! Very productive.
 
 Notice that I'm using a lounge chair painted with borrowed supplies
-from the art department.  [[file:../../images/grinnell-second-year.jpg]]
+from the art department.  [[file:../../images/desks/grinnell-second-year.jpg]]
 
 **Mendocino California, 2017**
 
@@ -44,55 +44,66 @@ Arch Linux and writing SQL, PHP, JavaScript. I still have two
 mismatched monitor sizes! If you look closely you can see I picked up
 a few more novelty key caps since the last photo. Also pictured: my
 misguided descent into everything dark mode.
-[[file:../../images/mendocino-desk.jpg]]
+[[file:../../images/desks/mendocino-desk.jpg]]
 
 **Ames Iowa, 2019**
 
 I moved back to Iowa for some reason. I rented a spacious two bedroom
 apartment with all utilities included for $650 a month. I didn't have
 much furniture, but I was able to work with what I had.
-[[file:../../images/ames-floor-desk.jpg]]
+[[file:../../images/desks/ames-floor-desk.jpg]]
 
 **Ames Iowa, 2020**
 
 New year, new apartment. I transitioned to a single monitor + standup
 desk.  See if you can spot the 4 computers.
-[[file:../../images/i-spy-4-computers.jpg]]
+[[file:../../images/desks/i-spy-4-computers.jpg]]
 
 Bonus setup from the same apartment: working from the dining
 table. Instead of dual monitors, I was experimenting with dual
 laptops. I find that whenever I use more than one monitor I end up
 using one screen for a distraction and one for code. So what's the
 point in having them connected?
-[[file:../../images/multi-laptop-setup.jpg]]
+[[file:../../images/desks/multi-laptop-setup.jpg]]
 
 **Eugene Oregon, 2020**
 
 I stayed at a house in Eugene for a few weeks and worked
 remotely. This is maybe my most conventional desk yet! A civilized
 MacBook + dongle setup. (the mug has a delicious late in it)
-[[file:../../images/eugene-desk.jpg]]
+[[file:../../images/desks/eugene-desk.jpg]]
 
 **Little River California, 2020**
 
 Same setup as last time, different place. The copper cup is certainly
-cool.  [[file:../../images/little-river-desk.jpg]]
+cool.  [[file:../../images/desks/little-river-desk.jpg]]
 
 **Comptche California, 2021**
 
 I was still on the move using the same equipment. I did get a vertical
 laptop holder to save space though. Nifty!
-[[file:../../images/desk-at-comptche.jpg]]
+[[file:../../images/desks/desk-at-comptche.jpg]]
 
 **Comptche California, 2021**
 
 I finally moved to my own place after bouncing around between family
 houses! I settled on a single monitor, my trusty Das Keyboard, an
 adjustable height desk, light theme for my code editor, and a killer
-view.  [[file:../../images/desk-at-sky-ranch.jpg]]
+view.  [[file:../../images/desks/desk-at-sky-ranch.jpg]]
 
 
 **Copper Center Alaska, 2022**
 
 Living in a log cabin in Alaska! No indoor plumbing, but at least the
-internet is fast!  [[file:../../images/alaska-desk.jpg]]
+internet is fast!  [[file:../../images/desks/alaska-desk.jpg]]
+
+**Navarro California, 2022**
+
+Enjoying a summer day on the ranch:
+
+[[file:../../images/desks/outdoor-rancho-desk.jpeg]]
+
+
+Working from yurt:
+
+[[file:../../images/desks/working-in-yurt.jpeg]]
